@@ -49,7 +49,8 @@ public class PersonListPanel extends UiPart<Region> {
                         raise(new PersonPanelSelectionChangedEvent(newValue));
                     }
                 });
-    }
+
+   }
 
     /**
      * Scrolls to the {@code PersonCard} at the {@code index} and selects it.
