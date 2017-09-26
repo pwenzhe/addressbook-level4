@@ -12,6 +12,10 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.model.person.ReadOnlyPerson;
 
+
+/**
+ * An UI component that displays information of a {@code Person} upon selection.
+ */
 public class PersonDetailsPanel extends UiPart<Region> {
     private static final String FXML = "PersonDetailsPanel.fxml";
 
@@ -41,11 +45,11 @@ public class PersonDetailsPanel extends UiPart<Region> {
      * so that they will be notified of any changes.
      */
     private void setLabel(ReadOnlyPerson person) {
-       name.textProperty().bind(Bindings.convert(person.nameProperty()));
-       phone.textProperty().bind(Bindings.convert(person.phoneProperty()));
-       address.textProperty().bind(Bindings.convert(person.addressProperty()));
-       email.textProperty().bind(Bindings.convert(person.emailProperty()));
-   }
+        name.textProperty().bind(Bindings.convert(person.nameProperty()));
+        phone.textProperty().bind(Bindings.convert(person.phoneProperty()));
+        address.textProperty().bind(Bindings.convert(person.addressProperty()));
+        email.textProperty().bind(Bindings.convert(person.emailProperty()));
+    }
 
     @Subscribe
     private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {

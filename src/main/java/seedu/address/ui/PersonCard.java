@@ -28,15 +28,15 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
-    public Label name;
+    private Label name;
     @FXML
     private Label id;
     @FXML
-    public Label phone;
+    private Label phone;
     @FXML
-    public Label address;
+    private Label address;
     @FXML
-    public Label email;
+    private Label email;
     @FXML
     private FlowPane tags;
 
