@@ -9,6 +9,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import seedu.address.MainApp;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.Config;
@@ -17,6 +18,8 @@ import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
+
+import javax.swing.*;
 
 /**
  * The manager of the UI component.
@@ -36,6 +39,8 @@ public class UiManager extends ComponentManager implements Ui {
     private Config config;
     private UserPrefs prefs;
     private MainWindow mainWindow;
+
+    private int theme = 0;
 
     public UiManager(Logic logic, Config config, UserPrefs prefs) {
         super();
@@ -68,6 +73,13 @@ public class UiManager extends ComponentManager implements Ui {
         prefs.updateLastUsedGuiSetting(mainWindow.getCurrentGuiSetting());
         mainWindow.hide();
         mainWindow.releaseResources();
+    }
+
+    // TODO: better way of keeping track of theme
+    @Override
+    public void changeTheme() {
+        mainWindow.changeTheme(theme);
+        theme = theme==0 ? 1 : 0;
     }
 
     private void showFileOperationAlertAndWait(String description, String details, Throwable cause) {

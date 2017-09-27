@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
+import com.sun.javafx.css.StyleManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -13,10 +14,12 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.ChangeThemeRequestEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.commons.util.FxViewUtil;
@@ -82,6 +85,19 @@ public class MainWindow extends UiPart<Region> {
 
         setAccelerators();
         registerAsAnEventHandler(this);
+    }
+
+    public void changeTheme(int theme) {
+        String brightTheme = "view/BrightTheme.css";
+        String darkTheme = "view/DarkTheme.css";
+        if (theme==0) {
+            getRoot().getStylesheets().remove(darkTheme);
+            getRoot().getStylesheets().add(brightTheme);
+        }
+        else {
+            getRoot().getStylesheets().remove(brightTheme);
+            getRoot().getStylesheets().add(darkTheme);
+        }
     }
 
     public Stage getPrimaryStage() {
@@ -202,6 +218,14 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private void handleExit() {
         raise(new ExitAppRequestEvent());
+    }
+
+    /**
+     * Changes the application theme.
+     */
+    @FXML
+    private void handleChangeTheme() {
+        raise(new ChangeThemeRequestEvent());
     }
 
     public PersonListPanel getPersonListPanel() {

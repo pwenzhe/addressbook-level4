@@ -13,4 +13,5 @@ public interface Ui {
     /** Stops the UI. */
     void stop();
 
+    void changeTheme();
 }
