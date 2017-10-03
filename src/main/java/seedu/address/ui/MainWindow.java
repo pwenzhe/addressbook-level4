@@ -4,8 +4,8 @@ import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
-import com.sun.javafx.css.StyleManager;
 import javafx.event.ActionEvent;
+
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
@@ -14,7 +14,6 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
@@ -87,14 +86,16 @@ public class MainWindow extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
+    /**
+     * Changes the stylesheet used by GUI.
+     */
     public void changeTheme(int theme) {
         String brightTheme = "view/BrightTheme.css";
         String darkTheme = "view/DarkTheme.css";
-        if (theme==0) {
+        if (theme == 0) {
             getRoot().getStylesheets().remove(darkTheme);
             getRoot().getStylesheets().add(brightTheme);
-        }
-        else {
+        } else {
             getRoot().getStylesheets().remove(brightTheme);
             getRoot().getStylesheets().add(darkTheme);
         }

@@ -2,10 +2,6 @@ package seedu.address.logic.commands;
 
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.ui.ChangeThemeRequestEvent;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.ui.UiManager;
-
-import javax.swing.*;
 
 /**
  * Changes theme of UI.
