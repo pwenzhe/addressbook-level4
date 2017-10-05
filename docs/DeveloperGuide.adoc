@@ -718,28 +718,173 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 
 Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (unlikely to have) - `*`
 
-[width="59%",cols="22%,<23%,<25%,<30%",options="header",]
+[width="99%",cols="2%,10%,<13%,<27%,<38%",options="header",]
 |=======================================================================
-|Priority |As a ... |I want to ... |So that I can...
-|`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
+|No. |Priority |As a ... |I want to ... |So that I can...
+|1 |`* * *` |new user |see user usage instructions |refer to instructions when I forget how to use the App
 
-|`* * *` |user |add a new person |
+|2 |`* * *` |user |add a new person | store the information about that person
 
-|`* * *` |user |delete a person |remove entries that I no longer need
+|3 |`* * *` |user |delete a person |remove entries that I no longer need
 
-|`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
+|4 |`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
 
-|`* *` |user |hide link:#private-contact-detail[private contact details] by default |minimize chance of someone else seeing them by accident
+|5 |`* * *` |user |find my friends through their initials |find my friend’s details easily
 
-|`*` |user with many persons in the address book |sort persons by name |locate a person easily
+|6 |`* * *` |user |undo and redo my commands |undo and redo my recent errors
+
+|7 |`* * *` |user |edit my addressBook |make changes to the addressBook
+
+|8 |`* * *` |user |view my contact list in alphabetical order |scroll through the list easily
+
+|9 |`* * *` |user |use alias for commands |use the commands conveniently
+
+|10 |`* * *` |user |find person using tags |find persons based on the different categories
+
+|11 |`* * *` |user |save my person's DOB |track persons' birthdays
+
+|12 |`* * *` |user |find persons by birthday month |find who is having birthdays
+
+|13 |`* * *` |user |add persons with minimal details |have a choice on the amount of details I want to include about a person
+
+|14 |`* * *` |user |view the total number of persons  |know how many persons in AddressBook
+
+|15 |`* * *` |user |pin contacts at the top |find my favourite contacts more easily
+
+|16 |`* *` |user |sort my list in many different ways |organise according to my preference
+
+|17 |`* *` |user |have an AddressBook that can auto capitalise the name |Add new person with more convenience
+
+|18 |`* *` |user |be able to have a choice of viewing less details on persons |view a cleaner list
+
+|19 |`* *` |user |be able to view more details about persons only after selection |view more information about that person with a cleaner list
+
+|20 |`* *` |user |be able to sync my AddressBook with social media |import persons’ details
+
+|21 |`* *` |user |view selected person’s social media |view more information
+
+|22 |`* *` |user |see invalid commands with a different colour |so that I can identify them easily
+
+|23 |`* *` |user |find persons using emails |find them without knowing their names
+
+|24 |`* *` |user |view selected person’s address visually |have a better idea of where they are at
+
+|25 |`* *` |user |close the help UI with a command |close the help UI without going back to it while on the main window
+
+|26 | `* *` |user |delete persons that contain a certain tag |delete a group with convenience
+
+|27 |`* *` |user |have confirmation before deleting a person |ensure that I am deleting the correct person
+
+|28 |`* *` |user |hide link:#private-contact-detail[private contact details] by default |minimize chance of someone else seeing them by accident
+
+|29 |`*` |user |open one help UI at any time |limit the number of windows opened
+
+|30 |`*` |user |add new persons using first name and last name |easily differentiate a name
+
+|31 |`*` |user |see the time |keep track of the time
+
+|32 |`*` |user |apply different themes |customise it according to my preference
+
+|33 |`*` |user |be able to change the colours of the tags | customise it according to my preference
+
+|34 |`*` |user |be able to add and view money lent to my friends |keep track of money lending
+
+|35 |`*` |user |filter and sort my friends based on how much money is on loan |better see the amount of money involved in lending
 |=======================================================================
-
-{More to be added}
-
 [appendix]
 == Use Cases
 
 (For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
+
+[discrete]
+=== Use case: View help
+
+*MSS*
+
+1.  User requests to view the help information
+2.  AddressBook opens a new window containing the help information
++
+Use case ends.
+
+[discrete]
+=== Use case: Add person
+
+*MSS*
+
+1.  User adds new person
+2.  AddressBook saves new person
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The given command is invalid.
++
+[none]
+** 1a1. AddressBook shows an error message.
++
+Use case resumes at step 1.
+
+[discrete]
+=== Use case: List all persons
+
+*MSS*
+
+1.  User requests to list persons
+2.  AddressBook shows a list of persons
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty.
++
+Use case ends.
+
+
+[discrete]
+=== Use case: Edit person
+
+*MSS*
+
+1. User requests to list persons
+2. AddressBook shows a list of persons
+3. User edits a specific person in the list
+4. AddressBook saves edited person
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 3a. The given command is invalid
+[none]
+** 3a1. AddressBook shows an error message
++
+Use case resumes at step 2.
+
+[discrete]
+=== Use case: Find persons
+
+*MSS*
+
+1. User requests to list persons
+2. AddressBook shows a list of persons
+3. User requests to find specific persons in the list
+4. AddressBook shows a list of matched persons
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 3a. The given keywords are invalid.
+[none]
+** 3a1. AddressBook shows an error message.
++
+Use case resumes at step 2.
 
 [discrete]
 === Use case: Delete person
@@ -767,7 +912,131 @@ Use case ends.
 +
 Use case resumes at step 2.
 
-{More to be added}
+[discrete]
+=== Use case: Select person
+
+*MSS*
+
+1. User requests to list persons
+2. AddressBook shows a list of persons
+3. User requests to select a specific person in list
+4. AddressBook shows selected person
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 3a. The given index is invalid.
+[none]
+** 3a1. AddressBook shows an error message.
++
+Use case resumes at step 2.
+
+[discrete]
+=== Use case: View history
+
+*MSS*
+
+1. User requests to view history of commands
+2. AddressBook shows a list of history
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. History is empty.
++
+Use case ends.
+
+[discrete]
+=== Use case: Undo
+
+*MSS*
+
+1. User requests to undo commands
+2. AddressBook retrieve previous state of AddressBook
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. No command to undo.
++
+Use case ends.
+
+[discrete]
+=== Use case: Redo
+
+*MSS*
+
+1. User requests to redo commands
+2. AddressBook retrieve previous state of AddressBook
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. No command to redo.
++
+Use case ends.
+
+[discrete]
+=== Use case: Clear
+
+*MSS*
+
+1. User requests to clear persons
+2. AddressBook clear all persons
++
+Use case ends.
+
+[discrete]
+=== Use case: Exit
+
+*MSS*
+
+1. User requests to exit AddressBook
+2. AddressBook closes and exit window
++
+Use case ends.
+
+[discrete]
+=== Use case: Rename Tag
+
+*MSS*
+
+1. User requests to list all existing tags
+2. AddressBook shows a list of tags
+3. User requests to rename a tag in the list
+4. AddressBook renames the tag
+5. AddressBook updates the tag
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty.
++
+Use case ends.
+
+* 3a. The given index is invalid.
++
+[none]
+** 3a1. AddressBook shows an error message.
++
+Use case resumes at step 2.
+
+* 3b. Updated name already exist in the list of existing tags
++
+[none]
+** 3b1. AddressBook shows an error message.
++
+Use case resumes at step 2.
 
 [appendix]
 == Non Functional Requirements
@@ -775,6 +1044,12 @@ Use case resumes at step 2.
 .  Should work on any link:#mainstream-os[mainstream OS] as long as it has Java `1.8.0_60` or higher installed.
 .  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+.  A user should be able to fully understand and use the AddressBook by following the User Guide and Help UI.
+.  The GUI should be easily readable without straining the user’s eyes.
+.  It is open source.
+.  It is completely free for use.
+.  A user should find the AddressBook easy to use and intuitive.
+.  Should be able to function properly with and without an Internet connection.
 
 {More to be added}
 
