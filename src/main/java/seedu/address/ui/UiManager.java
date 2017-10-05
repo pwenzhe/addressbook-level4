@@ -37,6 +37,8 @@ public class UiManager extends ComponentManager implements Ui {
     private UserPrefs prefs;
     private MainWindow mainWindow;
 
+    private int theme = 0;
+
     public UiManager(Logic logic, Config config, UserPrefs prefs) {
         super();
         this.logic = logic;
@@ -68,6 +70,13 @@ public class UiManager extends ComponentManager implements Ui {
         prefs.updateLastUsedGuiSetting(mainWindow.getCurrentGuiSetting());
         mainWindow.hide();
         mainWindow.releaseResources();
+    }
+
+    // TODO: better way of keeping track of theme
+    @Override
+    public void changeTheme() {
+        mainWindow.changeTheme(theme);
+        theme = theme == 0 ? 1 : 0;
     }
 
     private void showFileOperationAlertAndWait(String description, String details, Throwable cause) {
