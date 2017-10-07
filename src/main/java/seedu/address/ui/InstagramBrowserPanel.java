@@ -18,10 +18,10 @@ import seedu.address.model.person.ReadOnlyPerson;
 /**
  * The Browser Panel of the App.
  */
-public class BrowserPanel extends UiPart<Region> {
+public class InstagramBrowserPanel extends UiPart<Region> {
 
     public static final String DEFAULT_PAGE = "default.html";
-    public static final String FACEBOOK_SEARCH_URL_PREFIX = "https://www.facebook.com/search/top/?q=";
+    public static final String GOOGLE_SEARCH_URL_PREFIX = "https://www.instagram.com/";
 
     private static final String FXML = "BrowserPanel.fxml";
 
@@ -30,7 +30,7 @@ public class BrowserPanel extends UiPart<Region> {
     @FXML
     private WebView browser;
 
-    public BrowserPanel() {
+    public InstagramBrowserPanel() {
         super(FXML);
 
         // To prevent triggering events for typing inside the loaded Web page.
@@ -41,7 +41,7 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     private void loadPersonPage(ReadOnlyPerson person) {
-        loadPage(FACEBOOK_SEARCH_URL_PREFIX + person.getName().fullName.replaceAll(" ", "%20"));
+        loadPage(GOOGLE_SEARCH_URL_PREFIX + person.getName().fullName.replaceAll("\\s+", ""));
     }
 
     public void loadPage(String url) {

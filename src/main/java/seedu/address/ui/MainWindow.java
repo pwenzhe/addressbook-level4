@@ -45,6 +45,8 @@ public class MainWindow extends UiPart<Region> {
     // Independent Ui parts residing in this Ui container
     private PersonDetailsPanel personDetailsPanel;
     private BrowserPanel browserPanel;
+    private InstagramBrowserPanel instagramBrowserPanel;
+    private GoogleMapBrowserPanel googleMapBrowserPanel;
     private PersonListPanel personListPanel;
     private Config config;
     private UserPrefs prefs;
@@ -55,6 +57,11 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private StackPane browserPlaceholder;
 
+    @FXML
+    private StackPane instagramBrowserPlaceholder;
+
+    @FXML
+    private StackPane googleMapBrowserPaceholder;
     @FXML
     private StackPane commandBoxPlaceholder;
 
@@ -153,6 +160,12 @@ public class MainWindow extends UiPart<Region> {
 
         browserPanel = new BrowserPanel();
         browserPlaceholder.getChildren().add(browserPanel.getRoot());
+
+        instagramBrowserPanel = new InstagramBrowserPanel();
+        instagramBrowserPlaceholder.getChildren().add(instagramBrowserPanel.getRoot());
+
+        googleMapBrowserPanel = new GoogleMapBrowserPanel();
+        googleMapBrowserPaceholder.getChildren().add(googleMapBrowserPanel.getRoot());
 
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
