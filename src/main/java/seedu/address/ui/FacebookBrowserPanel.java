@@ -23,7 +23,7 @@ public class FacebookBrowserPanel extends UiPart<Region> {
     public static final String DEFAULT_PAGE = "default.html";
     public static final String FACEBOOK_SEARCH_URL_PREFIX = "https://www.facebook.com/search/top/?q=";
 
-    private static final String FXML = "BrowserPanel.fxml";
+    private static final String FXML = "FacebookBrowserPanel.fxml";
 
     private final Logger logger = LogsCenter.getLogger(this.getClass());
 

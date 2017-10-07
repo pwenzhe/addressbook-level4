@@ -21,9 +21,9 @@ import seedu.address.model.person.ReadOnlyPerson;
 public class GoogleMapBrowserPanel extends UiPart<Region> {
 
     public static final String DEFAULT_PAGE = "default.html";
-    public static final String GOOGLE_SEARCH_URL_PREFIX = "https://www.google.com/maps/place/";
-
-    private static final String FXML = "BrowserPanel.fxml";
+    public static final String GOOGLEMAP_SEARCH_URL_PREFIX = "https://www.google.com/maps/place/";
+    public static final String GOOGLEMAP_SEARCH_URL_SUFFIX = "?dg=dbrw&newdg=1";
+    private static final String FXML = "GoogleMapBrowserPanel.fxml";
 
     private final Logger logger = LogsCenter.getLogger(this.getClass());
 
@@ -41,7 +41,8 @@ public class GoogleMapBrowserPanel extends UiPart<Region> {
     }
 
     private void loadPersonPage(ReadOnlyPerson person) {
-        loadPage(GOOGLE_SEARCH_URL_PREFIX + person.getAddress().value.replaceAll(" ", "+"));
+        loadPage(GOOGLEMAP_SEARCH_URL_PREFIX + person.getAddress().value.replaceAll(" ", "+")
+            + GOOGLEMAP_SEARCH_URL_SUFFIX);
     }
 
     public void loadPage(String url) {

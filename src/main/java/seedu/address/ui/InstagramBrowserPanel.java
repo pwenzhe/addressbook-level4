@@ -21,9 +21,9 @@ import seedu.address.model.person.ReadOnlyPerson;
 public class InstagramBrowserPanel extends UiPart<Region> {
 
     public static final String DEFAULT_PAGE = "default.html";
-    public static final String GOOGLE_SEARCH_URL_PREFIX = "https://www.instagram.com/";
+    public static final String INSTAGRAM_SEARCH_URL_PREFIX = "https://www.instagram.com/";
 
-    private static final String FXML = "BrowserPanel.fxml";
+    private static final String FXML = "InstagramBrowserPanel.fxml";
 
     private final Logger logger = LogsCenter.getLogger(this.getClass());
 
@@ -41,7 +41,7 @@ public class InstagramBrowserPanel extends UiPart<Region> {
     }
 
     private void loadPersonPage(ReadOnlyPerson person) {
-        loadPage(GOOGLE_SEARCH_URL_PREFIX + person.getName().fullName.replaceAll("\\s+", ""));
+        loadPage(INSTAGRAM_SEARCH_URL_PREFIX + person.getName().fullName.replaceAll("\\s+", ""));
     }
 
     public void loadPage(String url) {

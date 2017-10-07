@@ -17,7 +17,7 @@ import guitests.guihandles.BrowserPanelHandle;
 import seedu.address.MainApp;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 
-public class BrowserPanelTest extends GuiUnitTest {
+public class FacebookBrowserPanelTest extends GuiUnitTest {
     private PersonPanelSelectionChangedEvent selectionChangedEventStub;
 
     private FacebookBrowserPanel facebookBrowserPanel;
