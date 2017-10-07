@@ -40,7 +40,7 @@ public class GoogleMapBrowserPanelTest extends GuiUnitTest {
         URL expectedDefaultPageUrl = MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE);
         assertEquals(expectedDefaultPageUrl, browserPanelHandle.getLoadedUrl());
 
-        String segment[] = ALICE.getAddress().value.split("#");
+        String []segment = ALICE.getAddress().value.split("#");
 
         // associated web page of a person
         postNow(selectionChangedEventStub);
