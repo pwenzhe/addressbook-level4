@@ -4,8 +4,8 @@ import static guitests.guihandles.WebViewUtil.waitUntilBrowserLoaded;
 import static org.junit.Assert.assertEquals;
 import static seedu.address.testutil.EventsUtil.postNow;
 import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.ui.BrowserPanel.DEFAULT_PAGE;
-import static seedu.address.ui.BrowserPanel.FACEBOOK_SEARCH_URL_PREFIX;
+import static seedu.address.ui.FacebookBrowserPanel.DEFAULT_PAGE;
+import static seedu.address.ui.FacebookBrowserPanel.FACEBOOK_SEARCH_URL_PREFIX;
 import static seedu.address.ui.UiPart.FXML_FILE_FOLDER;
 
 import java.net.URL;
@@ -20,17 +20,17 @@ import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 public class BrowserPanelTest extends GuiUnitTest {
     private PersonPanelSelectionChangedEvent selectionChangedEventStub;
 
-    private BrowserPanel browserPanel;
+    private FacebookBrowserPanel facebookBrowserPanel;
     private BrowserPanelHandle browserPanelHandle;
 
     @Before
     public void setUp() {
         selectionChangedEventStub = new PersonPanelSelectionChangedEvent(new PersonCard(ALICE, 0));
 
-        guiRobot.interact(() -> browserPanel = new BrowserPanel());
-        uiPartRule.setUiPart(browserPanel);
+        guiRobot.interact(() -> facebookBrowserPanel = new FacebookBrowserPanel());
+        uiPartRule.setUiPart(facebookBrowserPanel);
 
-        browserPanelHandle = new BrowserPanelHandle(browserPanel.getRoot());
+        browserPanelHandle = new BrowserPanelHandle(facebookBrowserPanel.getRoot());
     }
 
     @Test

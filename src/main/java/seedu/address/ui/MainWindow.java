@@ -55,7 +55,7 @@ public class MainWindow extends UiPart<Region> {
     private AnchorPane personDetailsPlaceholder;
 
     @FXML
-    private StackPane browserPlaceholder;
+    private StackPane facebookBrowserPlaceholder;
 
     @FXML
     private StackPane instagramBrowserPlaceholder;
@@ -159,7 +159,7 @@ public class MainWindow extends UiPart<Region> {
         personDetailsPlaceholder.getChildren().add(personDetailsPanel.getRoot());
 
         facebookBrowserPanel = new FacebookBrowserPanel();
-        browserPlaceholder.getChildren().add(facebookBrowserPanel.getRoot());
+        facebookBrowserPlaceholder.getChildren().add(facebookBrowserPanel.getRoot());
 
         instagramBrowserPanel = new InstagramBrowserPanel();
         instagramBrowserPlaceholder.getChildren().add(instagramBrowserPanel.getRoot());
@@ -256,8 +256,6 @@ public class MainWindow extends UiPart<Region> {
 
     void releaseResources() {
         facebookBrowserPanel.freeResources();
-        instagramBrowserPanel.freeResources();
-        googleMapBrowserPanel.freeResources();
     }
 
     @Subscribe
