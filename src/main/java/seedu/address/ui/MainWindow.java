@@ -44,7 +44,7 @@ public class MainWindow extends UiPart<Region> {
 
     // Independent Ui parts residing in this Ui container
     private PersonDetailsPanel personDetailsPanel;
-    private BrowserPanel browserPanel;
+    private FacebookBrowserPanel facebookBrowserPanel;
     private InstagramBrowserPanel instagramBrowserPanel;
     private GoogleMapBrowserPanel googleMapBrowserPanel;
     private PersonListPanel personListPanel;
@@ -158,8 +158,8 @@ public class MainWindow extends UiPart<Region> {
         personDetailsPanel = new PersonDetailsPanel();
         personDetailsPlaceholder.getChildren().add(personDetailsPanel.getRoot());
 
-        browserPanel = new BrowserPanel();
-        browserPlaceholder.getChildren().add(browserPanel.getRoot());
+        facebookBrowserPanel = new FacebookBrowserPanel();
+        browserPlaceholder.getChildren().add(facebookBrowserPanel.getRoot());
 
         instagramBrowserPanel = new InstagramBrowserPanel();
         instagramBrowserPlaceholder.getChildren().add(instagramBrowserPanel.getRoot());
@@ -255,7 +255,9 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void releaseResources() {
-        browserPanel.freeResources();
+        facebookBrowserPanel.freeResources();
+        instagramBrowserPanel.freeResources();
+        googleMapBrowserPanel.freeResources();
     }
 
     @Subscribe

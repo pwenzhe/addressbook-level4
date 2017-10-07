@@ -18,7 +18,7 @@ import seedu.address.model.person.ReadOnlyPerson;
 /**
  * The Browser Panel of the App.
  */
-public class BrowserPanel extends UiPart<Region> {
+public class FacebookBrowserPanel extends UiPart<Region> {
 
     public static final String DEFAULT_PAGE = "default.html";
     public static final String FACEBOOK_SEARCH_URL_PREFIX = "https://www.facebook.com/search/top/?q=";
@@ -30,7 +30,7 @@ public class BrowserPanel extends UiPart<Region> {
     @FXML
     private WebView browser;
 
-    public BrowserPanel() {
+    public FacebookBrowserPanel() {
         super(FXML);
 
         // To prevent triggering events for typing inside the loaded Web page.
