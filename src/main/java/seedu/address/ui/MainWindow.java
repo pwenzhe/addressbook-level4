@@ -256,6 +256,8 @@ public class MainWindow extends UiPart<Region> {
 
     void releaseResources() {
         facebookBrowserPanel.freeResources();
+        instagramBrowserPanel.freeResources();
+        googleMapBrowserPanel.freeResources();
     }
 
     @Subscribe
