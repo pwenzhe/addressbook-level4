@@ -180,6 +180,7 @@ public abstract class AddressBookSystemTest {
      */
     protected void assertSelectedCardDeselected() {
         assertFalse(getInstagramBrowserPanel().isUrlChanged());
+        assertFalse(getGoogleMapBrowserPanel().isUrlChanged());
         assertFalse(getPersonListPanel().isAnyCardSelected());
     }
 
