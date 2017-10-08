@@ -13,7 +13,7 @@ import java.net.URL;
 import org.junit.Before;
 import org.junit.Test;
 
-import guitests.guihandles.BrowserPanelHandle;
+import guitests.guihandles.InstagramBrowserPanelHandle;
 import seedu.address.MainApp;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 
@@ -21,7 +21,7 @@ public class InstagramBrowserPanelTest extends GuiUnitTest {
     private PersonPanelSelectionChangedEvent selectionChangedEventStub;
 
     private InstagramBrowserPanel instagramBrowserPanel;
-    private BrowserPanelHandle browserPanelHandle;
+    private InstagramBrowserPanelHandle instagramBrowserPanelHandle;
 
     @Before
     public void setUp() {
@@ -30,21 +30,21 @@ public class InstagramBrowserPanelTest extends GuiUnitTest {
         guiRobot.interact(() -> instagramBrowserPanel = new InstagramBrowserPanel());
         uiPartRule.setUiPart(instagramBrowserPanel);
 
-        browserPanelHandle = new BrowserPanelHandle(instagramBrowserPanel.getRoot());
+        instagramBrowserPanelHandle = new InstagramBrowserPanelHandle(instagramBrowserPanel.getRoot());
     }
 
     @Test
     public void display() throws Exception {
         // default web page
         URL expectedDefaultPageUrl = MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE);
-        assertEquals(expectedDefaultPageUrl, browserPanelHandle.getLoadedUrl());
+        assertEquals(expectedDefaultPageUrl, instagramBrowserPanelHandle.getLoadedUrl());
 
         // associated web page of a person
         postNow(selectionChangedEventStub);
         URL expectedPersonUrl = new URL(INSTAGRAM_SEARCH_URL_PREFIX
                 + ALICE.getName().fullName.replaceAll("\\s+", "") + "/");
 
-        waitUntilBrowserLoaded(browserPanelHandle);
-        assertEquals(expectedPersonUrl, browserPanelHandle.getLoadedUrl());
+        waitUntilBrowserLoaded(instagramBrowserPanelHandle);
+        assertEquals(expectedPersonUrl, instagramBrowserPanelHandle.getLoadedUrl());
     }
 }

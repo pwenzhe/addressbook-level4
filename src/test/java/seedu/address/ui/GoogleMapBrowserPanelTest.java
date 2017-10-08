@@ -14,7 +14,7 @@ import java.net.URL;
 import org.junit.Before;
 import org.junit.Test;
 
-import guitests.guihandles.BrowserPanelHandle;
+import guitests.guihandles.GoogleMapBrowserPanelHandle;
 import seedu.address.MainApp;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 
@@ -22,7 +22,7 @@ public class GoogleMapBrowserPanelTest extends GuiUnitTest {
     private PersonPanelSelectionChangedEvent selectionChangedEventStub;
 
     private GoogleMapBrowserPanel googleMapBrowserPanel;
-    private BrowserPanelHandle browserPanelHandle;
+    private GoogleMapBrowserPanelHandle googleMapBrowserPanelHandle;
 
     @Before
     public void setUp() {
@@ -31,14 +31,14 @@ public class GoogleMapBrowserPanelTest extends GuiUnitTest {
         guiRobot.interact(() -> googleMapBrowserPanel = new GoogleMapBrowserPanel());
         uiPartRule.setUiPart(googleMapBrowserPanel);
 
-        browserPanelHandle = new BrowserPanelHandle(googleMapBrowserPanel.getRoot());
+        googleMapBrowserPanelHandle = new GoogleMapBrowserPanelHandle(googleMapBrowserPanel.getRoot());
     }
 
     @Test
     public void display() throws Exception {
         // default web page
         URL expectedDefaultPageUrl = MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE);
-        assertEquals(expectedDefaultPageUrl, browserPanelHandle.getLoadedUrl());
+        assertEquals(expectedDefaultPageUrl, googleMapBrowserPanelHandle.getLoadedUrl());
 
         String []segment = ALICE.getAddress().value.split("#");
 
@@ -47,7 +47,7 @@ public class GoogleMapBrowserPanelTest extends GuiUnitTest {
         URL expectedPersonUrl = new URL(GOOGLEMAP_SEARCH_URL_PREFIX
                 + segment[0].replaceAll(" ", "+") + GOOGLEMAP_SEARCH_URL_SUFFIX);
 
-        waitUntilBrowserLoaded(browserPanelHandle);
-        assertEquals(expectedPersonUrl, browserPanelHandle.getLoadedUrl());
+        waitUntilBrowserLoaded(googleMapBrowserPanelHandle);
+        assertEquals(expectedPersonUrl, googleMapBrowserPanelHandle.getLoadedUrl());
     }
 }

@@ -31,7 +31,7 @@
     </padding>
   </StackPane>
 
-  <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" styleClass="pane-with-border" VBox.vgrow="NEVER">
+        <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100.0" minHeight="100.0" prefHeight="100.0" styleClass="pane-with-border" VBox.vgrow="NEVER">
     <padding>
       <Insets bottom="5" left="10" right="10" top="5" />
     </padding>
@@ -47,9 +47,8 @@
       <SplitPane id="splitPane" dividerPositions="0.375" orientation="VERTICAL">
          <items>
             <AnchorPane fx:id="personDetailsPlaceholder" maxHeight="180.0" minWidth="500.0" />
-            <SplitPane dividerPositions="0.5, 0.5" prefHeight="200.0" prefWidth="200.0">
+            <SplitPane dividerPositions="0.5" prefHeight="200.0" prefWidth="200.0">
                <items>
-                  <StackPane fx:id="facebookBrowserPlaceholder" />
                   <StackPane fx:id="instagramBrowserPlaceholder" prefHeight="150.0" prefWidth="200.0" />
                   <StackPane fx:id="googleMapBrowserPaceholder" prefHeight="150.0" prefWidth="200.0" />
                </items>

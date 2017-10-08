@@ -28,7 +28,7 @@ public class GoogleMapBrowserPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(this.getClass());
 
     @FXML
-    private WebView browser;
+    private WebView googleMapBrowser;
 
     public GoogleMapBrowserPanel() {
         super(FXML);
@@ -46,7 +46,7 @@ public class GoogleMapBrowserPanel extends UiPart<Region> {
     }
 
     public void loadPage(String url) {
-        Platform.runLater(() -> browser.getEngine().load(url));
+        Platform.runLater(() -> googleMapBrowser.getEngine().load(url));
     }
 
     /**
@@ -61,7 +61,7 @@ public class GoogleMapBrowserPanel extends UiPart<Region> {
      * Frees resources allocated to the browser.
      */
     public void freeResources() {
-        browser = null;
+        googleMapBrowser = null;
     }
 
     @Subscribe

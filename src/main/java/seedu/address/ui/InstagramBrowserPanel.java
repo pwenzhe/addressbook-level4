@@ -28,7 +28,7 @@ public class InstagramBrowserPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(this.getClass());
 
     @FXML
-    private WebView browser;
+    private WebView instagramBrowser;
 
     public InstagramBrowserPanel() {
         super(FXML);
@@ -45,7 +45,7 @@ public class InstagramBrowserPanel extends UiPart<Region> {
     }
 
     public void loadPage(String url) {
-        Platform.runLater(() -> browser.getEngine().load(url));
+        Platform.runLater(() -> instagramBrowser.getEngine().load(url));
     }
 
     /**
@@ -60,7 +60,7 @@ public class InstagramBrowserPanel extends UiPart<Region> {
      * Frees resources allocated to the browser.
      */
     public void freeResources() {
-        browser = null;
+        instagramBrowser = null;
     }
 
     @Subscribe
