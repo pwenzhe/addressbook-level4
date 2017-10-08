@@ -194,15 +194,14 @@ public abstract class AddressBookSystemTest {
      */
     protected void assertSelectedCardChanged(Index expectedSelectedCardIndex) {
         String selectedCardName = getPersonListPanel().getHandleToSelectedCard().getName();
-        String selectedCardAddress = getPersonListPanel().getHandleToSelectedCard().getAddress();
+        String []selectedCardAddress = getPersonListPanel().getHandleToSelectedCard().getAddress().split("#");
 
         URL expectedInstagramUrl;
         URL expectedGoogleMapUrl;
-        String []segment = getPersonListPanel().getHandleToSelectedCard().getAddress().split("#");
         try {
             expectedInstagramUrl = new URL(INSTAGRAM_SEARCH_URL_PREFIX + selectedCardName.replaceAll("\\s+",
                     "") + "/");
-            expectedGoogleMapUrl = new URL(GOOGLEMAP_SEARCH_URL_PREFIX + segment[0].replaceAll(" ",
+            expectedGoogleMapUrl = new URL(GOOGLEMAP_SEARCH_URL_PREFIX + selectedCardAddress[0].replaceAll(" ",
                     "+") + GOOGLEMAP_SEARCH_URL_SUFFIX);
         } catch (MalformedURLException mue) {
             throw new AssertionError("URL expected to be valid.");
