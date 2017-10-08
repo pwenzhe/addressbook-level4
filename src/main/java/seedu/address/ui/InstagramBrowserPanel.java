@@ -16,7 +16,7 @@ import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.model.person.ReadOnlyPerson;
 
 /**
- * The Browser Panel of the App.
+ * The Instagram Browser Panel of the App.
  */
 public class InstagramBrowserPanel extends UiPart<Region> {
 
