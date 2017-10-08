@@ -196,10 +196,11 @@ public abstract class AddressBookSystemTest {
 
         URL expectedInstagramUrl;
         URL expectedGoogleMapUrl;
+        String []segment = getPersonListPanel().getHandleToSelectedCard().getAddress().split("#");
         try {
             expectedInstagramUrl = new URL(INSTAGRAM_SEARCH_URL_PREFIX + selectedCardName.replaceAll("\\s+",
                     "") + "/");
-            expectedGoogleMapUrl = new URL(GOOGLEMAP_SEARCH_URL_PREFIX + selectedCardAddress.replaceAll(" ",
+            expectedGoogleMapUrl = new URL(GOOGLEMAP_SEARCH_URL_PREFIX + segment[0].replaceAll(" ",
                     "+") + GOOGLEMAP_SEARCH_URL_SUFFIX);
         } catch (MalformedURLException mue) {
             throw new AssertionError("URL expected to be valid.");

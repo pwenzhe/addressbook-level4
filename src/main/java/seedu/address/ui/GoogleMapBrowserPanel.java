@@ -41,7 +41,9 @@ public class GoogleMapBrowserPanel extends UiPart<Region> {
     }
 
     private void loadPersonPage(ReadOnlyPerson person) {
-        loadPage(GOOGLEMAP_SEARCH_URL_PREFIX + person.getAddress().value.replaceAll(" ", "+")
+        String []segment = person.getAddress().value.split("#");
+
+        loadPage(GOOGLEMAP_SEARCH_URL_PREFIX + segment[0].replaceAll(" ", "+")
             + GOOGLEMAP_SEARCH_URL_SUFFIX);
     }
 
