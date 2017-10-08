@@ -40,6 +40,10 @@ public class GoogleMapBrowserPanel extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
+    /**
+     * Tokenise the address to remove substring after "#" and use this address to load page
+     * @param person
+     */
     private void loadPersonPage(ReadOnlyPerson person) {
         String []segment = person.getAddress().value.split("#");
 
