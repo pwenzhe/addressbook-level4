@@ -19,6 +19,7 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Date;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -27,12 +28,14 @@ import seedu.address.model.tag.Tag;
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
+    private static final String INVALID_DATE = "9058u4";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
+    private static final String VALID_DATE = "260478";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
@@ -111,6 +114,31 @@ public class ParserUtilTest {
         Optional<Phone> actualPhone = ParserUtil.parsePhone(Optional.of(VALID_PHONE));
 
         assertEquals(expectedPhone, actualPhone.get());
+    }
+
+    @Test
+    public void parseDate_null_throwsNullPointerException() throws Exception {
+        thrown.expect(NullPointerException.class);
+        ParserUtil.parseDate(null);
+    }
+
+    @Test
+    public void parseDate_invalidValue_throwsIllegalValueException() throws Exception {
+        thrown.expect(IllegalValueException.class);
+        ParserUtil.parseDate(Optional.of(INVALID_DATE));
+    }
+
+    @Test
+    public void parseDate_optionalEmpty_returnsOptionalEmpty() throws Exception {
+        assertFalse(ParserUtil.parseDate(Optional.empty()).isPresent());
+    }
+
+    @Test
+    public void parseDate_validValue_returnsDate() throws Exception {
+        Date expectedDate = new Date(VALID_DATE);
+        Optional<Date> actualDate = ParserUtil.parseDate(Optional.of(VALID_DATE));
+
+        assertEquals(expectedDate, actualDate.get());
     }
 
     @Test
