@@ -1,4 +1,4 @@
-= Bevy - User Guide
+= AddressBook Level 4 - User Guide
 :toc:
 :toc-title:
 :toc-placement: preamble
@@ -12,19 +12,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/se-edu/addressbook-level4
 
-By: `Team Bevy`      Since: `Aug 2017`      Licence: `MIT`
-
-== Introduction
-
-Do you have a lot of friends that you wish that you can keep track of?
-Bevy is a free application that allows you to store your friends information in a single place.
-You can search for more details about your friends on common social media platform such as Facebook and Google.
-Bevy is available on both Apple and Play store.
-
-== About
-
-Bevy is easy to use where all commands are typed in the command box.
-This User Guide gives you a detailed instruction on how to use this application.
+By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
 
 == Quick Start
 
@@ -64,24 +52,15 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 === Viewing help : `help`
 
-Opens the help window which shows the guidelines to use Bevy.
 Format: `help`
 
 === Adding a person: `add`
 
 Adds a person to the address book +
-Format: `add n/NAME p/PHONE_NUMBER d/DOB e/EMAIL a/ADDRESS [t/TAG]...`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
 
-****
-* The format for adding need not be in order. For example, the email can be entered after phone number.
-* A person can have any number of tags (including 0)
-* There are restiction for each parameters:
-* Name: Person names should only contain alphanumeric characters and spaces, and it should not be blank.
-* Phone: Phone numbers can only contain numbers, and should be at least 3 digits long.
-* DOB: Date can only contain numbers, and should be 6 digits long in the format DDMMYY.
-* Email: Person emails should be 2 alphanumeric/period strings separated by '@'.
-* Address: Person addresses can take any values, and it should not be blank
-****
+[TIP]
+A person can have any number of tags (including 0)
 
 Examples:
 
@@ -258,27 +237,10 @@ There is no need to save manually.
 *Q*: How do I transfer my data to another Computer? +
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
 
-*Q*: What do I do if I loose all my data?+
-*A*: Your data is stored in our cloud storage. Simply enter your username to restore your data.
-
-*Q*: Will there be updates for new versions? +
-*A*: If there is an update, a notification will appear to let you know about the available updates.
-
-*Q*: My data is very important. What if my data is missing? +
-*A*: Bevy safeguards your data from being missing with two measures.
-First, each time when you exit the program normally, Bevy will backup the current file automatically to the backup folder.
-Second, you can click the backup command on the File menu at any time to backup the data of the current Bevy file to some other place, such as your USB.
-
-*Q*: I have no idea how to start using Bevy, is there anyone to help me? +
-*A*: The help function is always available. Simply type 'help' or 'h' in the command box and a help window will pop up.
-
-*Q*: My question is not on the FAQ list, what can I do? +
-*A*: Please do not hesitate to email us for any questions or comments.
-
 == Command Summary
 
-* *Add* `add n/NAME p/PHONE_NUMBER d/DOB e/EMAIL a/ADDRESS [t/TAG]...` +
-e.g. `add n/James Ho p/22224444 d/010191 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
+e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 * *Clear* : `clear`
 * *Delete* : `delete INDEX` +
 e.g. `delete 3`
