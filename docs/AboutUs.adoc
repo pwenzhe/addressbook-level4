@@ -4,6 +4,7 @@ ifdef::env-github,env-browser[:outfilesuffix: .adoc]
 :imagesDir: images
 :stylesDir: stylesheets
 
+
 Bevy, a powerful address book was developed by the https://github.com/orgs/CS2103AUG2017-T16-B3/teams/developers/members[Bevy] team. +
 {empty} +
 We are a team based in the http://www.comp.nus.edu.sg[School of Computing, National University of Singapore].
@@ -19,12 +20,12 @@ Responsibilities: Testing, Git Expert
 
 '''
 
-=== John Roe
-image::lejolly.jpg[width="150", align="left"]
-{empty}[http://github.com/lejolly[github]] [<<johndoe#, portfolio>>]
+=== Yue Pei Er Valerie
+image::Valerie.png[width="150", align="left"]
+{empty}[http://github.com/Valerieyue[github]] [<<johndoe#, portfolio>>]
 
-Role: Team Lead +
-Responsibilities: UI
+Role: Documentation +
+Responsibilities: Logic
 
 '''
 
