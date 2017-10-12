@@ -14,7 +14,7 @@ public class Date {
     public final String value;
 
     /**
-     * Validates given phone number.
+     * Validates given date.
      *
      * @throws IllegalValueException if given phone string is invalid.
      */
