@@ -16,22 +16,21 @@ import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.model.person.ReadOnlyPerson;
 
 /**
- * The Browser Panel of the App.
+ * The Instagram Browser Panel of the App.
  */
-public class BrowserPanel extends UiPart<Region> {
+public class InstagramBrowserPanel extends UiPart<Region> {
 
     public static final String DEFAULT_PAGE = "default.html";
-    public static final String GOOGLE_SEARCH_URL_PREFIX = "https://www.google.com.sg/search?safe=off&q=";
-    public static final String GOOGLE_SEARCH_URL_SUFFIX = "&cad=h";
+    public static final String INSTAGRAM_SEARCH_URL_PREFIX = "https://www.instagram.com/";
 
-    private static final String FXML = "BrowserPanel.fxml";
+    private static final String FXML = "InstagramBrowserPanel.fxml";
 
     private final Logger logger = LogsCenter.getLogger(this.getClass());
 
     @FXML
-    private WebView browser;
+    private WebView instagramBrowser;
 
-    public BrowserPanel() {
+    public InstagramBrowserPanel() {
         super(FXML);
 
         // To prevent triggering events for typing inside the loaded Web page.
@@ -42,12 +41,11 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     private void loadPersonPage(ReadOnlyPerson person) {
-        loadPage(GOOGLE_SEARCH_URL_PREFIX + person.getName().fullName.replaceAll(" ", "+")
-                + GOOGLE_SEARCH_URL_SUFFIX);
+        loadPage(INSTAGRAM_SEARCH_URL_PREFIX + person.getName().fullName.replaceAll("\\s+", ""));
     }
 
     public void loadPage(String url) {
-        Platform.runLater(() -> browser.getEngine().load(url));
+        Platform.runLater(() -> instagramBrowser.getEngine().load(url));
     }
 
     /**
@@ -62,7 +60,7 @@ public class BrowserPanel extends UiPart<Region> {
      * Frees resources allocated to the browser.
      */
     public void freeResources() {
-        browser = null;
+        instagramBrowser = null;
     }
 
     @Subscribe
