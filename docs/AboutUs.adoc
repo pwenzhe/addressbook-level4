@@ -4,8 +4,8 @@ ifdef::env-github,env-browser[:outfilesuffix: .adoc]
 :imagesDir: images
 :stylesDir: stylesheets
 
-AddressBook - Level 4 was developed by the https://se-edu.github.io/docs/Team.html[se-edu] team. +
-The dummy content given below serves as a placeholder to be used by future forks of the project. +
+Bevy was developed by https://github.com/CS2103AUG2017-T16-B3[T16-B3] team. +
+ +
 {empty} +
 We are a team based in the http://www.comp.nus.edu.sg[School of Computing, National University of Singapore].
 
@@ -19,12 +19,12 @@ Role: Project Advisor
 
 '''
 
-=== John Roe
-image::lejolly.jpg[width="150", align="left"]
-{empty}[http://github.com/lejolly[github]] [<<johndoe#, portfolio>>]
+=== Yue Pei Er Valerie
+image::Valerie.png[width="150", align="left"]
+{empty}[http://github.com/Valerieyue[github]] [<<johndoe#, portfolio>>]
 
-Role: Team Lead +
-Responsibilities: UI
+Role: Documentation +
+Responsibilities: Logic
 
 '''
 
