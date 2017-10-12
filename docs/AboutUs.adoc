@@ -37,12 +37,12 @@ Responsibilities: Data
 
 '''
 
-=== Johnny Roe
-image::m133225.jpg[width="150", align="left"]
-{empty}[http://github.com/m133225[github]] [<<johndoe#, portfolio>>]
+=== Poon Wenzhe
+image::poonwenzhe.jpg[width="150", align="left"]
+{empty}[http://github.com/pwenzhe[github]] [<<poonwenzhe#, portfolio>>]
 
 Role: Developer +
-Responsibilities: Dev Ops + Threading
+Responsibilities: UI
 
 '''
 
