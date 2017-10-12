@@ -29,7 +29,7 @@
          <children>
             <Label text="Name" />
             <Label text="Phone" GridPane.rowIndex="1" />
-            <Label text="Date" GridPane.rowIndex="2" />
+            <Label text="Birthday" GridPane.rowIndex="2" />
             <Label text="Address" GridPane.rowIndex="3" />
             <Label fx:id="phone" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label fx:id="date" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
