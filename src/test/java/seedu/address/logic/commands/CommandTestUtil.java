@@ -62,8 +62,14 @@ public class CommandTestUtil {
     public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "89473h"; // 'h' not allowed in date
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
-    public static final String INVALID_POSTALCODE_DESC = " " + PREFIX_POSTALCODE
+    public static final String INVALID_POSTALCODE_DESC_1 = " " + PREFIX_POSTALCODE
             + "1234z"; // 'z' not allowed in postal code
+    public static final String INVALID_POSTALCODE_DESC_2 = " " + PREFIX_POSTALCODE
+            + "456"; // Less than 6 digits, not allowed in postal code
+    public static final String INVALID_POSTALCODE_DESC_3 = " " + PREFIX_POSTALCODE
+            + "778125810"; // More than 6 digits, not allowed in postal code
+    public static final String INVALID_POSTALCODE_DESC_4 = " " + PREFIX_POSTALCODE
+            + "980150"; // Beyond range of postal codes in Singapore, not allowed in postal code
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;

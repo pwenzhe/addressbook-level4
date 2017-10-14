@@ -12,8 +12,8 @@ public class PostalCode {
 
 
     public static final String MESSAGE_POSTALCODE_CONSTRAINTS =
-            "Postal codes can only contain numbers, and should be 6 digits long";
-    public static final String POSTALCODE_VALIDATION_REGEX = "\\d{6,}";
+            "Postal codes can only contain numbers, should be exactly 6 digits long and less than 800000";
+    public static final String POSTALCODE_VALIDATION_REGEX = "(?<!\\d)\\d{6}(?!\\d)";
     public static final int POSTALCODE_UPPER_RANGE = 800000;
     public final Boolean isPresent;
     public final String value;
