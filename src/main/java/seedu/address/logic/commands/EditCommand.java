@@ -13,7 +13,9 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -35,6 +37,8 @@ import seedu.address.model.tag.Tag;
  */
 public class EditCommand extends UndoableCommand {
 
+    private final Logger logger = LogsCenter.getLogger(EditCommand.class);
+
     public static final String COMMAND_WORD = "edit";
     public static final String COMMAND_ALIAS = "e";
 
@@ -51,7 +55,7 @@ public class EditCommand extends UndoableCommand {
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_DATE + "010191"
+            + PREFIX_DATE + "010191 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
@@ -83,7 +87,7 @@ public class EditCommand extends UndoableCommand {
 
         ReadOnlyPerson personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
-
+        logger.info("A: " + editedPerson.getAsText());
         try {
             model.updatePerson(personToEdit, editedPerson);
         } catch (DuplicatePersonException dpe) {
@@ -242,6 +246,7 @@ public class EditCommand extends UndoableCommand {
                     && getDate().equals(e.getDate())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
+                    && getPostalCode().equals(e.getPostalCode())
                     && getTags().equals(e.getTags());
         }
     }

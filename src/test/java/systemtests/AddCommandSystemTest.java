@@ -261,17 +261,17 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
                 + INVALID_POSTALCODE_DESC_1 + ADDRESS_DESC_AMY;
         assertCommandFailure(command, PostalCode.MESSAGE_POSTALCODE_CONSTRAINTS);
 
-        /* Case: invalid postal code, less than 6 digits -> rejected */
+        /* Case: invalid postal code, less than 6 digits not allowed -> rejected */
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + DATE_DESC_AMY + EMAIL_DESC_AMY
                 + INVALID_POSTALCODE_DESC_2 + ADDRESS_DESC_AMY;
         assertCommandFailure(command, PostalCode.MESSAGE_POSTALCODE_CONSTRAINTS);
 
-        /* Case: invalid postal code, more than 6 digits -> rejected */
+        /* Case: invalid postal code, more than 6 digits not allowed -> rejected */
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + DATE_DESC_AMY + EMAIL_DESC_AMY
                 + INVALID_POSTALCODE_DESC_3 + ADDRESS_DESC_AMY;
         assertCommandFailure(command, PostalCode.MESSAGE_POSTALCODE_CONSTRAINTS);
 
-        /* Case: invalid postal code, beyond range of postal codes in Singapore -> rejected */
+        /* Case: invalid postal code, beyond range of postal codes in Singapore, not allowed -> rejected */
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + DATE_DESC_AMY + EMAIL_DESC_AMY
                 + INVALID_POSTALCODE_DESC_4 + ADDRESS_DESC_AMY;
         assertCommandFailure(command, PostalCode.MESSAGE_POSTALCODE_CONSTRAINTS);

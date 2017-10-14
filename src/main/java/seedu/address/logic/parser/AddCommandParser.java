@@ -77,6 +77,8 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         if (!postalCode.isPresent() && match.find()) {
             return ParserUtil.parsePostalCode(Optional.ofNullable(match.group("postalCode"))).get();
+        } else if (!postalCode.isPresent()) {
+            return new PostalCode("");
         } else {
             return ParserUtil.parsePostalCode(postalCode).get();
         }

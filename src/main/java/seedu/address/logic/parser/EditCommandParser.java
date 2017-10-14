@@ -36,8 +36,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_DATE, PREFIX_EMAIL,
-                        PREFIX_POSTALCODE, PREFIX_ADDRESS,
-                        PREFIX_TAG);
+                        PREFIX_ADDRESS, PREFIX_POSTALCODE, PREFIX_TAG);
 
         Index index;
 
@@ -54,6 +53,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE)).ifPresent(editPersonDescriptor::setDate);
             ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL)).ifPresent(editPersonDescriptor::setEmail);
             ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS)).ifPresent(editPersonDescriptor::setAddress);
+            ParserUtil.parsePostalCode(argMultimap.getValue(PREFIX_POSTALCODE))
+                    .ifPresent(editPersonDescriptor::setPostalCode);
             parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
         } catch (IllegalValueException ive) {
             throw new ParseException(ive.getMessage(), ive);
