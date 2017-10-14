@@ -125,7 +125,7 @@ public class PersonBuilder {
         return this;
     }
 
-     /**
+    /**
      * Sets the {@code PostalCode} of the {@code Person} that we are building.
      */
     public PersonBuilder withPostalCode(String postalCode) {
