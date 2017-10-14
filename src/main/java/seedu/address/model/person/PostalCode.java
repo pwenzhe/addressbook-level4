@@ -26,7 +26,7 @@ public class PostalCode {
     public PostalCode(String postalCode) throws IllegalValueException {
         requireNonNull(postalCode);
 
-        if (postalCode.equals("")) {
+        if ("".equals(postalCode)) {
             isPresent = false;
             this.value = postalCode;
         } else {
