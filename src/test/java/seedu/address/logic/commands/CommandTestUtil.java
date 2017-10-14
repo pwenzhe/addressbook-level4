@@ -52,6 +52,10 @@ public class CommandTestUtil {
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
+    public static final String ADDRESS_POSTFIX_POSTALCODE_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY
+            + " " + VALID_POSTALCODE_AMY;
+    public static final String ADDRESS_PREFIX_POSTALCODE_DESC_AMY = " " + PREFIX_ADDRESS + VALID_POSTALCODE_AMY
+            + " " + VALID_ADDRESS_AMY;
     public static final String POSTALCODE_DESC_AMY = " " + PREFIX_POSTALCODE + VALID_POSTALCODE_AMY;
     public static final String POSTALCODE_DESC_BOB = " " + PREFIX_POSTALCODE + VALID_POSTALCODE_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;

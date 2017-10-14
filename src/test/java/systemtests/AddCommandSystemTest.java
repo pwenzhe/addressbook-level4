@@ -3,6 +3,8 @@ package systemtests;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_POSTFIX_POSTALCODE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_PREFIX_POSTALCODE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -166,6 +168,22 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         assert getModel().getAddressBook().getPersonList().size() == 0;
         assertCommandSuccess(ALICE);
 
+        /* Case: add a person with postfix postal code in address -> added */
+        toAdd = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY).withDate(VALID_DATE_AMY)
+                .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY + " " + VALID_POSTALCODE_AMY)
+                .withPostalCode(VALID_POSTALCODE_AMY).withTags(VALID_TAG_FRIEND).build();
+        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + DATE_DESC_AMY + EMAIL_DESC_AMY
+                 + ADDRESS_POSTFIX_POSTALCODE_DESC_AMY + TAG_DESC_FRIEND;
+        assertCommandSuccess(command, toAdd);
+
+        /* Case: add a person with prefix postal code in address -> added */
+        toAdd = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_BOB).withDate(VALID_DATE_AMY)
+                .withEmail(VALID_EMAIL_AMY).withAddress(VALID_POSTALCODE_AMY + " " + VALID_ADDRESS_AMY)
+                .withPostalCode(VALID_POSTALCODE_AMY).withTags(VALID_TAG_FRIEND).build();
+        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_BOB + DATE_DESC_AMY + EMAIL_DESC_AMY
+                 + ADDRESS_PREFIX_POSTALCODE_DESC_AMY + TAG_DESC_FRIEND;
+        assertCommandSuccess(command, toAdd);
+
         /* Case: add a person with tags, command with parameters in random order -> added */
         toAdd = BOB;
         command = AddCommand.COMMAND_WORD + TAG_DESC_FRIEND + DATE_DESC_BOB + PHONE_DESC_BOB + ADDRESS_DESC_BOB
@@ -207,6 +225,10 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: invalid keyword -> rejected */
         command = "adds " + PersonUtil.getPersonDetails(toAdd);
+        assertCommandFailure(command, Messages.MESSAGE_UNKNOWN_COMMAND);
+
+        /* Case: invalid keyword -> rejected */
+        command = "as " + PersonUtil.getPersonDetails(toAdd);
         assertCommandFailure(command, Messages.MESSAGE_UNKNOWN_COMMAND);
 
         /* Case: invalid name -> rejected */

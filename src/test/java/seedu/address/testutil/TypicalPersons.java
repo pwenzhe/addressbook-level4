@@ -27,27 +27,35 @@ import seedu.address.model.person.exceptions.DuplicatePersonException;
 public class TypicalPersons {
 
     public static final ReadOnlyPerson ALICE = new PersonBuilder().withName("Alice Pauline")
-            .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-            .withPhone("85355255").withDate("051189").withTags("friends").build();
+            .withPhone("85355255").withDate("051189").withEmail("alice@example.com")
+            .withAddress("123, Jurong West Ave 6, #08-111").withPostalCode("555920").withTags("friends").build();
     public static final ReadOnlyPerson BENSON = new PersonBuilder().withName("Benson Meier")
-            .withAddress("311, Clementi Ave 2, #02-25").withEmail("johnd@example.com")
-            .withPhone("98765432").withDate("080667").withTags("owesMoney", "friends").build();
+            .withPhone("98765432").withDate("080667").withEmail("johnd@example.com")
+            .withAddress("311, Clementi Ave 2, #02-25").withPostalCode("120390")
+            .withTags("owesMoney", "friends").build();
     public static final ReadOnlyPerson CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withDate("220398").withEmail("heinz@example.com").withAddress("wall street").build();
+            .withDate("220398").withEmail("heinz@example.com").withAddress("wall street")
+            .withPostalCode("320195").build();
     public static final ReadOnlyPerson DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withDate("310388").withEmail("cornelia@example.com").withAddress("10th street").build();
+            .withDate("310388").withEmail("cornelia@example.com").withAddress("10th street")
+            .withPostalCode("800000").build();
     public static final ReadOnlyPerson ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withDate("070784").withEmail("werner@example.com").withAddress("michegan ave").build();
+            .withDate("070784").withEmail("werner@example.com").withAddress("michegan ave")
+            .withPostalCode("459568").build();
     public static final ReadOnlyPerson FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withDate("170889").withEmail("lydia@example.com").withAddress("little tokyo").build();
+            .withDate("170889").withEmail("lydia@example.com").withAddress("little tokyo")
+            .withPostalCode("250350").build();
     public static final ReadOnlyPerson GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
-            .withDate("131282").withEmail("anna@example.com").withAddress("4th street").build();
+            .withDate("131282").withEmail("anna@example.com").withAddress("4th street")
+            .withPostalCode("780125").build();
 
     // Manually added
     public static final ReadOnlyPerson HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
-            .withEmail("stefan@example.com").withAddress("little india").build();
+            .withDate("220395").withEmail("stefan@example.com").withAddress("little india")
+            .withPostalCode("650988").build();
     public static final ReadOnlyPerson IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
-            .withEmail("hans@example.com").withAddress("chicago ave").build();
+            .withDate("300999").withEmail("hans@example.com").withAddress("chicago ave")
+            .withPostalCode("300290").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final ReadOnlyPerson AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
