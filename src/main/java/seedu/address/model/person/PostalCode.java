@@ -12,9 +12,10 @@ public class PostalCode {
 
 
     public static final String MESSAGE_POSTALCODE_CONSTRAINTS =
-            "Phone numbers can only contain numbers, and should be 6 digits long";
+            "Postal codes can only contain numbers, and should be 6 digits long";
     public static final String POSTALCODE_VALIDATION_REGEX = "\\d{6,}";
     public static final int POSTALCODE_UPPER_RANGE = 800000;
+    public final Boolean isPresent;
     public final String value;
 
     /**
@@ -24,11 +25,19 @@ public class PostalCode {
      */
     public PostalCode(String postalCode) throws IllegalValueException {
         requireNonNull(postalCode);
-        String trimmedPostalCode = postalCode.trim();
-        if (!isValidPostalCode(trimmedPostalCode)) {
-            throw new IllegalValueException(MESSAGE_POSTALCODE_CONSTRAINTS);
+
+        if (postalCode.equals("")) {
+            isPresent = false;
+            this.value = postalCode;
+        } else {
+            String trimmedPostalCode = postalCode.trim();
+            if (!isValidPostalCode(trimmedPostalCode)) {
+                throw new IllegalValueException(MESSAGE_POSTALCODE_CONSTRAINTS);
+            }
+
+            isPresent = true;
+            this.value = trimmedPostalCode;
         }
-        this.value = trimmedPostalCode;
     }
 
     /**
@@ -36,6 +45,14 @@ public class PostalCode {
      */
     public static boolean isValidPostalCode(String test) {
         return test.matches(POSTALCODE_VALIDATION_REGEX) && Integer.parseInt(test) <= POSTALCODE_UPPER_RANGE;
+    }
+
+    /**
+     * Returns true if a valide postal code is present
+     * @return
+     */
+    public boolean isPresentPostalCode() {
+        return isPresent;
     }
 
     @Override
