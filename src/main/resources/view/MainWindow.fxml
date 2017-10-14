@@ -49,7 +49,7 @@
             <AnchorPane fx:id="personDetailsPlaceholder" maxHeight="180.0" minWidth="500.0" />
             <SplitPane dividerPositions="0.5" prefHeight="200.0" prefWidth="200.0">
                <items>
-                  <StackPane fx:id="instagramBrowserPlaceholder" prefHeight="150.0" prefWidth="200.0" />
+                  <StackPane fx:id="instagramBrowserPlaceholder" maxWidth="500.0" prefHeight="150.0" prefWidth="200.0" />
                   <StackPane fx:id="googleMapBrowserPaceholder" prefHeight="150.0" prefWidth="200.0" />
                </items>
             </SplitPane>
