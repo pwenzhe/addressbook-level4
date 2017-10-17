@@ -15,6 +15,7 @@ import seedu.address.model.person.Date;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.PostalCode;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -72,6 +73,15 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code Optional<String> email} into an {@code Optional<Email>} if {@code email} is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<Email> parseEmail(Optional<String> email) throws IllegalValueException {
+        requireNonNull(email);
+        return email.isPresent() ? Optional.of(new Email(email.get())) : Optional.empty();
+    }
+
+    /**
      * Parses a {@code Optional<String> address} into an {@code Optional<Address>} if {@code address} is present.
      * See header comment of this class regarding the use of {@code Optional} parameters.
      */
@@ -81,12 +91,13 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> email} into an {@code Optional<Email>} if {@code email} is present.
+     * Parses a {@code Optional<String> postalCode} into an {@code Optional<PostalCode>} if {@code address} is present.
      * See header comment of this class regarding the use of {@code Optional} parameters.
      */
-    public static Optional<Email> parseEmail(Optional<String> email) throws IllegalValueException {
-        requireNonNull(email);
-        return email.isPresent() ? Optional.of(new Email(email.get())) : Optional.empty();
+    public static Optional<PostalCode> parsePostalCode(Optional<String> postalCode) throws IllegalValueException {
+        requireNonNull(postalCode);
+        return postalCode.isPresent() ? Optional.of(new PostalCode(postalCode.get()))
+                : Optional.empty();
     }
 
     /**

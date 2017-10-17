@@ -14,6 +14,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.PostalCode;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.tag.Tag;
 
@@ -32,6 +33,8 @@ public class XmlAdaptedPerson {
     private String email;
     @XmlElement(required = true)
     private String address;
+    @XmlElement(required = true)
+    private String postalCode;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -54,6 +57,7 @@ public class XmlAdaptedPerson {
         date = source.getDate().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        postalCode = source.getPostalCode().value;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -75,7 +79,8 @@ public class XmlAdaptedPerson {
         final Date date = new Date(this.date);
         final Email email = new Email(this.email);
         final Address address = new Address(this.address);
+        final PostalCode postalCode = new PostalCode(this.postalCode);
         final Set<Tag> tags = new HashSet<>(personTags);
-        return new Person(name, phone, date, email, address, tags);
+        return new Person(name, phone, date, email, address, postalCode, tags);
     }
 }

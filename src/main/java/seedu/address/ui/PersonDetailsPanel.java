@@ -30,6 +30,8 @@ public class PersonDetailsPanel extends UiPart<Region> {
     @FXML
     private Label address;
     @FXML
+    private Label postalCode;
+    @FXML
     private Label email;
 
     public PersonDetailsPanel() {
@@ -38,6 +40,7 @@ public class PersonDetailsPanel extends UiPart<Region> {
         phone.setText("");
         date.setText("");
         address.setText("");
+        postalCode.setText("");
         email.setText("");
 
         registerAsAnEventHandler(this);
@@ -52,6 +55,7 @@ public class PersonDetailsPanel extends UiPart<Region> {
         phone.textProperty().bind(Bindings.convert(person.phoneProperty()));
         date.textProperty().bind(Bindings.convert(person.dateProperty()));
         address.textProperty().bind(Bindings.convert(person.addressProperty()));
+        postalCode.textProperty().bind(Bindings.convert(person.postalCodeProperty()));
         email.textProperty().bind(Bindings.convert(person.emailProperty()));
     }
 
