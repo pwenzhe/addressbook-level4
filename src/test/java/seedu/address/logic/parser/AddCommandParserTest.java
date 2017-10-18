@@ -101,10 +101,32 @@ public class AddCommandParserTest {
     public void parse_optionalFieldsMissing_success() {
         // zero tags
         Person expectedPerson = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-                .withDate(VALID_DATE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withPostalCode("").withTags().build();
+                .withDate(VALID_DATE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withPostalCode("")
+                .withTags().build();
         assertParseSuccess(parser, AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + DATE_DESC_AMY
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY, new AddCommand(expectedPerson));
+
+        // no date
+        expectedPerson = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY).withDate("")
+                .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withPostalCode("").withTags().build();
+        assertParseSuccess(parser, AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
+                + ADDRESS_DESC_AMY, new AddCommand(expectedPerson));
+
+        // no email
+        expectedPerson = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
+                .withDate(VALID_DATE_AMY).withEmail("").withAddress(VALID_ADDRESS_AMY).withPostalCode("").withTags()
+                .build();
+        assertParseSuccess(parser, AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + DATE_DESC_AMY
+                + ADDRESS_DESC_AMY, new AddCommand(expectedPerson));
+
+        // no address
+        expectedPerson = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
+                .withDate(VALID_DATE_AMY).withEmail(VALID_EMAIL_AMY).withAddress("").withPostalCode("").withTags()
+                .build();
+        assertParseSuccess(parser, AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + DATE_DESC_AMY
+                + EMAIL_DESC_AMY, new AddCommand(expectedPerson));
+
+
     }
 
     @Test
@@ -118,18 +140,6 @@ public class AddCommandParserTest {
         // missing phone prefix
         assertParseFailure(parser, AddCommand.COMMAND_WORD + NAME_DESC_BOB + VALID_PHONE_BOB + DATE_DESC_BOB
                 + EMAIL_DESC_BOB + ADDRESS_DESC_BOB, expectedMessage);
-
-        // missing date prefix
-        assertParseFailure(parser, AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_BOB + VALID_DATE_BOB
-                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB, expectedMessage);
-
-        // missing email prefix
-        assertParseFailure(parser, AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_BOB + DATE_DESC_BOB
-                + VALID_EMAIL_BOB + ADDRESS_DESC_BOB, expectedMessage);
-
-        // missing address prefix
-        assertParseFailure(parser, AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_BOB + DATE_DESC_BOB
-                + EMAIL_DESC_BOB + VALID_ADDRESS_BOB, expectedMessage);
 
         // all prefixes missing
         assertParseFailure(parser, AddCommand.COMMAND_WORD + VALID_NAME_BOB + VALID_PHONE_BOB + DATE_DESC_BOB
