@@ -20,8 +20,8 @@ public class PersonContainsKeywordsPredicate implements Predicate<ReadOnlyPerson
         return
                 keywords.stream()
                         .filter(num -> num.matches("\\d+"))
-                        .anyMatch(number -> person.getPhone().toString().contains(number)) ||
-                keywords.stream()
+                        .anyMatch(number -> person.getPhone().toString().contains(number))
+                || keywords.stream()
                         .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword));
     }
 
