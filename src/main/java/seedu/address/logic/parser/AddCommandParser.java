@@ -84,9 +84,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
     }
 
-    private static Optional<String> areValuePresent(Optional<String> value) {
-        value = Optional.of(value.orElse(""));
-        return value;
+    private static Optional<String> areValuePresent(Optional<String> args) {
+        args = Optional.of(args.orElse(""));
+        return args;
     }
 
     /**
