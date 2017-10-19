@@ -44,17 +44,17 @@ public class AddCommandParser implements Parser<AddCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_DATE, PREFIX_EMAIL, PREFIX_ADDRESS,
                         PREFIX_POSTALCODE, PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_DATE, PREFIX_EMAIL)) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
         try {
             Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME)).get();
             Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE)).get();
-            Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE)).get();
-            Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL)).get();
-            Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS)).get();
-            PostalCode postalCode = getPostalCode(argMultimap.getValue(PREFIX_ADDRESS),
+            Date date = ParserUtil.parseDate(areValuePresent(argMultimap.getValue(PREFIX_DATE))).get();
+            Email email = ParserUtil.parseEmail(areValuePresent(argMultimap.getValue(PREFIX_EMAIL))).get();
+            Address address = ParserUtil.parseAddress(areValuePresent(argMultimap.getValue(PREFIX_ADDRESS))).get();
+            PostalCode postalCode = getPostalCode(areValuePresent(argMultimap.getValue(PREFIX_ADDRESS)),
                     argMultimap.getValue(PREFIX_POSTALCODE));
             Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
@@ -84,6 +84,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         } else {
             return ParserUtil.parsePostalCode(postalCode).get();
         }
+    }
+
+    private static Optional<String> areValuePresent(Optional<String> checkPresent) {
+        return Optional.of(checkPresent.orElse(""));
     }
 
     /**
