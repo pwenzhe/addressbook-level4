@@ -96,8 +96,7 @@ public class ParserUtil {
      */
     public static Optional<PostalCode> parsePostalCode(Optional<String> postalCode) throws IllegalValueException {
         requireNonNull(postalCode);
-        return postalCode.isPresent() ? Optional.of(new PostalCode(postalCode.get()))
-                : Optional.empty();
+        return postalCode.isPresent() ? Optional.of(new PostalCode(postalCode.get())) : Optional.empty();
     }
 
     /**

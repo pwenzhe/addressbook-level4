@@ -10,7 +10,7 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4
+:repoURL: https://github.com/CS2103AUG2017-T16-B3/addressbook-level4.git
 
 By: `Team Bevy`      Since: `Aug 2017`      Licence: `MIT`
 
@@ -25,6 +25,7 @@ Bevy is available on both Apple and Play store.
 
 Bevy is easy to use where all commands are typed in the command box.
 This User Guide gives you a detailed instruction on how to use this application.
+=======
 
 == Quick Start
 
@@ -157,20 +158,20 @@ Examples:
 
 * `list` +
 `delete 2` +
-Deletes the 2nd person in the address book.
+Deletes the 2nd person listed in the address book.
 * `find Betsy` +
 `delete 1` +
-Deletes the 1st person in the results of the `find` command.
+Deletes the 1st person listed in the results of the `find` command.
 
 === Selecting a person : `select`
 
-Selects the person identified by the index number used in the last person listing. +
+Selects the person identified by the index shown in the current listing of persons. +
 Format: `select INDEX`
 Command Alias: `s`
 
 ****
-* Selects the person and loads the Google search page the person at the specified `INDEX`.
-* The index refers to the index number shown in the most recent listing.
+* Selects the person and load the Instagram and Google Maps panel of the person at the specified `INDEX`.
+* The index refers to the index number shown in the current listing of persons.
 * The index *must be a positive integer* `1, 2, 3, ...`
 ****
 
@@ -178,10 +179,10 @@ Examples:
 
 * `list` +
 `select 2` +
-Selects the 2nd person in the address book.
+Selects the 2nd person listed in the address book.
 * `find Betsy` +
 `select 1` +
-Selects the 1st person in the results of the `find` command.
+Selects the 1st person listed in the results of the `find` command.
 
 === Listing entered commands : `history`
 
@@ -203,14 +204,14 @@ Command Alias: `u`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
+Undoable commands: Those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
 ====
 
 Examples:
 
 * `delete 1` +
 `list` +
-`undo` (reverses the `delete 1` command) +
+`undo` (Reverses the `delete 1` command) +
 
 * `select 1` +
 `list` +
@@ -219,8 +220,8 @@ The `undo` command fails as there are no undoable commands executed previously.
 
 * `delete 1` +
 `clear` +
-`undo` (reverses the `clear` command) +
-`undo` (reverses the `delete 1` command) +
+`undo` (Reverses the `clear` command) +
+`undo` (Reverses the `delete 1` command) +
 
 === Redoing the previously undone command : `redo`
 
@@ -231,8 +232,8 @@ Command Alias: `r`
 Examples:
 
 * `delete 1` +
-`undo` (reverses the `delete 1` command) +
-`redo` (reapplies the `delete 1` command) +
+`undo` (Reverses the `delete 1` command) +
+`redo` (Reapplies the `delete 1` command) +
 
 * `delete 1` +
 `redo` +
@@ -240,11 +241,10 @@ The `redo` command fails as there are no `undo` commands executed previously.
 
 * `delete 1` +
 `clear` +
-`undo` (reverses the `clear` command) +
-`undo` (reverses the `delete 1` command) +
-`redo` (reapplies the `delete 1` command) +
-`redo` (reapplies the `clear` command) +
-// end::undoredo[]
+`undo` (Reverses the `clear` command) +
+`undo` (Reverses the `delete 1` command) +
+`redo` (Reapplies the `delete 1` command) +
+`redo` (Reapplies the `clear` command) +
 
 === Clearing all entries : `clear`
 
@@ -272,17 +272,6 @@ There is no need to save manually.
 
 *Q*: How do I transfer my data to another Computer? +
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
-
-*Q*: What do I do if I loose my data? +
-*A*: Your data is stored in our cloud storage. Simply enter your username to restore your data.
-
-*Q*: Will there be updates fpr new versions? +
-*A*: If there is an update, a notification will appear to let you know about the available updates.
-
-*Q*: My data is very important. What if my data is missing? +
-*A*: Bevy safeguards your data from being missing with two measures.
-First, each time when you exit the program normally, Bevy will backup the current file automatically to the backup folder.
-Second, you can click the backup command on the File menu at any time to backup the data of the current Bevy file to some other place, such as your USB.
 
 *Q*: My question is not on the FAQ list, what can I do? +
 *A*: Please do not hesitate to email us for any questions or comments.
