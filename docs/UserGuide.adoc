@@ -76,13 +76,16 @@ Command Alias: `a`
 
 ****
 * The format for add need not be in order. For example, the email can be entered after the phone number.
-* A person can have any number of tags (including 0)
+* There is autocapitalisation for the name. This means that the first letter of each part of the name will be capitalised when saved in the database.
+* Postal code can be retrived from the address without specifying.
+* A person can have any number of tags (including 0).
 * There are restrictions for each parameters:
 ** Name: Person names should contain alphanumeric characters and spaces, and it should not be blank.
 ** Phone: Phone should only contain numbers and it should not be blank. It should be at least 3 digits long.
 ** DOB: Date should only contain numbers, and should be 6 digits long in the format DDMMYY.
 ** Email: Person email should be 2 aphanumeric/ period strings separated by '@'.
 ** Address: Person address can take any values, and it should not be blank.
+** Postal Code: Postal code should only contain numbers and be exactly 6 digits long.
 ****
 
 Examples:
@@ -286,8 +289,8 @@ Second, you can click the backup command on the File menu at any time to backup 
 
 == Command Summary
 
-* *Add* `add n/NAME p/PHONE_NUMBER d/DOB e/EMAIL a/ADDRESS [t/TAG]...` +
-e.g. `add n/James Ho p/22224444 d/240989 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+* *Add* `add n/NAME p/PHONE_NUMBER [d/DOB] [e/EMAIL] [a/ADDRESS] [pc/POSTAL_CODE] t/TAG]...` +
+e.g. `add n/James Ho p/22224444 d/240989 e/jamesho@example.com a/123, Clementi Rd pc/234665 t/friend t/colleague`
 * *Clear* : `clear`
 * *Delete* : `delete INDEX` +
 e.g. `delete 3`

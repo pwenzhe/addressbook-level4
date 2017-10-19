@@ -1,4 +1,4 @@
-= AddressBook Level 4 - Developer Guide
+= Bevy - Developer Guide
 :toc:
 :toc-title:
 :toc-placement: preamble
@@ -14,63 +14,87 @@ ifdef::env-github,env-browser[:outfilesuffix: .adoc]
 
 By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
 
+== Introduction
+
+Bevy is a database that helps to store user's contact list.
+It is a one stop location for user to find out more detailed information about their friends.
+This developer guide provides information that will help you get started as a Bevy contributor.
+This guide will be useful even if you are already an experienced contributor.
+It contains a general guideline that you will have to take note of such as the documentation required.
+There is a detailed explanation on the design of the architecture for clear understanding.
+
 == Setting up
 
 === Prerequisites
+It is important that you have downloaded required software to support Bevy.
+If not, you will not be able to run or make changes to it.
 
 . *JDK `1.8.0_60`* or later
 +
 [NOTE]
-Having any Java 8 version is not enough. +
-This app will not work with earlier versions of Java 8.
+Having any Java 8 version will not be sufficient. +
+Bevy will not work with earlier versions of Java 8.
 +
 
 . *IntelliJ* IDE
 +
 [NOTE]
-IntelliJ by default has Gradle and JavaFx plugins installed. +
-Do not disable them. If you have disabled them, go to `File` > `Settings` > `Plugins` to re-enable them.
+By default, IntelliJ has Gradle and JavaFx plugins installed. +
+To ensure that you have enabled them, go to `File` > `Settings` > `Plugins`.
 
 
 === Setting up the project in your computer
 
-. Fork this repo, and clone the fork to your computer
-. Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
-. Set up the correct JDK version for Gradle
-.. Click `Configure` > `Project Defaults` > `Project Structure`
-.. Click `New...` and find the directory of the JDK
-. Click `Import Project`
-. Locate the `build.gradle` file and select it. Click `OK`
-. Click `Open as Project`
-. Click `OK` to accept the default settings
+. Fork this repository from Bevy's github page (link?), and clone the fork to your computer to create a local repository.
+. Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first).
+. Set up the correct JDK version for Gradle.
+.. Click `Configure` > `Project Defaults` > `Project Structure`.
+.. Click `New...` and find the directory of the JDK.
+. Click `Import Project`.
+. Locate the `build.gradle` file and select it. Click `OK`.
+. Click `Open as Project`.
+. Click `OK` to accept the default settings.
 . Open a console and run the command `gradlew processResources` (Mac/Linux: `./gradlew processResources`). It should finish with the `BUILD SUCCESSFUL` message. +
 This will generate all resources required by the application and tests.
 
 === Verifying the setup
 
-. Run the `seedu.address.MainApp` and try a few commands
+. Run the `seedu.address.MainApp` and try a few commands.
 . link:#testing[Run the tests] to ensure they all pass.
+. If you encounter any issues, please refork the repository and ensure that you have the relevant software required.
 
 === Configurations to do before writing code
 
 ==== Configuring the coding style
 
-This project follows https://github.com/oss-generic/process/blob/master/docs/CodingStandards.md[oss-generic coding standards]. IntelliJ's default style is mostly compliant with ours but it uses a different import order from ours. To rectify,
+This project follows https://github.com/oss-generic/process/blob/master/docs/CodingStandards.md[oss-generic coding standards].
+IntelliJ's default style is mostly compliant with ours but it uses a different import order from ours. To rectify:
 
-. Go to `File` > `Settings...` (Windows/Linux), or `IntelliJ IDEA` > `Preferences...` (macOS)
-. Select `Editor` > `Code Style` > `Java`
-. Click on the `Imports` tab to set the order
+. Go to `File` > `Settings...` (Windows/Linux), or `IntelliJ IDEA` > `Preferences...` (macOS).
+. Select `Editor` > `Code Style` > `Java`.
+. Click on the `Imports` tab to set the order.
 
-* For `Class count to use import with '\*'` and `Names count to use static import with '*'`: Set to `999` to prevent IntelliJ from contracting the import statements
-* For `Import Layout`: The order is `import static all other imports`, `import java.\*`, `import javax.*`, `import org.\*`, `import com.*`, `import all other imports`. Add a `<blank line>` between each `import`
+* For `Class count to use import with '\*'` and `Names count to use static import with '*'`:
+Set to `999` to prevent IntelliJ from contracting the import statements.
+* For `Import Layout`, follow this order:
+** import static all other imports
+** import java.\*
+** import javax.*
+** import org.\*
+** import com.*
+** import all other imports
+** Add a `<blank line>` between each import.
 
-Optionally, you can follow the <<UsingCheckstyle#, UsingCheckstyle.adoc>> document to configure Intellij to check style-compliance as you write code.
+Optionally, you can follow the <<UsingCheckstyle#, UsingCheckstyle.adoc>> document
+to configure IntelliJ to check style-compliance as you write code.
 
 ==== Updating documentation to match your fork
 
-After forking the repo, links in the documentation will still point to the `se-edu/addressbook-level4` repo. If you plan to develop this as a separate product (i.e. instead of contributing to the `se-edu/addressbook-level4`) , you should replace the URL in the variable `repoURL` in `DeveloperGuide.adoc` and `UserGuide.adoc` with the URL of your fork.
+After forking the repository, links in the documentation will still point to the `CS2103AUG2017-T16-B3/addressbook-level4` repository.
+If you plan to develop this as a separate product (i.e. instead of contributing to the `CS2103AUG2017-T16-B3/addressbook-level4`),
+you should replace the URL in the variable `repoURL` in `DeveloperGuide.adoc` and `UserGuide.adoc` with the URL of your fork.
 
-==== Setting up CI
+==== Setting up Continuous Integration
 
 Set up Travis to perform Continuous Integration (CI) for your fork. See <<UsingTravis#, UsingTravis.adoc>> to learn how to set it up.
 
@@ -83,7 +107,7 @@ Having both Travis and AppVeyor ensures your App works on both Unix-based platfo
 
 When you are ready to start coding,
 
-1. Get some sense of the overall design by reading the link:#architecture[Architecture] section.
+1. Read the link:#architecture[Architecture] section to get a better understanding of how to code using the API.
 2. Take a look at the section link:#suggested-programming-tasks-to-get-started[Suggested Programming Tasks to Get Started].
 
 == Design
@@ -93,15 +117,15 @@ When you are ready to start coding,
 image::Architecture.png[width="600"]
 _Figure 2.1.1 : Architecture Diagram_
 
-The *_Architecture Diagram_* given above explains the high-level design of the App. Given below is a quick overview of each component.
+The *_Architecture Diagram_* given above explains the high-level design of the application. The following is a quick overview of each component.
 
 [TIP]
 The `.pptx` files used to create diagrams in this document can be found in the link:{repoURL}/docs/diagrams/[diagrams] folder. To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
 
 `Main` has only one class called link:{repoURL}/src/main/java/seedu/address/MainApp.java[`MainApp`]. It is responsible for,
 
-* At app launch: Initializes the components in the correct sequence, and connects them up with each other.
-* At shut down: Shuts down the components and invokes cleanup method where necessary.
+* App launch: Initializes the components and connects them in the correct sequence.
+* Shut down: Shuts down the components and invokes cleanup method where necessary.
 
 link:#common-classes[*`Commons`*] represents a collection of classes used by multiple other components. Two of those classes play important roles at the architecture level.
 
@@ -165,6 +189,8 @@ The `UI` component,
 
 === Logic component
 
+The logic component executes the commands. This is the component that parses and filter the information required for Model.
+
 image::LogicClassDiagram.png[width="800"]
 _Figure 2.3.1 : Structure of the Logic Component_
 
@@ -176,6 +202,8 @@ link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 
 .  `Logic` uses the `AddressBookParser` class to parse the user command.
 .  This results in a `Command` object which is executed by the `LogicManager`.
+.  `CommandParser` parses the input for execution by `Command`
+.  The fixed variable names are stored separately as indicated by the faded blue boxes that will be used by `Command` and `CommandParser`.
 .  The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
@@ -183,6 +211,13 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 
 image::DeletePersonSdForLogic.png[width="800"]
 _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
+
+.  Following the flow of the diagram, the command `delete 1` will be sent to `LogicManager`.
+.  `AddressBookParser` will parse the `delete` command and will call the`DeleteCommandParser`.
+.  `DeleteCommandParser` will parse the remaining command, in this case `1` and call `DeleteCommand`.
+.  `DeleteCommand` will execute the functions in the class and delete the information in `Model`.
+.  After the end of execution, `DeleteCommand` will return the result to `LogicManager`.
+.  `LogicManager` will then return result.
 
 === Model component
 
@@ -359,6 +394,38 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 * `WARNING` : Can continue, but with caution
 * `INFO` : Information showing the noteworthy actions by the App
 * `FINE` : Details that is not usually noteworthy but may be useful in debugging e.g. print the actual list instead of just its size
+
+=== Calendar
+
+The calendar feature allows user to store birthdays. Users can further make use of this feature to sort the database.
+This feature is supported by visual where user can see their friend's name on the calendar.
+This feature would require changes on all component of the architecture.
+
+==== Logic
+
+===== Add Command
+The date variable can be added via the add command as this is one of the possible data that an be stored by the user.
+Minor changes has been changed to AddCommand and AddCommandPaser. The changes made ensures that this additional variable follows the format of the initial four varaible.
+
+===== Find Command
+User can categorise people based on their birthday and the database will be sorted based on the day when user is viewing it.
+This is implemented using the find command as this will reduce the number of commands used by the users.
+
+
+
+==== Model
+
+Date is added the same way as the other variables for person.
+->diagram
+As can be seen from the diagram, date is accessed the same way as the other four variables.
+
+
+==== Storage
+
+
+==== UI
+A calendar will be added. It will be a monthly view such that users can see their friend's name appearing on the calendar.
+When the user select a person, the calendar will bring them to the upcoming birthday date for that person.
 
 === Configuration
 
