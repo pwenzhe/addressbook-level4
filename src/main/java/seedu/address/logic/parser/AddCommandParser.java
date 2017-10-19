@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSTALCODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.model.person.PostalCode.POSTALCODE_UPPER_RANGE;
 
 import java.util.Optional;
 import java.util.Set;
@@ -75,8 +76,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Pattern pattern = Pattern.compile("(?<postalCode>(?<!\\d)\\d{6}(?!\\d))");
         Matcher match = pattern.matcher(address.get());
 
-        if (!postalCode.isPresent() && match.find()) {
-            return ParserUtil.parsePostalCode(Optional.ofNullable(match.group("postalCode"))).get();
+        if (!postalCode.isPresent() && match.find()
+                && Integer.parseInt(match.group("postalCode").toString()) <= POSTALCODE_UPPER_RANGE) {
+            return ParserUtil.parsePostalCode(Optional.of(match.group("postalCode"))).get();
         } else if (!postalCode.isPresent()) {
             return new PostalCode("");
         } else {
