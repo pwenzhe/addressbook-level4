@@ -380,7 +380,7 @@ The following sequence diagram shows how the browser operation works, using Inst
 image::BrowserPanelsSequenceDiagram.png[width="400"]
 
 As shown from the sequence diagram, when a user selects a new person, the InstagramBrowserPanel handles the new selection event and display the selected
-person's instagram based on the name. For example, if the selected person's name is `Alex Yeoh`, InstagramBrowserPanel will use `AlexYeoh` as part of the URL parameter to display the person's
+person's instagram based on the name in the details. For example, if the selected person's name is `Alex Yeoh`, InstagramBrowserPanel will use `AlexYeoh` as part of the URL parameter to display the person's
 instagram page.
 
 Similarly, the GoogleMapBrowserPanel will display the map of the selected person's home location using either the postal code or the address in the details. The UiParts is responsible for constructing and displaying
