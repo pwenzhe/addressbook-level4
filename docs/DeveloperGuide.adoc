@@ -364,6 +364,53 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
 
+=== Instagram/Google Map Browser Panel
+
+image::BrowserPanels.png[width="500"]
+
+The browser panels display visual information about the selected person.
+
+image::BrowserPanelsClassDiagram.png[width="400"]
+
+As shown from the class diagram, both browser panels extends the UiParts. The browser panels are responsible for displaying information on the selected
+person based on the person details.
+
+The following sequence diagram shows how the browser operation works, using InstagramBrowserPanel as an exmaple:
+
+image::BrowserPanelsSequenceDiagram.png[width="400"]
+
+As shown from the sequence diagram, when a user selects a new person, the InstagramBrowserPanel handles the new selection event and display the selected
+person's instagram based on the name. For example, if the selected person's name is `Alex Yeoh`, InstagramBrowserPanel will use `AlexYeoh` as part of the URL parameter to display the person's
+instagram page.
+
+Similarly, the GoogleMapBrowserPanel will display the map of the selected person's home location using either the postal code or the address in the details. The UiParts is responsible for constructing and displaying
+respective scene. For example, if the postal code is `150159`, GoogleMapBrowserPanel will use this exact value to display the person's location. If the postal code is not available, address will be used. For example,
+if the address is `ABC 123 Street`, GoogleMapBrowserPanel will use `ABC+123+Street` as part of the URL parameter to display
+the person's location.
+
+[NOTE]
+If the address contains `#` characters, GoogleMapBrowserPanel will ignore any substring after this character
+
+==== Design Considerations
+
+**Aspect:** Type of implementation for Instagram +
+**Alternative 1 (current choice):** Use browser to display selected person's instagram page. +
+**Pros:** Easy to implement, since we only need to familiarise with URL parameters. +
+**Cons:** It does not integrate very well with the Address Book, as some user's instagram page cannot be found using just their name. +
+**Alternative 2:** Use Instagram API to construct an intergrated Instagram component +
+**Pros:** Integrates well, as users can use one-time login authentication to sync with Instagram and we can find users with similar names from user's followers +
+**Cons:** Difficult to implement, as there is a steep learning curve to master Instagram API +
+
+
+**Aspect:** Type of implementation for Google Map +
+**Alternative 1 (current choice):** Use browser to display selected person's location. +
+**Pros:** Easy to implement, since we only need to familiarise with URL parameters. +
+**Cons:** It does not integrate very well with the Address Book, as we can not customise the visual display. +
+**Alternative 2:** Use Google Map API to construct an intergrated Google Map component +
+**Pros:** Integrates well, as we can simplify the experience for users +
+**Cons:** Difficult to implement, as there is a steep learning curve to master Google Map API +
+
+
 == Documentation
 
 We use asciidoc for writing documentation.
