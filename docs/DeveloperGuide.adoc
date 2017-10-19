@@ -366,7 +366,7 @@ Certain properties of the application can be controlled (e.g App name, logging l
 
 === Instagram/Google Map Browser Panel
 
-image::BrowserPanels.png[width="500"]
+image::BrowserPanels.png[width="800"]
 
 The browser panels display visual information about the selected person.
 
