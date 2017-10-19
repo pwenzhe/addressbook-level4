@@ -398,8 +398,8 @@ If the address contains `#` characters, GoogleMapBrowserPanel will ignore any su
 **Pros:** Easy to implement, since we only need to familiarise with URL parameters. +
 **Cons:** It does not integrate very well with the Address Book, as some user's instagram page cannot be found using just their name. +
 **Alternative 2:** Use Instagram API to construct an intergrated Instagram component +
-**Pros:** Integrates well, as users can use one-time login authentication to sync with Instagram and we can find users with similar names from user's followers +
-**Cons:** Difficult to implement, as there is a steep learning curve to master Instagram API +
+**Pros:** Integrates well, as users can use one-time login authentication to sync with Instagram and we can find users with similar names from user's followers. +
+**Cons:** Difficult to implement, as there is a steep learning curve to master Instagram API. +
 
 
 **Aspect:** Type of implementation for Google Map +
@@ -407,8 +407,8 @@ If the address contains `#` characters, GoogleMapBrowserPanel will ignore any su
 **Pros:** Easy to implement, since we only need to familiarise with URL parameters. +
 **Cons:** It does not integrate very well with the Address Book, as we can not customise the visual display. +
 **Alternative 2:** Use Google Map API to construct an intergrated Google Map component +
-**Pros:** Integrates well, as we can simplify the experience for users +
-**Cons:** Difficult to implement, as there is a steep learning curve to master Google Map API +
+**Pros:** Integrates well, as we can simplify the experience for users. +
+**Cons:** Difficult to implement, as there is a steep learning curve to master Google Map API. +
 
 
 == Documentation
