@@ -73,13 +73,13 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Removes the equivalent person from the list.
+     * Removes the equivalent persons from the list.
      *
-     * @throws PersonNotFoundException if no such person could be found in the list.
+     * @throws PersonNotFoundException if a person could be found in the list.
      */
-    public boolean remove(ReadOnlyPerson toRemove) throws PersonNotFoundException {
-        requireNonNull(toRemove);
-        final boolean personFoundAndDeleted = internalList.remove(toRemove);
+    public boolean removeAll(List<ReadOnlyPerson> personsToRemove) throws PersonNotFoundException {
+        requireNonNull(personsToRemove);
+        final boolean personFoundAndDeleted = internalList.removeAll(personsToRemove);
         if (!personFoundAndDeleted) {
             throw new PersonNotFoundException();
         }
