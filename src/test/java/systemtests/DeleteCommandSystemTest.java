@@ -10,10 +10,15 @@ import static seedu.address.testutil.TestUtil.getPerson;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+
 import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
@@ -33,8 +38,12 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
         /* Case: delete the first person in the list, command with leading spaces and trailing spaces -> deleted */
         Model expectedModel = getModel();
         String command = "     " + DeleteCommand.COMMAND_WORD + "      " + INDEX_FIRST_PERSON.getOneBased() + "       ";
-        ReadOnlyPerson deletedPerson = removePerson(expectedModel, INDEX_FIRST_PERSON);
-        String expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedPerson);
+        List<ReadOnlyPerson> deletedPerson = removePerson(expectedModel, INDEX_FIRST_PERSON);
+        HashSet<Integer> zeroBasedIndexes = new HashSet<>();
+        zeroBasedIndexes.add(INDEX_FIRST_PERSON.getZeroBased());
+
+        String expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedPerson.size(),
+                StringUtil.toIndexedListString(zeroBasedIndexes, deletedPerson));
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
 
         /* Case: delete the last person in the list -> deleted */
@@ -116,10 +125,12 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
      * Removes the {@code ReadOnlyPerson} at the specified {@code index} in {@code model}'s address book.
      * @return the removed person
      */
-    private ReadOnlyPerson removePerson(Model model, Index index) {
-        ReadOnlyPerson targetPerson = getPerson(model, index);
+    private List<ReadOnlyPerson> removePerson(Model model, Index index) {
+        List<ReadOnlyPerson> targetPerson = new ArrayList<>();
+        targetPerson.add(getPerson(model, index));
+
         try {
-            model.deletePerson(targetPerson);
+            model.deletePersons(targetPerson);
         } catch (PersonNotFoundException pnfe) {
             throw new AssertionError("targetPerson is retrieved from model.");
         }
@@ -133,7 +144,8 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
      */
     private void assertCommandSuccess(Index toDelete) {
         Model expectedModel = getModel();
-        ReadOnlyPerson deletedPerson = removePerson(expectedModel, toDelete);
+
+        List<ReadOnlyPerson> deletedPerson = removePerson(expectedModel, toDelete);
         String expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedPerson);
 
         assertCommandSuccess(

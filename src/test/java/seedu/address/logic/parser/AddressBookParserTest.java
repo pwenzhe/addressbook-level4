@@ -8,6 +8,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -58,7 +59,9 @@ public class AddressBookParserTest {
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+        HashSet<Integer> zeroBasedIndex = new HashSet<>();
+        zeroBasedIndex.add(INDEX_FIRST_PERSON.getZeroBased());
+        assertEquals(new DeleteCommand(zeroBasedIndex), command);
     }
 
     @Test
