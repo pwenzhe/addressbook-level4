@@ -52,4 +52,20 @@ public class DeleteCommand extends UndoableCommand {
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete.size(),
                 StringUtil.toIndexedListString(zeroBasedTargetIndexes, personToDelete)));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof DeleteCommand)) {
+            return false;
+        }
+
+        DeleteCommand d = (DeleteCommand) other;
+        return zeroBasedTargetIndexes.equals(d.zeroBasedTargetIndexes);
+    }
 }

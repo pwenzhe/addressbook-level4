@@ -143,7 +143,9 @@ public class CommandTestUtil {
      * Deletes the first person in {@code model}'s filtered list from {@code model}'s address book.
      */
     public static void deleteFirstPerson(Model model) {
-        List<ReadOnlyPerson> firstPerson = (List) model.getFilteredPersonList().get(0);
+        List<ReadOnlyPerson> firstPerson = new ArrayList<>();
+        firstPerson.add(model.getFilteredPersonList().get(0));
+
         try {
             model.deletePersons(firstPerson);
         } catch (PersonNotFoundException pnfe) {

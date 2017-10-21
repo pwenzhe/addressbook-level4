@@ -61,6 +61,7 @@ public class AddressBookParserTest {
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         HashSet<Integer> zeroBasedIndex = new HashSet<>();
         zeroBasedIndex.add(INDEX_FIRST_PERSON.getZeroBased());
+
         assertEquals(new DeleteCommand(zeroBasedIndex), command);
     }
 

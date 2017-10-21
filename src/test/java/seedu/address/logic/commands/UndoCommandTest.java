@@ -34,11 +34,11 @@ public class UndoCommandTest {
         HashSet<Integer> zeroBasedIndexes = new HashSet<>();
         zeroBasedIndexes.add(INDEX_FIRST_PERSON.getZeroBased());
         deleteCommandOne = new DeleteCommand(zeroBasedIndexes);
-        zeroBasedIndexes.remove(INDEX_FIRST_PERSON.getZeroBased());
 
-        zeroBasedIndexes.add(INDEX_SECOND_PERSON.getZeroBased());
-        deleteCommandTwo = new DeleteCommand(zeroBasedIndexes);
-        zeroBasedIndexes.remove(INDEX_SECOND_PERSON.getZeroBased());
+        // New HashSet created to prevent multiple HashSets referencing to the same HashSet
+        HashSet<Integer> zeroBasedIndexes2 = new HashSet<>();
+        zeroBasedIndexes2.add(INDEX_SECOND_PERSON.getZeroBased());
+        deleteCommandTwo = new DeleteCommand(zeroBasedIndexes2);
 
         deleteCommandOne.setData(model, EMPTY_COMMAND_HISTORY, EMPTY_STACK);
         deleteCommandTwo.setData(model, EMPTY_COMMAND_HISTORY, EMPTY_STACK);

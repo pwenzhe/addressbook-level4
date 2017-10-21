@@ -17,6 +17,7 @@ import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.UndoRedoStack;
 import seedu.address.model.Model;
@@ -38,16 +39,17 @@ public class DeleteCommandTest {
         personsToDelete.add(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()));
         zeroBasedIndexes.add(INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteCommand = prepareCommand(zeroBasedIndexes);
-        zeroBasedIndexes.remove(INDEX_FIRST_PERSON.getZeroBased());
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personsToDelete.size(),
-                personsToDelete);
+                StringUtil.toIndexedListString(zeroBasedIndexes, personsToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePersons(personsToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
         personsToDelete.clear();
+        zeroBasedIndexes.remove(INDEX_FIRST_PERSON.getZeroBased());
+
     }
 
     @Test
@@ -56,9 +58,9 @@ public class DeleteCommandTest {
 
         zeroBasedIndexes.add(outOfBoundIndex.getZeroBased());
         DeleteCommand deleteCommand = prepareCommand(zeroBasedIndexes);
-        zeroBasedIndexes.remove(outOfBoundIndex.getZeroBased());
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        zeroBasedIndexes.remove(outOfBoundIndex.getZeroBased());
     }
 
     @Test
@@ -68,16 +70,17 @@ public class DeleteCommandTest {
         personsToDelete.add(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()));
         zeroBasedIndexes.add(INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteCommand = prepareCommand(zeroBasedIndexes);
-        zeroBasedIndexes.remove(INDEX_FIRST_PERSON.getZeroBased());
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personsToDelete.size(),
-                personsToDelete);
+                StringUtil.toIndexedListString(zeroBasedIndexes, personsToDelete));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePersons(personsToDelete);
         showNoPerson(expectedModel);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        personsToDelete.clear();
+        zeroBasedIndexes.remove(INDEX_FIRST_PERSON.getZeroBased());
     }
 
     @Test
@@ -90,9 +93,9 @@ public class DeleteCommandTest {
 
         zeroBasedIndexes.add(outOfBoundIndex.getZeroBased());
         DeleteCommand deleteCommand = prepareCommand(zeroBasedIndexes);
-        zeroBasedIndexes.remove(outOfBoundIndex.getZeroBased());
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        zeroBasedIndexes.remove(outOfBoundIndex.getZeroBased());
     }
 
     @Test
@@ -100,11 +103,10 @@ public class DeleteCommandTest {
         zeroBasedIndexes.add(INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteFirstCommand = new DeleteCommand(zeroBasedIndexes);
 
-        zeroBasedIndexes.remove(INDEX_FIRST_PERSON.getZeroBased());
-
-        zeroBasedIndexes.add(INDEX_SECOND_PERSON.getZeroBased());
-        DeleteCommand deleteSecondCommand = new DeleteCommand(zeroBasedIndexes);
-        zeroBasedIndexes.remove(INDEX_SECOND_PERSON.getZeroBased());
+        // New HashSet created to prevent multiple HashSets referencing to the same HashSet
+        HashSet<Integer> zeroBasedIndexes2 = new HashSet<>();
+        zeroBasedIndexes2.add(INDEX_SECOND_PERSON.getZeroBased());
+        DeleteCommand deleteSecondCommand = new DeleteCommand(zeroBasedIndexes2);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
@@ -124,7 +126,7 @@ public class DeleteCommandTest {
      * Returns a {@code DeleteCommand} with the parameter {@code index}.
      */
     private DeleteCommand prepareCommand(HashSet<Integer> zeroBasedIndexes) {
-        DeleteCommand deleteCommand = new DeleteCommand(zeroBasedIndexes);
+        DeleteCommand deleteCommand = new DeleteCommand(new HashSet<>(zeroBasedIndexes));
         deleteCommand.setData(model, new CommandHistory(), new UndoRedoStack());
         return deleteCommand;
     }

@@ -54,7 +54,7 @@ public class IndexRange {
 
     /**
     * Returns a sublist of items from {@code list} specified by {@code indices}.
-    * Original list order is maintained in the extracted list.<br>
+    * Original list order is maintained in the extracted list.
     */
     public static <T> List<T> subList(HashSet<Integer> indices, List<T> list) {
         assert areIndicesWithinBounds(indices, list);

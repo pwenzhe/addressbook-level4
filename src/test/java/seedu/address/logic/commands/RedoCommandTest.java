@@ -5,7 +5,6 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.deleteFirstPerson;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -34,11 +33,7 @@ public class RedoCommandTest {
         HashSet<Integer> zeroBasedIndexes = new HashSet<>();
         zeroBasedIndexes.add(INDEX_FIRST_PERSON.getZeroBased());
         deleteCommandOne = new DeleteCommand(zeroBasedIndexes);
-        zeroBasedIndexes.remove(INDEX_FIRST_PERSON.getZeroBased());
-
-        zeroBasedIndexes.add(INDEX_SECOND_PERSON.getZeroBased());
         deleteCommandTwo = new DeleteCommand(zeroBasedIndexes);
-        zeroBasedIndexes.remove(INDEX_SECOND_PERSON.getZeroBased());
 
         deleteCommandOne.setData(model, EMPTY_COMMAND_HISTORY, EMPTY_STACK);
         deleteCommandTwo.setData(model, EMPTY_COMMAND_HISTORY, EMPTY_STACK);

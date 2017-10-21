@@ -45,6 +45,8 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
         String expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedPerson.size(),
                 StringUtil.toIndexedListString(zeroBasedIndexes, deletedPerson));
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
+        deletedPerson.clear();
+        zeroBasedIndexes.clear();
 
         /* Case: delete the last person in the list -> deleted */
         Model modelBeforeDeletingLast = getModel();
@@ -92,8 +94,13 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
         selectPerson(selectedIndex);
         command = DeleteCommand.COMMAND_WORD + " " + selectedIndex.getOneBased();
         deletedPerson = removePerson(expectedModel, selectedIndex);
-        expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedPerson);
+        zeroBasedIndexes.add(selectedIndex.getZeroBased());
+
+        expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedPerson.size(),
+                StringUtil.toIndexedListString(zeroBasedIndexes, deletedPerson));
         assertCommandSuccess(command, expectedModel, expectedResultMessage, expectedIndex);
+        deletedPerson.clear();
+        zeroBasedIndexes.clear();
 
         /* --------------------------------- Performing invalid delete operation ------------------------------------ */
 
@@ -144,9 +151,12 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
      */
     private void assertCommandSuccess(Index toDelete) {
         Model expectedModel = getModel();
+        HashSet<Integer> zeroBasedIndexes = new HashSet<>();
+        zeroBasedIndexes.add(toDelete.getZeroBased());
 
         List<ReadOnlyPerson> deletedPerson = removePerson(expectedModel, toDelete);
-        String expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedPerson);
+        String expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedPerson.size(),
+                StringUtil.toIndexedListString(zeroBasedIndexes, deletedPerson));
 
         assertCommandSuccess(
                 DeleteCommand.COMMAND_WORD + " " + toDelete.getOneBased(), expectedModel, expectedResultMessage);

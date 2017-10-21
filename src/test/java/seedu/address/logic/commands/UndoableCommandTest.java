@@ -6,6 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.deleteFirstPerson;
 import static seedu.address.logic.commands.CommandTestUtil.showFirstPersonOnly;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
@@ -57,7 +58,9 @@ public class UndoableCommandTest {
 
         @Override
         public CommandResult executeUndoableCommand() throws CommandException {
-            List<ReadOnlyPerson> personToDelete = (List) model.getFilteredPersonList().get(0);
+            List<ReadOnlyPerson> personToDelete = new ArrayList<>();
+            personToDelete.add(model.getFilteredPersonList().get(0));
+
             try {
                 model.deletePersons(personToDelete);
             } catch (PersonNotFoundException pnfe) {
