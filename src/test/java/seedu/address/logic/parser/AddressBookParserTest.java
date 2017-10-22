@@ -59,10 +59,10 @@ public class AddressBookParserTest {
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        HashSet<Integer> zeroBasedIndex = new HashSet<>();
-        zeroBasedIndex.add(INDEX_FIRST_PERSON.getZeroBased());
+        HashSet<Integer> zeroBasedIndexes = new HashSet<>();
+        zeroBasedIndexes.add(INDEX_FIRST_PERSON.getZeroBased());
 
-        assertEquals(new DeleteCommand(zeroBasedIndex), command);
+        assertEquals(new DeleteCommand(zeroBasedIndexes), command);
     }
 
     @Test
