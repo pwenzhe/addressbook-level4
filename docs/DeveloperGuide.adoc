@@ -19,13 +19,14 @@ By: `Team Bevy`      Since: `Aug 2017`      Licence: `MIT`
 Bevy is a database that helps to store user's contact list.
 It is a one stop location for user to find out more detailed information about their friends.
 This developer guide provides information that will help you get started as a Bevy contributor.
-This guide will be useful even if you are already an experienced contributor.
+It will be useful even if you are already an experienced contributor.
 It contains a general guideline that you will have to take note of such as the documentation required.
 There is a detailed explanation on the design of the architecture for clear understanding.
 
 == Setting up
 
 === Prerequisites
+
 It is important that you have downloaded required software to support Bevy.
 If not, you will not be able to run or make changes to it.
 
@@ -113,6 +114,8 @@ When you are ready to start coding,
 == Design
 
 === Architecture
+
+The architecture section shows how Bevy is designed and will explain the reasons needed for this structure.
 
 image::Architecture.png[width="600"]
 _Figure 2.1.1 : Architecture Diagram_
@@ -213,7 +216,7 @@ image::DeletePersonSdForLogic.png[width="800"]
 _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
 
 .  Following the flow of the diagram, the command `delete 1` will be sent to `LogicManager`.
-.  `AddressBookParser` will parse the `delete` command and will call the`DeleteCommandParser`.
+.  `AddressBookParser` will parse the `delete` command and will call the `DeleteCommandParser`.
 .  `DeleteCommandParser` will parse the remaining command, in this case `1` and call `DeleteCommand`.
 .  `DeleteCommand` will execute the functions in the class and delete the information in `Model`.
 .  After the end of execution, `DeleteCommand` will return the result to `LogicManager`.
@@ -395,37 +398,37 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 * `INFO` : Information showing the noteworthy actions by the App
 * `FINE` : Details that is not usually noteworthy but may be useful in debugging e.g. print the actual list instead of just its size
 
-=== Calendar
+=== Birthday
 
-The calendar feature allows user to store birthdays. Users can further make use of this feature to sort the database.
-This feature is supported by visual where user can see their friend's name on the calendar.
-This feature would require changes on all component of the architecture.
+The birthday feature allows user to store their friends' birthdays.
+There are restrictions set to ensure that the date entered is valid.
+The format of the entered is not restricted to a single format.
+The birthday class will format the birthday entered to ensure that the birthday saved in the contact list is standardised.
+This will make it easier for user to view and also easier to execute find command for month.
 
-==== Logic
+After adding the birthday, user can search for a particular month and the list will show the people who were born in the same month, sorted according to the day.
 
-===== Add Command
-The date variable can be added via the add command as this is one of the possible data that an be stored by the user.
-Minor changes has been changed to AddCommand and AddCommandPaser. The changes made ensures that this additional variable follows the format of the initial four varaible.
+The following sequence diagram shows how find works when searching for a month.
 
-===== Find Command
-User can categorise people based on their birthday and the database will be sorted based on the day when user is viewing it.
-This is implemented using the find command as this will reduce the number of commands used by the users.
+image::FindMonthLogic.png[width="800"]
+_Figure 4.3.1: Interactions Inside the Logic Component for the `find m/Jan` Command_
 
+. Following the flow of the diagram, the command `find m/Jan will be sent to the `LogicManager`.
+. `AddressBookParser` will parse the `find` command and will call the `FindCommandParser`.
+. `FindCommandParser` will parse the remaining command, in this case `m/Jan` and call `FindCommand`.
+. `FindCommand` will execute the functions in the class and call `PersonContainsKeywordsPredicate`.
+. In `PersonContainsKeywordsPredicate`, this is where the list is filtered to find the contacts who has their birthday in Jan.
+. The list will then be returned to `LogicManager`.
 
+=== Design Consideration
 
-==== Model
-
-Date is added the same way as the other variables for person.
-->diagram
-As can be seen from the diagram, date is accessed the same way as the other four variables.
-
-
-==== Storage
-
-
-==== UI
-A calendar will be added. It will be a monthly view such that users can see their friend's name appearing on the calendar.
-When the user select a person, the calendar will bring them to the upcoming birthday date for that person.
+**Aspect:** Type of implementation to find the month. +
+**Alternative 1 (current choice):** Use the current find command that is currently used for finding name and phone number. +
+**Pros:** Easy to implement, since we only need to add a methods to the class. +
+**Cons:** It may make the code for find command more complicated. +
+**Alternative 2:** Creating a separate find command only for searching month. +
+**Pros:** Makes the code simpler and more direct as there is a command reserved for each of the command. +
+**Cons:** This would make it more complicated for the user to use as there is a different command for the different search. +
 
 === Configuration
 
@@ -857,7 +860,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |10 |`* * *` |user |find person using tags |find persons based on the different categories
 
-|11 |`* * *` |user |save my person's DOB |track persons' birthdays
+|11 |`* * *` |user |save my person's birthday |track persons' birthdays
 
 |12 |`* * *` |user |find persons by birthday month |find who is having birthdays
 

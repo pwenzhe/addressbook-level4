@@ -25,7 +25,6 @@ Bevy is available on both Apple and Play store.
 
 Bevy is easy to use where all commands are typed in the command box.
 This User Guide gives you a detailed instruction on how to use this application.
-=======
 
 == Quick Start
 
@@ -40,6 +39,7 @@ This app will not work with earlier versions of Java 8.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
 image::Ui.png[width="790"]
+_Figure 3.4.1 GUI_
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
@@ -66,33 +66,43 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 === Viewing help : `help`
 
 Opens the help window which shows the guidelines to use Bevy.
-Format: `help`
+Format: `help` +
 Command Alias: `sos`
 
 === Adding a person: `add`
 
 Adds a person to the address book +
-Format: `add n/NAME p/PHONE_NUMBER d/DOB e/EMAIL a/ADDRESS pc/POSTAL_CODE [t/TAG]...`
+Format: `add n/NAME p/PHONE_NUMBER [b/BIRTHDAY] [e/EMAIL] [a/ADDRESS] [pc/POSTAL_CODE] [t/TAG]...` +
 Command Alias: `a`
 
 ****
-* The format for add need not be in order. For example, the email can be entered after the phone number.
-* There is autocapitalisation for the name. This means that the first letter of each part of the name will be capitalised when saved in the database.
-* Postal code can be retrived from the address without specifying.
-* A person can have any number of tags (including 0).
 * There are restrictions for each parameters:
 ** Name: Person names should contain alphanumeric characters and spaces, and it should not be blank.
 ** Phone: Phone should only contain numbers and it should not be blank. It should be at least 3 digits long.
-** DOB: Date should only contain numbers, and should be 6 digits long in the format DDMMYY.
+** Birthday: Birthday must be in the format DDMMYYYY, separated by '/' or '-' or '.' or ' '.
+             The month can be entered as a number or name of the month. The date entered must be a valid.
 ** Email: Person email should be 2 aphanumeric/ period strings separated by '@'.
 ** Address: Person address can take any values, and it should not be blank.
 ** Postal Code: Postal code should only contain numbers and be exactly 6 digits long.
 ****
 
-Examples:
+Examples: +
+There are a number of features that are available in the add command.
+These features can be further explained using examples.
 
-* `add n/John Doe p/98765432 d/240894 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+*1. Adding a new Contact*
+
+Command: `add p/89893878 n/brandon tan t/friend b/25-9-94 e/brandon@gmail.com a/Blk 433, Bedok Street 10, 520433 t/family`
+
+image::AddCommand.jpg[width="790"]
+_Figure 4.2.1.1 Adding a New Contact_
+
+* From Figure 4.2.1.1, you can observe the following features:
+** You need not add the name in a specific order.
+** There is autocapitalisation for the name. This means that the first letter of each part of the name will be capitalised when saved in the database.
+** Postal code can be retrieved from the address without specifying `pc/`.
+** A person can have any number of tags.
+** Note that birthday can be added in a number of format, and it will be saved in the contact in the standard format.
 
 === Listing all persons : `list`
 
@@ -103,28 +113,60 @@ Command Alias: `l`
 === Editing a person : `edit`
 
 Edits an existing person in the address book. +
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Format: `edit INDEX [n/NAME] [p/PHONE] [b/BIRTHDAY] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 Command Alias: `e`
 
 ****
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the last person listing. The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person's tags by typing `t/` without specifying any tags after it.
 ****
 
-Examples:
+Examples: +
+The examples will show you how to use the edit command in more detail.
 
-* `edit 1 p/91234567 e/johndoe@example.com` +
-Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` +
-Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+image::EditBefore.jpg[width="790"]
+Figure 4.4.1 Before edit command
+
+Figure 4.4.1 shows the initial state before any edits. Subsequent edits will be changed with respect to this figure.
+
+*1. Removing Tag*
+
+Command: `edit 2 t/`
+
+image::RemoveTag.jpg[width="790"]
+_Figure 4.4.2 Removing Tag_
+
+You can remove all the person's tags by typing `t/` without specifying any tags after it. +
+From Figure 4.4.1, index 2 is Bernice Yu and has the tags colleagues and friends.
+After entering the command, all tags are removed as seen from Figure 4.4.2.
+
+*2. Editing Tag*
+
+Command: `edit 2 t/family`
+
+image::EditTag.jpg[width="790"]
+_Figure 4.4.3 Editing tag_
+
+When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative. +
+From Figure 4.4.1, index 2 is Bernice Yu and has the tags, colleagues and friends.
+After entering the command, the previous tags are replaced with a single tag, family.
+
+*3. Editing Fields*
+
+Command: `edit 4 n/Jackie Lam e/jackielam@hotmail.com`
+
+image::EditFields.jpg[width="790"]
+_Figure 4.4.4 Editing Fields_
+
+It is possible to edit more than one field at the same time.
+From Figure 4.4.1, index 4 is David Li.
+After executing the command, the name and email is changed as requested.
 
 === Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords. +
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find KEYWORD [MORE_KEYWORDS]` +
 Command Alias: `f`
 
 ****
@@ -145,7 +187,7 @@ Returns any person having names `Betsy`, `Tim`, or `John`
 === Deleting a person : `delete`
 
 Deletes the specified person from the address book. +
-Format: `delete INDEX`
+Format: `delete INDEX` +
 Command Alias: `d`
 
 ****
@@ -166,7 +208,7 @@ Deletes the 1st person listed in the results of the `find` command.
 === Selecting a person : `select`
 
 Selects the person identified by the index shown in the current listing of persons. +
-Format: `select INDEX`
+Format: `select INDEX` +
 Command Alias: `s`
 
 ****
@@ -187,7 +229,7 @@ Selects the 1st person listed in the results of the `find` command.
 === Listing entered commands : `history`
 
 Lists all the commands that you have entered in reverse chronological order. +
-Format: `history`
+Format: `history` +
 Command Alias: `h`
 
 [NOTE]
@@ -199,7 +241,7 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 === Undoing previous command : `undo`
 
 Restores the address book to the state before the previous _undoable_ command was executed. +
-Format: `undo`
+Format: `undo` +
 Command Alias: `u`
 
 [NOTE]
@@ -226,7 +268,7 @@ The `undo` command fails as there are no undoable commands executed previously.
 === Redoing the previously undone command : `redo`
 
 Reverses the most recent `undo` command. +
-Format: `redo`
+Format: `redo` +
 Command Alias: `r`
 
 Examples:
@@ -249,7 +291,7 @@ The `redo` command fails as there are no `undo` commands executed previously.
 === Clearing all entries : `clear`
 
 Clears all entries from the address book. +
-Format: `clear`
+Format: `clear` +
 Command Alias: `c`
 
 === Changing the theme: `changetheme`
@@ -260,7 +302,7 @@ Format: `changetheme`
 === Exiting the program : `exit`
 
 Exits the program. +
-Format: `exit`
+Format: `exit` +
 Command Alias: `x`
 
 === Saving the data
@@ -278,12 +320,12 @@ There is no need to save manually.
 
 == Command Summary
 
-* *Add* `add n/NAME p/PHONE_NUMBER [d/DOB] [e/EMAIL] [a/ADDRESS] [pc/POSTAL_CODE] t/TAG]...` +
-e.g. `add n/James Ho p/22224444 d/240989 e/jamesho@example.com a/123, Clementi Rd pc/234665 t/friend t/colleague`
+* *Add* `add n/NAME p/PHONE_NUMBER [b/BIRTHDAY] [e/EMAIL] [a/ADDRESS] [pc/POSTAL_CODE] t/TAG]...` +
+e.g. `add n/James Ho p/22224444 b/24 09 89 e/jamesho@example.com a/123, Clementi Rd pc/234665 t/friend t/colleague`
 * *Clear* : `clear`
 * *Delete* : `delete INDEX` +
 e.g. `delete 3`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
+* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [b/BIRTHDAY] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
 e.g. `edit 2 n/James Lee e/jameslee@example.com`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find James Jake`
