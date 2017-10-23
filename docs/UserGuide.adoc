@@ -121,17 +121,18 @@ Edits the phone number and email address of the 1st person to be `91234567` and 
 * `edit 2 n/Betsy Crower t/` +
 Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-=== Locating persons by name: `find`
+=== Locating persons by name or phone number: `find`
 
-Finds persons whose names contain any of the given keywords. +
+Finds persons whose names or phone numbers contain any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
 Command Alias: `f`
 
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Only the name and phone number is searched
+* Only full words will be matched for names e.g. `Han` will not match `Hans`
+* Phone numbers will match all numbers than contain the given number e.g. `123' will match `91234567`
 * Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 ****
 
@@ -139,8 +140,8 @@ Examples:
 
 * `find John` +
 Returns `john` and `John Doe`
-* `find Betsy Tim John` +
-Returns any person having names `Betsy`, `Tim`, or `John`
+* `find Betsy Tim John 123` +
+Returns any person having names `Betsy`, `Tim`, or `John`, or any person with phone number containing `123`.
 
 === Deleting a person : `delete`
 
@@ -254,7 +255,7 @@ Command Alias: `c`
 
 === Changing the theme: `changetheme`
 
-Changes the theme of the application. +
+Changes the theme of the application between the bright and dark theme. +
 Format: `changetheme`
 
 === Exiting the program : `exit`
