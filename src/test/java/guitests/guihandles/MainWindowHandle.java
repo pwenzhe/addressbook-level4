@@ -7,30 +7,33 @@ import javafx.stage.Stage;
  */
 public class MainWindowHandle extends StageHandle {
 
-    private final PersonListPanelHandle personListPanel;
-    private final ResultDisplayHandle resultDisplay;
-    private final CommandBoxHandle commandBox;
-    private final StatusBarFooterHandle statusBarFooter;
     private final MainMenuHandle mainMenu;
+    private final CommandBoxHandle commandBox;
+    private final ResultDisplayHandle resultDisplay;
+    private final PersonListPanelHandle personListPanel;
+    private final PersonDetailsPanelHandle personDetailsPanel;
     private final InstagramBrowserPanelHandle instagramBrowserPanel;
     private final GoogleMapBrowserPanelHandle googleMapBrowserPanel;
+    private final StatusBarFooterHandle statusBarFooter;
 
     public MainWindowHandle(Stage stage) {
         super(stage);
 
-        personListPanel = new PersonListPanelHandle(getChildNode(PersonListPanelHandle.PERSON_LIST_VIEW_ID));
+        mainMenu = new MainMenuHandle(getChildNode(MainMenuHandle.MENU_BAR_ID));
         resultDisplay = new ResultDisplayHandle(getChildNode(ResultDisplayHandle.RESULT_DISPLAY_ID));
         commandBox = new CommandBoxHandle(getChildNode(CommandBoxHandle.COMMAND_INPUT_FIELD_ID));
-        statusBarFooter = new StatusBarFooterHandle(getChildNode(StatusBarFooterHandle.STATUS_BAR_PLACEHOLDER));
-        mainMenu = new MainMenuHandle(getChildNode(MainMenuHandle.MENU_BAR_ID));
+        personListPanel = new PersonListPanelHandle(getChildNode(PersonListPanelHandle.PERSON_LIST_VIEW_ID));
+        personDetailsPanel = new PersonDetailsPanelHandle(
+                getChildNode(PersonDetailsPanelHandle.PERSON_DETAILS_VIEW_ID));
         instagramBrowserPanel = new InstagramBrowserPanelHandle(
                 getChildNode(InstagramBrowserPanelHandle.INSTAGRAM_BROWSER_ID));
         googleMapBrowserPanel = new GoogleMapBrowserPanelHandle(
                 getChildNode(GoogleMapBrowserPanelHandle.GOOGLEMAP_BROWSER_ID));
+        statusBarFooter = new StatusBarFooterHandle(getChildNode(StatusBarFooterHandle.STATUS_BAR_PLACEHOLDER));
     }
 
-    public PersonListPanelHandle getPersonListPanel() {
-        return personListPanel;
+    public MainMenuHandle getMainMenu() {
+        return mainMenu;
     }
 
     public ResultDisplayHandle getResultDisplay() {
@@ -41,12 +44,12 @@ public class MainWindowHandle extends StageHandle {
         return commandBox;
     }
 
-    public StatusBarFooterHandle getStatusBarFooter() {
-        return statusBarFooter;
+    public PersonListPanelHandle getPersonListPanel() {
+        return personListPanel;
     }
 
-    public MainMenuHandle getMainMenu() {
-        return mainMenu;
+    public PersonDetailsPanelHandle getPersonDetailsPanel() {
+        return personDetailsPanel;
     }
 
     public InstagramBrowserPanelHandle getInstagramBrowserPanel() {
@@ -55,5 +58,9 @@ public class MainWindowHandle extends StageHandle {
 
     public GoogleMapBrowserPanelHandle getGoogleMapBrowserPanel() {
         return googleMapBrowserPanel;
+    }
+
+    public StatusBarFooterHandle getStatusBarFooter() {
+        return statusBarFooter;
     }
 }
