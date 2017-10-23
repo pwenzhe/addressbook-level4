@@ -16,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import seedu.address.MainApp;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -97,15 +98,19 @@ public class MainWindow extends UiPart<Region> {
     /**
      * Changes the stylesheet used by GUI.
      */
-    public void changeTheme(int theme) {
-        String brightTheme = "view/BrightTheme.css";
-        String darkTheme = "view/DarkTheme.css";
-        if (theme == 0) {
-            getRoot().getStylesheets().remove(darkTheme);
-            getRoot().getStylesheets().add(brightTheme);
+    public void changeTheme() {
+        String brightThemePath = MainApp.class.getResource(FXML_FILE_FOLDER + "BrightTheme.css").toString();
+        String darkThemePath = MainApp.class.getResource(FXML_FILE_FOLDER + "DarkTheme.css").toString();
+        String extensionsPath = MainApp.class.getResource(FXML_FILE_FOLDER + "Extensions.css").toString();
+
+        String brightThemeAllPaths = "[" + extensionsPath + ", " + brightThemePath + "]";
+
+        if (getRoot().getStylesheets().toString().equals(brightThemeAllPaths)) {
+            getRoot().getStylesheets().remove(brightThemePath);
+            getRoot().getStylesheets().add(darkThemePath);
         } else {
-            getRoot().getStylesheets().remove(brightTheme);
-            getRoot().getStylesheets().add(darkTheme);
+            getRoot().getStylesheets().remove(darkThemePath);
+            getRoot().getStylesheets().add(brightThemePath);
         }
     }
 

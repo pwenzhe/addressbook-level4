@@ -200,7 +200,7 @@ public abstract class AddressBookSystemTest {
      */
     protected void assertSelectedCardChanged(Index expectedSelectedCardIndex) {
         String selectedCardName = getPersonListPanel().getHandleToSelectedCard().getName();
-        String []selectedCardAddress = getPersonListPanel().getHandleToSelectedCard().getAddress().split("#");
+        String []selectedCardAddress = getPersonDetailsPanel().getAddress().split("#");
 
         URL expectedInstagramUrl;
         URL expectedGoogleMapUrl;
