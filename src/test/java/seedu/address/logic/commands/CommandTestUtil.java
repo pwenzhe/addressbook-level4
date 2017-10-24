@@ -116,7 +116,7 @@ public class CommandTestUtil {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
-        List<ReadOnlyPerson> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
+        List<ReadOnlyPerson> expectedFilteredList = actualModel.getFilteredPersonList();
 
         try {
             command.execute();
@@ -143,9 +143,11 @@ public class CommandTestUtil {
      * Deletes the first person in {@code model}'s filtered list from {@code model}'s address book.
      */
     public static void deleteFirstPerson(Model model) {
-        ReadOnlyPerson firstPerson = model.getFilteredPersonList().get(0);
+        List<ReadOnlyPerson> firstPerson = new ArrayList<>();
+        firstPerson.add(model.getFilteredPersonList().get(0));
+
         try {
-            model.deletePerson(firstPerson);
+            model.deletePersons(firstPerson);
         } catch (PersonNotFoundException pnfe) {
             throw new AssertionError("Person in filtered list must exist in model.", pnfe);
         }

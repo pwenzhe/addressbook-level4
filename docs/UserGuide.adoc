@@ -72,6 +72,7 @@ Command Alias: `sos`
 === Adding a person: `add`
 
 Adds a person to the address book +
+
 Format: `add n/NAME p/PHONE_NUMBER [b/BIRTHDAY] [e/EMAIL] [a/ADDRESS] [pc/POSTAL_CODE] [t/TAG]...` +
 Command Alias: `a`
 
@@ -163,17 +164,18 @@ It is possible to edit more than one field at the same time.
 From Figure 4.4.1, index 4 is David Li.
 After executing the command, the name and email is changed as requested.
 
-=== Locating persons by name: `find`
+=== Locating persons by name or phone number: `find`
 
-Finds persons whose names contain any of the given keywords. +
+Finds persons whose names or phone numbers contain any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]` +
 Command Alias: `f`
 
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Only the name and phone number is searched
+* Only full words will be matched for names e.g. `Han` will not match `Hans`
+* Phone numbers will match all numbers than contain the given number e.g. `123' will match `91234567`
 * Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 ****
 
@@ -181,19 +183,21 @@ Examples:
 
 * `find John` +
 Returns `john` and `John Doe`
-* `find Betsy Tim John` +
-Returns any person having names `Betsy`, `Tim`, or `John`
+* `find Betsy Tim John 123` +
+Returns any person having names `Betsy`, `Tim`, or `John`, or any person with phone number containing `123`.
 
-=== Deleting a person : `delete`
+=== Deleting persons : `delete`
 
-Deletes the specified person from the address book. +
-Format: `delete INDEX` +
+Delete the specified persons from the address book. +
+Format: `delete INDEX RANGES` +
 Command Alias: `d`
 
 ****
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the most recent listing.
-* The index *must be a positive integer* 1, 2, 3, ...
+* Delete persons at the specified `INDEX RANGES`.
+* The index ranges refers to the index numbers shown in the most recent listing.
+* The index ranges *must be a positive integer* 1, 2, 3, ...
+* The index ranges can *overlap one another* 2-3, 1-3
+
 ****
 
 Examples:
@@ -201,9 +205,18 @@ Examples:
 * `list` +
 `delete 2` +
 Deletes the 2nd person listed in the address book.
+
+* `list` +
+`delete 2-5` +
+Deletes the 2nd to 4th person listed in the address book.
+
 * `find Betsy` +
 `delete 1` +
 Deletes the 1st person listed in the results of the `find` command.
+
+* `find John` +
+`delete 2-3 1-3 5-6` +
+Delete the 1st to 3rd, 5th and 6th person listed in the results of the `find` command.
 
 === Selecting a person : `select`
 
@@ -212,8 +225,8 @@ Format: `select INDEX` +
 Command Alias: `s`
 
 ****
-* Selects the person and load the Instagram and Google Maps panel of the person at the specified `INDEX`.
-* The index refers to the index number shown in the current listing of persons.
+* Selects the person and displays the details, Instagram and Google Map of the person at the specified `INDEX`.
+* The index refers to the index numbers shown in the current listing of persons.
 * The index *must be a positive integer* `1, 2, 3, ...`
 ****
 
@@ -221,12 +234,13 @@ Examples:
 
 * `list` +
 `select 2` +
-Selects the 2nd person listed in the address book.
+Selects the 2nd person listed in the address book. +
+
 * `find Betsy` +
 `select 1` +
 Selects the 1st person listed in the results of the `find` command.
 
-=== Listing entered commands : `history`
+=== Listing entered commands: `history`
 
 Lists all the commands that you have entered in reverse chronological order. +
 Format: `history` +
@@ -238,7 +252,7 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 ====
 
 // tag::undoredo[]
-=== Undoing previous command : `undo`
+=== Undoing previous command: `undo`
 
 Restores the address book to the state before the previous _undoable_ command was executed. +
 Format: `undo` +
@@ -265,7 +279,7 @@ The `undo` command fails as there are no undoable commands executed previously.
 `undo` (Reverses the `clear` command) +
 `undo` (Reverses the `delete 1` command) +
 
-=== Redoing the previously undone command : `redo`
+=== Redoing the previously undone command: `redo`
 
 Reverses the most recent `undo` command. +
 Format: `redo` +
@@ -288,7 +302,7 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (Reapplies the `delete 1` command) +
 `redo` (Reapplies the `clear` command) +
 
-=== Clearing all entries : `clear`
+=== Clearing all entries: `clear`
 
 Clears all entries from the address book. +
 Format: `clear` +
@@ -296,7 +310,7 @@ Command Alias: `c`
 
 === Changing the theme: `changetheme`
 
-Changes the theme of the application. +
+Changes the theme of the application between the bright and dark theme. +
 Format: `changetheme`
 
 === Exiting the program : `exit`
@@ -323,8 +337,8 @@ There is no need to save manually.
 * *Add* `add n/NAME p/PHONE_NUMBER [b/BIRTHDAY] [e/EMAIL] [a/ADDRESS] [pc/POSTAL_CODE] t/TAG]...` +
 e.g. `add n/James Ho p/22224444 b/24 09 89 e/jamesho@example.com a/123, Clementi Rd pc/234665 t/friend t/colleague`
 * *Clear* : `clear`
-* *Delete* : `delete INDEX` +
-e.g. `delete 3`
+* *Delete* : `delete INDEX RANGES` +
+e.g. `delete 3`, `delete 1-3`, `delete 1-2, 1-3`
 * *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [b/BIRTHDAY] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
 e.g. `edit 2 n/James Lee e/jameslee@example.com`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
