@@ -32,13 +32,13 @@ public class Birthday {
         String temp = trimmedBirthday;
         if (!trimmedBirthday.isEmpty() & !isValidBirthday(trimmedBirthday)) {
             throw new IllegalValueException(MESSAGE_BIRTHDAY_CONSTRAINTS);
-        } else if (!trimmedBirthday.equals("")) {
+        } else if (!"".equals(trimmedBirthday)) {
             String[] array = trimmedBirthday.replace("/", " ").replace("-", " ")
                     .replace(".", " ").split(" ");
             int monthInt = 0;
-            String day = "";
+            String day;
             String month;
-            String year = "";
+            String year;
 
             // day
             if (array[0].length() == 2) {
