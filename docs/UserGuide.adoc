@@ -1,4 +1,4 @@
-= Bevy - User Guide
+= Bevy - User Guide `v1.3`
 :toc:
 :toc-title:
 :toc-placement: preamble
@@ -10,21 +10,28 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/CS2103AUG2017-T16-B3/addressbook-level4.git
+:repoURL: https://github.com/CS2103AUG2017-T16-B3/main
 
 By: `Team Bevy`      Since: `Aug 2017`      Licence: `MIT`
 
 == Introduction
+Have you ever forget that special friend's birthday? Or that memorable event you have had with
+a friend?
 
-Do you have a lot of friends that you wish you can keep track of?
-Bevy is a free application that allows you to store your friends' information in a single place.
-You can search for more details about your friends on Instagram and Google.
-Bevy is available on both Apple and Play store.
+In today's interconnectedness, we are making more friends than we can ever imagine, but
+at the same time, we are losing many of them because of our forgetfulness. If that is you,
+then this app is for you.
+
+Bevy is a powerful app that helps you to remember your friends again. It simplifies your friends' information in a
+single place and provide more. Bevy is smart to know what your friends are up to in their social media and even gives
+you a sneak peek into their location.
+
+Excited? We are too, because we love connecting you with Bevy.
 
 == About
 
-Bevy is easy to use where all commands are typed in the command box.
-This User Guide gives you a detailed instruction on how to use this application.
+Bevy is easy to use, with an elegant user interface and a simple Command Line Interface.
+This User Guide provides you concise instructions on how to use the app.
 
 
 == Quick Start
@@ -32,23 +39,27 @@ This User Guide gives you a detailed instruction on how to use this application.
 .  Ensure you have Java version `1.8.0_60` or later installed in your Computer.
 +
 [NOTE]
-Having any Java 8 version is not enough. +
+The version has to be `1.8.0_60` or later. +
 This app will not work with earlier versions of Java 8.
 +
 .  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
 .  Copy the file to the folder you want to use as the home folder for your Address Book.
-.  Double-click the file to start the app. The GUI should appear in a few seconds.
+.  Double-click the app icon to start the app.
 +
 image::Ui.png[width="790"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
-e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
+e.g. typing *`help`* or *`sos`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
-* *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
-* **`delete`**`3` : deletes the 3rd contact shown in the current list
-* *`exit`* : exits the app
+* *`list`* +
+Lists all contacts.
+* **`add`**`n/John Doe b/010595 p/98765432 e/johnd@u.nus.edu a/John street, block 123, #01-01 pc/159656` +
+Adds a contact named `John Doe` to the Address Book.
+* **`delete`**`3` +
+Deletes the 3rd contact shown in the current list.
+* *`exit`* +
+Exits the app.
 
 .  Refer to the link:#features[Features] section below for details of each command.
 
@@ -63,13 +74,13 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 ====
 
-=== Viewing help : `help`
+=== Viewing help : `help` `sos`
 
 Opens the help window which shows the guidelines to use Bevy.
 Format: `help`
 Command Alias: `sos`
 
-=== Adding a person: `add`
+=== Adding a person: `add` `a`
 
 Adds a person to the address book +
 Format: `add n/NAME p/PHONE_NUMBER d/DOB e/EMAIL a/ADDRESS pc/POSTAL_CODE [t/TAG]...` / `a`
@@ -93,13 +104,13 @@ Examples:
 * `add n/John Doe p/98765432 d/240894 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-=== Listing all persons : `list`
+=== Listing all persons : `list` `l`
 
 Shows a list of all persons in the address book. +
 Format: `list`
 Command Alias: `l`
 
-=== Editing a person : `edit`
+=== Editing a person : `edit` `e`
 
 Edits an existing person in the address book. +
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
@@ -120,7 +131,7 @@ Edits the phone number and email address of the 1st person to be `91234567` and 
 * `edit 2 n/Betsy Crower t/` +
 Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-=== Locating persons by name: `find`
+=== Locating persons by name: `find` `f`
 
 Finds persons whose names contain any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
@@ -141,7 +152,7 @@ Returns `john` and `John Doe`
 * `find Betsy Tim John` +
 Returns any person having names `Betsy`, `Tim`, or `John`
 
-=== Deleting persons : `delete`
+=== Deleting persons : `delete` `d`
 
 Delete the specified persons from the address book. +
 Format: `delete INDEX RANGES`
@@ -173,7 +184,7 @@ Deletes the 1st person listed in the results of the `find` command.
 `delete 2-3 1-3 5-6` +
 Delete the 1st to 3rd, 5th and 6th person listed in the results of the `find` command.
 
-=== Selecting a person : `select`
+=== Selecting a person : `select` `s`
 
 Selects the person identified by the index shown in the current listing of persons. +
 Format: `select INDEX`
@@ -195,7 +206,7 @@ Selects the 2nd person listed in the address book. +
 `select 1` +
 Selects the 1st person listed in the results of the `find` command.
 
-=== Listing entered commands: `history`
+=== Listing entered commands: `history` `h`
 
 Lists all the commands that you have entered in reverse chronological order. +
 Format: `history`
@@ -207,7 +218,7 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 ====
 
 // tag::undoredo[]
-=== Undoing previous command: `undo`
+=== Undoing previous command: `undo` `u`
 
 Restores the address book to the state before the previous _undoable_ command was executed. +
 Format: `undo`
@@ -234,7 +245,7 @@ The `undo` command fails as there are no undoable commands executed previously.
 `undo` (Reverses the `clear` command) +
 `undo` (Reverses the `delete 1` command) +
 
-=== Redoing the previously undone command: `redo`
+=== Redoing the previously undone command: `redo` `r`
 
 Reverses the most recent `undo` command. +
 Format: `redo`
@@ -257,18 +268,18 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (Reapplies the `delete 1` command) +
 `redo` (Reapplies the `clear` command) +
 
-=== Clearing all entries: `clear`
+=== Clearing all entries: `clear` `c`
 
 Clears all entries from the address book. +
 Format: `clear`
 Command Alias: `c`
 
-=== Changing the theme: `changetheme`
+=== Changing the theme: `changetheme` `c`
 
 Changes the theme of the application. +
 Format: `changetheme`
 
-=== Exiting the program : `exit`
+=== Exiting the program : `exit` `x`
 
 Exits the program. +
 Format: `exit`
@@ -284,24 +295,43 @@ There is no need to save manually.
 *Q*: How do I transfer my data to another Computer? +
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
 
+*Q*: I do not see the correct Instagram page of my friend, what should I do?
+*A*: Ensure that the name of your friend matches the username of the instagram account.
+
+*Q*: Why am I able to add another friend with the same details? +
+*A*: Please check that all fields are the same. Bevy allows adding of a similar person even if they are only a letter apart,
+because we know you have many friends.
+
 *Q*: My question is not on the FAQ list, what can I do? +
-*A*: Please do not hesitate to email us for any questions or comments.
+*A*: Please do not hesitate to link:{repoURL}/blob/master/docs/AboutUs.adoc[email] us for any questions or comments.
 
 == Command Summary
 
-* *Add* `add n/NAME p/PHONE_NUMBER [d/DOB] [e/EMAIL] [a/ADDRESS] [pc/POSTAL_CODE] t/TAG]...` +
-e.g. `add n/James Ho p/22224444 d/240989 e/jamesho@example.com a/123, Clementi Rd pc/234665 t/friend t/colleague`
-* *Clear* : `clear`
-* *Delete* : `delete INDEX RANGES` +
-e.g. `delete 3`, `delete 1-3`, `delete 1-2, 1-3`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
-e.g. `edit 2 n/James Lee e/jameslee@example.com`
-* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find James Jake`
-* *List* : `list`
-* *Help* : `help`
-* *Select* : `select INDEX` +
-e.g.`select 2`
-* *History* : `history`
-* *Undo* : `undo`
-* *Redo* : `redo`
+[width="99%",cols="10%, 10%, 5%, <30%, <40%",options="header",]
+|=======================================================================
+|Command |Keyword |Alias | Format | Examples
+|Add |`add` |`a` | `add n/NAME p/PHONE_NUMBER [b/Birthday] [e/EMAIL] [a/ADDRESS] [pc/POSTAL_CODE] t/TAG]...` |`add n/James Ho p/22224444 b/240989 e/jamesho@example.com a/123, Clementi Rd pc/234665 t/friend t/colleague`
+
+|Clear |`clear` |`c` |- |-
+
+|Change Theme |`changetheme` |- |- |-
+
+|Delete |`delete` |`d` |`delete INDEX RANGES` |`delete 3`, `delete 1-3`, `d 1-2, 1-3`
+
+|Edit |`edit` |`e` |`edit INDEX [n/NAME] [p/PHONE_NUMBER] [b/BIRTHDAY] [e/EMAIL] [a/ADDRESS] [pc/POSTAL CODE] [t/TAG]...` |`edit 2 n/James Lee` `e/jameslee@example.com`
+
+|Exit |`exit` |`x` |- |-
+
+|Find |`find` |`f` |`find KEYWORD [MORE_KEYWORDS]` |`find James Jake`
+
+|Help |`help` |`sos` |- |-
+
+|History |`history` |`h` |- |-
+
+|List |`list` |`l` |- |-
+
+|Select |`select` |`s` |- |-
+
+|Undo |`undo` |`u` |- |-
+
+|Redo |`redo` |`r` |- |-
