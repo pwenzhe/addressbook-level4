@@ -481,6 +481,14 @@ is fully managed by the browser and Google Map page itself. +
 
 === Delete Multiple Persons Mechanism
 
+The Delete mechanism is able to support deleting multiple persons. Refer to diagram 2.3.1 for the basic implementation of the
+Delete mechanism.
+
+At `DeleteCommandParser`, the index ranges will be parsed into a list of `IndexRange` class using the `ParserUtil`, where each `IndexRange`
+object contains the start and end index of each range. This list will then be converted into a `HashSet` of indexes, which
+will be used to construct a `DeleteCommand`. `HashSet` prevents the duplicates of indexes. Upon executing the `DeleteCommand`,
+a sub list of person to delete will be produced to delete the information in `Model`.
+
 
 
 == Documentation

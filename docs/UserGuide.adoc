@@ -26,7 +26,7 @@ Bevy is a powerful app that helps you to remember your friends again. It simplif
 single place and provide more. Bevy is smart to know what your friends are up to in their social media and even gives
 you a sneak peek into their location.
 
-Excited? We are too, because we love connecting you with Bevy.
+Excited? We are too, because we *love* connecting you with Bevy.
 
 == About
 
