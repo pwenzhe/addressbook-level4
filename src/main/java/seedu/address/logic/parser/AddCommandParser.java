@@ -51,8 +51,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         try {
             Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME)).get();
             Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE)).get();
-            Birthday birthday = ParserUtil.parseBirthday(areValuePresent(argMultimap.getValue(PREFIX_BIRTHDAY))).get();
             Email email = ParserUtil.parseEmail(areValuePresent(argMultimap.getValue(PREFIX_EMAIL))).get();
+            Birthday birthday = ParserUtil.parseBirthday(areValuePresent(argMultimap.getValue(PREFIX_BIRTHDAY))).get();
             Address address = ParserUtil.parseAddress(areValuePresent(argMultimap.getValue(PREFIX_ADDRESS))).get();
             PostalCode postalCode = getPostalCode(areValuePresent(argMultimap.getValue(PREFIX_ADDRESS)),
                     argMultimap.getValue(PREFIX_POSTALCODE));

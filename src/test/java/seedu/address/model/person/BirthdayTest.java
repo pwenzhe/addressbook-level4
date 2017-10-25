@@ -17,8 +17,8 @@ public class BirthdayTest {
         assertFalse(Birthday.isValidBirthday("931 534")); // spaces within digits
 
         // valid birthday
-        assertTrue(Birthday.isValidBirthday("121287")); // exactly 6 numbers
-        assertTrue(Birthday.isValidBirthday("140597"));
-        assertTrue(Birthday.isValidBirthday("57247542979")); // long date numbers
+        assertTrue(Birthday.isValidBirthday("12 12 87")); // can enter year using 2 digit
+        assertTrue(Birthday.isValidBirthday("14-05-1997")); // accepts '-' as separator
+        assertTrue(Birthday.isValidBirthday("08 aug 1985")); // name of month
     }
 }
