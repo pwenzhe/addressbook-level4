@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -19,7 +19,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Date;
+import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -44,14 +44,14 @@ public class EditCommand extends UndoableCommand {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_DATE + "DOB] "
+            + "[" + PREFIX_BIRTHDAY + "BIRTHDAY] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_POSTALCODE + "POSTAL CODE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_DATE + "010191 "
+            + PREFIX_BIRTHDAY + "010191 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
@@ -105,13 +105,13 @@ public class EditCommand extends UndoableCommand {
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Date updatedDate = editPersonDescriptor.getDate().orElse(personToEdit.getDate());
+        Birthday updatedBirthday = editPersonDescriptor.getBirthday().orElse(personToEdit.getBirthday());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         PostalCode updatedPostalCode = editPersonDescriptor.getPostalCode().orElse(personToEdit.getPostalCode());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedDate, updatedEmail, updatedAddress,
+        return new Person(updatedName, updatedPhone, updatedBirthday, updatedEmail, updatedAddress,
                 updatedPostalCode, updatedTags);
     }
 
@@ -140,7 +140,7 @@ public class EditCommand extends UndoableCommand {
     public static class EditPersonDescriptor {
         private Name name;
         private Phone phone;
-        private Date date;
+        private Birthday birthday;
         private Email email;
         private Address address;
         private PostalCode postalCode;
@@ -151,7 +151,7 @@ public class EditCommand extends UndoableCommand {
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             this.name = toCopy.name;
             this.phone = toCopy.phone;
-            this.date = toCopy.date;
+            this.birthday = toCopy.birthday;
             this.email = toCopy.email;
             this.address = toCopy.address;
             this.postalCode = toCopy.postalCode;
@@ -162,7 +162,7 @@ public class EditCommand extends UndoableCommand {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(this.name, this.phone, this.date, this.email,
+            return CollectionUtil.isAnyNonNull(this.name, this.phone, this.birthday, this.email,
                     this.address, this.postalCode, this.tags);
         }
 
@@ -182,12 +182,12 @@ public class EditCommand extends UndoableCommand {
             return Optional.ofNullable(phone);
         }
 
-        public void setDate(Date date) {
-            this.date = date;
+        public void setBirthday(Birthday birthday) {
+            this.birthday = birthday;
         }
 
-        public Optional<Date> getDate() {
-            return Optional.ofNullable(date);
+        public Optional<Birthday> getBirthday() {
+            return Optional.ofNullable(birthday);
         }
 
         public void setEmail(Email email) {
@@ -239,7 +239,7 @@ public class EditCommand extends UndoableCommand {
 
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
-                    && getDate().equals(e.getDate())
+                    && getBirthday().equals(e.getBirthday())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
                     && getPostalCode().equals(e.getPostalCode())

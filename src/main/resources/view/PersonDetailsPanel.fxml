@@ -27,7 +27,7 @@
             <Label text="Address" GridPane.rowIndex="3" />
             <Label text="Postal Code" GridPane.rowIndex="4" />
             <Label fx:id="phone" text="Label" GridPane.columnIndex="1" />
-            <Label fx:id="date" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="birthday" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label fx:id="address" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Label text="Email" GridPane.rowIndex="2" />
             <Label fx:id="email" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />

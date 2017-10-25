@@ -19,7 +19,7 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Date;
+import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -28,14 +28,14 @@ import seedu.address.model.tag.Tag;
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
-    private static final String INVALID_DATE = "9058u4";
+    private static final String INVALID_BIRTHDAY = "9058u4";
     private static final String INVALID_ADDRESS = "%^&";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
-    private static final String VALID_DATE = "260478";
+    private static final String VALID_BIRTHDAY = "260478";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
@@ -117,28 +117,28 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseDateNullThrowsNullPointerException() throws Exception {
+    public void parseBirthdayNullThrowsNullPointerException() throws Exception {
         thrown.expect(NullPointerException.class);
-        ParserUtil.parseDate(null);
+        ParserUtil.parseBirthday(null);
     }
 
     @Test
-    public void parseDateInvalidValueThrowsIllegalValueException() throws Exception {
+    public void parseBirthdayInvalidValueThrowsIllegalValueException() throws Exception {
         thrown.expect(IllegalValueException.class);
-        ParserUtil.parseDate(Optional.of(INVALID_DATE));
+        ParserUtil.parseBirthday(Optional.of(INVALID_BIRTHDAY));
     }
 
     @Test
-    public void parseDateOptionalEmptyReturnsOptionalEmpty() throws Exception {
-        assertFalse(ParserUtil.parseDate(Optional.empty()).isPresent());
+    public void parseBirthdayOptionalEmptyReturnsOptionalEmpty() throws Exception {
+        assertFalse(ParserUtil.parseBirthday(Optional.empty()).isPresent());
     }
 
     @Test
-    public void parseDateValidValueReturnsDate() throws Exception {
-        Date expectedDate = new Date(VALID_DATE);
-        Optional<Date> actualDate = ParserUtil.parseDate(Optional.of(VALID_DATE));
+    public void parseBirthdayValidValueReturnsBirthday() throws Exception {
+        Birthday expectedBirthday = new Birthday(VALID_BIRTHDAY);
+        Optional<Birthday> actualBirthday = ParserUtil.parseBirthday(Optional.of(VALID_BIRTHDAY));
 
-        assertEquals(expectedDate, actualDate.get());
+        assertEquals(expectedBirthday, actualBirthday.get());
     }
 
     @Test
