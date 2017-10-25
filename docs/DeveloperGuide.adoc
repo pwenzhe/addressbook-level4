@@ -1,4 +1,4 @@
-= Bevy - Developer Guide
+= Bevy - Developer Guide `v1.3`
 :toc:
 :toc-title:
 :toc-placement: preamble
@@ -10,7 +10,7 @@ ifdef::env-github[]
 :note-caption: :information_source:
 endif::[]
 ifdef::env-github,env-browser[:outfilesuffix: .adoc]
-:repoURL: https://github.com/CS2103AUG2017-T16-B3/addressbook-level4.git
+:repoURL: https://github.com/CS2103AUG2017-T16-B3/main
 
 By: `Team Bevy`      Since: `Aug 2017`      Licence: `MIT`
 
@@ -450,7 +450,7 @@ As shown from the sequence diagram, when a user selects a new person, the Instag
 person's instagram based on the name in the details. For example, if the selected person's name is `Alex Yeoh`, InstagramBrowserPanel will use `AlexYeoh` as part of the URL parameter to display the person's
 instagram page.
 
-Similarly, the GoogleMapBrowserPanel will display the map of the selected person's home location using either the postal code or the address in the details. The UiParts is responsible for constructing and displaying
+Similarly, the GoogleMapBrowserPanel will display the map of the selected person's home location using either the postal code or the address in the person details. The UiParts is responsible for constructing and displaying
 respective scene. For example, if the postal code is `150159`, GoogleMapBrowserPanel will use this exact value to display the person's location. If the postal code is not available, address will be used. For example,
 if the address is `ABC 123 Street`, GoogleMapBrowserPanel will use `ABC+123+Street` as part of the URL parameter to display
 the person's location.
@@ -462,8 +462,9 @@ If the address contains `#` characters, GoogleMapBrowserPanel will ignore any su
 
 **Aspect:** Type of implementation for Instagram +
 **Alternative 1 (current choice):** Use browser to display selected person's instagram page. +
-**Pros:** Easy to implement, since we only need to familiarise with URL parameters. +
-**Cons:** It does not integrate very well with the Address Book, as some user's instagram page cannot be found using just their name. +
+**Pros:** Easy to implement, since the components needed is the JavaFX scene and instagram URL parameter. The user interaction
+ is fully managed by the browser and instagram page itself. +
+**Cons:** Some user's instagram page cannot be found using just their name. +
 **Alternative 2:** Use Instagram API to construct an intergrated Instagram component +
 **Pros:** Integrates well, as users can use one-time login authentication to sync with Instagram and we can find users with similar names from user's followers. +
 **Cons:** Difficult to implement, as there is a steep learning curve to master Instagram API. +
@@ -471,11 +472,15 @@ If the address contains `#` characters, GoogleMapBrowserPanel will ignore any su
 
 **Aspect:** Type of implementation for Google Map +
 **Alternative 1 (current choice):** Use browser to display selected person's location. +
-**Pros:** Easy to implement, since we only need to familiarise with URL parameters. +
-**Cons:** It does not integrate very well with the Address Book, as we can not customise the visual display. +
+**Pros:** Easy to implement, since the componenets needed is the JavaFX scene and Google Map URL parameter. The user interaction
+is fully managed by the browser and Google Map page itself. +
+**Cons:** We can not customise the visual display of Google Map. +
 **Alternative 2:** Use Google Map API to construct an intergrated Google Map component +
 **Pros:** Integrates well, as we can simplify the experience for users. +
 **Cons:** Difficult to implement, as there is a steep learning curve to master Google Map API. +
+
+=== Delete Multiple Persons Mechanism
+
 
 
 == Documentation
