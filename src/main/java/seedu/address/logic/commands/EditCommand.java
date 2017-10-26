@@ -167,7 +167,7 @@ public class EditCommand extends UndoableCommand {
         /**
          * Returns true if at least one field is edited.
          */
-        public boolean isAnyFieldEdited() 
+        public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(this.name, this.phone, this.birthday, this.email,
                     this.address, this.postalCode, this.favourite, this.tags);
         }
