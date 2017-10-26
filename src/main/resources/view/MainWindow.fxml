@@ -41,14 +41,13 @@
     </VBox>
       <VBox SplitPane.resizableWithParent="false">
          <children>
-         
-                             <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
+           <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
              <padding>
                <Insets bottom="5" left="10" right="10" top="5" />
              </padding>
            </StackPane>
          
-                                   <StackPane fx:id="resultDisplayPlaceholder" maxHeight="90.0" minHeight="90.0" prefHeight="90.0" styleClass="pane-with-border">
+           <StackPane fx:id="resultDisplayPlaceholder" maxHeight="90.0" minHeight="90.0" prefHeight="90.0" styleClass="pane-with-border">
              <padding>
                <Insets bottom="5" left="10" right="10" top="5" />
              </padding>
