@@ -15,6 +15,7 @@ endif::[]
 By: `Team Bevy`      Since: `Aug 2017`      Licence: `MIT`
 
 == Introduction
+
 Have you ever forget that special friend's birthday? Or that memorable event you have had with
 a friend?
 
