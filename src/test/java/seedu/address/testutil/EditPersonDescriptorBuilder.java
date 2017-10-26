@@ -30,7 +30,7 @@ public class EditPersonDescriptorBuilder {
         descriptor = new EditPersonDescriptor();
         descriptor.setName(person.getName());
         descriptor.setPhone(person.getPhone());
-        descriptor.setDate(person.getDate());
+        descriptor.setBirthday(person.getBirthday());
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
         descriptor.setPostalCode(person.getPostalCode());
@@ -62,13 +62,13 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Date} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Birthday} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withDate(String date) {
+    public EditPersonDescriptorBuilder withBirthday(String birthday) {
         try {
-            ParserUtil.parseDate(Optional.of(date)).ifPresent(descriptor::setDate);
+            ParserUtil.parseBirthday(Optional.of(birthday)).ifPresent(descriptor::setBirthday);
         } catch (IllegalValueException ive) {
-            throw new IllegalArgumentException("date is expected to be unique.");
+            throw new IllegalArgumentException("birthday is expected to be unique.");
         }
         return this;
     }

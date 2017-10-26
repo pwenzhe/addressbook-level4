@@ -39,7 +39,7 @@ public class GuiTestAssert {
     public static void assertEmptyPersonDetailsPanel(PersonDetailsPanelHandle actualPersonDetailsPanel) {
         assertEquals("", actualPersonDetailsPanel.getName());
         assertEquals("", actualPersonDetailsPanel.getPhone());
-        assertEquals("", actualPersonDetailsPanel.getDate());
+        assertEquals("", actualPersonDetailsPanel.getBirthday());
         assertEquals("", actualPersonDetailsPanel.getEmail());
         assertEquals("", actualPersonDetailsPanel.getAddress());
         assertEquals("", actualPersonDetailsPanel.getPostalCode());
@@ -52,7 +52,7 @@ public class GuiTestAssert {
                                                   PersonDetailsPanelHandle actualPersonDetailsPanel) {
         assertEquals(expectedPerson.getName().fullName, actualPersonDetailsPanel.getName());
         assertEquals(expectedPerson.getPhone().value, actualPersonDetailsPanel.getPhone());
-        assertEquals(expectedPerson.getDate().value, actualPersonDetailsPanel.getDate());
+        assertEquals(expectedPerson.getBirthday().value, actualPersonDetailsPanel.getBirthday());
         assertEquals(expectedPerson.getEmail().value, actualPersonDetailsPanel.getEmail());
         assertEquals(expectedPerson.getAddress().value, actualPersonDetailsPanel.getAddress());
         assertEquals(expectedPerson.getPostalCode().value, actualPersonDetailsPanel.getPostalCode());
