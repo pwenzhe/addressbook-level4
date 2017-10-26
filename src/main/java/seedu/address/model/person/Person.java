@@ -24,13 +24,14 @@ public class Person implements ReadOnlyPerson {
     private ObjectProperty<Email> email;
     private ObjectProperty<Address> address;
     private ObjectProperty<PostalCode> postalCode;
+    private ObjectProperty<Favourite> favourite;
     private ObjectProperty<UniqueTagList> tags;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Birthday birthday, Email email, Address address,
-                  PostalCode postalCode, Set<Tag> tags) {
+                  PostalCode postalCode, Favourite favourite, Set<Tag> tags) {
         requireAllNonNull(name, phone, birthday, email, address, tags);
         this.name = new SimpleObjectProperty<>(name);
         this.phone = new SimpleObjectProperty<>(phone);
@@ -38,6 +39,7 @@ public class Person implements ReadOnlyPerson {
         this.email = new SimpleObjectProperty<>(email);
         this.address = new SimpleObjectProperty<>(address);
         this.postalCode = new SimpleObjectProperty<>(postalCode);
+        this.favourite = new SimpleObjectProperty<>(favourite);
         // protect internal tags from changes in the arg list
         this.tags = new SimpleObjectProperty<>(new UniqueTagList(tags));
     }
@@ -47,7 +49,7 @@ public class Person implements ReadOnlyPerson {
      */
     public Person(ReadOnlyPerson source) {
         this(source.getName(), source.getPhone(), source.getBirthday(), source.getEmail(), source.getAddress(),
-                source.getPostalCode(), source.getTags());
+                source.getPostalCode(), source.getFavourite(), source.getTags());
     }
 
     public void setName(Name name) {
@@ -132,6 +134,20 @@ public class Person implements ReadOnlyPerson {
     @Override
     public PostalCode getPostalCode() {
         return postalCode.get();
+    }
+
+    public void setFavourite(Favourite favourite) {
+        this.favourite.set(favourite);
+    }
+
+    @Override
+    public ObjectProperty<Favourite> favProperty() {
+        return favourite;
+    }
+
+    @Override
+    public Favourite getFavourite() {
+        return favourite.get();
     }
 
     /**

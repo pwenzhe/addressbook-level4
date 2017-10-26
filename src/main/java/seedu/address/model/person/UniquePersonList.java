@@ -109,8 +109,33 @@ public class UniquePersonList implements Iterable<Person> {
      * Sorts person name in alphabetical order
      */
     public void sort() {
-        Comparator<Person> comparator = (p1, p2) -> (p1.getName().toString().compareTo(p2.getName().toString()));
+        Comparator<Person> comparator = (p1, p2) -> (comparePeople(p1, p2));
         Collections.sort(internalList, comparator);
+    }
+
+    /**
+     * Compare Persons by favourite status and then name
+     */
+    public int comparePeople(Person p1, Person p2) {
+        int compare;
+        String p1Fav = "";
+        String p2Fav = "";
+        if (p1.getFavourite().getFavourite()) {
+            p1Fav = "1";
+        } else {
+            p1Fav = "2";
+        }
+        if (p2.getFavourite().getFavourite()) {
+            p2Fav = "1";
+        } else {
+            p2Fav = "2";
+        }
+        compare = p1Fav.compareTo(p2Fav);
+        if (compare == 0) {
+            compare = p1.getName().toString().compareTo(p2.getName().toString());
+        }
+
+        return compare;
     }
 
 

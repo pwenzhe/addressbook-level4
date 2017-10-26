@@ -34,6 +34,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
         descriptor.setPostalCode(person.getPostalCode());
+        descriptor.setFavourite(person.getFavourite());
         descriptor.setTags(person.getTags());
     }
 
@@ -98,13 +99,25 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Postal Code} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withPostalCode(String postalCode) {
         try {
             ParserUtil.parsePostalCode(Optional.of(postalCode)).ifPresent(descriptor::setPostalCode);
         } catch (IllegalValueException ive) {
-            throw new IllegalArgumentException("address is expected to be unique.");
+            throw new IllegalArgumentException("postal code is expected to be unique.");
+        }
+        return this;
+    }
+
+    /**
+     * Sets the {@code Favourite} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withFavourite(String favourite) {
+        try {
+            ParserUtil.parseFavourite(Optional.of(favourite)).ifPresent(descriptor::setFavourite);
+        } catch (IllegalValueException ive) {
+            throw new IllegalArgumentException("favourite is expected to be unique.");
         }
         return this;
     }

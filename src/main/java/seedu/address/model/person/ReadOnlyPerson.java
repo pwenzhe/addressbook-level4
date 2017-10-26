@@ -24,6 +24,8 @@ public interface ReadOnlyPerson {
     Address getAddress();
     ObjectProperty<PostalCode> postalCodeProperty();
     PostalCode getPostalCode();
+    ObjectProperty<Favourite> favProperty();
+    Favourite getFavourite();
     ObjectProperty<UniqueTagList> tagProperty();
     Set<Tag> getTags();
 
@@ -57,6 +59,8 @@ public interface ReadOnlyPerson {
                 .append(getAddress())
                 .append(" Postal Code: ")
                 .append(getPostalCode())
+                .append(" Favourite: ")
+                .append(getFavourite())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
