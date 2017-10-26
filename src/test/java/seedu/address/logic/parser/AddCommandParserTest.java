@@ -47,6 +47,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Favourite;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -137,11 +138,11 @@ public class AddCommandParserTest {
                 + EMAIL_DESC_AMY + FAV_DESC_AMY, new AddCommand(expectedPerson));
 
         // no favourite
-        expectedPerson = new PersonBuilder().withName(VALID_NAME_AMY).withName(VALID_PHONE_AMY)
+        expectedPerson = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
                 .withBirthday(VALID_BIRTHDAY_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withPostalCode("").withFavourite("").withTags().build();
         assertParseSuccess(parser, AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + BIRTHDAY_DESC_AMY
-               + ADDRESS_DESC_AMY + EMAIL_DESC_AMY, new AddCommand(expectedPerson));
+                + ADDRESS_DESC_AMY + EMAIL_DESC_AMY, new AddCommand(expectedPerson));
     }
 
     @Test
@@ -195,7 +196,7 @@ public class AddCommandParserTest {
         // invalid favourite
         assertParseFailure(parser, AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_BOB + BIRTHDAY_DESC_BOB
                         + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + INVALID_FAVOURITE + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                Address.MESSAGE_ADDRESS_CONSTRAINTS);
+                Favourite.MESSAGE_FAVOURITE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_BOB + BIRTHDAY_DESC_BOB

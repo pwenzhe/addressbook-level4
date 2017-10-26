@@ -62,7 +62,7 @@ public class CommandTestUtil {
     public static final String POSTALCODE_DESC_AMY = " " + PREFIX_POSTALCODE + VALID_POSTALCODE_AMY;
     public static final String POSTALCODE_DESC_BOB = " " + PREFIX_POSTALCODE + VALID_POSTALCODE_BOB;
     public static final String FAV_DESC_AMY = " " + PREFIX_FAV + VALID_FAV_AMY;
-    public static final String FAV_DESC_BOB = " " + PREFIX_FAV + VALID_FAV_AMY;
+    public static final String FAV_DESC_BOB = " " + PREFIX_FAV + VALID_FAV_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
