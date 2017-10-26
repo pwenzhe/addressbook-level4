@@ -46,7 +46,7 @@ To ensure that you have enabled them, go to `File` > `Settings` > `Plugins`.
 
 === Setting up the project in your computer
 
-. Fork this repository from Bevy's github page (link?), and clone the fork to your computer to create a local repository.
+. Fork this repository from Bevy's github page, and clone the fork to your computer to create a local repository.
 . Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first).
 . Set up the correct JDK version for Gradle.
 .. Click `Configure` > `Project Defaults` > `Project Structure`.
@@ -91,8 +91,8 @@ to configure IntelliJ to check style-compliance as you write code.
 
 ==== Updating documentation to match your fork
 
-After forking the repository, links in the documentation will still point to the `CS2103AUG2017-T16-B3/addressbook-level4` repository.
-If you plan to develop this as a separate product (i.e. instead of contributing to the `CS2103AUG2017-T16-B3/addressbook-level4`),
+After forking the repository, links in the documentation will still point to the `CS2103AUG2017-T16-B3/main` repository.
+If you plan to develop this as a separate product (i.e. instead of contributing to the `CS2103AUG2017-T16-B3/main`),
 you should replace the URL in the variable `repoURL` in `DeveloperGuide.adoc` and `UserGuide.adoc` with the URL of your fork.
 
 ==== Setting up Continuous Integration
@@ -398,6 +398,31 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 * `INFO` : Information showing the noteworthy actions by the App
 * `FINE` : Details that is not usually noteworthy but may be useful in debugging e.g. print the actual list instead of just its size
 
+=== Configuration
+
+Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
+
+=== Sorting
+
+The list will be sorted in alphabetical order whenever a new person is added.
+
+image::SortSequenceDiagram.png[width="300"]
+_Figure 4.4.1: Sorting Sequence Diagram_
+
+. Following the flow of the diagram, when a person is added, the addPerson method will be called in `AddressBook`.
+. `UniquePersonList` will sort the added person by comparing the names in the current list and insert the name at the correct slot.
+. The sorted contact list will then be returned.
+
+==== Design Consideration
+
+**Aspect:** Type of implementation to sort contact list. +
+**Alternative 1 (current choice):** Sort the list while new persons are added. +
+**Pros:**More convenient for users as the list will be sorted once a new person is added. +
+**Cons:** List will only be sorted when new person is added. May cause limitation if there are commands that will mess up the order. +
+**Alternative 2:** Creating a separate sort command to sort list. +
+**Pros:** A command that will always allow the list to be sorted in order. +
+**Cons:** It will cause inconvenience as user have to manually type in the command to sort the list whenever they add a new person. +
+
 === Birthday
 
 The birthday feature allows user to store their friends' birthdays.
@@ -410,8 +435,8 @@ After adding the birthday, user can search for a particular month and the list w
 
 The following sequence diagram shows how find works when searching for a month.
 
-image::FindMonthLogic.png[width="800"]
-_Figure 4.3.1: Interactions Inside the Logic Component for the `find m/Jan` Command_
+image::FindMonthSequenceDiagram.png[width="800"]
+_Figure 4.4.1: Find Month Sequence Diagram_
 
 . Following the flow of the diagram, the command `find m/Jan will be sent to the `LogicManager`.
 . `AddressBookParser` will parse the `find` command and will call the `FindCommandParser`.
@@ -420,27 +445,25 @@ _Figure 4.3.1: Interactions Inside the Logic Component for the `find m/Jan` Comm
 . In `PersonContainsKeywordsPredicate`, this is where the list is filtered to find the contacts who has their birthday in Jan.
 . The list will then be returned to `LogicManager`.
 
-=== Design Consideration
+==== Design Consideration
 
 **Aspect:** Type of implementation to find the month. +
 **Alternative 1 (current choice):** Use the current find command that is currently used for finding name and phone number. +
-**Pros:** Easy to implement, since we only need to add a methods to the class. +
+**Pros:** Easy to implement, since we only need to add a method to the class. +
 **Cons:** It may make the code for find command more complicated. +
 **Alternative 2:** Creating a separate find command only for searching month. +
 **Pros:** Makes the code simpler and more direct as there is a command reserved for each of the command. +
 **Cons:** This would make it more complicated for the user to use as there is a different command for the different search. +
 
-=== Configuration
-
-Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
-
 === Instagram/Google Map Browser Panel
 
 image::BrowserPanels.png[width="800"]
+_Figure 4.6.1: Browser Panels UI_
 
 The browser panels display visual information about the selected person.
 
 image::BrowserPanelsClassDiagram.png[width="400"]
+_Figure 4.6.2: Browser Panels Class Diagram_
 
 As shown from the class diagram, both browser panels extends the UiParts. The browser panels are responsible for displaying information on the selected
 person based on the person details.
@@ -448,6 +471,7 @@ person based on the person details.
 The following sequence diagram shows how the browser operation works, using InstagramBrowserPanel as an exmaple:
 
 image::BrowserPanelsSequenceDiagram.png[width="400"]
+_Figure 4.6.3: Browser Panels Sequence Diagram_
 
 As shown from the sequence diagram, when a user selects a new person, the InstagramBrowserPanel handles the new selection event and display the selected
 person's instagram based on the name in the details. For example, if the selected person's name is `Alex Yeoh`, InstagramBrowserPanel will use `AlexYeoh` as part of the URL parameter to display the person's
