@@ -15,8 +15,19 @@ ifndef::env-github[]
 image::images/Ui.png[width="600"]
 endif::[]
 
-* Bevy is a desktop Address Book application, designed to help users simplify their contacts.
-* It has a GUI for visual display, with a CLI (Command Line Interface) for user interactions.
+
+Have you ever forget that special friend's birthday? Or that memorable event you have had with
+a friend?
+
+In today's interconnectedness, we are making more friends than we can ever imagine, but
+at the same time, we are losing many of them because of our forgetfulness. If that is you,
+then this app is for you.
+
+Bevy is a powerful app that helps you to remember your friends again. It simplifies your friends' information in a
+single place and provide more. Bevy is smart to know what your friends are up to in their social media and even gives
+you a sneak peek into their location.
+
+Excited? We are too, because we *love* connecting you with Bevy.
 
 == Site Map
 
