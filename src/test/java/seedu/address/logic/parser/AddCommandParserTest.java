@@ -139,10 +139,10 @@ public class AddCommandParserTest {
 
         // no favourite
         expectedPerson = new PersonBuilder().withName(VALID_NAME_AMY).withName(VALID_PHONE_AMY)
-                .withDate(VALID_DATE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withPostalCode("")
+                .withBirthday(VALID_BIRTHDAY_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withPostalCode("")
                 .withFavourite("").withTags()
                 .build();
-        assertParseSuccess(parser, AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + DATE_DESC_AMY
+        assertParseSuccess(parser, AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + BIRTHDAY_DESC_AMY
                + ADDRESS_DESC_AMY + EMAIL_DESC_AMY, new AddCommand(expectedPerson));
     }
 
@@ -195,7 +195,7 @@ public class AddCommandParserTest {
                         Address.MESSAGE_ADDRESS_CONSTRAINTS);
 
         // invalid favourite
-        assertParseFailure(parser, AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_BOB + DATE_DESC_BOB
+        assertParseFailure(parser, AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_BOB + BIRTHDAY_DESC_BOB
                         + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + INVALID_FAVOURITE + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 Address.MESSAGE_ADDRESS_CONSTRAINTS);
 
