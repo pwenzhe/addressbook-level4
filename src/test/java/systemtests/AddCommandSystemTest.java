@@ -233,7 +233,8 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
                 .build();
         assertCommandSuccess(person);
 
-        person = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY).withBirthday(VALID_BIRTHDAY_AMY)
+        person = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
+                .withBirthday(VALID_BIRTHDAY_AMY)
                 .withEmail(VALID_EMAIL_AMY).withPostalCode(VALID_POSTALCODE_AMY).build();
         assertCommandSuccess(person);
 
