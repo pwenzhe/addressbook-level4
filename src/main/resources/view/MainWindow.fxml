@@ -13,12 +13,23 @@
 <VBox xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
 
   <MenuBar fx:id="menuBar" nodeOrientation="LEFT_TO_RIGHT" VBox.vgrow="NEVER">
-    <Menu mnemonicParsing="false" text="File">
+    <Menu mnemonicParsing="false" text="Bevy">
       <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
     </Menu>
+      <Menu mnemonicParsing="false" text="Statistics">
+         <items>
+            <MenuItem mnemonicParsing="false" text="Birthday" />
+            <MenuItem mnemonicParsing="false" text="Tags" />
+         </items>
+      </Menu>
     <Menu mnemonicParsing="false" text="Help">
       <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
     </Menu>
+      <Menu mnemonicParsing="false" text="About">
+         <items>
+            <MenuItem mnemonicParsing="false" text="Developers" />
+         </items>
+      </Menu>
   </MenuBar>
 
   <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.5" VBox.vgrow="ALWAYS">
@@ -42,7 +53,7 @@
                <Insets bottom="5" left="10" right="10" top="5" />
              </padding>
            </StackPane>
-            <AnchorPane fx:id="personDetailsPlaceholder" maxHeight="180.0" minWidth="500.0" />
+            <AnchorPane fx:id="personDetailsPlaceholder" maxHeight="200.0" />
             <SplitPane dividerPositions="0.5" prefWidth="200.0">
                <items>
                   <StackPane fx:id="instagramBrowserPlaceholder" maxWidth="350.0" minWidth="300.0" prefWidth="300.0" />
