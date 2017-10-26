@@ -20,7 +20,7 @@ public class Person implements ReadOnlyPerson {
 
     private ObjectProperty<Name> name;
     private ObjectProperty<Phone> phone;
-    private ObjectProperty<Date> date;
+    private ObjectProperty<Birthday> birthday;
     private ObjectProperty<Email> email;
     private ObjectProperty<Address> address;
     private ObjectProperty<PostalCode> postalCode;
@@ -30,12 +30,12 @@ public class Person implements ReadOnlyPerson {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Date date, Email email, Address address,
+    public Person(Name name, Phone phone, Birthday birthday, Email email, Address address,
                   PostalCode postalCode, Favourite favourite, Set<Tag> tags) {
-        requireAllNonNull(name, phone, date, email, address, tags);
+        requireAllNonNull(name, phone, birthday, email, address, tags);
         this.name = new SimpleObjectProperty<>(name);
         this.phone = new SimpleObjectProperty<>(phone);
-        this.date = new SimpleObjectProperty<>(date);
+        this.birthday = new SimpleObjectProperty<>(birthday);
         this.email = new SimpleObjectProperty<>(email);
         this.address = new SimpleObjectProperty<>(address);
         this.postalCode = new SimpleObjectProperty<>(postalCode);
@@ -48,7 +48,7 @@ public class Person implements ReadOnlyPerson {
      * Creates a copy of the given ReadOnlyPerson.
      */
     public Person(ReadOnlyPerson source) {
-        this(source.getName(), source.getPhone(), source.getDate(), source.getEmail(), source.getAddress(),
+        this(source.getName(), source.getPhone(), source.getBirthday(), source.getEmail(), source.getAddress(),
                 source.getPostalCode(), source.getFavourite(), source.getTags());
     }
 
@@ -80,17 +80,18 @@ public class Person implements ReadOnlyPerson {
         return phone.get();
     }
 
-    public void setDate(Date date) {
-        this.date.set(requireNonNull(date));
+    public void setBirthday(Birthday birthday) {
+        this.birthday.set(requireNonNull(birthday));
     }
 
     @Override
-    public ObjectProperty<Date> dateProperty() {
-        return date;
+    public ObjectProperty<Birthday> birthdayProperty() {
+        return birthday;
     }
+
     @Override
-    public Date getDate() {
-        return date.get();
+    public Birthday getBirthday() {
+        return birthday.get();
     }
 
     public void setEmail(Email email) {
