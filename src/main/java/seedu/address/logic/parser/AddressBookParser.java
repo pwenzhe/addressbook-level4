@@ -98,6 +98,7 @@ public class AddressBookParser {
             return new RedoCommand();
 
         case ThemeCommand.COMMAND_WORD:
+        case ThemeCommand.COMMAND_ALIAS:
             return new ThemeCommand();
 
         default:
