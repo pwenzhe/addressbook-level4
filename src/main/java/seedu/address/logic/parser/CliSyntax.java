@@ -13,5 +13,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_ADDRESS = new Prefix("a/");
     public static final Prefix PREFIX_POSTALCODE = new Prefix("pc/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
+    public static final Prefix PREFIX_FAV = new Prefix("f/");
 
 }

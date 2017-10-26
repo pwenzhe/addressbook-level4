@@ -16,6 +16,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Date;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Favourite;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.PostalCode;
@@ -140,6 +141,15 @@ public class ParserUtil {
     public static Optional<PostalCode> parsePostalCode(Optional<String> postalCode) throws IllegalValueException {
         requireNonNull(postalCode);
         return postalCode.isPresent() ? Optional.of(new PostalCode(postalCode.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code Optional<String> favourite} into an {@code Optional<favourite>} if {@code favourite} is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<Favourite> parseFavourite(Optional<String> favourite) throws IllegalValueException {
+        requireNonNull(favourite);
+        return favourite.isPresent() ? Optional.of(new Favourite(favourite.get())) : Optional.empty();
     }
 
     /**

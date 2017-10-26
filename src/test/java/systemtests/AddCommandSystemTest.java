@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.FAV_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
@@ -82,7 +83,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         ReadOnlyPerson toAdd = AMY;
         String command = "   " + AddCommand.COMMAND_WORD + "  " + NAME_DESC_AMY + "  " + PHONE_DESC_AMY + " "
                 + DATE_DESC_AMY + " " + EMAIL_DESC_AMY + "   " + ADDRESS_DESC_AMY + "   " + POSTALCODE_DESC_AMY
-                + "  " + TAG_DESC_FRIEND + " ";
+                + "  " + FAV_DESC_AMY + " " + TAG_DESC_FRIEND + " ";
         assertCommandSuccess(command, toAdd);
 
         /* Case: undo adding Amy to the list -> Amy deleted */
@@ -98,7 +99,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: add a duplicate person -> rejected */
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + DATE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY + POSTALCODE_DESC_AMY + TAG_DESC_FRIEND;
+                + ADDRESS_DESC_AMY + POSTALCODE_DESC_AMY + FAV_DESC_AMY + TAG_DESC_FRIEND;
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
 
         /* Case: add a duplicate person except with different tags -> rejected */
