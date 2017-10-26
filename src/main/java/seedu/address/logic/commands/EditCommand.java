@@ -220,9 +220,13 @@ public class EditCommand extends UndoableCommand {
             return Optional.ofNullable(postalCode);
         }
 
-        public void setFavourite(Favourite favourite) { this.favourite = favourite; }
+        public void setFavourite(Favourite favourite) {
+            this.favourite = favourite;
+        }
 
-        public Optional<Favourite> getFavourite() { return Optional.ofNullable(favourite); }
+        public Optional<Favourite> getFavourite() {
+            return Optional.ofNullable(favourite);
+        }
 
         public void setTags(Set<Tag> tags) {
             this.tags = tags;

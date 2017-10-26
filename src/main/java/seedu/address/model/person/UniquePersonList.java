@@ -120,12 +120,20 @@ public class UniquePersonList implements Iterable<Person> {
         int compare;
         String p1Fav = "";
         String p2Fav = "";
-        if (p1.getFavourite().getFavourite()) p1Fav = "1";
-        else p1Fav = "2";
-        if (p2.getFavourite().getFavourite()) p2Fav = "1";
-        else p2Fav = "2";
+        if (p1.getFavourite().getFavourite()) {
+            p1Fav = "1";
+        } else {
+            p1Fav = "2";
+        }
+        if (p2.getFavourite().getFavourite()) {
+            p2Fav = "1";
+        } else {
+            p2Fav = "2";
+        }
         compare = p1Fav.compareTo(p2Fav);
-        if (compare == 0) compare = p1.getName().toString().compareTo(p2.getName().toString());
+        if (compare == 0) {
+            compare = p1.getName().toString().compareTo(p2.getName().toString());
+        }
 
         return compare;
     }

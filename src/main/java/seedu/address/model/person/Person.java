@@ -135,13 +135,19 @@ public class Person implements ReadOnlyPerson {
         return postalCode.get();
     }
 
-    public void setFavourite(Favourite favourite) { this.favourite.set(favourite); }
+    public void setFavourite(Favourite favourite) {
+        this.favourite.set(favourite);
+    }
 
     @Override
-    public ObjectProperty<Favourite> favProperty() { return favourite; }
+    public ObjectProperty<Favourite> favProperty() {
+        return favourite;
+    }
 
     @Override
-    public Favourite getFavourite() { return favourite.get(); }
+    public Favourite getFavourite() {
+        return favourite.get();
+    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}

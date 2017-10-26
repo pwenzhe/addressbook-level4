@@ -24,8 +24,7 @@ public class Favourite {
         if (formattedFav.isEmpty()) {
             isFavourite = false;
             value = "no";
-        }
-        else {
+        } else {
             if (!isValidFav(formattedFav)) {
                 throw new IllegalValueException(MESSAGE_FAVOURITE_CONSTRAINTS);
             }
@@ -46,8 +45,11 @@ public class Favourite {
      * Parses and returns the appropriate value for favourite status.
      */
     private boolean parseFav(String str) {
-        if (str.matches("yes|y")) return true;
-        else if (str.matches("no|n")) return false;
+        if (str.matches("yes|y")) {
+            return true;
+        } else if (str.matches("no|n")) {
+            return false;
+        }
 
         return true;
     }
@@ -56,8 +58,11 @@ public class Favourite {
      * Formats favourite status into a string.
      */
     private String favValue(String str) {
-        if (str.matches("yes|y")) return "yes";
-        else if (str.matches("no|n")) return "no";
+        if (str.matches("yes|y")) {
+            return "yes";
+        } else if (str.matches("no|n")) {
+            return "no";
+        }
 
         return "";
     }
@@ -65,7 +70,7 @@ public class Favourite {
     /**
      * Returns if Person is a favourite.
      */
-    public boolean getFavourite(){
+    public boolean getFavourite() {
         return isFavourite;
     }
 

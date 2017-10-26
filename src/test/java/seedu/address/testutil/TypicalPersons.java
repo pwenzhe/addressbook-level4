@@ -66,7 +66,8 @@ public class TypicalPersons {
             .withPostalCode(VALID_POSTALCODE_AMY).withFavourite(VALID_FAV_AMY).withTags(VALID_TAG_FRIEND).build();
     public static final ReadOnlyPerson BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withDate("201283").withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-            .withPostalCode(VALID_POSTALCODE_BOB).withFavourite(VALID_FAV_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+            .withPostalCode(VALID_POSTALCODE_BOB).withFavourite(VALID_FAV_BOB)
+            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

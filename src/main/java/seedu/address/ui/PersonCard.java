@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-import java.awt.*;
 import java.util.HashMap;
 import java.util.Random;
 
