@@ -233,7 +233,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
                 .build();
         assertCommandSuccess(person);
 
-        person = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY).withDate(VALID_DATE_AMY)
+        person = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY).withBirthday(VALID_BIRTHDAY_AMY)
                 .withEmail(VALID_EMAIL_AMY).withPostalCode(VALID_POSTALCODE_AMY).build();
         assertCommandSuccess(person);
 
@@ -255,10 +255,10 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
                 + ADDRESS_DESC_AMY + FAV_DESC_AMY;
         assertCommandFailure(command, Phone.MESSAGE_PHONE_CONSTRAINTS);
 
-        /* Case: invalid date -> rejected */
+        /* Case: invalid birthday -> rejected */
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + INVALID_BIRTHDAY_DESC + EMAIL_DESC_AMY
                 + ADDRESS_DESC_AMY + FAV_DESC_AMY;
-        assertCommandFailure(command, Date.MESSAGE_DATE_CONSTRAINTS);
+        assertCommandFailure(command, Birthday.MESSAGE_BIRTHDAY_CONSTRAINTS);
 
         /* Case: invalid email -> rejected */
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + BIRTHDAY_DESC_AMY + INVALID_EMAIL_DESC
