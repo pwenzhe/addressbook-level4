@@ -21,36 +21,36 @@
     </Menu>
   </MenuBar>
 
-  <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" VBox.vgrow="NEVER">
-    <padding>
-      <Insets bottom="5" left="10" right="10" top="5" />
-    </padding>
-  </StackPane>
-
-        <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100.0" minHeight="100.0" prefHeight="100.0" styleClass="pane-with-border" VBox.vgrow="NEVER">
-    <padding>
-      <Insets bottom="5" left="10" right="10" top="5" />
-    </padding>
-  </StackPane>
-
   <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.5" VBox.vgrow="ALWAYS">
-    <VBox fx:id="personList" minWidth="340" prefWidth="340" SplitPane.resizableWithParent="false">
+    <VBox fx:id="personList" maxWidth="350.0" minWidth="300.0" prefWidth="300.0" SplitPane.resizableWithParent="false">
       <padding>
         <Insets bottom="10" left="10" right="10" top="10" />
       </padding>
       <StackPane fx:id="personListPanelPlaceholder" focusTraversable="true" VBox.vgrow="ALWAYS" />
     </VBox>
-      <SplitPane id="splitPane" dividerPositions="0.375" orientation="VERTICAL">
-         <items>
+      <VBox>
+         <children>
+         
+                       <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
+             <padding>
+               <Insets bottom="5" left="10" right="10" top="5" />
+             </padding>
+           </StackPane>
+         
+                             <StackPane fx:id="resultDisplayPlaceholder" maxHeight="90.0" minHeight="90.0" prefHeight="90.0" styleClass="pane-with-border">
+             <padding>
+               <Insets bottom="5" left="10" right="10" top="5" />
+             </padding>
+           </StackPane>
             <AnchorPane fx:id="personDetailsPlaceholder" maxHeight="180.0" minWidth="500.0" />
-            <SplitPane dividerPositions="0.5" prefHeight="200.0" prefWidth="200.0">
+            <SplitPane dividerPositions="0.5" prefWidth="200.0">
                <items>
-                  <StackPane fx:id="instagramBrowserPlaceholder" maxWidth="500.0" prefHeight="150.0" prefWidth="200.0" />
-                  <StackPane fx:id="googleMapBrowserPaceholder" prefHeight="150.0" prefWidth="200.0" />
+                  <StackPane fx:id="instagramBrowserPlaceholder" maxWidth="350.0" minWidth="300.0" prefWidth="300.0" />
+                  <StackPane fx:id="googleMapBrowserPaceholder" minWidth="400.0" prefWidth="400.0" />
                </items>
             </SplitPane>
-         </items>
-      </SplitPane>
+         </children>
+      </VBox>
   </SplitPane>
 
   <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
