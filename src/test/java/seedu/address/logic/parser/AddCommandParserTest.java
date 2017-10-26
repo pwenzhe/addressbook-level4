@@ -82,7 +82,7 @@ public class AddCommandParserTest {
         // multiple emails - last email accepted
         assertParseSuccess(parser, AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_BOB + BIRTHDAY_DESC_BOB
                 + EMAIL_DESC_AMY + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + POSTALCODE_DESC_BOB
-				+ FAV_DESC_BOB + TAG_DESC_FRIEND,
+                + FAV_DESC_BOB + TAG_DESC_FRIEND,
                 new AddCommand(expectedPerson));
 
         // multiple addresses - last address accepted
@@ -102,7 +102,7 @@ public class AddCommandParserTest {
                 .withPostalCode(VALID_POSTALCODE_BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).build();
         assertParseSuccess(parser, AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_BOB + BIRTHDAY_DESC_BOB
                         + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + POSTALCODE_DESC_BOB
-						+ FAV_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                        + FAV_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 new AddCommand(expectedPersonMultipleTags));
     }
 
@@ -118,7 +118,7 @@ public class AddCommandParserTest {
         // no birthday
         expectedPerson = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY).withBirthday("")
                 .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withPostalCode("")
-				.withFavourite(VALID_FAV_AMY).withTags().build();
+                .withFavourite(VALID_FAV_AMY).withTags().build();
         assertParseSuccess(parser, AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + ADDRESS_DESC_AMY + FAV_DESC_BOB, new AddCommand(expectedPerson));
 
@@ -139,7 +139,7 @@ public class AddCommandParserTest {
         // no favourite
         expectedPerson = new PersonBuilder().withName(VALID_NAME_AMY).withName(VALID_PHONE_AMY)
                 .withBirthday(VALID_BIRTHDAY_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-		.withPostalCode("").withFavourite("").withTags().build();
+                .withPostalCode("").withFavourite("").withTags().build();
         assertParseSuccess(parser, AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + BIRTHDAY_DESC_AMY
                + ADDRESS_DESC_AMY + EMAIL_DESC_AMY, new AddCommand(expectedPerson));
     }
@@ -166,25 +166,25 @@ public class AddCommandParserTest {
         // invalid name
         assertParseFailure(parser, AddCommand.COMMAND_WORD + INVALID_NAME_DESC + PHONE_DESC_BOB
                         + BIRTHDAY_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-						+ FAV_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                        + FAV_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 Name.MESSAGE_NAME_CONSTRAINTS);
 
         // invalid phone
         assertParseFailure(parser, AddCommand.COMMAND_WORD + NAME_DESC_BOB + INVALID_PHONE_DESC
                         + BIRTHDAY_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-						+ FAV_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                        + FAV_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 Phone.MESSAGE_PHONE_CONSTRAINTS);
 
         // invalid birthday
         assertParseFailure(parser, AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_BOB
                         + INVALID_BIRTHDAY_DESC + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-						+ FAV_DESC_BOB + TAG_DESC_HUSBAND
+                        + FAV_DESC_BOB + TAG_DESC_HUSBAND
                         + TAG_DESC_FRIEND, Birthday.MESSAGE_BIRTHDAY_CONSTRAINTS);
 
         // invalid email
         assertParseFailure(parser, AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_BOB + BIRTHDAY_DESC_BOB
                 + INVALID_EMAIL_DESC + ADDRESS_DESC_BOB
-				+ FAV_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                + FAV_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 Email.MESSAGE_EMAIL_CONSTRAINTS);
 
         // invalid address
@@ -200,7 +200,7 @@ public class AddCommandParserTest {
         // invalid tag
         assertParseFailure(parser, AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_BOB + BIRTHDAY_DESC_BOB
                 + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-				+ FAV_DESC_BOB + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_TAG_CONSTRAINTS);
+                + FAV_DESC_BOB + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_TAG_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, AddCommand.COMMAND_WORD + INVALID_NAME_DESC + PHONE_DESC_BOB
