@@ -4,8 +4,9 @@ import java.util.Set;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Date;
+import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Favourite;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -21,10 +22,11 @@ public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Alice Pauline";
     public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_DATE = "030498";
+    public static final String DEFAULT_BIRTHDAY = "03/apr/98";
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_POSTALCODE = "150654";
+    public static final String DEFAULT_FAVOURITE = "no";
     public static final String DEFAULT_TAGS = "friends";
 
     private Person person;
@@ -33,13 +35,14 @@ public class PersonBuilder {
         try {
             Name defaultName = new Name(DEFAULT_NAME);
             Phone defaultPhone = new Phone(DEFAULT_PHONE);
-            Date defaultDate = new Date(DEFAULT_DATE);
+            Birthday defaultBirthday = new Birthday(DEFAULT_BIRTHDAY);
             Email defaultEmail = new Email(DEFAULT_EMAIL);
             Address defaultAddress = new Address(DEFAULT_ADDRESS);
             PostalCode defaultPostalCode = new PostalCode(DEFAULT_POSTALCODE);
+            Favourite defaultFavourite = new Favourite(DEFAULT_FAVOURITE);
             Set<Tag> defaultTags = SampleDataUtil.getTagSet(DEFAULT_TAGS);
-            this.person = new Person(defaultName, defaultPhone, defaultDate, defaultEmail, defaultAddress,
-                    defaultPostalCode, defaultTags);
+            this.person = new Person(defaultName, defaultPhone, defaultBirthday, defaultEmail, defaultAddress,
+                defaultPostalCode, defaultFavourite, defaultTags);
         } catch (IllegalValueException ive) {
             throw new AssertionError("Default person's values are invalid.");
         }
@@ -89,13 +92,13 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Date} of the {@code Person} that we are building.
+     * Sets the {@code Birthday} of the {@code Person} that we are building.
      */
-    public PersonBuilder withDate(String date) {
+    public PersonBuilder withBirthday(String birthday) {
         try {
-            this.person.setDate(new Date(date));
+            this.person.setBirthday(new Birthday(birthday));
         } catch (IllegalValueException ive) {
-            throw new IllegalArgumentException("dob is expected to be unique.");
+            throw new IllegalArgumentException("birthday is expected to be unique.");
         }
         return this;
     }
@@ -133,6 +136,17 @@ public class PersonBuilder {
             this.person.setPostalCode(new PostalCode(postalCode));
         } catch (IllegalValueException ive) {
             throw new IllegalArgumentException("postal code is expected to be unique.");
+        }
+        return this;
+    }
+    /**
+     * Sets the {@code Favourite} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withFavourite(String favourite) {
+        try {
+            this.person.setFavourite(new Favourite(favourite));
+        } catch (IllegalValueException ive) {
+            throw new IllegalArgumentException("favourite is expected to be unique.");
         }
         return this;
     }

@@ -116,6 +116,10 @@
     -fx-text-fill: white;
 }
 
+.listPanel > ListView {
+    -fx-background-color: #383838;
+}
+
 .cell_big_label {
     -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 16px;
@@ -175,6 +179,15 @@
 
 .grid-pane .anchor-pane {
     -fx-background-color: derive(#1d1d1d, 30%);
+}
+
+.personLabel {
+    -fx-font-size: 20pt;
+    -fx-text-fill: white;
+}
+
+.personGrid > Label {
+    -fx-text-fill: white;
 }
 
 .context-menu {

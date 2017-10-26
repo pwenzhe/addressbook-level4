@@ -9,8 +9,9 @@ import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Date;
+import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Favourite;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -28,13 +29,15 @@ public class XmlAdaptedPerson {
     @XmlElement(required = true)
     private String phone;
     @XmlElement(required = true)
-    private String date;
+    private String birthday;
     @XmlElement(required = true)
     private String email;
     @XmlElement(required = true)
     private String address;
     @XmlElement(required = true)
     private String postalCode;
+    @XmlElement(required = true)
+    private String favourite;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -54,10 +57,11 @@ public class XmlAdaptedPerson {
     public XmlAdaptedPerson(ReadOnlyPerson source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
-        date = source.getDate().value;
+        birthday = source.getBirthday().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
         postalCode = source.getPostalCode().value;
+        favourite = source.getFavourite().value;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -76,11 +80,12 @@ public class XmlAdaptedPerson {
         }
         final Name name = new Name(this.name);
         final Phone phone = new Phone(this.phone);
-        final Date date = new Date(this.date);
+        final Birthday birthday = new Birthday(this.birthday);
         final Email email = new Email(this.email);
         final Address address = new Address(this.address);
         final PostalCode postalCode = new PostalCode(this.postalCode);
+        final Favourite favourite = new Favourite(this.favourite);
         final Set<Tag> tags = new HashSet<>(personTags);
-        return new Person(name, phone, date, email, address, postalCode, tags);
+        return new Person(name, phone, birthday, email, address, postalCode, favourite, tags);
     }
 }

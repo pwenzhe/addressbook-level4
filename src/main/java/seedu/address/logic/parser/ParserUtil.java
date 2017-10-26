@@ -14,8 +14,9 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Date;
+import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Favourite;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.PostalCode;
@@ -107,12 +108,12 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> date} into an {@code Optional<Date>} if {@code date} is present.
+     * Parses a {@code Optional<String> birthday} into an {@code Optional<birthday>} if {@code birthday} is present.
      * See header comment of this class regarding the use of {@code Optional} parameters.
      */
-    public static Optional<Date> parseDate(Optional<String> date) throws IllegalValueException {
-        requireNonNull(date);
-        return date.isPresent() ? Optional.of(new Date(date.get())) : Optional.empty();
+    public static Optional<Birthday> parseBirthday(Optional<String> birthday) throws IllegalValueException {
+        requireNonNull(birthday);
+        return birthday.isPresent() ? Optional.of(new Birthday(birthday.get())) : Optional.empty();
     }
 
     /**
@@ -140,6 +141,15 @@ public class ParserUtil {
     public static Optional<PostalCode> parsePostalCode(Optional<String> postalCode) throws IllegalValueException {
         requireNonNull(postalCode);
         return postalCode.isPresent() ? Optional.of(new PostalCode(postalCode.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code Optional<String> favourite} into an {@code Optional<favourite>} if {@code favourite} is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<Favourite> parseFavourite(Optional<String> favourite) throws IllegalValueException {
+        requireNonNull(favourite);
+        return favourite.isPresent() ? Optional.of(new Favourite(favourite.get())) : Optional.empty();
     }
 
     /**

@@ -9,6 +9,7 @@ import seedu.address.commons.events.ui.ChangeThemeRequestEvent;
 public class ThemeCommand extends Command {
 
     public static final String COMMAND_WORD = "changetheme";
+    public static final String COMMAND_ALIAS = "ct";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Changes theme of UI between dark and bright themes.\n"
             + "Example: " + COMMAND_WORD;
