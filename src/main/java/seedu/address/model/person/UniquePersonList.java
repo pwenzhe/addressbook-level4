@@ -118,7 +118,8 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public int comparePeople(Person p1, Person p2) {
         int compare;
-        String p1Fav, p2Fav;
+        String p1Fav = "";
+        String p2Fav = "";
         if (p1.getFavourite().getFavourite()) p1Fav = "1";
         else p1Fav = "2";
         if (p2.getFavourite().getFavourite()) p2Fav = "1";

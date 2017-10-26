@@ -41,7 +41,7 @@ public class CommandTestUtil {
     public static final String VALID_POSTALCODE_AMY = "159656";
     public static final String VALID_POSTALCODE_BOB = "777456";
     public static final String VALID_FAV_AMY = "yes";
-    public static final String VALID_FAV_BOB = "yes";
+    public static final String VALID_FAV_BOB = "no";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
