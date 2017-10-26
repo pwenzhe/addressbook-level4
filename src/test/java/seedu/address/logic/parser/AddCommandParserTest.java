@@ -31,7 +31,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_BIRTHDAY_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FAV_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_FAV_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
@@ -65,13 +64,13 @@ public class AddCommandParserTest {
 
         // multiple names - last name accepted
         assertParseSuccess(parser, AddCommand.COMMAND_WORD + NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB
-                + BIRTHDAY_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + POSTALCODE_DESC_BOB + FAV_DESC_BOB + TAG_DESC_FRIEND,
-                new AddCommand(expectedPerson));
+                + BIRTHDAY_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + POSTALCODE_DESC_BOB + FAV_DESC_BOB
+			   + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
 
         // multiple phones - last phone accepted
         assertParseSuccess(parser, AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB
                 + BIRTHDAY_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + POSTALCODE_DESC_BOB
-				+ FAV_DESC_BOB + TAG_DESC_FRIEND,
+		+ FAV_DESC_BOB + TAG_DESC_FRIEND,
                 new AddCommand(expectedPerson));
 
         // multiple birthdays - last birthday accepted
@@ -89,7 +88,7 @@ public class AddCommandParserTest {
         // multiple addresses - last address accepted
         assertParseSuccess(parser, AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_BOB + BIRTHDAY_DESC_BOB
                 + EMAIL_DESC_BOB + ADDRESS_DESC_AMY + ADDRESS_DESC_BOB + POSTALCODE_DESC_BOB
-				+ FAV_DESC_BOB+ TAG_DESC_FRIEND,
+		+ FAV_DESC_BOB + TAG_DESC_FRIEND,
                 new AddCommand(expectedPerson));
 
         // multiple postal codes - last postal code accepted
@@ -139,9 +138,8 @@ public class AddCommandParserTest {
 
         // no favourite
         expectedPerson = new PersonBuilder().withName(VALID_NAME_AMY).withName(VALID_PHONE_AMY)
-                .withBirthday(VALID_BIRTHDAY_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withPostalCode("")
-                .withFavourite("").withTags()
-                .build();
+                .withBirthday(VALID_BIRTHDAY_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
+		.withPostalCode("").withFavourite("").withTags().build();
         assertParseSuccess(parser, AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + BIRTHDAY_DESC_AMY
                + ADDRESS_DESC_AMY + EMAIL_DESC_AMY, new AddCommand(expectedPerson));
     }
@@ -201,7 +199,7 @@ public class AddCommandParserTest {
 
         // invalid tag
         assertParseFailure(parser, AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_BOB + BIRTHDAY_DESC_BOB
-                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB 
+                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
 				+ FAV_DESC_BOB + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_TAG_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
