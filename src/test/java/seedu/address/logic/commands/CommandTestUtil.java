@@ -80,7 +80,7 @@ public class CommandTestUtil {
             + "778125810"; // More than 6 digits, not allowed in postal code
     public static final String INVALID_POSTALCODE_DESC_4 = " " + PREFIX_POSTALCODE
             + "980150"; // Beyond range of postal codes in Singapore, not allowed in postal code
-    public static final String INVALID_FAVOURITE = " " + PREFIX_FAV + "yess"; // additional 's'
+    public static final String INVALID_FAVOURITE_DESC = " " + PREFIX_FAV + "yess"; // additional 's'
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;

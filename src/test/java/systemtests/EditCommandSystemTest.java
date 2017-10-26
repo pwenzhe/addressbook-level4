@@ -176,43 +176,43 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: invalid name -> rejected */
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
-                        + INVALID_NAME_DESC, Name.MESSAGE_NAME_CONSTRAINTS);
+                + INVALID_NAME_DESC, Name.MESSAGE_NAME_CONSTRAINTS);
 
         /* Case: invalid phone -> rejected */
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
-                        + INVALID_PHONE_DESC, Phone.MESSAGE_PHONE_CONSTRAINTS);
+                + INVALID_PHONE_DESC, Phone.MESSAGE_PHONE_CONSTRAINTS);
 
         /* Case: invalid birthday -> rejected */
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
-                        + INVALID_BIRTHDAY_DESC, Birthday.MESSAGE_BIRTHDAY_CONSTRAINTS);
+                + INVALID_BIRTHDAY_DESC, Birthday.MESSAGE_BIRTHDAY_CONSTRAINTS);
 
         /* Case: invalid email -> rejected */
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
-                        + INVALID_EMAIL_DESC, Email.MESSAGE_EMAIL_CONSTRAINTS);
+                + INVALID_EMAIL_DESC, Email.MESSAGE_EMAIL_CONSTRAINTS);
 
         /* Case: invalid address -> rejected */
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
-                        + INVALID_ADDRESS_DESC, Address.MESSAGE_ADDRESS_CONSTRAINTS);
+                + INVALID_ADDRESS_DESC, Address.MESSAGE_ADDRESS_CONSTRAINTS);
 
         /* Case: invalid postal code, letters not allowed -> rejected */
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
-                        + INVALID_POSTALCODE_DESC_1, PostalCode.MESSAGE_POSTALCODE_CONSTRAINTS);
+                + INVALID_POSTALCODE_DESC_1, PostalCode.MESSAGE_POSTALCODE_CONSTRAINTS);
 
         /* Case: invalid postal code, less than 6 digits not allowed -> rejected */
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
-                        + INVALID_POSTALCODE_DESC_2, PostalCode.MESSAGE_POSTALCODE_CONSTRAINTS);
+                + INVALID_POSTALCODE_DESC_2, PostalCode.MESSAGE_POSTALCODE_CONSTRAINTS);
 
         /* Case: invalid postal code, more than 6 digits not allowed -> rejected */
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
-                        + INVALID_POSTALCODE_DESC_3, PostalCode.MESSAGE_POSTALCODE_CONSTRAINTS);
+                + INVALID_POSTALCODE_DESC_3, PostalCode.MESSAGE_POSTALCODE_CONSTRAINTS);
 
         /* Case: invalid postal code, beyond range of postal codes in Singapore, not allowed -> rejected */
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
-                        + INVALID_POSTALCODE_DESC_4, PostalCode.MESSAGE_POSTALCODE_CONSTRAINTS);
+                + INVALID_POSTALCODE_DESC_4, PostalCode.MESSAGE_POSTALCODE_CONSTRAINTS);
 
         /* Case: invalid tag -> rejected */
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
-                        + INVALID_TAG_DESC, Tag.MESSAGE_TAG_CONSTRAINTS);
+                + INVALID_TAG_DESC, Tag.MESSAGE_TAG_CONSTRAINTS);
 
         /* Case: edit a person with new values same as another person's values -> rejected */
         executeCommand(PersonUtil.getAddCommand(BOB));
@@ -220,14 +220,14 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         index = INDEX_FIRST_PERSON;
         assertFalse(getModel().getFilteredPersonList().get(index.getZeroBased()).equals(BOB));
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB
-                + BIRTHDAY_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + POSTALCODE_DESC_BOB + FAV_DESC_BOB
-                + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
+                + BIRTHDAY_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + POSTALCODE_DESC_BOB
+                + FAV_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
 
         /* Case: edit a person with new values same as another person's values but with different tags -> rejected */
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB
-                + BIRTHDAY_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + POSTALCODE_DESC_BOB + FAV_DESC_BOB
-                + TAG_DESC_HUSBAND;
+                + BIRTHDAY_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + POSTALCODE_DESC_BOB
+                + FAV_DESC_BOB + TAG_DESC_HUSBAND;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
@@ -250,7 +250,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
      * @see EditCommandSystemTest#assertCommandSuccess(String, Model, String, Index)
      */
     private void assertCommandSuccess(String command, Index toEdit, ReadOnlyPerson editedPerson,
-            Index expectedSelectedCardIndex) {
+                                      Index expectedSelectedCardIndex) {
         Model expectedModel = getModel();
         try {
             expectedModel.updatePerson(
@@ -289,7 +289,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
      * @see AddressBookSystemTest#assertSelectedCardChanged(Index)
      */
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage,
-            Index expectedSelectedCardIndex) {
+                                      Index expectedSelectedCardIndex) {
         executeCommand(command);
         expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);

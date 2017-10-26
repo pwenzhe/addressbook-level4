@@ -13,6 +13,7 @@ import static seedu.address.logic.commands.CommandTestUtil.FAV_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_BIRTHDAY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_FAVOURITE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_POSTALCODE_DESC_1;
@@ -64,7 +65,9 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Favourite;
 import seedu.address.model.person.Name;
+
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.PostalCode;
 import seedu.address.model.person.ReadOnlyPerson;
@@ -227,11 +230,6 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
                 .build();
         assertCommandSuccess(person);
 
-        person = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-                .withBirthday(VALID_BIRTHDAY_AMY)
-                .withEmail(VALID_EMAIL_AMY).withPostalCode(VALID_POSTALCODE_AMY).build();
-        assertCommandSuccess(person);
-
         /* Case: invalid keyword -> rejected */
         command = "adds " + PersonUtil.getPersonDetails(toAdd);
         assertCommandFailure(command, Messages.MESSAGE_UNKNOWN_COMMAND);
@@ -287,8 +285,8 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: invalid favourite -> rejected */
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + BIRTHDAY_DESC_AMY + EMAIL_DESC_AMY
-                + POSTALCODE_DESC_AMY + ADDRESS_DESC_AMY;
-        assertCommandFailure(command, PostalCode.MESSAGE_POSTALCODE_CONSTRAINTS);
+                + POSTALCODE_DESC_AMY + ADDRESS_DESC_AMY + INVALID_FAVOURITE_DESC;
+        assertCommandFailure(command, Favourite.MESSAGE_FAVOURITE_CONSTRAINTS);
 
         /* Case: invalid tag -> rejected */
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + BIRTHDAY_DESC_AMY + EMAIL_DESC_AMY

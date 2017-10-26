@@ -12,7 +12,7 @@ import static seedu.address.logic.commands.CommandTestUtil.FAV_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_BIRTHDAY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_FAVOURITE;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_FAVOURITE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
@@ -195,7 +195,7 @@ public class AddCommandParserTest {
 
         // invalid favourite
         assertParseFailure(parser, AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_BOB + BIRTHDAY_DESC_BOB
-                        + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + INVALID_FAVOURITE + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                        + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + INVALID_FAVOURITE_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 Favourite.MESSAGE_FAVOURITE_CONSTRAINTS);
 
         // invalid tag

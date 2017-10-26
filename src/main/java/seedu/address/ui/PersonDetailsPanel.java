@@ -33,8 +33,6 @@ public class PersonDetailsPanel extends UiPart<Region> {
     private Label postalCode;
     @FXML
     private Label email;
-    @FXML
-    private Label favourite;
 
     public PersonDetailsPanel() {
         super(FXML);
@@ -59,7 +57,6 @@ public class PersonDetailsPanel extends UiPart<Region> {
         address.textProperty().bind(Bindings.convert(person.addressProperty()));
         postalCode.textProperty().bind(Bindings.convert(person.postalCodeProperty()));
         email.textProperty().bind(Bindings.convert(person.emailProperty()));
-        favourite.textProperty().bind(Bindings.convert(person.favProperty()));
     }
 
     @Subscribe
