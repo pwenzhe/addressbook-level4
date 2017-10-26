@@ -23,7 +23,7 @@ Responsibilities: Testing, Git Expert
 image::Valerie.png[width="150", align="left"]
 {empty}[http://github.com/Valerieyue[github]] [<<johndoe#, portfolio>>]
 
-Role: Documentation +
+Role: Developer +
 Responsibilities: Logic
 
 '''
