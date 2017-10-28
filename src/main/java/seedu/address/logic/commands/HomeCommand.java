@@ -15,7 +15,7 @@ public class HomeCommand extends Command {
             + "Example: " + COMMAND_WORD;
     public static final String HOME_PANEL_REQUEST_EVENT = "HomePanel";
 
-    public static final String MESSAGE_SUCCESS = "Opened home panel.";
+    public static final String MESSAGE_SUCCESS = "You are back at ho-ho-home panel!";
 
     @Override
     public CommandResult execute() {

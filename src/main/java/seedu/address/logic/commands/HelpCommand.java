@@ -15,7 +15,7 @@ public class HelpCommand extends Command {
             + "Example: " + COMMAND_WORD;
     public static final String HELP_PANEL_REQUEST_EVENT = "HelpPanel";
 
-    public static final String MESSAGE_SUCCESS = "Opened help panel.";
+    public static final String MESSAGE_SUCCESS = "Help is here!";
 
     @Override
     public CommandResult execute() {
