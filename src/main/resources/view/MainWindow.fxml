@@ -25,11 +25,6 @@
     <Menu mnemonicParsing="false" text="Help">
       <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
     </Menu>
-      <Menu mnemonicParsing="false" text="About">
-         <items>
-            <MenuItem mnemonicParsing="false" text="Developers" />
-         </items>
-      </Menu>
   </MenuBar>
 
   <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.5" VBox.vgrow="ALWAYS">
