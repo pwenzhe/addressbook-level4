@@ -15,11 +15,11 @@ public class HelpCommand extends Command {
             + "Example: " + COMMAND_WORD;
     public static final String HELP_PANEL_REQUEST_EVENT = "HelpPanel";
 
-    public static final String SHOWING_HELP_MESSAGE = "Opened help panel.";
+    public static final String MESSAGE_SUCCESS = "Opened help panel.";
 
     @Override
     public CommandResult execute() {
         EventsCenter.getInstance().post(new ChangeInformationPanelRequestEvent(HELP_PANEL_REQUEST_EVENT));
-        return new CommandResult(SHOWING_HELP_MESSAGE);
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 }
