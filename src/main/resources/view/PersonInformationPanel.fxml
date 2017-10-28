@@ -4,13 +4,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 
-<SplitPane id="splitPane" dividerPositions="0.375" orientation="VERTICAL" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+
+<SplitPane id="splitPane" dividerPositions="0.5" orientation="VERTICAL" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <items>
-      <AnchorPane fx:id="personDetailsPlaceholder" maxHeight="200.0" minWidth="500.0" />
-      <SplitPane dividerPositions="0.5" prefHeight="200.0" prefWidth="200.0">
+      <AnchorPane fx:id="personDetailsPlaceholder" maxHeight="220.0" minHeight="220.0" prefHeight="220.0" />
+      <SplitPane dividerPositions="0.5">
          <items>
-            <StackPane fx:id="instagramBrowserPlaceholder" maxWidth="500.0" prefHeight="150.0" prefWidth="200.0" />
-            <StackPane fx:id="googleMapBrowserPaceholder" prefHeight="150.0" prefWidth="200.0" />
+            <StackPane fx:id="instagramBrowserPlaceholder" maxWidth="350.0" minHeight="300.0" minWidth="300.0" prefWidth="300.0" />
+            <StackPane fx:id="googleMapBrowserPaceholder" minWidth="400.0" prefWidth="400.0" />
          </items>
       </SplitPane>
    </items>

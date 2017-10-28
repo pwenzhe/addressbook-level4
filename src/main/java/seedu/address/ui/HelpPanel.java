@@ -13,11 +13,11 @@ import seedu.address.commons.util.FxViewUtil;
 /**
  * Controller for a help page
  */
-public class HelpWindow extends UiPart<Region> {
+public class HelpPanel extends UiPart<Region> {
 
     public static final String USERGUIDE_FILE_PATH = "/docs/UserGuide.html";
 
-    private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
+    private static final Logger logger = LogsCenter.getLogger(HelpPanel.class);
     private static final String ICON = "/images/help_icon.png";
     private static final String FXML = "HelpWindow.fxml";
     private static final String TITLE = "Help";
@@ -27,7 +27,7 @@ public class HelpWindow extends UiPart<Region> {
 
     private final Stage dialogStage;
 
-    public HelpWindow() {
+    public HelpPanel() {
         super(FXML);
         Scene scene = new Scene(getRoot());
         //Null passed as the parent stage to make it non-modal.

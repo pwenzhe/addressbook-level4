@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<StackPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <VBox fx:id="home" alignment="CENTER">
+      <children>
+         <Text fx:id="welcomeHeaderText" fill="#464646" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Bevy.">
+            <font>
+               <Font name="Segoe UI Semibold" size="56.0" />
+            </font>
+         </Text>
+         <Text fx:id="welcomeContentText" fill="#464646" strokeType="OUTSIDE" strokeWidth="0.0" text="To begin, type on the Command Line Interface" textAlignment="CENTER">
+            <font>
+               <Font name="Segoe UI Semibold" size="24.0" />
+            </font>
+         </Text>
+         <Text fx:id="welcomeContentText" fill="#464646" strokeType="OUTSIDE" strokeWidth="0.0" text="Not sure what to do? Type help to find out more!">
+            <font>
+               <Font name="Segoe UI Semibold" size="24.0" />
+            </font>
+         </Text>
+      </children>
+   </VBox>
+</StackPane>

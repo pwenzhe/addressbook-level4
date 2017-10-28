@@ -203,7 +203,7 @@
 }
 
 .menu-bar .label {
-    -fx-font-size: 14pt;
+    -fx-font-size: 12pt;
     -fx-font-family: "Segoe UI Light";
     -fx-text-fill: white;
     -fx-opacity: 0.9;
@@ -355,4 +355,16 @@
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;
+}
+
+#welcomeHeaderText {
+    -fx-fill: white;
+}
+
+#welcomeContentText {
+    -fx-fill: #D6D6D6;
+}
+
+#home {
+    -fx-background-color: #2F2F2F;
 }

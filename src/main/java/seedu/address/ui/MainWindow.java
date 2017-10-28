@@ -22,7 +22,6 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.ChangeInformationPanelRequestEvent;
 import seedu.address.commons.events.ui.ChangeThemeRequestEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
-import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
@@ -35,8 +34,9 @@ public class MainWindow extends UiPart<Region> {
 
     private static final String ICON = "/images/address_book_32.png";
     private static final String FXML = "MainWindow.fxml";
+    private static final String HOME_PANEL = "HomePanel";
     private static final String PERSON_INFORMATION_PANEL = "PersonInformationPanel";
-    private static final String WELCOME_PANEL = "WelcomePanel";
+    private static final String HELP_PANEL = "HelpPanel";
     private static final int MIN_HEIGHT = 700;
     private static final int MIN_WIDTH = 1400;
 
@@ -46,9 +46,10 @@ public class MainWindow extends UiPart<Region> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private WelcomePanel welcomePanel;
     private PersonListPanel personListPanel;
+    private HomePanel homePanel;
     private PersonInformationPanel personInformationPanel;
+    private HelpPanel helpPanel;
     private Config config;
     private UserPrefs prefs;
     private String currentInformationPanel;
@@ -147,28 +148,28 @@ public class MainWindow extends UiPart<Region> {
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
-    void showWelcomePanel() {
-        welcomePanel = new WelcomePanel();
-        informationPanelPlaceholder.getChildren().add(welcomePanel.getRoot());
-        currentInformationPanel = WELCOME_PANEL;
+    void showHomePanel() {
+        homePanel = new HomePanel();
+        informationPanelPlaceholder.getChildren().add(homePanel.getRoot());
+        currentInformationPanel = HOME_PANEL;
     }
 
-    /** Changes the PersonInformationPanel */
+    /** Changes the InformationPanel */
     void changeInformationPanel(ChangeInformationPanelRequestEvent event) {
         if (event.getPanelRequestEvent().equals(currentInformationPanel)) {
-            logger.info("NO CHANGE");
             return;
         } else if (event.getPanelRequestEvent().equals(PERSON_INFORMATION_PANEL)) {
-            logger.info("CHANGING 1");
             personInformationPanel = new PersonInformationPanel();
             informationPanelPlaceholder.getChildren().add(personInformationPanel.getRoot());
-        } else if (event.getPanelRequestEvent().equals((WELCOME_PANEL))) {
-            logger.info("CHANGING 2");
-            welcomePanel = new WelcomePanel();
-            informationPanelPlaceholder.getChildren().add(welcomePanel.getRoot());
+        } else if (event.getPanelRequestEvent().equals((HOME_PANEL))) {
+            homePanel = new HomePanel();
+            informationPanelPlaceholder.getChildren().add(homePanel.getRoot());
+        } else if (event.getPanelRequestEvent().equals((HELP_PANEL))) {
+            helpPanel = new HelpPanel();
+            informationPanelPlaceholder.getChildren().add(helpPanel.getRoot());
         }
 
-        currentInformationPanel = PERSON_INFORMATION_PANEL;
+        currentInformationPanel = event.getPanelRequestEvent();
     }
 
     /**
@@ -232,12 +233,19 @@ public class MainWindow extends UiPart<Region> {
     }
 
     /**
-     * Opens the help window.
+     * Opens the help panel.
      */
     @FXML
     public void handleHelp() {
-        HelpWindow helpWindow = new HelpWindow();
-        helpWindow.show();
+        changeInformationPanel(new ChangeInformationPanelRequestEvent(HELP_PANEL));
+    }
+
+    /**
+     * Opens the help panel.
+     */
+    @FXML
+    public void handleHome() {
+        changeInformationPanel(new ChangeInformationPanelRequestEvent(HOME_PANEL));
     }
 
     void show() {
@@ -266,11 +274,5 @@ public class MainWindow extends UiPart<Region> {
 
     void releaseResources() {
         personInformationPanel.releaseResources();
-    }
-
-    @Subscribe
-    private void handleShowHelpEvent(ShowHelpRequestEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        handleHelp();
     }
 }
