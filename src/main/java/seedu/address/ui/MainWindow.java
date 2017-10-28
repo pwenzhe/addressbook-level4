@@ -2,8 +2,6 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
-import com.google.common.eventbus.Subscribe;
-
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
@@ -37,8 +35,8 @@ public class MainWindow extends UiPart<Region> {
     private static final String HOME_PANEL = "HomePanel";
     private static final String PERSON_INFORMATION_PANEL = "PersonInformationPanel";
     private static final String HELP_PANEL = "HelpPanel";
-    private static final int MIN_HEIGHT = 700;
-    private static final int MIN_WIDTH = 1400;
+    private static final int MIN_HEIGHT = 800;
+    private static final int MIN_WIDTH = 1500;
 
     private final Logger logger = LogsCenter.getLogger(this.getClass());
 
@@ -148,16 +146,27 @@ public class MainWindow extends UiPart<Region> {
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
-    void showHomePanel() {
+    /**
+     * Initialise all dynamic information panels to allow MainWindowHandle initialise
+     * handles for these panels for testings, and then show home panel to user
+     */
+    void initAllAndShowHomePanel() {
+        helpPanel = new HelpPanel();
+        informationPanelPlaceholder.getChildren().add(helpPanel.getRoot());
+
+        personInformationPanel = new PersonInformationPanel();
+        informationPanelPlaceholder.getChildren().add(personInformationPanel.getRoot());
+
         homePanel = new HomePanel();
         informationPanelPlaceholder.getChildren().add(homePanel.getRoot());
+
         currentInformationPanel = HOME_PANEL;
     }
 
-    /** Changes the InformationPanel */
+    /** Changes the InformationPanel based on request event */
     void changeInformationPanel(ChangeInformationPanelRequestEvent event) {
         if (event.getPanelRequestEvent().equals(currentInformationPanel)) {
-            return;
+            return; // Short circuit if the current information panel is the same as the requested information panel
         } else if (event.getPanelRequestEvent().equals(PERSON_INFORMATION_PANEL)) {
             personInformationPanel = new PersonInformationPanel();
             informationPanelPlaceholder.getChildren().add(personInformationPanel.getRoot());

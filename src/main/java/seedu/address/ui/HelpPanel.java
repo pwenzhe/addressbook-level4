@@ -9,6 +9,7 @@ import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.FxViewUtil;
+import sun.applet.Main;
 
 /**
  * Controller for a help page
@@ -19,7 +20,7 @@ public class HelpPanel extends UiPart<Region> {
 
     private static final Logger logger = LogsCenter.getLogger(HelpPanel.class);
     private static final String ICON = "/images/help_icon.png";
-    private static final String FXML = "HelpWindow.fxml";
+    private static final String FXML = "HelpPanel.fxml";
     private static final String TITLE = "Help";
 
     @FXML

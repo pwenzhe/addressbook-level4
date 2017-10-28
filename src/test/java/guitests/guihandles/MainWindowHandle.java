@@ -11,6 +11,7 @@ public class MainWindowHandle extends StageHandle {
     private final CommandBoxHandle commandBox;
     private final ResultDisplayHandle resultDisplay;
     private final PersonListPanelHandle personListPanel;
+    private final InformationPanelHandle informationPanel;
     private final PersonDetailsPanelHandle personDetailsPanel;
     private final InstagramBrowserPanelHandle instagramBrowserPanel;
     private final GoogleMapBrowserPanelHandle googleMapBrowserPanel;
@@ -23,6 +24,8 @@ public class MainWindowHandle extends StageHandle {
         resultDisplay = new ResultDisplayHandle(getChildNode(ResultDisplayHandle.RESULT_DISPLAY_ID));
         commandBox = new CommandBoxHandle(getChildNode(CommandBoxHandle.COMMAND_INPUT_FIELD_ID));
         personListPanel = new PersonListPanelHandle(getChildNode(PersonListPanelHandle.PERSON_LIST_VIEW_ID));
+        informationPanel = new InformationPanelHandle(
+                getChildNode(InformationPanelHandle.INFORMATION_PANEL_PLACEHOLDER));
         personDetailsPanel = new PersonDetailsPanelHandle(
                 getChildNode(PersonDetailsPanelHandle.PERSON_DETAILS_VIEW_ID));
         instagramBrowserPanel = new InstagramBrowserPanelHandle(
@@ -46,6 +49,10 @@ public class MainWindowHandle extends StageHandle {
 
     public PersonListPanelHandle getPersonListPanel() {
         return personListPanel;
+    }
+
+    public InformationPanelHandle getInformationPanel() {
+        return informationPanel;
     }
 
     public PersonDetailsPanelHandle getPersonDetailsPanel() {
