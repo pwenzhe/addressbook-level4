@@ -365,6 +365,14 @@
     -fx-fill: #D6D6D6;
 }
 
-#home {
-    -fx-background-color: #2F2F2F;
+#homePanel {
+    -fx-background-color: #464646;
+}
+
+#homePanel .label {
+    -fx-background-color: #3e7b91;
+    -fx-background-radius: 10 10 10 10;
+    -fx-font-size: 15pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: white;
 }

@@ -14,7 +14,7 @@
   <MenuBar fx:id="menuBar" nodeOrientation="LEFT_TO_RIGHT" VBox.vgrow="NEVER">
     <Menu mnemonicParsing="false" text="Bevy">
          <MenuItem mnemonicParsing="false" onAction="#handleHome" text="Home" />
-      <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
+      <MenuItem fx:id="exitMenuItem" mnemonicParsing="false" onAction="#handleExit" text="Exit" />
     </Menu>
       <Menu mnemonicParsing="false" text="Statistics">
          <items>
@@ -46,7 +46,10 @@
                <Insets bottom="5" left="10" right="10" top="5" />
              </padding>
            </StackPane>
-            <StackPane fx:id="informationPanelPlaceholder" prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+            <StackPane fx:id="informationPanelPlaceholder" prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+               <padding>
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+               </padding></StackPane>
          </children>
       </VBox>
   </SplitPane>

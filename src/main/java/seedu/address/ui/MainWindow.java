@@ -62,6 +62,9 @@ public class MainWindow extends UiPart<Region> {
     private MenuItem helpMenuItem;
 
     @FXML
+    private MenuItem exitMenuItem;
+
+    @FXML
     private StackPane personListPanelPlaceholder;
 
     @FXML
@@ -97,6 +100,7 @@ public class MainWindow extends UiPart<Region> {
 
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(exitMenuItem, KeyCombination.valueOf("Esc"));
     }
 
     /**
@@ -144,23 +148,15 @@ public class MainWindow extends UiPart<Region> {
 
         CommandBox commandBox = new CommandBox(logic);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
-    }
-
-    /**
-     * Initialise all dynamic information panels to allow MainWindowHandle initialise
-     * handles for these panels for testings, and then show home panel to user
-     */
-    void initAllAndShowHomePanel() {
-        helpPanel = new HelpPanel();
-        informationPanelPlaceholder.getChildren().add(helpPanel.getRoot());
 
         personInformationPanel = new PersonInformationPanel();
         informationPanelPlaceholder.getChildren().add(personInformationPanel.getRoot());
 
-        homePanel = new HomePanel();
-        informationPanelPlaceholder.getChildren().add(homePanel.getRoot());
+        helpPanel = new HelpPanel();
+        informationPanelPlaceholder.getChildren().add(helpPanel.getRoot());
 
-        currentInformationPanel = HOME_PANEL;
+        homePanel = new HomePanel(logic.getAddressBook());
+        informationPanelPlaceholder.getChildren().add(homePanel.getRoot());
     }
 
     /** Changes the InformationPanel based on request event */
@@ -171,7 +167,7 @@ public class MainWindow extends UiPart<Region> {
             personInformationPanel = new PersonInformationPanel();
             informationPanelPlaceholder.getChildren().add(personInformationPanel.getRoot());
         } else if (event.getPanelRequestEvent().equals((HOME_PANEL))) {
-            homePanel = new HomePanel();
+            homePanel = new HomePanel(logic.getAddressBook());
             informationPanelPlaceholder.getChildren().add(homePanel.getRoot());
         } else if (event.getPanelRequestEvent().equals((HELP_PANEL))) {
             helpPanel = new HelpPanel();
