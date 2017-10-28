@@ -12,7 +12,6 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -20,6 +19,7 @@ import seedu.address.MainApp;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.ChangeInformationPanelRequestEvent;
 import seedu.address.commons.events.ui.ChangeThemeRequestEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
@@ -35,8 +35,10 @@ public class MainWindow extends UiPart<Region> {
 
     private static final String ICON = "/images/address_book_32.png";
     private static final String FXML = "MainWindow.fxml";
+    private static final String PERSON_INFORMATION_PANEL = "PersonInformationPanel";
+    private static final String WELCOME_PANEL = "WelcomePanel";
     private static final int MIN_HEIGHT = 700;
-    private static final int MIN_WIDTH = 1200;
+    private static final int MIN_WIDTH = 1400;
 
     private final Logger logger = LogsCenter.getLogger(this.getClass());
 
@@ -44,21 +46,16 @@ public class MainWindow extends UiPart<Region> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonDetailsPanel personDetailsPanel;
-    private InstagramBrowserPanel instagramBrowserPanel;
-    private GoogleMapBrowserPanel googleMapBrowserPanel;
+    private WelcomePanel welcomePanel;
     private PersonListPanel personListPanel;
+    private PersonInformationPanel personInformationPanel;
     private Config config;
     private UserPrefs prefs;
+    private String currentInformationPanel;
 
     @FXML
-    private AnchorPane personDetailsPlaceholder;
+    private StackPane informationPanelPlaceholder;
 
-    @FXML
-    private StackPane instagramBrowserPlaceholder;
-
-    @FXML
-    private StackPane googleMapBrowserPaceholder;
     @FXML
     private StackPane commandBoxPlaceholder;
 
@@ -93,25 +90,6 @@ public class MainWindow extends UiPart<Region> {
 
         setAccelerators();
         registerAsAnEventHandler(this);
-    }
-
-    /**
-     * Changes the stylesheet used by GUI.
-     */
-    public void changeTheme() {
-        String brightThemePath = MainApp.class.getResource(FXML_FILE_FOLDER + "BrightTheme.css").toString();
-        String darkThemePath = MainApp.class.getResource(FXML_FILE_FOLDER + "DarkTheme.css").toString();
-        String extensionsPath = MainApp.class.getResource(FXML_FILE_FOLDER + "Extensions.css").toString();
-
-        String brightThemeAllPaths = "[" + extensionsPath + ", " + brightThemePath + "]";
-
-        if (getRoot().getStylesheets().toString().equals(brightThemeAllPaths)) {
-            getRoot().getStylesheets().remove(brightThemePath);
-            getRoot().getStylesheets().add(darkThemePath);
-        } else {
-            getRoot().getStylesheets().remove(darkThemePath);
-            getRoot().getStylesheets().add(brightThemePath);
-        }
     }
 
     public Stage getPrimaryStage() {
@@ -156,15 +134,6 @@ public class MainWindow extends UiPart<Region> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personDetailsPanel = new PersonDetailsPanel();
-        personDetailsPlaceholder.getChildren().add(personDetailsPanel.getRoot());
-
-        instagramBrowserPanel = new InstagramBrowserPanel();
-        instagramBrowserPlaceholder.getChildren().add(instagramBrowserPanel.getRoot());
-
-        googleMapBrowserPanel = new GoogleMapBrowserPanel();
-        googleMapBrowserPaceholder.getChildren().add(googleMapBrowserPanel.getRoot());
-
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
@@ -176,6 +145,49 @@ public class MainWindow extends UiPart<Region> {
 
         CommandBox commandBox = new CommandBox(logic);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    void showWelcomePanel() {
+        welcomePanel = new WelcomePanel();
+        informationPanelPlaceholder.getChildren().add(welcomePanel.getRoot());
+        currentInformationPanel = WELCOME_PANEL;
+    }
+
+    /** Changes the PersonInformationPanel */
+    void changeInformationPanel(ChangeInformationPanelRequestEvent event) {
+        if (event.getPanelRequestEvent().equals(currentInformationPanel)) {
+            logger.info("NO CHANGE");
+            return;
+        } else if (event.getPanelRequestEvent().equals(PERSON_INFORMATION_PANEL)) {
+            logger.info("CHANGING 1");
+            personInformationPanel = new PersonInformationPanel();
+            informationPanelPlaceholder.getChildren().add(personInformationPanel.getRoot());
+        } else if (event.getPanelRequestEvent().equals((WELCOME_PANEL))) {
+            logger.info("CHANGING 2");
+            welcomePanel = new WelcomePanel();
+            informationPanelPlaceholder.getChildren().add(welcomePanel.getRoot());
+        }
+
+        currentInformationPanel = PERSON_INFORMATION_PANEL;
+    }
+
+    /**
+     * Changes the stylesheet used by UI on changetheme command.
+     */
+    public void changeTheme() {
+        String brightThemePath = MainApp.class.getResource(FXML_FILE_FOLDER + "BrightTheme.css").toString();
+        String darkThemePath = MainApp.class.getResource(FXML_FILE_FOLDER + "DarkTheme.css").toString();
+        String extensionsPath = MainApp.class.getResource(FXML_FILE_FOLDER + "Extensions.css").toString();
+
+        String brightThemeAllPaths = "[" + extensionsPath + ", " + brightThemePath + "]";
+
+        if (getRoot().getStylesheets().toString().equals(brightThemeAllPaths)) {
+            getRoot().getStylesheets().remove(brightThemePath);
+            getRoot().getStylesheets().add(darkThemePath);
+        } else {
+            getRoot().getStylesheets().remove(darkThemePath);
+            getRoot().getStylesheets().add(brightThemePath);
+        }
     }
 
     void hide() {
@@ -253,8 +265,7 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void releaseResources() {
-        instagramBrowserPanel.freeResources();
-        googleMapBrowserPanel.freeResources();
+        personInformationPanel.releaseResources();
     }
 
     @Subscribe

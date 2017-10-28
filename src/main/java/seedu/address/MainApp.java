@@ -14,6 +14,7 @@ import seedu.address.commons.core.Config;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Version;
+import seedu.address.commons.events.ui.ChangeInformationPanelRequestEvent;
 import seedu.address.commons.events.ui.ChangeThemeRequestEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.exceptions.DataConversionException;
@@ -202,14 +203,19 @@ public class MainApp extends Application {
     }
 
     @Subscribe
-    public void handleExitAppRequestEvent(ExitAppRequestEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        this.stop();
+    public void handleChangeInformationPanelRequestEvent(ChangeInformationPanelRequestEvent event) {
+        ui.changeInformationPanel(event);
     }
 
     @Subscribe
     public void handleChangeThemeRequestEvent(ChangeThemeRequestEvent event) {
         ui.changeTheme();
+    }
+
+    @Subscribe
+    public void handleExitAppRequestEvent(ExitAppRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        this.stop();
     }
 
     public static void main(String[] args) {

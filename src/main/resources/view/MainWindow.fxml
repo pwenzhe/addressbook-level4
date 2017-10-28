@@ -52,17 +52,12 @@
              </padding>
            </StackPane>
             <AnchorPane fx:id="personDetailsPlaceholder" />
-            <SplitPane dividerPositions="0.5" prefWidth="200.0">
-               <items>
-                  <StackPane fx:id="instagramBrowserPlaceholder" maxWidth="350.0" minWidth="300.0" prefWidth="300.0" />
-                  <StackPane fx:id="googleMapBrowserPaceholder" minWidth="400.0" prefWidth="400.0" />
-               </items>
-            </SplitPane>
+            <StackPane fx:id="informationPanelPlaceholder" prefHeight="150.0" prefWidth="200.0" />
          </children>
       </VBox>
   </SplitPane>
 
-  <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
+  <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="ALWAYS" />
    <stylesheets>
       <URL value="@Extensions.css" />
       <URL value="@BrightTheme.css" />
