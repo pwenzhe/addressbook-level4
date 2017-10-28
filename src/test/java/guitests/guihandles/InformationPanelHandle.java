@@ -7,14 +7,12 @@ import javafx.scene.Node;
  */
 public class InformationPanelHandle extends NodeHandle<Node> {
     public static final String INFORMATION_PANEL_PLACEHOLDER = "#informationPanelPlaceholder";
-    private Node informationPanelNode;
 
     public InformationPanelHandle(Node informationPanelNode) {
         super(informationPanelNode);
-        this.informationPanelNode = informationPanelNode;
     }
 
     public Node getInformationPanelNode() {
-        return informationPanelNode;
+        return getRootNode();
     }
 }

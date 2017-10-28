@@ -26,6 +26,7 @@ import org.junit.ClassRule;
 
 import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.GoogleMapBrowserPanelHandle;
+import guitests.guihandles.HomePanelHandle;
 import guitests.guihandles.InstagramBrowserPanelHandle;
 import guitests.guihandles.MainMenuHandle;
 import guitests.guihandles.MainWindowHandle;
