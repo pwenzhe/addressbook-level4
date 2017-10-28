@@ -6,7 +6,7 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 
 /**
- * The Google Map Browser Panel of the App.
+ * The Home Panel of the App.
  */
 public class HomePanel extends UiPart<Region> {
 

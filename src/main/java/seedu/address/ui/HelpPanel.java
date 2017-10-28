@@ -9,10 +9,9 @@ import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.FxViewUtil;
-import sun.applet.Main;
 
 /**
- * Controller for a help page
+ * The Help Panel of the App.
  */
 public class HelpPanel extends UiPart<Region> {
 
