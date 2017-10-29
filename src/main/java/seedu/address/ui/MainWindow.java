@@ -105,7 +105,7 @@ public class MainWindow extends UiPart<Region> {
 
     /**
      * Sets the accelerator of a MenuItem.
-     * @param keyCombination the KeyCombination value of the accelerator
+     * @param keyCombination the KeyCombination value of the accelerator.
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
         menuItem.setAccelerator(keyCombination);
@@ -150,7 +150,7 @@ public class MainWindow extends UiPart<Region> {
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
         /** At start, Initalise all dynamic information panels for MainWindowHandle
-         * to initalise handles for these panels for testing */
+         * to initalise handles for these panels for testing. */
         personInformationPanel = new PersonInformationPanel();
         informationPanelPlaceholder.getChildren().add(personInformationPanel.getRoot());
 
@@ -161,7 +161,7 @@ public class MainWindow extends UiPart<Region> {
         informationPanelPlaceholder.getChildren().add(homePanel.getRoot());
     }
 
-    /** Changes the InformationPanel based on request event */
+    /** Changes the InformationPanel based on request event. */
     public void changeInformationPanel(ChangeInformationPanelRequestEvent event) {
         if (event.getPanelRequestEvent().equals(currentInformationPanel)) {
             return; // Short circuit if the current information panel is the same as the requested information panel

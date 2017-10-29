@@ -382,3 +382,23 @@
     -fx-font-family: "Segoe UI Light";
     -fx-text-fill: white;
 }
+
+#helpPanel {
+    -fx-background-color: #CECECE;
+}
+
+#helpPanel #header {
+    -fx-font-size: 14pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: black;
+}
+
+#helpPanel .label {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: black;
+}
+
+#bevyAssistant {
+    -fx-fill: black;
+}
