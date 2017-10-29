@@ -36,6 +36,8 @@ public class HomePanel extends UiPart<Region> {
 
     @Subscribe
     public void handleAddressBookChangedEvent(AddressBookChangedEvent abce) {
+        logger.info("Home panel new status: " + abce.data.getPersonList().size() + " persons and "
+                + abce.data.getTagList().size());
         setData(abce.data.getPersonList().size(), abce.data.getTagList().size());
     }
 }

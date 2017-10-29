@@ -136,7 +136,7 @@ public class MainWindow extends UiPart<Region> {
     /**
      * Fills up all the placeholders of this window.
      */
-    void fillInnerParts() {
+    public void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
@@ -149,6 +149,8 @@ public class MainWindow extends UiPart<Region> {
         CommandBox commandBox = new CommandBox(logic);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
+        /** At start, Initalise all dynamic information panels for MainWindowHandle
+         * to initalise handles for these panels for testing */
         personInformationPanel = new PersonInformationPanel();
         informationPanelPlaceholder.getChildren().add(personInformationPanel.getRoot());
 
@@ -160,11 +162,12 @@ public class MainWindow extends UiPart<Region> {
     }
 
     /** Changes the InformationPanel based on request event */
-    void changeInformationPanel(ChangeInformationPanelRequestEvent event) {
+    public void changeInformationPanel(ChangeInformationPanelRequestEvent event) {
         if (event.getPanelRequestEvent().equals(currentInformationPanel)) {
             return; // Short circuit if the current information panel is the same as the requested information panel
         } else if (event.getPanelRequestEvent().equals(PERSON_INFORMATION_PANEL)) {
             personInformationPanel = new PersonInformationPanel();
+            informationPanelPlaceholder.getChildren().remove(currentInformationPanel);
             informationPanelPlaceholder.getChildren().add(personInformationPanel.getRoot());
         } else if (event.getPanelRequestEvent().equals((HOME_PANEL))) {
             homePanel = new HomePanel(logic.getAddressBook());
@@ -196,7 +199,7 @@ public class MainWindow extends UiPart<Region> {
         }
     }
 
-    void hide() {
+    public void hide() {
         primaryStage.hide();
     }
 
@@ -232,7 +235,7 @@ public class MainWindow extends UiPart<Region> {
     /**
      * Returns the current size and the position of the main Window.
      */
-    GuiSettings getCurrentGuiSetting() {
+    public GuiSettings getCurrentGuiSetting() {
         return new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
     }
