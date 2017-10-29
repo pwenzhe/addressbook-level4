@@ -167,13 +167,15 @@ public class MainWindow extends UiPart<Region> {
             return; // Short circuit if the current information panel is the same as the requested information panel
         } else if (event.getPanelRequestEvent().equals(PERSON_INFORMATION_PANEL)) {
             personInformationPanel = new PersonInformationPanel();
-            informationPanelPlaceholder.getChildren().remove(currentInformationPanel);
+            informationPanelPlaceholder.getChildren().removeAll(homePanel.getRoot(), helpPanel.getRoot());
             informationPanelPlaceholder.getChildren().add(personInformationPanel.getRoot());
         } else if (event.getPanelRequestEvent().equals((HOME_PANEL))) {
             homePanel = new HomePanel(logic.getAddressBook());
+            informationPanelPlaceholder.getChildren().removeAll(helpPanel.getRoot(), personInformationPanel.getRoot());
             informationPanelPlaceholder.getChildren().add(homePanel.getRoot());
         } else if (event.getPanelRequestEvent().equals((HELP_PANEL))) {
             helpPanel = new HelpPanel();
+            informationPanelPlaceholder.getChildren().removeAll(homePanel.getRoot(), personInformationPanel.getRoot());
             informationPanelPlaceholder.getChildren().add(helpPanel.getRoot());
         }
 
