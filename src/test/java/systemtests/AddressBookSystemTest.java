@@ -114,8 +114,12 @@ public abstract class AddressBookSystemTest {
         return mainWindowHandle.getResultDisplay();
     }
 
-    public String getStyleSheet() {
-        return testApp.getStyleSheets();
+    public String getCurrentInformationPanel() {
+        return testApp.getCurrentInformationPanel();
+    }
+
+    public String getCurrentStyleSheet() {
+        return testApp.getCurrentStyleSheets();
     }
 
     /**
@@ -251,18 +255,26 @@ public abstract class AddressBookSystemTest {
     }
 
     /**
-     * Asserts that the theme before changing is not the same as the expected theme
-      */
-    protected void assertThemeBeforeChangingNotSame(String expectedThemeAllPaths) {
-        assertNotEquals(expectedThemeAllPaths, getStyleSheet());
+     * Asserts that the information panel shows correct panel.
+     */
+    protected void assertInformationPanelShowsCorrectPanel(String expectedInformationPanelId) {
+        assertEquals(expectedInformationPanelId, getCurrentInformationPanel());
     }
 
     /**
-     * Asserts that the theme after changing is the same as the expected theme
+     * Asserts that the theme before changing is not the same as the expected theme.
+      */
+    protected void assertThemeBeforeChangingNotSame(String expectedThemeAllPaths) {
+        assertNotEquals(expectedThemeAllPaths, getCurrentStyleSheet());
+    }
+
+    /**
+     * Asserts that the theme after changing is the same as the expected theme.
       */
     protected void assertThemeAfterChangingSame(String expectedThemeAllPaths) {
-        assertEquals(expectedThemeAllPaths, getStyleSheet());
+        assertEquals(expectedThemeAllPaths, getCurrentStyleSheet());
     }
+
     /**
      * Asserts that the entire status bar remains the same.
      */

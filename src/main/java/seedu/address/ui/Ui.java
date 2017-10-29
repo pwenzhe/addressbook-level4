@@ -11,16 +11,19 @@ public interface Ui {
     /** Starts the UI (and the App). */
     void start(Stage primaryStage);
 
-    /** Changes the PersonInformationPanels */
+    /** Changes the information panel based on request event. */
     void changeInformationPanel(ChangeInformationPanelRequestEvent event);
 
-    /** Changes the stylesheet used by the UI on changetheme command. */
+    /** Changes the stylesheet used by the UI when change theme command is executed. */
     void changeTheme();
 
+    /** Returns an unmodifiable child of the information panel currently displayed. */
+    String getCurrentInformationPanel();
+
+    /** Returns the current stylesheets. */
+    String getCurrentStyleSheets();
 
     /** Stops the UI. */
     void stop();
 
-    /** Returns the current StyleSheets */
-    String getStyleSheets();
 }

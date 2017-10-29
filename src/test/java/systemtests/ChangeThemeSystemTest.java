@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 public class ChangeThemeSystemTest extends AddressBookSystemTest {
 
     @Test
-    public void clear() {
+    public void changeTheme() {
         String brightThemePath = TestApp.class.getResource(FXML_FILE_FOLDER + "BrightTheme.css").toString();
         String darkThemePath = TestApp.class.getResource(FXML_FILE_FOLDER + "DarkTheme.css").toString();
         String extensionsPath = TestApp.class.getResource(FXML_FILE_FOLDER + "Extensions.css").toString();
@@ -49,7 +49,7 @@ public class ChangeThemeSystemTest extends AddressBookSystemTest {
 
     /**
      * Executes {@code command} and verifies that the command box displays an empty string, the result display
-     * box displays {@code ClearCommand#MESSAGE_SUCCESS} and the model related components equal to an empty model.
+     * box displays {@code ClearCommand#MESSAGE_SUCCESS} and the model related components equal to the current model.
      * These verifications are done by
      * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
      * Also verifies that the command box has the default style class and the status bar's sync status changes.
@@ -88,7 +88,6 @@ public class ChangeThemeSystemTest extends AddressBookSystemTest {
 
         executeCommand(command);
         assertApplicationDisplaysExpected(command, expectedResultMessage, expectedModel);
-        assertSelectedCardUnchanged();
         assertCommandBoxShowsErrorStyle();
         assertStatusBarUnchanged();
     }

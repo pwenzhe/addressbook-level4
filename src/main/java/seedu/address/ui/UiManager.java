@@ -75,8 +75,13 @@ public class UiManager extends ComponentManager implements Ui {
     }
 
     @Override
-    public String getStyleSheets() {
-        return mainWindow.getRoot().getStylesheets().toString();
+    public String getCurrentInformationPanel() {
+        return mainWindow.getCurrentInformationPanel();
+    }
+
+    @Override
+    public String getCurrentStyleSheets() {
+        return mainWindow.getCurrentStyleSheets();
     }
 
     @Override

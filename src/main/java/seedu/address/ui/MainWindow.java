@@ -161,7 +161,7 @@ public class MainWindow extends UiPart<Region> {
         informationPanelPlaceholder.getChildren().add(homePanel.getRoot());
     }
 
-    /** Changes the InformationPanel based on request event. */
+    /** Changes the information panel based on request event. */
     public void changeInformationPanel(ChangeInformationPanelRequestEvent event) {
         if (event.getPanelRequestEvent().equals(currentInformationPanel)) {
             return; // Short circuit if the current information panel is the same as the requested information panel
@@ -182,7 +182,7 @@ public class MainWindow extends UiPart<Region> {
     }
 
     /**
-     * Changes the stylesheet used by UI on changetheme command.
+     * Changes the stylesheet used by UI when change theme command is executed.
      */
     public void changeTheme() {
         String brightThemePath = MainApp.class.getResource(FXML_FILE_FOLDER + "BrightTheme.css").toString();
@@ -242,19 +242,33 @@ public class MainWindow extends UiPart<Region> {
     }
 
     /**
-     * Opens the help panel.
+     * Returns an unmodifiable child of the information panel currently displayed.
+     */
+    public String getCurrentInformationPanel() {
+        return informationPanelPlaceholder.getChildrenUnmodifiable().toString();
+    }
+
+    /**
+     * Returns the current stylesheets.
+     */
+    public String getCurrentStyleSheets() {
+        return getRoot().getStylesheets().toString();
+    }
+
+    /**
+     * Opens the home panel.
      */
     @FXML
-    public void handleHelp() {
-        changeInformationPanel(new ChangeInformationPanelRequestEvent(HELP_PANEL));
+    public void handleHome() {
+        changeInformationPanel(new ChangeInformationPanelRequestEvent(HOME_PANEL));
     }
 
     /**
      * Opens the help panel.
      */
     @FXML
-    public void handleHome() {
-        changeInformationPanel(new ChangeInformationPanelRequestEvent(HOME_PANEL));
+    public void handleHelp() {
+        changeInformationPanel(new ChangeInformationPanelRequestEvent(HELP_PANEL));
     }
 
     void show() {

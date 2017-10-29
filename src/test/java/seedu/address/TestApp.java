@@ -99,8 +99,18 @@ public class TestApp extends MainApp {
         return copy;
     }
 
-    public String getStyleSheets() {
-        return ui.getStyleSheets();
+    /**
+     * Returns an unmodifiable child of information panel currently displayed
+     */
+    public String getCurrentInformationPanel() {
+        return ui.getCurrentInformationPanel();
+    }
+
+    /**
+     * Returns the current stylesheets
+     */
+    public String getCurrentStyleSheets() {
+        return ui.getCurrentStyleSheets();
     }
 
     @Override
