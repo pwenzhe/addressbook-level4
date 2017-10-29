@@ -20,4 +20,7 @@ public interface Ui {
 
     /** Stops the UI. */
     void stop();
+
+    /** Returns the current StyleSheets */
+    String getStyleSheets();
 }

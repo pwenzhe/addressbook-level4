@@ -3,6 +3,7 @@ package systemtests;
 import static guitests.guihandles.WebViewUtil.waitUntilBrowserLoaded;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static seedu.address.ui.GoogleMapBrowserPanel.GOOGLEMAP_SEARCH_URL_PREFIX;
 import static seedu.address.ui.GoogleMapBrowserPanel.GOOGLEMAP_SEARCH_URL_SUFFIX;
 import static seedu.address.ui.InstagramBrowserPanel.DEFAULT_PAGE;
@@ -113,6 +114,10 @@ public abstract class AddressBookSystemTest {
         return mainWindowHandle.getResultDisplay();
     }
 
+    public String getStyleSheet() {
+        return testApp.getStyleSheets();
+    }
+
     /**
      * Executes {@code command} in the application's {@code CommandBox}.
      * Method returns after UI components have been updated.
@@ -126,6 +131,7 @@ public abstract class AddressBookSystemTest {
         mainWindowHandle.getCommandBox().run(command);
 
         waitUntilBrowserLoaded(getInstagramBrowserPanel());
+        waitUntilBrowserLoaded(getGoogleMapBrowserPanel());
     }
 
     /**
@@ -244,6 +250,19 @@ public abstract class AddressBookSystemTest {
         assertEquals(COMMAND_BOX_ERROR_STYLE, getCommandBox().getStyleClass());
     }
 
+    /**
+     * Asserts that the theme before changing is not the same as the expected theme
+      */
+    protected void assertThemeBeforeChangingNotSame(String expectedThemeAllPaths) {
+        assertNotEquals(expectedThemeAllPaths, getStyleSheet());
+    }
+
+    /**
+     * Asserts that the theme after changing is the same as the expected theme
+      */
+    protected void assertThemeAfterChangingSame(String expectedThemeAllPaths) {
+        assertEquals(expectedThemeAllPaths, getStyleSheet());
+    }
     /**
      * Asserts that the entire status bar remains the same.
      */

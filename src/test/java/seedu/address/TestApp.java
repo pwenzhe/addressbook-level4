@@ -99,6 +99,10 @@ public class TestApp extends MainApp {
         return copy;
     }
 
+    public String getStyleSheets() {
+        return ui.getStyleSheets();
+    }
+
     @Override
     public void start(Stage primaryStage) {
         ui.start(primaryStage);

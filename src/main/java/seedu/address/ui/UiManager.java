@@ -75,6 +75,11 @@ public class UiManager extends ComponentManager implements Ui {
     }
 
     @Override
+    public String getStyleSheets() {
+        return mainWindow.getRoot().getStylesheets().toString();
+    }
+
+    @Override
     public void stop() {
         prefs.updateLastUsedGuiSetting(mainWindow.getCurrentGuiSetting());
         mainWindow.hide();
