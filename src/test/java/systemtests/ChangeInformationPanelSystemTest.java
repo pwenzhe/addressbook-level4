@@ -21,6 +21,10 @@ public class ChangeInformationPanelSystemTest extends AddressBookSystemTest {
         final String personInformationPanelId = "[SplitPane[id=personInformationPanel, styleClass=split-pane]]";
         final String helpPanelId = "[StackPane[id=helpPanel]]";
 
+        assertHandleSuccess("helpPanel", helpPanelId, "");
+
+        assertHandleSuccess("homePanel", homePanelId, "");
+
         /* Case: Changes information panel of address book using select command word, no leading spaces
          * and trailing alphanumeric characters and spaces -> information panel changed to person information panel.
          */
@@ -133,6 +137,35 @@ public class ChangeInformationPanelSystemTest extends AddressBookSystemTest {
     private void assertCommandSuccess(String command, String expectedInformationPanelId,
                                       String expectedResultMessage, Model expectedModel) {
         executeCommand(command);
+        assertInformationPanelShowsCorrectPanel(expectedInformationPanelId);
+        assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
+        assertCommandBoxShowsDefaultStyle();
+        assertStatusBarUnchanged();
+    }
+
+    /**
+     * Executes {@code handle} and verifies that the command box displays an empty string, the information panel ID
+     * displays the correct panel, the result display
+     * box displays {@code ClearCommand#MESSAGE_SUCCESS} and the model related components equal to the initial model.
+     * These verifications are done by
+     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * Also verifies that the command box has the default style class and the status bar's sync status changes.
+     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     */
+    private void assertHandleSuccess(String handle, String expectedInformationPanelId,
+                                     String expectedResultMessage) {
+        assertHandleSuccess(handle, expectedInformationPanelId, expectedResultMessage, getModel());
+    }
+
+    /**
+     * Performs the same verification as {@code assertHandleSuccess(String, String, String)} except that the
+     * information panel displays {@code expectedInformationPanel}, result box displays
+     * {@code expectedResultMessage} and the model related components equal to {@code expectedModel}.
+     * @see ChangeInformationPanelSystemTest#assertHandleSuccess(String, String, String, Model)
+     */
+    private void assertHandleSuccess(String handle, String expectedInformationPanelId,
+                                     String expectedResultMessage, Model expectedModel) {
+        executeHandle(handle);
         assertInformationPanelShowsCorrectPanel(expectedInformationPanelId);
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
         assertCommandBoxShowsDefaultStyle();

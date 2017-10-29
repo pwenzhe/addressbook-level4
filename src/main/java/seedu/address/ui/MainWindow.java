@@ -279,7 +279,7 @@ public class MainWindow extends UiPart<Region> {
      * Closes the application.
      */
     @FXML
-    private void handleExit() {
+    public void handleExit() {
         raise(new ExitAppRequestEvent());
     }
 

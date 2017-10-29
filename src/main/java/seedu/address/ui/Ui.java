@@ -17,6 +17,9 @@ public interface Ui {
     /** Changes the stylesheet used by the UI when change theme command is executed. */
     void changeTheme();
 
+    /** Returns main window. */
+    MainWindow getMainWindow();
+
     /** Returns an unmodifiable child of the information panel currently displayed. */
     String getCurrentInformationPanel();
 

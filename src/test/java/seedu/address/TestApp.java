@@ -19,6 +19,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.storage.XmlSerializableAddressBook;
 import seedu.address.testutil.TestUtil;
+import seedu.address.ui.MainWindow;
 import systemtests.ModelHelper;
 
 /**
@@ -99,6 +100,9 @@ public class TestApp extends MainApp {
         return copy;
     }
 
+    public MainWindow getMainWindow() {
+        return ui.getMainWindow();
+    }
     /**
      * Returns an unmodifiable child of information panel currently displayed
      */
