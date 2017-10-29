@@ -18,7 +18,6 @@ import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.ChangeInformationPanelRequestEvent;
-import seedu.address.commons.events.ui.ChangeThemeRequestEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.logic.Logic;
@@ -281,14 +280,6 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     public void handleExit() {
         raise(new ExitAppRequestEvent());
-    }
-
-    /**
-     * Changes the application theme.
-     */
-    @FXML
-    private void handleChangeTheme() {
-        raise(new ChangeThemeRequestEvent());
     }
 
     public PersonListPanel getPersonListPanel() {
