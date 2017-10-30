@@ -33,7 +33,6 @@ Excited? We are too, because we *love* connecting you with Bevy.
 
 * <<UserGuide#, User Guide>>
 * <<DeveloperGuide#, Developer Guide>>
-* <<LearningOutcomes#, Learning Outcomes>>
 * <<AboutUs#, About Us>>
 * <<ContactUs#, Contact Us>>
 
