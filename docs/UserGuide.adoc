@@ -77,7 +77,7 @@ Exits the app.
 
 === Viewing help : `help` `sos`
 
-Opens the help window which shows the guidelines to use Bevy.
+Opens the help panel which shows the guidelines to use Bevy.
 Format: `help` +
 Command Alias: `sos`
 
@@ -325,6 +325,12 @@ Command Alias: `c`
 Changes the theme of the application between the bright and dark theme. +
 Format: `changetheme`
 
+=== Viewing home: `home` `ho`
+
+Opens the home panel which shows the Bevy logo and application status.
+Format: `home` +
+Command Alias: `ho`
+
 === Exiting the program : `exit` `x`
 
 Exits the program. +
@@ -373,6 +379,8 @@ because we know you have many friends.
 |Help |`help` |`sos` |- |-
 
 |History |`history` |`h` |- |-
+
+|Home |`home` |`ho` |- |-
 
 |List |`list` |`l` |- |-
 
