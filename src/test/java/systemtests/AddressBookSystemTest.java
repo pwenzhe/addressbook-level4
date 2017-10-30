@@ -158,8 +158,11 @@ public abstract class AddressBookSystemTest {
             Platform.runLater(() -> testApp.getMainWindow().handleHelp());
         }
 
-        waitUntilBrowserLoaded(getInstagramBrowserPanel());
-        waitUntilBrowserLoaded(getGoogleMapBrowserPanel());
+        try {
+            Thread.sleep(250);
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
     }
     /**
      * Displays all persons in the address book.
