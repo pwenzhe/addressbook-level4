@@ -14,6 +14,7 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
+import seedu.address.commons.events.ui.ChangeInformationPanelRequestEvent;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
@@ -64,16 +65,35 @@ public class UiManager extends ComponentManager implements Ui {
     }
 
     @Override
+    public void changeInformationPanel(ChangeInformationPanelRequestEvent event) {
+        mainWindow.changeInformationPanel(event);
+    }
+
+    @Override
+    public void changeTheme() {
+        mainWindow.changeTheme();
+    }
+
+    @Override
+    public MainWindow getMainWindow() {
+        return mainWindow;
+    }
+
+    @Override
+    public String getCurrentInformationPanel() {
+        return mainWindow.getCurrentInformationPanel();
+    }
+
+    @Override
+    public String getCurrentStyleSheets() {
+        return mainWindow.getCurrentStyleSheets();
+    }
+
+    @Override
     public void stop() {
         prefs.updateLastUsedGuiSetting(mainWindow.getCurrentGuiSetting());
         mainWindow.hide();
         mainWindow.releaseResources();
-    }
-
-    // TODO: better way of keeping track of theme
-    @Override
-    public void changeTheme() {
-        mainWindow.changeTheme();
     }
 
     private void showFileOperationAlertAndWait(String description, String details, Throwable cause) {
@@ -96,7 +116,7 @@ public class UiManager extends ComponentManager implements Ui {
     private static void showAlertDialogAndWait(Stage owner, AlertType type, String title, String headerText,
                                                String contentText) {
         final Alert alert = new Alert(type);
-        alert.getDialogPane().getStylesheets().add("view/DarkTheme.css");
+        alert.getDialogPane().getStylesheets().add("view/BrightTheme.css");
         alert.initOwner(owner);
         alert.setTitle(title);
         alert.setHeaderText(headerText);
@@ -116,7 +136,7 @@ public class UiManager extends ComponentManager implements Ui {
         System.exit(1);
     }
 
-    //==================== Event Handling Code ===============================================================
+    //============================ Event Handling Code =================================//
 
     @Subscribe
     private void handleDataSavingExceptionEvent(DataSavingExceptionEvent event) {

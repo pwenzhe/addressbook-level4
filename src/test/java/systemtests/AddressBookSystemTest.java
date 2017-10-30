@@ -3,6 +3,7 @@ package systemtests;
 import static guitests.guihandles.WebViewUtil.waitUntilBrowserLoaded;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static seedu.address.ui.GoogleMapBrowserPanel.GOOGLEMAP_SEARCH_URL_PREFIX;
 import static seedu.address.ui.GoogleMapBrowserPanel.GOOGLEMAP_SEARCH_URL_SUFFIX;
 import static seedu.address.ui.InstagramBrowserPanel.DEFAULT_PAGE;
@@ -33,6 +34,7 @@ import guitests.guihandles.PersonDetailsPanelHandle;
 import guitests.guihandles.PersonListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
+import javafx.application.Platform;
 import seedu.address.MainApp;
 import seedu.address.TestApp;
 import seedu.address.commons.core.EventsCenter;
@@ -54,6 +56,8 @@ public abstract class AddressBookSystemTest {
     private static final List<String> COMMAND_BOX_DEFAULT_STYLE = Arrays.asList("text-input", "text-field");
     private static final List<String> COMMAND_BOX_ERROR_STYLE =
             Arrays.asList("text-input", "text-field", CommandBox.ERROR_STYLE_CLASS);
+    private static final String homePanel = "homePanel";
+    private static final String helpPanel = "helpPanel";
 
     private MainWindowHandle mainWindowHandle;
     private TestApp testApp;
@@ -113,6 +117,14 @@ public abstract class AddressBookSystemTest {
         return mainWindowHandle.getResultDisplay();
     }
 
+    public String getCurrentInformationPanel() {
+        return testApp.getCurrentInformationPanel();
+    }
+
+    public String getCurrentStyleSheet() {
+        return testApp.getCurrentStyleSheets();
+    }
+
     /**
      * Executes {@code command} in the application's {@code CommandBox}.
      * Method returns after UI components have been updated.
@@ -126,8 +138,32 @@ public abstract class AddressBookSystemTest {
         mainWindowHandle.getCommandBox().run(command);
 
         waitUntilBrowserLoaded(getInstagramBrowserPanel());
+        waitUntilBrowserLoaded(getGoogleMapBrowserPanel());
     }
 
+    /**
+     * Executes {@code handle} in the application's {@code MainMenu}
+     * Method returns after UI components have been updated.
+     */
+    protected void executeHandle(String handle) {
+        rememberStates();
+
+        // Injects a fixed clock before executing a command so that the time stamp shown in the status bar
+        // after each command is predictable and also different from the previous command.
+        clockRule.setInjectedClockToCurrentTime();
+
+        if (homePanel.equals(handle)) {
+            Platform.runLater(() -> testApp.getMainWindow().handleHome());
+        } else if (helpPanel.equals(handle)) {
+            Platform.runLater(() -> testApp.getMainWindow().handleHelp());
+        }
+
+        try {
+            Thread.sleep(250);
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
+    }
     /**
      * Displays all persons in the address book.
      */
@@ -245,6 +281,27 @@ public abstract class AddressBookSystemTest {
     }
 
     /**
+     * Asserts that the information panel shows correct panel.
+     */
+    protected void assertInformationPanelShowsCorrectPanel(String expectedInformationPanelId) {
+        assertEquals(expectedInformationPanelId, getCurrentInformationPanel());
+    }
+
+    /**
+     * Asserts that the theme before changing is not the same as the expected theme.
+      */
+    protected void assertThemeBeforeChangingNotSame(String expectedThemeAllPaths) {
+        assertNotEquals(expectedThemeAllPaths, getCurrentStyleSheet());
+    }
+
+    /**
+     * Asserts that the theme after changing is the same as the expected theme.
+      */
+    protected void assertThemeAfterChangingSame(String expectedThemeAllPaths) {
+        assertEquals(expectedThemeAllPaths, getCurrentStyleSheet());
+    }
+
+    /**
      * Asserts that the entire status bar remains the same.
      */
     protected void assertStatusBarUnchanged() {
@@ -276,6 +333,8 @@ public abstract class AddressBookSystemTest {
             assertEmptyPersonDetailsPanel(getPersonDetailsPanel());
             assertEquals(MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE),
                     getInstagramBrowserPanel().getLoadedUrl());
+            assertEquals(MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE),
+                    getGoogleMapBrowserPanel().getLoadedUrl());
             assertEquals("./" + testApp.getStorageSaveLocation(), getStatusBarFooter().getSaveLocation());
             assertEquals(SYNC_STATUS_INITIAL, getStatusBarFooter().getSyncStatus());
         } catch (Exception e) {

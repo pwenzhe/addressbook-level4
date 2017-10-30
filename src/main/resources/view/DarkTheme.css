@@ -203,7 +203,7 @@
 }
 
 .menu-bar .label {
-    -fx-font-size: 14pt;
+    -fx-font-size: 12pt;
     -fx-font-family: "Segoe UI Light";
     -fx-text-fill: white;
     -fx-opacity: 0.9;
@@ -355,4 +355,44 @@
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;
+}
+
+#welcomeHeaderText {
+    -fx-fill: white;
+}
+
+#welcomeContentText {
+    -fx-fill: #D6D6D6;
+}
+
+#homePanel {
+    -fx-background-color: #464646;
+}
+
+#homePanel .label {
+    -fx-background-color: #3e7b91;
+    -fx-background-radius: 10 10 10 10;
+    -fx-font-size: 15pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: white;
+}
+
+#helpPanel {
+    -fx-background-color: #464646;
+}
+
+#helpPanel #header {
+    -fx-font-size: 14pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: white;
+}
+
+#helpPanel .label {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: white;
+}
+
+#bevyAssistant {
+    -fx-fill: white;
 }

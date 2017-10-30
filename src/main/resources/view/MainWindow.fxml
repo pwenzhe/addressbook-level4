@@ -6,7 +6,6 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
@@ -14,7 +13,8 @@
 
   <MenuBar fx:id="menuBar" nodeOrientation="LEFT_TO_RIGHT" VBox.vgrow="NEVER">
     <Menu mnemonicParsing="false" text="Bevy">
-      <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
+         <MenuItem mnemonicParsing="false" onAction="#handleHome" text="Home" />
+      <MenuItem fx:id="exitMenuItem" mnemonicParsing="false" onAction="#handleExit" text="Exit" />
     </Menu>
       <Menu mnemonicParsing="false" text="Statistics">
          <items>
@@ -25,11 +25,6 @@
     <Menu mnemonicParsing="false" text="Help">
       <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
     </Menu>
-      <Menu mnemonicParsing="false" text="About">
-         <items>
-            <MenuItem mnemonicParsing="false" text="Developers" />
-         </items>
-      </Menu>
   </MenuBar>
 
   <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.5" VBox.vgrow="ALWAYS">
@@ -51,18 +46,15 @@
                <Insets bottom="5" left="10" right="10" top="5" />
              </padding>
            </StackPane>
-            <AnchorPane fx:id="personDetailsPlaceholder" />
-            <SplitPane dividerPositions="0.5" prefWidth="200.0">
-               <items>
-                  <StackPane fx:id="instagramBrowserPlaceholder" maxWidth="350.0" minWidth="300.0" prefWidth="300.0" />
-                  <StackPane fx:id="googleMapBrowserPaceholder" minWidth="400.0" prefWidth="400.0" />
-               </items>
-            </SplitPane>
+            <StackPane fx:id="informationPanelPlaceholder" prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+               <padding>
+                  <Insets bottom="10.0" left="2.0" right="10.0" top="5.0" />
+               </padding></StackPane>
          </children>
       </VBox>
   </SplitPane>
 
-  <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
+  <StackPane fx:id="statusbarPlaceholder" />
    <stylesheets>
       <URL value="@Extensions.css" />
       <URL value="@BrightTheme.css" />

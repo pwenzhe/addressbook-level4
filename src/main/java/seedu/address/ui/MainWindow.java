@@ -2,8 +2,6 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
-import com.google.common.eventbus.Subscribe;
-
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
@@ -12,7 +10,6 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -20,9 +17,8 @@ import seedu.address.MainApp;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.ui.ChangeThemeRequestEvent;
+import seedu.address.commons.events.ui.ChangeInformationPanelRequestEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
-import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
@@ -35,8 +31,11 @@ public class MainWindow extends UiPart<Region> {
 
     private static final String ICON = "/images/address_book_32.png";
     private static final String FXML = "MainWindow.fxml";
-    private static final int MIN_HEIGHT = 700;
-    private static final int MIN_WIDTH = 1200;
+    private static final String HOME_PANEL = "HomePanel";
+    private static final String PERSON_INFORMATION_PANEL = "PersonInformationPanel";
+    private static final String HELP_PANEL = "HelpPanel";
+    private static final int MIN_HEIGHT = 800;
+    private static final int MIN_WIDTH = 1500;
 
     private final Logger logger = LogsCenter.getLogger(this.getClass());
 
@@ -44,26 +43,25 @@ public class MainWindow extends UiPart<Region> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonDetailsPanel personDetailsPanel;
-    private InstagramBrowserPanel instagramBrowserPanel;
-    private GoogleMapBrowserPanel googleMapBrowserPanel;
     private PersonListPanel personListPanel;
+    private HomePanel homePanel;
+    private PersonInformationPanel personInformationPanel;
+    private HelpPanel helpPanel;
     private Config config;
     private UserPrefs prefs;
+    private String currentInformationPanel;
 
     @FXML
-    private AnchorPane personDetailsPlaceholder;
+    private StackPane informationPanelPlaceholder;
 
-    @FXML
-    private StackPane instagramBrowserPlaceholder;
-
-    @FXML
-    private StackPane googleMapBrowserPaceholder;
     @FXML
     private StackPane commandBoxPlaceholder;
 
     @FXML
     private MenuItem helpMenuItem;
+
+    @FXML
+    private MenuItem exitMenuItem;
 
     @FXML
     private StackPane personListPanelPlaceholder;
@@ -95,36 +93,18 @@ public class MainWindow extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
-    /**
-     * Changes the stylesheet used by GUI.
-     */
-    public void changeTheme() {
-        String brightThemePath = MainApp.class.getResource(FXML_FILE_FOLDER + "BrightTheme.css").toString();
-        String darkThemePath = MainApp.class.getResource(FXML_FILE_FOLDER + "DarkTheme.css").toString();
-        String extensionsPath = MainApp.class.getResource(FXML_FILE_FOLDER + "Extensions.css").toString();
-
-        String brightThemeAllPaths = "[" + extensionsPath + ", " + brightThemePath + "]";
-
-        if (getRoot().getStylesheets().toString().equals(brightThemeAllPaths)) {
-            getRoot().getStylesheets().remove(brightThemePath);
-            getRoot().getStylesheets().add(darkThemePath);
-        } else {
-            getRoot().getStylesheets().remove(darkThemePath);
-            getRoot().getStylesheets().add(brightThemePath);
-        }
-    }
-
     public Stage getPrimaryStage() {
         return primaryStage;
     }
 
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(exitMenuItem, KeyCombination.valueOf("Esc"));
     }
 
     /**
      * Sets the accelerator of a MenuItem.
-     * @param keyCombination the KeyCombination value of the accelerator
+     * @param keyCombination the KeyCombination value of the accelerator.
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
         menuItem.setAccelerator(keyCombination);
@@ -155,16 +135,7 @@ public class MainWindow extends UiPart<Region> {
     /**
      * Fills up all the placeholders of this window.
      */
-    void fillInnerParts() {
-        personDetailsPanel = new PersonDetailsPanel();
-        personDetailsPlaceholder.getChildren().add(personDetailsPanel.getRoot());
-
-        instagramBrowserPanel = new InstagramBrowserPanel();
-        instagramBrowserPlaceholder.getChildren().add(instagramBrowserPanel.getRoot());
-
-        googleMapBrowserPanel = new GoogleMapBrowserPanel();
-        googleMapBrowserPaceholder.getChildren().add(googleMapBrowserPanel.getRoot());
-
+    public void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
@@ -176,9 +147,59 @@ public class MainWindow extends UiPart<Region> {
 
         CommandBox commandBox = new CommandBox(logic);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        /** At start, Initalise all dynamic information panels for MainWindowHandle
+         * to initalise handles for these panels for testing. */
+        personInformationPanel = new PersonInformationPanel();
+        informationPanelPlaceholder.getChildren().add(personInformationPanel.getRoot());
+
+        helpPanel = new HelpPanel();
+        informationPanelPlaceholder.getChildren().add(helpPanel.getRoot());
+
+        homePanel = new HomePanel(logic.getAddressBook());
+        informationPanelPlaceholder.getChildren().add(homePanel.getRoot());
     }
 
-    void hide() {
+    /** Changes the information panel based on request event. */
+    public void changeInformationPanel(ChangeInformationPanelRequestEvent event) {
+        if (event.getPanelRequestEvent().equals(currentInformationPanel)) {
+            return; // Short circuit if the current information panel is the same as the requested information panel
+        } else {
+            informationPanelPlaceholder.getChildren().removeAll(homePanel.getRoot(), personInformationPanel.getRoot(),
+                    helpPanel.getRoot());
+
+            if (event.getPanelRequestEvent().equals(PERSON_INFORMATION_PANEL)) {
+                informationPanelPlaceholder.getChildren().add(personInformationPanel.getRoot());
+            } else if (event.getPanelRequestEvent().equals((HOME_PANEL))) {
+                informationPanelPlaceholder.getChildren().add(homePanel.getRoot());
+            } else if (event.getPanelRequestEvent().equals((HELP_PANEL))) {
+                informationPanelPlaceholder.getChildren().add(helpPanel.getRoot());
+            }
+        }
+
+        currentInformationPanel = event.getPanelRequestEvent();
+    }
+
+    /**
+     * Changes the stylesheet used by UI when change theme command is executed.
+     */
+    public void changeTheme() {
+        String brightThemePath = MainApp.class.getResource(FXML_FILE_FOLDER + "BrightTheme.css").toString();
+        String darkThemePath = MainApp.class.getResource(FXML_FILE_FOLDER + "DarkTheme.css").toString();
+        String extensionsPath = MainApp.class.getResource(FXML_FILE_FOLDER + "Extensions.css").toString();
+
+        String brightThemeAllPaths = "[" + extensionsPath + ", " + brightThemePath + "]";
+
+        if (getRoot().getStylesheets().toString().equals(brightThemeAllPaths)) {
+            getRoot().getStylesheets().remove(brightThemePath);
+            getRoot().getStylesheets().add(darkThemePath);
+        } else {
+            getRoot().getStylesheets().remove(darkThemePath);
+            getRoot().getStylesheets().add(brightThemePath);
+        }
+    }
+
+    public void hide() {
         primaryStage.hide();
     }
 
@@ -214,18 +235,39 @@ public class MainWindow extends UiPart<Region> {
     /**
      * Returns the current size and the position of the main Window.
      */
-    GuiSettings getCurrentGuiSetting() {
+    public GuiSettings getCurrentGuiSetting() {
         return new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
     }
 
     /**
-     * Opens the help window.
+     * Returns an unmodifiable child of the information panel currently displayed.
+     */
+    public String getCurrentInformationPanel() {
+        return informationPanelPlaceholder.getChildrenUnmodifiable().toString();
+    }
+
+    /**
+     * Returns the current stylesheets.
+     */
+    public String getCurrentStyleSheets() {
+        return getRoot().getStylesheets().toString();
+    }
+
+    /**
+     * Opens the home panel.
+     */
+    @FXML
+    public void handleHome() {
+        changeInformationPanel(new ChangeInformationPanelRequestEvent(HOME_PANEL));
+    }
+
+    /**
+     * Opens the help panel.
      */
     @FXML
     public void handleHelp() {
-        HelpWindow helpWindow = new HelpWindow();
-        helpWindow.show();
+        changeInformationPanel(new ChangeInformationPanelRequestEvent(HELP_PANEL));
     }
 
     void show() {
@@ -236,16 +278,8 @@ public class MainWindow extends UiPart<Region> {
      * Closes the application.
      */
     @FXML
-    private void handleExit() {
+    public void handleExit() {
         raise(new ExitAppRequestEvent());
-    }
-
-    /**
-     * Changes the application theme.
-     */
-    @FXML
-    private void handleChangeTheme() {
-        raise(new ChangeThemeRequestEvent());
     }
 
     public PersonListPanel getPersonListPanel() {
@@ -253,13 +287,6 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void releaseResources() {
-        instagramBrowserPanel.freeResources();
-        googleMapBrowserPanel.freeResources();
-    }
-
-    @Subscribe
-    private void handleShowHelpEvent(ShowHelpRequestEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        handleHelp();
+        personInformationPanel.releaseResources();
     }
 }

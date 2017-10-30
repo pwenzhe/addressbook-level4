@@ -14,7 +14,7 @@ import seedu.address.model.person.ReadOnlyPerson;
 
 
 /**
- * An UI component that displays information of a {@code Person} upon selection.
+ * An UI component that displays details of a {@code Person} upon selection.
  */
 public class PersonDetailsPanel extends UiPart<Region> {
     private static final String FXML = "PersonDetailsPanel.fxml";
