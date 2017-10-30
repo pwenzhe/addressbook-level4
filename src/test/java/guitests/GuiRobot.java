@@ -32,9 +32,9 @@ public class GuiRobot extends FxRobot {
      * unnecessary delays.
      */
     public void pauseForHuman() {
-        /*if (isHeadlessMode) {
+        if (isHeadlessMode) {
             return;
-        }*/
+        }
 
         sleep(PAUSE_FOR_HUMAN_DELAY_MILLISECONDS);
     }
