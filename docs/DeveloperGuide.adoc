@@ -1,4 +1,4 @@
-= Bevy - Developer Guide `v1.3`
+= Bevy - Developer Guide `v1.4`
 :toc:
 :toc-title:
 :toc-placement: preamble
@@ -16,7 +16,7 @@ By: `Team Bevy`      Since: `Aug 2017`      Licence: `MIT`
 
 == Introduction
 
-Bevy is an application that stores and displays user's friends.
+Bevy is an application that stores and displays the user's friends.
 It is a one stop location for users to view more information about their friends. +
 
 This developer guide provides important technical information and explanations to help you get started as a Bevy contributor.
@@ -127,6 +127,7 @@ The `.pptx` files used to create diagrams in this document can be found in the l
 `Main` has only one class called link:{repoURL}/src/main/java/seedu/address/MainApp.java[`MainApp`]. It is responsible for,
 
 * App launch: Initializes the components and connects them in the correct sequence.
+* Changing theme: Changes the active theme of the app.
 * Shut down: Shuts down the components and invokes cleanup method where necessary.
 
 link:#common-classes[*`Commons`*] represents a collection of classes used by multiple other components. Two of those classes play important roles at the architecture level.
@@ -179,7 +180,7 @@ _Figure 2.2.1 : Structure of the UI Component_
 
 *API* : link:{repoURL}/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `InstagramBrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
@@ -409,7 +410,7 @@ image::SortSequenceDiagram.png[width="300"]
 _Figure 4.4.1: Sorting Sequence Diagram_
 
 . Following the flow of the diagram, when a person is added, the addPerson method will be called in `AddressBook`.
-. `UniquePersonList` will sort the added person by comparing the names in the current list and insert the name at the correct slot.
+. `UniquePersonList` will sort the added person by comparing the favourite status and then the names in the current list and insert the persons at the correct slot.
 . The sorted contact list will then be returned.
 
 ==== Design Consideration
