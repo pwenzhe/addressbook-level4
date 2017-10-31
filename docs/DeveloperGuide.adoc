@@ -426,10 +426,10 @@ _Figure 4.4.1: Sorting Sequence Diagram_
 === Birthday
 
 The birthday feature allows user to store their friends' birthdays.
-There are restrictions set to ensure that the date entered is valid.
-The format of the entered is not restricted to a single format.
-The birthday class will format the birthday entered to ensure that the birthday saved in the contact list is standardised.
-This will make it easier for user to view and also easier to execute find command for month.
+Restrictions are set to ensure that the date entered is valid.
+There are a few format that the user can enter the date.
+The birthday class will reformat the birthday entered to ensure that the birthday saved in the contact list is standardised.
+This will make it easier for user to view and also assist in executing find command for month.
 
 After adding the birthday, user can search for a particular month and the list will show the people who were born in the same month, sorted according to the day.
 
@@ -438,7 +438,7 @@ The following sequence diagram shows how find works when searching for a month.
 image::FindMonthSequenceDiagram.png[width="800"]
 _Figure 4.4.1: Find Month Sequence Diagram_
 
-. Following the flow of the diagram, the command `find m/Jan will be sent to the `LogicManager`.
+. Following the flow of the diagram, the command `find m/Jan` will be sent to the `LogicManager`.
 . `AddressBookParser` will parse the `find` command and will call the `FindCommandParser`.
 . `FindCommandParser` will parse the remaining command, in this case `m/Jan` and call `FindCommand`.
 . `FindCommand` will execute the functions in the class and call `PersonContainsKeywordsPredicate`.
@@ -455,15 +455,39 @@ _Figure 4.4.1: Find Month Sequence Diagram_
 **Pros:** Makes the code simpler and more direct as there is a command reserved for each of the command. +
 **Cons:** This would make it more complicated for the user to use as there is a different command for the different search. +
 
+=== Birthday Statistics
+
+_Figure 4.6.1: Birthday Statistics_
+
+The birthday statistics will show user a table of the number of people having their birthday in each month.
+
+image::BirthdayStatisticsPanelClassDiagram.png[width="800"]
+_Figure 4.6.2: Birthday Statistics Panel Class Diagram_
+
+As shown from the class diagram, the birthday statistics class diagram extends the UiParts.
+The birthday statistics panel will display the information when user enter the command word, `statistics`.
+
+The following sequence diagram shows how the birthday statistics table is called.
+
+image::BirthdayStatisticsSequenceDiagram.png[width="800"]
+_Figure 4.6.2: Birthday Statistics Sequence Diagram_
+
+. Following the flow of the diagram, the command `statistics` will be sent to the `LogicManager`.
+. `AddressBookParser` will parse the `statistics` command and will call the `BirthdyaStatisticsCommand`.
+. This command will trigger the `HandleBirthdayStatistics` method within the `MainWindow` and `BirthdayStatisticsPanel`.
+. `MainWindow` will wait for `BirthdayStatisticsPanel` to create the table through the method `setPersonData` and after that,
+it will raise a `handleAddressBookChangedEvent` method and will return by raising the `ChangeInformationPanelRequestEvent` to `MainWindow`.
+. `MainWindow` will show the table after the end of execution.
+
 === Instagram/Google Map Browser Panel
 
 image::BrowserPanels.png[width="800"]
-_Figure 4.6.1: Browser Panels UI_
+_Figure 4.7.1: Browser Panels UI_
 
 The browser panels display visual information about the selected person.
 
 image::BrowserPanelsClassDiagram.png[width="400"]
-_Figure 4.6.2: Browser Panels Class Diagram_
+_Figure 4.7.2: Browser Panels Class Diagram_
 
 As shown from the class diagram, both browser panels extends the UiParts. The browser panels are responsible for displaying information on the selected
 person based on the person details.
@@ -471,7 +495,7 @@ person based on the person details.
 The following sequence diagram shows how the browser operation works, using InstagramBrowserPanel as an exmaple:
 
 image::BrowserPanelsSequenceDiagram.png[width="400"]
-_Figure 4.6.3: Browser Panels Sequence Diagram_
+_Figure 4.7.3: Browser Panels Sequence Diagram_
 
 As shown from the sequence diagram, when a user selects a new person, the InstagramBrowserPanel handles the new selection event and display the selected
 person's instagram based on the name in the details. For example, if the selected person's name is `Alex Yeoh`, InstagramBrowserPanel will use `AlexYeoh` as part of the URL parameter to display the person's
@@ -515,8 +539,6 @@ At `DeleteCommandParser`, the index ranges will be parsed into a list of `IndexR
 object contains the start and end index of each range. This list will then be converted into a `HashSet` of indexes, which
 will be used to construct a `DeleteCommand`. `HashSet` prevents the duplicates of indexes. Upon executing the `DeleteCommand`,
 a sub list of person to delete will be produced to delete the information in `Model`.
-
-
 
 == Documentation
 
@@ -1235,10 +1257,10 @@ Author: ...
 
 Pros:
 
-* ...
-* ...
+* Shows detailed information on birthday.
+* Command alias to allow ease of use.
 
 Cons:
 
-* ...
+* Commands are restricted to CLI. It would be better if there are more GUI commands.
 * ...
