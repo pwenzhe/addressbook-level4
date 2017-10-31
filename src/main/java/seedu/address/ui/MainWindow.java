@@ -32,6 +32,7 @@ public class MainWindow extends UiPart<Region> {
     private static final String ICON = "/images/address_book_32.png";
     private static final String FXML = "MainWindow.fxml";
     private static final String HOME_PANEL = "HomePanel";
+    private static final String BIRTHDAY_STATISTICS_PANEL = "BirthdayStatisticsPanel";
     private static final String PERSON_INFORMATION_PANEL = "PersonInformationPanel";
     private static final String HELP_PANEL = "HelpPanel";
     private static final int MIN_HEIGHT = 800;
@@ -47,6 +48,7 @@ public class MainWindow extends UiPart<Region> {
     private HomePanel homePanel;
     private PersonInformationPanel personInformationPanel;
     private HelpPanel helpPanel;
+    private BirthdayStatisticsPanel birthdayStatisticsPanel;
     private Config config;
     private UserPrefs prefs;
     private String currentInformationPanel;
@@ -156,6 +158,9 @@ public class MainWindow extends UiPart<Region> {
         helpPanel = new HelpPanel();
         informationPanelPlaceholder.getChildren().add(helpPanel.getRoot());
 
+        birthdayStatisticsPanel = new BirthdayStatisticsPanel(logic.getAddressBook());
+        informationPanelPlaceholder.getChildren().add(birthdayStatisticsPanel.getRoot());
+
         homePanel = new HomePanel(logic.getAddressBook());
         informationPanelPlaceholder.getChildren().add(homePanel.getRoot());
     }
@@ -166,7 +171,7 @@ public class MainWindow extends UiPart<Region> {
             return; // Short circuit if the current information panel is the same as the requested information panel
         } else {
             informationPanelPlaceholder.getChildren().removeAll(homePanel.getRoot(), personInformationPanel.getRoot(),
-                    helpPanel.getRoot());
+                    helpPanel.getRoot(), birthdayStatisticsPanel.getRoot());
 
             if (event.getPanelRequestEvent().equals(PERSON_INFORMATION_PANEL)) {
                 informationPanelPlaceholder.getChildren().add(personInformationPanel.getRoot());
@@ -174,6 +179,8 @@ public class MainWindow extends UiPart<Region> {
                 informationPanelPlaceholder.getChildren().add(homePanel.getRoot());
             } else if (event.getPanelRequestEvent().equals((HELP_PANEL))) {
                 informationPanelPlaceholder.getChildren().add(helpPanel.getRoot());
+            } else if (event.getPanelRequestEvent().equals((BIRTHDAY_STATISTICS_PANEL))) {
+                informationPanelPlaceholder.getChildren().add(birthdayStatisticsPanel.getRoot());
             }
         }
 
@@ -260,6 +267,14 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     public void handleHome() {
         changeInformationPanel(new ChangeInformationPanelRequestEvent(HOME_PANEL));
+    }
+
+    /**
+     * Opens the birthday statistics panel.
+     */
+    @FXML
+    public void handleBirthdayStatistics() {
+        changeInformationPanel(new ChangeInformationPanelRequestEvent(BIRTHDAY_STATISTICS_PANEL));
     }
 
     /**
