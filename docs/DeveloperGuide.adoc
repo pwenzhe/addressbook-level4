@@ -16,12 +16,11 @@ By: `Team Bevy`      Since: `Aug 2017`      Licence: `MIT`
 
 == Introduction
 
-Bevy is a database that helps to store user's contact list.
-It is a one stop location for user to find out more detailed information about their friends.
-This developer guide provides information that will help you get started as a Bevy contributor.
-It will be useful even if you are already an experienced contributor.
-It contains a general guideline that you will have to take note of such as the documentation required.
-There is a detailed explanation on the design of the architecture for clear understanding.
+Bevy is an application that stores and displays user's friends.
+It is a one stop location for users to view more information about their friends. +
+
+This developer guide provides important technical information and explanations to help you get started as a Bevy contributor.
+It will be useful even if you are an experienced developer.
 
 == Setting up
 
@@ -195,10 +194,10 @@ The `UI` component,
 The logic component executes the commands. This is the component that parses and filter the information required for Model.
 
 image::LogicClassDiagram.png[width="800"]
-_Figure 2.3.1 : Structure of the Logic Component_
+_Figure 3.3.1 : Structure of the Logic Component_
 
 image::LogicCommandClassDiagram.png[width="800"]
-_Figure 2.3.2 : Structure of Commands in the Logic Component. This diagram shows finer details concerning `XYZCommand` and `Command` in Figure 2.3.1_
+_Figure 3.3.2 : Structure of Commands in the Logic Component. This diagram shows finer details concerning `XYZCommand` and `Command` in Figure 2.3.1_
 
 *API* :
 link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
@@ -212,8 +211,8 @@ link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
 
-image::DeletePersonSdForLogic.png[width="800"]
-_Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
+image::DeletePersons1SequenceDiagram.png[width="800"]
+_Figure 3.3.4 : Interactions Inside the Logic Component for the `delete 1` Command_
 
 .  Following the flow of the diagram, the command `delete 1` will be sent to `LogicManager`.
 .  `AddressBookParser` will parse the `delete` command and will call the `DeleteCommandParser`.
@@ -417,7 +416,7 @@ _Figure 4.4.1: Sorting Sequence Diagram_
 
 **Aspect:** Type of implementation to sort contact list. +
 **Alternative 1 (current choice):** Sort the list while new persons are added. +
-**Pros:**More convenient for users as the list will be sorted once a new person is added. +
+**Pros:** More convenient for users as the list will be sorted once a new person is added. +
 **Cons:** List will only be sorted when new person is added. May cause limitation if there are commands that will mess up the order. +
 **Alternative 2:** Creating a separate sort command to sort list. +
 **Pros:** A command that will always allow the list to be sorted in order. +
@@ -429,9 +428,9 @@ The birthday feature allows user to store their friends' birthdays.
 Restrictions are set to ensure that the date entered is valid.
 There are a few format that the user can enter the date.
 The birthday class will reformat the birthday entered to ensure that the birthday saved in the contact list is standardised.
-This will make it easier for user to view and also assist in executing find command for month.
+This will make it easier for users to view and also assist in executing find command for month.
 
-After adding the birthday, user can search for a particular month and the list will show the people who were born in the same month, sorted according to the day.
+After adding the birthday, users can search for a particular month and the list will show the people who were born in the same month, sorted according to the day.
 
 The following sequence diagram shows how find works when searching for a month.
 
@@ -439,9 +438,9 @@ image::FindMonthSequenceDiagram.png[width="800"]
 _Figure 4.4.1: Find Month Sequence Diagram_
 
 . Following the flow of the diagram, the command `find m/Jan` will be sent to the `LogicManager`.
-. `AddressBookParser` will parse the `find` command and will call the `FindCommandParser`.
+. `AddressBookParser` will parse the `find` command and call the `FindCommandParser`.
 . `FindCommandParser` will parse the remaining command, in this case `m/Jan` and call `FindCommand`.
-. `FindCommand` will execute the functions in the class and call `PersonContainsKeywordsPredicate`.
+. `FindCommand` will execute and call `PersonContainsKeywordsPredicate`.
 . In `PersonContainsKeywordsPredicate`, this is where the list is filtered to find the contacts who has their birthday in Jan.
 . The list will then be returned to `LogicManager`.
 
@@ -494,15 +493,15 @@ person based on the person details.
 
 The following sequence diagram shows how the browser operation works, using InstagramBrowserPanel as an exmaple:
 
-image::BrowserPanelsSequenceDiagram.png[width="400"]
-_Figure 4.7.3: Browser Panels Sequence Diagram_
+image::InstagramPanelSequenceDiagram.png[width="400"]
+_Figure 4.7.3: InstagramBrowserPanel Sequence Diagram_
 
 As shown from the sequence diagram, when a user selects a new person, the InstagramBrowserPanel handles the new selection event and display the selected
 person's instagram based on the name in the details. For example, if the selected person's name is `Alex Yeoh`, InstagramBrowserPanel will use `AlexYeoh` as part of the URL parameter to display the person's
 instagram page.
 
-Similarly, the GoogleMapBrowserPanel will display the map of the selected person's home location using either the postal code or the address in the person details. The UiParts is responsible for constructing and displaying
-respective scene. For example, if the postal code is `150159`, GoogleMapBrowserPanel will use this exact value to display the person's location. If the postal code is not available, address will be used. For example,
+Similarly, the GoogleMapBrowserPanel will display the map of the selected person's home location using either the postal code or the address in the person details.
+For example, if the postal code is `150159`, GoogleMapBrowserPanel will use this value to display the person's location. If the postal code is not available, address will be used. For example,
 if the address is `ABC 123 Street`, GoogleMapBrowserPanel will use `ABC+123+Street` as part of the URL parameter to display
 the person's location.
 
@@ -530,15 +529,46 @@ is fully managed by the browser and Google Map page itself. +
 **Pros:** Integrates well, as we can simplify the experience for users. +
 **Cons:** Difficult to implement, as there is a steep learning curve to master Google Map API. +
 
-=== Delete Multiple Persons Mechanism
+=== Delete Multiple Persons
 
-The Delete mechanism is able to support deleting multiple persons. Refer to diagram 2.3.1 for the basic implementation of the
-Delete mechanism.
+The Delete mechanism has been extended to support deleting multiple persons.
 
-At `DeleteCommandParser`, the index ranges will be parsed into a list of `IndexRange` class using the `ParserUtil`, where each `IndexRange`
-object contains the start and end index of each range. This list will then be converted into a `HashSet` of indexes, which
-will be used to construct a `DeleteCommand`. `HashSet` prevents the duplicates of indexes. Upon executing the `DeleteCommand`,
-a sub list of person to delete will be produced to delete the information in `Model`.
+The following sequence diagram shows how the delete operation works:
+
+image::DeletePersons1-3SequenceDiagram.png[width="800"]
+_Figure 4.7.1 : Interactions Inside the Logic Component for the `delete 1-3` Command_
+
+Below is a detailed explanation of the extension.
+
+. Following the flow of the diagram, the command `delete 1-3` will be sent to the `LogicManager`.
+. `AddressBookParser` will parse the `delete` command and call the `DeleteCommandParser`.
+. `DeleteCommandParser` will parse the index ranges into a list of `IndexRange` class using the `ParserUtil`, where each `IndexRange`
+object contains the start and end index of each range.
+. This list will then be converted into a `HashSet` of indexes, which
+will be used to construct a `DeleteCommand`. `HashSet` prevents the duplicates of indexes.
+. `DeleteCommand` will execute and a sub list of person to delete will be produced to delete the person information in `Model`.
+. `DeleteCommand` will generate the result and return it.
+
+**Aspect:** Type of implementation for storing index range +
+**Alternative 1 (current choice):** Use a `IndexRange` class to store the start and end index of index range. +
+**Pros:** Easy to implement, a list of `IndexRange` can be constructed to store each index range +
+**Cons:** Some index may not be a range, therefore does not need the `IndexRange` class +
+**Alternative 2:** Directly parse the index ranges into a list of integers +
+**Pros:** Index that are not a range can be directly passed into this list. +
+**Cons:** Difficult to implement, duplicates of index will occur and requires iterating through the list and adding into a `HashSet`
+ to remove duplicates +
+
+
+=== Dynamic Information Panel
+The information panel has the capability of changing panel depending on the request event. home, select and help command are the current commands
+that will raise `ChangeInformationPanelRequestEvent()`.
+
+
+Below are the respective commands and their requested panel.
+
+. *Home Command*: Request home panel.
+. *Select Command*: Request selected person's information panel.
+. *Help Command*: Request help panel.
 
 == Documentation
 
@@ -939,7 +969,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |20 |`* *` |user |be able to sync my AddressBook with social media |import persons’ details
 
-|21 |`* *` |user |view selected person’s social media |view more information
+|21 |`* *` |user |view selected person’s social media |find out more about what is going on in that person's life
 
 |22 |`* *` |user |see invalid commands with a different colour |so that I can identify them easily
 
@@ -955,7 +985,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |28 |`* *` |user |hide link:#private-contact-detail[private contact details] by default |minimize chance of someone else seeing them by accident
 
-|29 |`*` |user |open one help UI at any time |limit the number of windows opened
+|29 |`*` |user |open one help window at any time |I do not have the problem of many opened windows
 
 |30 |`*` |user |add new persons using first name and last name |easily differentiate a name
 
@@ -967,7 +997,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |34 |`*` |user |be able to add and view money lent to my friends |keep track of money lending
 
-|35 |`*` |user |filter and sort my friends based on how much money is on loan |better see the amount of money involved in lending
+|35 |`*` |user |filter and sort my friends based on how much money is on loan |see the amount of money loaned to each person in decreasing order
 |=======================================================================
 [appendix]
 == Use Cases
@@ -1223,10 +1253,9 @@ Use case resumes at step 2.
 .  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 .  A user should be able to fully understand and use the AddressBook by following the User Guide and Help UI.
-.  The GUI should be easily readable without straining the user’s eyes.
+.  The GUI should be easily readable.
 .  It is open source.
 .  It is completely free for use.
-.  A user should find the AddressBook easy to use and intuitive.
 .  Should be able to function properly with and without an Internet connection.
 
 {More to be added}
@@ -1251,16 +1280,22 @@ A contact detail that is not meant to be shared with others
 [appendix]
 == Product Survey
 
-*Product Name*
+*contactzilla*
 
-Author: ...
+Author: contactzilla
 
 Pros:
 
+* Offers many integration features
+* Unlimited address books
+* Helps to remove duplicates
 * Shows detailed information on birthday.
 * Command alias to allow ease of use.
 
 Cons:
 
+* Expansive, cost $5 per month
+* Complicated user interface and features
 * Commands are restricted to CLI. It would be better if there are more GUI commands.
-* ...
+* No feature to view person's social media directly
+
