@@ -77,12 +77,12 @@ IntelliJ's default style is mostly compliant with ours but it uses a different i
 * For `Class count to use import with '\*'` and `Names count to use static import with '*'`:
 Set to `999` to prevent IntelliJ from contracting the import statements.
 * For `Import Layout`, follow this order:
-** Import static all other imports
-** Import java.\*
-** Import javax.*
-** Import org.\*
-** Import com.*
-** Import all other imports
+** import static all other imports
+** import java.\*
+** import javax.*
+** import org.\*
+** import com.*
+** import all other imports
 ** Add a `<blank line>` between each import.
 
 Optionally, you can follow the <<UsingCheckstyle#, UsingCheckstyle.adoc>> document
