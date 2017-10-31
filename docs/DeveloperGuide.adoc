@@ -425,10 +425,10 @@ _Figure 4.4.1: Sorting Sequence Diagram_
 === Birthday
 
 The birthday feature allows user to store their friends' birthdays.
-There are restrictions set to ensure that the date entered is valid.
-The format of the entered is not restricted to a single format.
-The birthday class will format the birthday entered to ensure that the birthday saved in the contact list is standardised.
-This will make it easier for users to view and also easier to execute find command for month.
+Restrictions are set to ensure that the date entered is valid.
+There are a few format that the user can enter the date.
+The birthday class will reformat the birthday entered to ensure that the birthday saved in the contact list is standardised.
+This will make it easier for users to view and also assist in executing find command for month.
 
 After adding the birthday, users can search for a particular month and the list will show the people who were born in the same month, sorted according to the day.
 
@@ -454,15 +454,39 @@ _Figure 4.4.1: Find Month Sequence Diagram_
 **Pros:** Makes the code simpler and more direct as there is a command reserved for each of the command. +
 **Cons:** This would make it more complicated for the user to use as there is a different command for the different search. +
 
+=== Birthday Statistics
+
+_Figure 4.6.1: Birthday Statistics_
+
+The birthday statistics will show user a table of the number of people having their birthday in each month.
+
+image::BirthdayStatisticsPanelClassDiagram.png[width="800"]
+_Figure 4.6.2: Birthday Statistics Panel Class Diagram_
+
+As shown from the class diagram, the birthday statistics class diagram extends the UiParts.
+The birthday statistics panel will display the information when user enter the command word, `statistics`.
+
+The following sequence diagram shows how the birthday statistics table is called.
+
+image::BirthdayStatisticsSequenceDiagram.png[width="800"]
+_Figure 4.6.2: Birthday Statistics Sequence Diagram_
+
+. Following the flow of the diagram, the command `statistics` will be sent to the `LogicManager`.
+. `AddressBookParser` will parse the `statistics` command and will call the `BirthdyaStatisticsCommand`.
+. This command will trigger the `HandleBirthdayStatistics` method within the `MainWindow` and `BirthdayStatisticsPanel`.
+. `MainWindow` will wait for `BirthdayStatisticsPanel` to create the table through the method `setPersonData` and after that,
+it will raise a `handleAddressBookChangedEvent` method and will return by raising the `ChangeInformationPanelRequestEvent` to `MainWindow`.
+. `MainWindow` will show the table after the end of execution.
+
 === Instagram/Google Map Browser Panel
 
 image::BrowserPanels.png[width="800"]
-_Figure 4.6.1: Browser Panels UI_
+_Figure 4.7.1: Browser Panels UI_
 
 The browser panels display visual information about the selected person.
 
 image::BrowserPanelsClassDiagram.png[width="400"]
-_Figure 4.6.2: Browser Panels Class Diagram_
+_Figure 4.7.2: Browser Panels Class Diagram_
 
 As shown from the class diagram, both browser panels extends the UiParts. The browser panels are responsible for displaying information on the selected
 person based on the person details.
@@ -470,7 +494,7 @@ person based on the person details.
 The following sequence diagram shows how the browser operation works, using InstagramBrowserPanel as an exmaple:
 
 image::InstagramPanelSequenceDiagram.png[width="400"]
-_Figure 4.6.3: InstagramBrowserPanel Sequence Diagram_
+_Figure 4.7.3: InstagramBrowserPanel Sequence Diagram_
 
 As shown from the sequence diagram, when a user selects a new person, the InstagramBrowserPanel handles the new selection event and display the selected
 person's instagram based on the name in the details. For example, if the selected person's name is `Alex Yeoh`, InstagramBrowserPanel will use `AlexYeoh` as part of the URL parameter to display the person's
@@ -538,6 +562,7 @@ will be used to construct a `DeleteCommand`. `HashSet` prevents the duplicates o
 === Dynamic Information Panel
 The information panel has the capability of changing panel depending on the request event. home, select and help command are the current commands
 that will raise `ChangeInformationPanelRequestEvent()`.
+
 
 Below are the respective commands and their requested panel.
 
@@ -1264,9 +1289,13 @@ Pros:
 * Offers many integration features
 * Unlimited address books
 * Helps to remove duplicates
+* Shows detailed information on birthday.
+* Command alias to allow ease of use.
 
 Cons:
 
 * Expansive, cost $5 per month
 * Complicated user interface and features
+* Commands are restricted to CLI. It would be better if there are more GUI commands.
 * No feature to view person's social media directly
+
