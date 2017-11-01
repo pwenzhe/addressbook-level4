@@ -58,6 +58,9 @@ public class MainWindow extends UiPart<Region> {
     private StackPane commandBoxPlaceholder;
 
     @FXML
+    private MenuItem homeMenuItem;
+
+    @FXML
     private MenuItem helpMenuItem;
 
     @FXML
@@ -98,7 +101,8 @@ public class MainWindow extends UiPart<Region> {
     }
 
     private void setAccelerators() {
-        setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(homeMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(helpMenuItem, KeyCombination.valueOf("F2"));
         setAccelerator(exitMenuItem, KeyCombination.valueOf("Esc"));
     }
 
