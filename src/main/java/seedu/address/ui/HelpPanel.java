@@ -2,8 +2,9 @@ package seedu.address.ui;
 
 import javafx.scene.layout.Region;
 
+// @@author johnweikangong
 /**
- * The Help Panel of the App.
+ * The help panel of the app.
  */
 public class HelpPanel extends UiPart<Region> {
 

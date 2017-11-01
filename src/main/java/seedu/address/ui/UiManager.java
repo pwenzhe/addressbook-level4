@@ -64,6 +64,7 @@ public class UiManager extends ComponentManager implements Ui {
         }
     }
 
+    // @@author johnweikangong
     @Override
     public void changeInformationPanel(ChangeInformationPanelRequestEvent event) {
         mainWindow.changeInformationPanel(event);
@@ -73,6 +74,7 @@ public class UiManager extends ComponentManager implements Ui {
     public void changeTheme() {
         mainWindow.changeTheme();
     }
+    // @@author
 
     @Override
     public MainWindow getMainWindow() {

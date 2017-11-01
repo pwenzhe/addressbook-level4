@@ -363,6 +363,7 @@
     -fx-font-size: 11;
 }
 
+/* @@author johnweikangong */
 #welcomeHeaderText {
     -fx-fill: black;
 }

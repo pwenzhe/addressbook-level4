@@ -15,8 +15,9 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.model.person.ReadOnlyPerson;
 
+// @@author johnweikangong
 /**
- * The Google Map Browser Panel of the App.
+ * The google map browser panel of the app.
  */
 public class GoogleMapBrowserPanel extends UiPart<Region> {
 

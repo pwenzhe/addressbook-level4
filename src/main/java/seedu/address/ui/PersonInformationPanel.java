@@ -5,8 +5,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 
+// @@author johnweikangong
 /**
- * An UI component that displays information of a {@code Person} upon selection.
+ * An UI component that displays information - details, Instagram and
+ * google map of a {@code Person} upon selection.
  */
 public class PersonInformationPanel extends UiPart<Region> {
     private static final String FXML = "PersonInformationPanel.fxml";
