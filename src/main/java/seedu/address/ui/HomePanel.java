@@ -11,8 +11,9 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.model.ReadOnlyAddressBook;
 
+// @@author johnweikangong
 /**
- * The home panel of the App.
+ * The home panel of the app.
  */
 public class HomePanel extends UiPart<Region> {
 

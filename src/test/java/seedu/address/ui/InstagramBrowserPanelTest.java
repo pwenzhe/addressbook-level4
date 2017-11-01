@@ -17,6 +17,7 @@ import guitests.guihandles.InstagramBrowserPanelHandle;
 import seedu.address.MainApp;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 
+// @@author johnweikangong
 public class InstagramBrowserPanelTest extends GuiUnitTest {
     private PersonPanelSelectionChangedEvent selectionChangedEventStub;
 

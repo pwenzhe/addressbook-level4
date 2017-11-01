@@ -4,7 +4,7 @@ import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.ui.ChangeThemeRequestEvent;
 
 /**
- * Changes theme of UI.
+ * Changes theme of the app.
  */
 public class ThemeCommand extends Command {
 

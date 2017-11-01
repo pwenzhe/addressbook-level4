@@ -10,6 +10,7 @@ import org.junit.Test;
 import seedu.address.commons.events.ui.ChangeInformationPanelRequestEvent;
 import seedu.address.ui.testutil.EventsCollectorRule;
 
+// @@author johnweikangong
 public class HomeCommandTest {
     @Rule
     public final EventsCollectorRule eventsCollectorRule = new EventsCollectorRule();

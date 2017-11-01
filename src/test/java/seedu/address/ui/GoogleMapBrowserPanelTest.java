@@ -18,6 +18,7 @@ import guitests.guihandles.GoogleMapBrowserPanelHandle;
 import seedu.address.MainApp;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 
+// @@author johnweikangong
 public class GoogleMapBrowserPanelTest extends GuiUnitTest {
     private PersonPanelSelectionChangedEvent selectionChangedEventStub;
 
