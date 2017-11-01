@@ -1,4 +1,4 @@
-= Bevy - Developer Guide `v1.3`
+= Bevy - Developer Guide `v1.4`
 :toc:
 :toc-title:
 :toc-placement: preamble
@@ -16,7 +16,7 @@ By: `Team Bevy`      Since: `Aug 2017`      Licence: `MIT`
 
 == Introduction
 
-Bevy is an application that stores and displays user's friends.
+Bevy is an application that stores and displays the user's friends.
 It is a one stop location for users to view more information about their friends. +
 
 This developer guide provides important technical information and explanations to help you get started as a Bevy contributor.
@@ -127,6 +127,7 @@ The `.pptx` files used to create diagrams in this document can be found in the l
 `Main` has only one class called link:{repoURL}/src/main/java/seedu/address/MainApp.java[`MainApp`]. It is responsible for,
 
 * App launch: Initializes the components and connects them in the correct sequence.
+* Changing theme: Changes the active theme of the app.
 * Shut down: Shuts down the components and invokes cleanup method where necessary.
 
 link:#common-classes[*`Commons`*] represents a collection of classes used by multiple other components. Two of those classes play important roles at the architecture level.
@@ -179,7 +180,7 @@ _Figure 2.2.1 : Structure of the UI Component_
 
 *API* : link:{repoURL}/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `InstagramBrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
@@ -409,7 +410,7 @@ image::SortSequenceDiagram.png[width="300"]
 _Figure 4.4.1: Sorting Sequence Diagram_
 
 . Following the flow of the diagram, when a person is added, the addPerson method will be called in `AddressBook`.
-. `UniquePersonList` will sort the added person by comparing the names in the current list and insert the name at the correct slot.
+. `UniquePersonList` will sort the added person by comparing the favourite status and then the names in the current list and insert the persons at the correct slot.
 . The sorted contact list will then be returned.
 
 ==== Design Consideration
@@ -425,10 +426,10 @@ _Figure 4.4.1: Sorting Sequence Diagram_
 === Birthday
 
 The birthday feature allows user to store their friends' birthdays.
-There are restrictions set to ensure that the date entered is valid.
-The format of the entered is not restricted to a single format.
-The birthday class will format the birthday entered to ensure that the birthday saved in the contact list is standardised.
-This will make it easier for users to view and also easier to execute find command for month.
+Restrictions are set to ensure that the date entered is valid.
+There are a few format that the user can enter the date.
+The birthday class will reformat the birthday entered to ensure that the birthday saved in the contact list is standardised.
+This will make it easier for users to view and also assist in executing find command for month.
 
 After adding the birthday, users can search for a particular month and the list will show the people who were born in the same month, sorted according to the day.
 
@@ -454,15 +455,39 @@ _Figure 4.4.1: Find Month Sequence Diagram_
 **Pros:** Makes the code simpler and more direct as there is a command reserved for each of the command. +
 **Cons:** This would make it more complicated for the user to use as there is a different command for the different search. +
 
+=== Birthday Statistics
+
+_Figure 4.6.1: Birthday Statistics_
+
+The birthday statistics will show user a table of the number of people having their birthday in each month.
+
+image::BirthdayStatisticsPanelClassDiagram.png[width="800"]
+_Figure 4.6.2: Birthday Statistics Panel Class Diagram_
+
+As shown from the class diagram, the birthday statistics class diagram extends the UiParts.
+The birthday statistics panel will display the information when user enter the command word, `statistics`.
+
+The following sequence diagram shows how the birthday statistics table is called.
+
+image::BirthdayStatisticsSequenceDiagram.png[width="800"]
+_Figure 4.6.2: Birthday Statistics Sequence Diagram_
+
+. Following the flow of the diagram, the command `statistics` will be sent to the `LogicManager`.
+. `AddressBookParser` will parse the `statistics` command and will call the `BirthdyaStatisticsCommand`.
+. This command will trigger the `HandleBirthdayStatistics` method within the `MainWindow` and `BirthdayStatisticsPanel`.
+. `MainWindow` will wait for `BirthdayStatisticsPanel` to create the table through the method `setPersonData` and after that,
+it will raise a `handleAddressBookChangedEvent` method and will return by raising the `ChangeInformationPanelRequestEvent` to `MainWindow`.
+. `MainWindow` will show the table after the end of execution.
+
 === Instagram/Google Map Browser Panel
 
 image::BrowserPanels.png[width="800"]
-_Figure 4.6.1: Browser Panels UI_
+_Figure 4.7.1: Browser Panels UI_
 
 The browser panels display visual information about the selected person.
 
 image::BrowserPanelsClassDiagram.png[width="400"]
-_Figure 4.6.2: Browser Panels Class Diagram_
+_Figure 4.7.2: Browser Panels Class Diagram_
 
 As shown from the class diagram, both browser panels extends the UiParts. The browser panels are responsible for displaying information on the selected
 person based on the person details.
@@ -470,7 +495,7 @@ person based on the person details.
 The following sequence diagram shows how the browser operation works, using InstagramBrowserPanel as an exmaple:
 
 image::InstagramPanelSequenceDiagram.png[width="400"]
-_Figure 4.6.3: InstagramBrowserPanel Sequence Diagram_
+_Figure 4.7.3: InstagramBrowserPanel Sequence Diagram_
 
 As shown from the sequence diagram, when a user selects a new person, the InstagramBrowserPanel handles the new selection event and display the selected
 person's instagram based on the name in the details. For example, if the selected person's name is `Alex Yeoh`, InstagramBrowserPanel will use `AlexYeoh` as part of the URL parameter to display the person's
@@ -538,6 +563,7 @@ will be used to construct a `DeleteCommand`. `HashSet` prevents the duplicates o
 === Dynamic Information Panel
 The information panel has the capability of changing panel depending on the request event. home, select and help command are the current commands
 that will raise `ChangeInformationPanelRequestEvent()`.
+
 
 Below are the respective commands and their requested panel.
 
@@ -1264,9 +1290,13 @@ Pros:
 * Offers many integration features
 * Unlimited address books
 * Helps to remove duplicates
+* Shows detailed information on birthday.
+* Command alias to allow ease of use.
 
 Cons:
 
 * Expansive, cost $5 per month
 * Complicated user interface and features
+* Commands are restricted to CLI. It would be better if there are more GUI commands.
 * No feature to view person's social media directly
+
