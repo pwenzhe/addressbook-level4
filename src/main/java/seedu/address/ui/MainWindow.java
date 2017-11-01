@@ -269,6 +269,7 @@ public class MainWindow extends UiPart<Region> {
         changeInformationPanel(new ChangeInformationPanelRequestEvent(HOME_PANEL));
     }
 
+    //@@author Valerieyue
     /**
      * Opens the birthday statistics panel.
      */
@@ -276,6 +277,7 @@ public class MainWindow extends UiPart<Region> {
     public void handleBirthdayStatistics() {
         changeInformationPanel(new ChangeInformationPanelRequestEvent(BIRTHDAY_STATISTICS_PANEL));
     }
+    //@@author Valerieyue
 
     /**
      * Opens the help panel.

@@ -89,9 +89,11 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
     }
 
+    //@@author Valerieyue
     private static Optional<String> areValuePresent(Optional<String> checkPresent) {
         return Optional.of(checkPresent.orElse(""));
     }
+    //@@author Valerieyue
 
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
