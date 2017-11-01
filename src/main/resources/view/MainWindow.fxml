@@ -57,6 +57,5 @@
   <StackPane fx:id="statusbarPlaceholder" />
    <stylesheets>
       <URL value="@Extensions.css" />
-      <URL value="@BrightTheme.css" />
    </stylesheets>
 </VBox>
