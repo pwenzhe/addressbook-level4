@@ -34,7 +34,6 @@ public class BirthdayStatisticsPanel extends UiPart<Region> {
 
     private final Logger logger = LogsCenter.getLogger(this.getClass());
     private ObservableList<String> monthNames = FXCollections.observableArrayList();
-    private XYChart.Series<String, Integer> series = new XYChart.Series<>();
 
     public BirthdayStatisticsPanel(ReadOnlyAddressBook readOnlyAddressBook) {
         super(FXML);
@@ -48,17 +47,19 @@ public class BirthdayStatisticsPanel extends UiPart<Region> {
         // Assign the month names as categories for the horizontal axis.
         xAxis.setCategories(monthNames);
         setPersonData(readOnlyAddressBook);
+        barChart.setCategoryGap(10);
+        barChart.setTitle("Birthday Statistics");
+        xAxis.setLabel("Month");
         registerAsAnEventHandler(this);
     }
 
     private void setPersonData(ReadOnlyAddressBook readOnlyAddressBook) {
+        XYChart.Series<String, Integer> series = new XYChart.Series<>();
         // Count the number of people having their birthday in a specific month.
-        //barChart.getData().removeAll(series);
         int[] monthCounter = new int[12];
         int monthInt;
         for (ReadOnlyPerson p : readOnlyAddressBook.getPersonList()) {
             String month = p.getBirthday().toString().replaceAll("[^a-zA-Z]+", "");
-            logger.info(month);
             switch(month) {
             case "Jan":
                 monthInt = 0;
@@ -105,25 +106,16 @@ public class BirthdayStatisticsPanel extends UiPart<Region> {
 
         // Create a XYChart.Data object for each month. Add it to the series.
         for (int i = 0; i < monthCounter.length; i++) {
-            //if (!series.getData().isEmpty()){
-                //series.getData().remove(monthCounter[i]);
-                //series.getData().remove(monthNames.get(i));
-              //  series.getData().remove(new XYChart.Data<>(monthNames.get(i), monthCounter[i]));
-            //}
-
             series.getData().add(new XYChart.Data<>(monthNames.get(i), monthCounter[i]));
         }
         barChart.getData().clear();
-        barChart.layout();
-        barChart.getData().addAll(series);
-
+        barChart.getData().add(series);
 
     }
 
     @Subscribe
     public void handleAddressBookChangedEvent(AddressBookChangedEvent abce) {
-        //logger.info("Home panel new status: " + abce.data.getPersonList().size() + " persons and "
-        //        + abce.data.getTagList().size());
+        logger.info("Birthday statistics updated");
         setPersonData(abce.data);
     }
 }
