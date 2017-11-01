@@ -105,6 +105,7 @@ public class UniquePersonList implements Iterable<Person> {
         return FXCollections.unmodifiableObservableList(mappedList);
     }
 
+    //@@author Valerieyue
     /**
      * Sorts person name in alphabetical order
      */
@@ -112,6 +113,7 @@ public class UniquePersonList implements Iterable<Person> {
         Comparator<Person> comparator = (p1, p2) -> (comparePeople(p1, p2));
         Collections.sort(internalList, comparator);
     }
+    //@@author Valerieyue
 
     /**
      * Compare Persons by favourite status and then name

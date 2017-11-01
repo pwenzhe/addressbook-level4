@@ -9,6 +9,7 @@ import seedu.address.TestApp;
 import seedu.address.logic.commands.ThemeCommand;
 import seedu.address.model.Model;
 
+// @@author johnweikangong
 public class ChangeThemeSystemTest extends AddressBookSystemTest {
 
     @Test

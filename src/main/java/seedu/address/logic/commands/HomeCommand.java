@@ -3,8 +3,9 @@ package seedu.address.logic.commands;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.ui.ChangeInformationPanelRequestEvent;
 
+// @@author johnweikangong
 /**
- * Changes theme of UI.
+ * Shows home panel of the App.
  */
 public class HomeCommand extends Command {
 

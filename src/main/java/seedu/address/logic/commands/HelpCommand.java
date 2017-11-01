@@ -3,8 +3,9 @@ package seedu.address.logic.commands;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.ui.ChangeInformationPanelRequestEvent;
 
+// @@author johnweikangong
 /**
- * Format full help instructions for every command for display.
+ * Shows help panel of the App.
  */
 public class HelpCommand extends Command {
 

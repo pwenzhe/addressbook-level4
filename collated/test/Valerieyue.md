@@ -1,10 +1,6 @@
-package seedu.address.model.person;
-
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
-import org.junit.Test;
-//@@author Valerieyue
+# Valerieyue
+###### \java\seedu\address\model\person\BirthdayTest.java
+``` java
 public class BirthdayTest {
 
     @Test
@@ -22,3 +18,4 @@ public class BirthdayTest {
         assertTrue(Birthday.isValidBirthday("08 aug 1985")); // Name of month
     }
 }
+```

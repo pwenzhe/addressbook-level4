@@ -32,6 +32,7 @@ public class MainWindow extends UiPart<Region> {
     private static final String ICON = "/images/address_book_32.png";
     private static final String FXML = "MainWindow.fxml";
     private static final String HOME_PANEL = "HomePanel";
+    private static final String BIRTHDAY_STATISTICS_PANEL = "BirthdayStatisticsPanel";
     private static final String PERSON_INFORMATION_PANEL = "PersonInformationPanel";
     private static final String HELP_PANEL = "HelpPanel";
     private static final int MIN_HEIGHT = 800;
@@ -47,6 +48,7 @@ public class MainWindow extends UiPart<Region> {
     private HomePanel homePanel;
     private PersonInformationPanel personInformationPanel;
     private HelpPanel helpPanel;
+    private BirthdayStatisticsPanel birthdayStatisticsPanel;
     private Config config;
     private UserPrefs prefs;
     private String currentInformationPanel;
@@ -56,6 +58,9 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private StackPane commandBoxPlaceholder;
+
+    @FXML
+    private MenuItem homeMenuItem;
 
     @FXML
     private MenuItem helpMenuItem;
@@ -98,7 +103,8 @@ public class MainWindow extends UiPart<Region> {
     }
 
     private void setAccelerators() {
-        setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(homeMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(helpMenuItem, KeyCombination.valueOf("F2"));
         setAccelerator(exitMenuItem, KeyCombination.valueOf("Esc"));
     }
 
@@ -132,6 +138,7 @@ public class MainWindow extends UiPart<Region> {
         });
     }
 
+    // @@author johnweikangong
     /**
      * Fills up all the placeholders of this window.
      */
@@ -149,12 +156,15 @@ public class MainWindow extends UiPart<Region> {
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
         /** At start, Initalise all dynamic information panels for MainWindowHandle
-         * to initalise handles for these panels for testing. */
+         * to be able to initalise these panel in its respective handles for testing. */
         personInformationPanel = new PersonInformationPanel();
         informationPanelPlaceholder.getChildren().add(personInformationPanel.getRoot());
 
         helpPanel = new HelpPanel();
         informationPanelPlaceholder.getChildren().add(helpPanel.getRoot());
+
+        birthdayStatisticsPanel = new BirthdayStatisticsPanel(logic.getAddressBook());
+        informationPanelPlaceholder.getChildren().add(birthdayStatisticsPanel.getRoot());
 
         homePanel = new HomePanel(logic.getAddressBook());
         informationPanelPlaceholder.getChildren().add(homePanel.getRoot());
@@ -166,7 +176,7 @@ public class MainWindow extends UiPart<Region> {
             return; // Short circuit if the current information panel is the same as the requested information panel
         } else {
             informationPanelPlaceholder.getChildren().removeAll(homePanel.getRoot(), personInformationPanel.getRoot(),
-                    helpPanel.getRoot());
+                    helpPanel.getRoot(), birthdayStatisticsPanel.getRoot());
 
             if (event.getPanelRequestEvent().equals(PERSON_INFORMATION_PANEL)) {
                 informationPanelPlaceholder.getChildren().add(personInformationPanel.getRoot());
@@ -174,6 +184,8 @@ public class MainWindow extends UiPart<Region> {
                 informationPanelPlaceholder.getChildren().add(homePanel.getRoot());
             } else if (event.getPanelRequestEvent().equals((HELP_PANEL))) {
                 informationPanelPlaceholder.getChildren().add(helpPanel.getRoot());
+            } else if (event.getPanelRequestEvent().equals((BIRTHDAY_STATISTICS_PANEL))) {
+                informationPanelPlaceholder.getChildren().add(birthdayStatisticsPanel.getRoot());
             }
         }
 
@@ -198,6 +210,7 @@ public class MainWindow extends UiPart<Region> {
             getRoot().getStylesheets().add(brightThemePath);
         }
     }
+    // @@author
 
     /**
      * Initializes the theme on startup to the user preferred theme.
@@ -264,6 +277,7 @@ public class MainWindow extends UiPart<Region> {
         return getRoot().getStylesheets().toString();
     }
 
+    // @@author johnweikangong
     /**
      * Opens the home panel.
      */
@@ -272,6 +286,16 @@ public class MainWindow extends UiPart<Region> {
         changeInformationPanel(new ChangeInformationPanelRequestEvent(HOME_PANEL));
     }
 
+    //@@author Valerieyue
+    /**
+     * Opens the birthday statistics panel.
+     */
+    @FXML
+    public void handleBirthdayStatistics() {
+        changeInformationPanel(new ChangeInformationPanelRequestEvent(BIRTHDAY_STATISTICS_PANEL));
+    }
+    //@@author Valerieyue
+
     /**
      * Opens the help panel.
      */
@@ -279,6 +303,7 @@ public class MainWindow extends UiPart<Region> {
     public void handleHelp() {
         changeInformationPanel(new ChangeInformationPanelRequestEvent(HELP_PANEL));
     }
+    // @@author
 
     void show() {
         primaryStage.show();
@@ -296,7 +321,9 @@ public class MainWindow extends UiPart<Region> {
         return this.personListPanel;
     }
 
+    // @@author johnweikangong
     void releaseResources() {
         personInformationPanel.releaseResources();
     }
+    // @@author
 }

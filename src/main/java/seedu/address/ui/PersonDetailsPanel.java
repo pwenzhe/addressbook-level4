@@ -12,7 +12,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.model.person.ReadOnlyPerson;
 
-
+// @@author johnweikangong
 /**
  * An UI component that displays details of a {@code Person} upon selection.
  */

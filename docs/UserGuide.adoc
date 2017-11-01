@@ -81,6 +81,9 @@ Opens the help panel which shows the guidelines to use Bevy. +
 Format: `help` +
 Command Alias: `sos`
 
+image::ViewingHelp.JPG[width="790"]
+_Figure 4.1.1:Viewing Help_
+
 === Adding a person: `add`, `a`
 
 Adds a person to the address book. +
@@ -147,35 +150,35 @@ Figure 4.4.1 shows the initial state before any edits. Subsequent edits will be 
 
 *1. Removing Tag*
 
-Command: `edit 2 t/`
+Command: `edit 4 t/`
 
 image::RemoveTag.jpg[width="790"]
 _Figure 4.4.2 Removing Tag_
 
 You can remove all the person's tags by typing `t/` without specifying any tags after it. +
-From Figure 4.4.1, index 2 is Bernice Yu and has the tags colleagues and friends.
+From Figure 4.4.1, index 4 is Bernice Yu and has the tags colleagues and friends.
 After entering the command, all tags are removed as seen from Figure 4.4.2.
 
 *2. Editing Tag*
 
-Command: `edit 2 t/family`
+Command: `edit 4 t/family`
 
 image::EditTag.jpg[width="790"]
 _Figure 4.4.3 Editing tag_
 
 When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative. +
-From Figure 4.4.1, index 2 is Bernice Yu and has the tags, colleagues and friends.
+From Figure 4.4.1, index 4, Bernice Yu has the tags, colleagues and friends.
 After entering the command, the previous tags are replaced with a single tag, family.
 
 *3. Editing Fields*
 
-Command: `edit 4 n/Jackie Lam e/jackielam@hotmail.com`
+Command: `edit 7 n/Jackie Lam e/jackielam@hotmail.com`
 
 image::EditFields.jpg[width="790"]
 _Figure 4.4.4 Editing Fields_
 
 You can edit more than one field at the same time.
-From Figure 4.4.1, index 4 is David Li.
+From Figure 4.4.1, index 7 is David Li.
 After executing the command, the name and email is changed as requested.
 
 === Locating persons by name, phone number or birthday: `find`, `f`
@@ -241,6 +244,9 @@ Delete the 1st to 3rd, 5th and 6th person listed in the results of the `find` co
 Shows a table that indicates the number of people having their birthdays in a particular month. +
 Format: `statistics` +
 Command Alias: `stats`
+
+image::BirthdayStatistics.jpg[width="790"]
+_Figure 4.7.1:Birthday Statistics_
 
 === Selecting a person : `select` `s`
 
@@ -335,13 +341,26 @@ Command Alias: `c`
 === Changing the theme: `changetheme` `ct`
 
 Changes the theme of the application between the bright and dark theme. +
-Format: `changetheme`
+Format: `changetheme` +
+Command Alias: `ct`
+
+image::BrightTheme.jpg[width="790"]
+_Figure 4.13.1: Bright Theme_
+
+image::DarkTheme.jpg[width="790"]
+_Figure 4.13.2: Dark Theme_
+
+As you can see from Figure 4.13.1, it shows the bright theme, which is the default theme used.
+After entering the command, the colour scheme will be changed to the dark theme as seen from Figure 4.12.2.
 
 === Viewing home: `home`, `ho`
 
 Opens the home panel which shows the Bevy logo and application status. +
 Format: `home` +
 Command Alias: `ho`
+
+image::Home.jpg[width="790"]
+_Figure 4.14.1: Viewing Home_
 
 === Exiting the program : `exit` `x`
 

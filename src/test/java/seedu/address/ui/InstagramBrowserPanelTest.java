@@ -17,6 +17,7 @@ import guitests.guihandles.InstagramBrowserPanelHandle;
 import seedu.address.MainApp;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 
+// @@author johnweikangong
 public class InstagramBrowserPanelTest extends GuiUnitTest {
     private PersonPanelSelectionChangedEvent selectionChangedEventStub;
 
@@ -35,11 +36,11 @@ public class InstagramBrowserPanelTest extends GuiUnitTest {
 
     @Test
     public void display() throws Exception {
-        // default web page
+        // Default web page
         URL expectedDefaultPageUrl = MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE);
         assertEquals(expectedDefaultPageUrl, instagramBrowserPanelHandle.getLoadedUrl());
 
-        // associated web page of a person
+        // Associated web page of a person
         postNow(selectionChangedEventStub);
         URL expectedPersonUrl = new URL(INSTAGRAM_SEARCH_URL_PREFIX
                 + ALICE.getName().fullName.replaceAll("\\s+", "") + "/");

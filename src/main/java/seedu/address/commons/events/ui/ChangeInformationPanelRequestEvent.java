@@ -2,8 +2,9 @@ package seedu.address.commons.events.ui;
 
 import seedu.address.commons.events.BaseEvent;
 
+// @@author johnweikangong
 /**
- * Indicates a request for Information Panel change
+ * Indicates a request for Information Panel change.
  */
 public class ChangeInformationPanelRequestEvent extends BaseEvent {
 
