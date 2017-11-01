@@ -9,7 +9,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSTALCODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.person.PostalCode.POSTALCODE_UPPER_RANGE;
 
 import java.util.Optional;
 import java.util.Set;
@@ -69,18 +68,19 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
     }
 
+    //@@author johnweikangong
     /**
-     * If postal code not specified and can be found in address, return
+     * If postal code is not specified and can be found in address, return
      * postal code found in address, else return postal code entered
      * @throws IllegalValueException if postal code entered is not exactly 6 digit
+     * and/or more than the postal code upper range.
      */
     private PostalCode getPostalCode(Optional<String> address, Optional<String> postalCode)
             throws IllegalValueException {
         Pattern pattern = Pattern.compile("(?<postalCode>(?<!\\d)\\d{6}(?!\\d))");
         Matcher match = pattern.matcher(address.get());
 
-        if (!postalCode.isPresent() && match.find()
-                && Integer.parseInt(match.group("postalCode").toString()) <= POSTALCODE_UPPER_RANGE) {
+        if (!postalCode.isPresent() && match.find()) {
             return ParserUtil.parsePostalCode(Optional.of(match.group("postalCode"))).get();
         } else if (!postalCode.isPresent()) {
             return new PostalCode("");
@@ -88,6 +88,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             return ParserUtil.parsePostalCode(postalCode).get();
         }
     }
+    //@@author
 
     //@@author Valerieyue
     private static Optional<String> areValuePresent(Optional<String> checkPresent) {

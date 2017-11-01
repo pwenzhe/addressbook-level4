@@ -14,6 +14,7 @@ import seedu.address.logic.commands.HomeCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.model.Model;
 
+// @@author johnweikangong
 public class ChangeInformationPanelSystemTest extends AddressBookSystemTest {
 
     @Test
@@ -30,18 +31,18 @@ public class ChangeInformationPanelSystemTest extends AddressBookSystemTest {
         assertHandleSuccess("birthdayStatisticsPanel", birthdayStatisticsPanelId, "");
 
         /* Case: Changes information panel of address book using select command word, no leading spaces
-         * and trailing alphanumeric characters and spaces -> information panel changed to person information panel.
+         * and trailing alphanumeric characters and spaces -> information panel changed to person information panel
          */
         String selectCommand = SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased();
         assertCommandSuccess(selectCommand, personInformationPanelId, INDEX_FIRST_PERSON);
 
         /* Case: Change information panel of address book using help command word, no leading spaces
-         * and trailing alphanumeric characters and spaces -> information panel changed to help panel.
+         * and trailing alphanumeric characters and spaces -> information panel changed to help panel
          */
         assertCommandSuccess(HelpCommand.COMMAND_WORD, helpPanelId, HelpCommand.MESSAGE_SUCCESS);
 
         /* Case: Change information panel of address book using home command word, no leading spaces
-         * and trailing alphanumeric characters and spaces -> information panel changed to home panel.
+         * and trailing alphanumeric characters and spaces -> information panel changed to home panel
         */
         assertCommandSuccess(HomeCommand.COMMAND_WORD, homePanelId, HomeCommand.MESSAGE_SUCCESS);
 
@@ -52,19 +53,19 @@ public class ChangeInformationPanelSystemTest extends AddressBookSystemTest {
                 BirthdayStatisticsCommand.MESSAGE_SUCCESS);
 
         /* Case: Changes information panel of address book using select command word, no leading spaces
-         * and trailing alphanumeric characters and spaces -> information panel changed to person information panel.
+         * and trailing alphanumeric characters and spaces -> information panel changed to person information panel
         */
         selectCommand = SelectCommand.COMMAND_WORD + " " + INDEX_SECOND_PERSON.getOneBased();
         assertCommandSuccess(selectCommand, personInformationPanelId, INDEX_SECOND_PERSON);
 
         /* Case: Changes information panel of address book using help command word, with leading spaces
-         * and trailing alphanumeric characters and spaces -> information panel changed to help panel.
+         * and trailing alphanumeric characters and spaces -> information panel changed to help panel
         */
         assertCommandSuccess("   " + HelpCommand.COMMAND_WORD + " 232##$$% ",
                 helpPanelId, HelpCommand.MESSAGE_SUCCESS);
 
         /* Case: Changes information panel of address book using home command word, with leading spaces
-         * and trailing alphanumeric characters and spaces -> information panel changed to home panel.
+         * and trailing alphanumeric characters and spaces -> information panel changed to home panel
         */
         assertCommandSuccess("       " + HomeCommand.COMMAND_WORD + "  $#%@   ",
                 homePanelId, HomeCommand.MESSAGE_SUCCESS);
@@ -76,12 +77,12 @@ public class ChangeInformationPanelSystemTest extends AddressBookSystemTest {
         assertCommandSuccess(selectCommand, personInformationPanelId, INDEX_FIRST_PERSON);
 
         /* Case: Changes information panel of address book using help command alias, no leading spaces
-         * and trailing alphanumeric characters and spaces -> information panel changed to help panel.
+         * and trailing alphanumeric characters and spaces -> information panel changed to help panel
         */
         assertCommandSuccess(HelpCommand.COMMAND_ALIAS, helpPanelId, HelpCommand.MESSAGE_SUCCESS);
 
         /* Case: Changes information panel of address book using home command alias, no leading spaces
-         * and trailing alphanumeric characters and spaces -> information panel changed to home panel.
+         * and trailing alphanumeric characters and spaces -> information panel changed to home panel
         */
         assertCommandSuccess(HomeCommand.COMMAND_ALIAS, homePanelId, HomeCommand.MESSAGE_SUCCESS);
 
@@ -92,13 +93,13 @@ public class ChangeInformationPanelSystemTest extends AddressBookSystemTest {
                 BirthdayStatisticsCommand.MESSAGE_SUCCESS);
 
         /* Case: Changes information panel of address book using help command alias, with leading spaces
-         * and trailing alphanumeric characters and spaces -> information panel changed to help panel.
+         * and trailing alphanumeric characters and spaces -> information panel changed to help panel
         */
         assertCommandSuccess("      " + HelpCommand.COMMAND_ALIAS + " 2##$$% ",
                 helpPanelId, HelpCommand.MESSAGE_SUCCESS);
 
         /* Case: Changes information panel of address book using home command alias, with leading spaces
-         * and trailing alphanumeric characters and spaces -> information panel changed to home panel.
+         * and trailing alphanumeric characters and spaces -> information panel changed to home panel
         */
         assertCommandSuccess("  " + HomeCommand.COMMAND_WORD + "  $#%323@21   ",
                 homePanelId, HomeCommand.MESSAGE_SUCCESS);

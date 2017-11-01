@@ -60,6 +60,9 @@ public class MainWindow extends UiPart<Region> {
     private StackPane commandBoxPlaceholder;
 
     @FXML
+    private MenuItem homeMenuItem;
+
+    @FXML
     private MenuItem helpMenuItem;
 
     @FXML
@@ -100,7 +103,8 @@ public class MainWindow extends UiPart<Region> {
     }
 
     private void setAccelerators() {
-        setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(homeMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(helpMenuItem, KeyCombination.valueOf("F2"));
         setAccelerator(exitMenuItem, KeyCombination.valueOf("Esc"));
     }
 
@@ -134,6 +138,7 @@ public class MainWindow extends UiPart<Region> {
         });
     }
 
+    // @@author johnweikangong
     /**
      * Fills up all the placeholders of this window.
      */
@@ -151,7 +156,7 @@ public class MainWindow extends UiPart<Region> {
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
         /** At start, Initalise all dynamic information panels for MainWindowHandle
-         * to initalise handles for these panels for testing. */
+         * to be able to initalise these panel in its respective handles for testing. */
         personInformationPanel = new PersonInformationPanel();
         informationPanelPlaceholder.getChildren().add(personInformationPanel.getRoot());
 
@@ -205,6 +210,7 @@ public class MainWindow extends UiPart<Region> {
             getRoot().getStylesheets().add(brightThemePath);
         }
     }
+    // @@author
 
     public void hide() {
         primaryStage.hide();
@@ -261,6 +267,7 @@ public class MainWindow extends UiPart<Region> {
         return getRoot().getStylesheets().toString();
     }
 
+    // @@author johnweikangong
     /**
      * Opens the home panel.
      */
@@ -286,6 +293,7 @@ public class MainWindow extends UiPart<Region> {
     public void handleHelp() {
         changeInformationPanel(new ChangeInformationPanelRequestEvent(HELP_PANEL));
     }
+    // @@author
 
     void show() {
         primaryStage.show();
@@ -303,7 +311,9 @@ public class MainWindow extends UiPart<Region> {
         return this.personListPanel;
     }
 
+    // @@author johnweikangong
     void releaseResources() {
         personInformationPanel.releaseResources();
     }
+    // @@author
 }

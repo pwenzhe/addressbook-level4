@@ -34,6 +34,7 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
     private static final String MESSAGE_INVALID_DELETE_COMMAND_FORMAT =
             String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE);
 
+    // @@author johnweikangong
     @Test
     public void delete() {
         /* ----------------- Performing delete operation while an unfiltered list is being shown -------------------- */
@@ -174,6 +175,7 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
         /* Case: mixed case command word -> rejected */
         assertCommandFailure("DelETE 1", MESSAGE_UNKNOWN_COMMAND);
     }
+    // @@author
 
     /**
      * Removes the {@code ReadOnlyPerson} at the specified {@code index} in {@code model}'s address book.

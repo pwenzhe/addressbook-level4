@@ -18,6 +18,7 @@ import guitests.guihandles.GoogleMapBrowserPanelHandle;
 import seedu.address.MainApp;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 
+// @@author johnweikangong
 public class GoogleMapBrowserPanelTest extends GuiUnitTest {
     private PersonPanelSelectionChangedEvent selectionChangedEventStub;
 
@@ -36,13 +37,13 @@ public class GoogleMapBrowserPanelTest extends GuiUnitTest {
 
     @Test
     public void display() throws Exception {
-        // default web page
+        // Default web page
         URL expectedDefaultPageUrl = MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE);
         assertEquals(expectedDefaultPageUrl, googleMapBrowserPanelHandle.getLoadedUrl());
 
         String []segment = ALICE.getAddress().value.split("#");
 
-        // associated web page of a person
+        // Associated web page of a person
         postNow(selectionChangedEventStub);
         URL expectedPersonUrl = new URL(GOOGLEMAP_SEARCH_URL_PREFIX
                 + segment[0].replaceAll(" ", "+") + GOOGLEMAP_SEARCH_URL_SUFFIX);
