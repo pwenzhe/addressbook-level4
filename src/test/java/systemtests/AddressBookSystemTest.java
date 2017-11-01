@@ -58,6 +58,7 @@ public abstract class AddressBookSystemTest {
             Arrays.asList("text-input", "text-field", CommandBox.ERROR_STYLE_CLASS);
     private static final String homePanel = "homePanel";
     private static final String helpPanel = "helpPanel";
+    private static final String birthdayStatisticsPanel = "birthdayStatisticsPanel";
 
     private MainWindowHandle mainWindowHandle;
     private TestApp testApp;
@@ -156,6 +157,8 @@ public abstract class AddressBookSystemTest {
             Platform.runLater(() -> testApp.getMainWindow().handleHome());
         } else if (helpPanel.equals(handle)) {
             Platform.runLater(() -> testApp.getMainWindow().handleHelp());
+        } else if (birthdayStatisticsPanel.equals(handle)) {
+            Platform.runLater(() -> testApp.getMainWindow().handleBirthdayStatistics());
         }
 
         try {
@@ -164,6 +167,7 @@ public abstract class AddressBookSystemTest {
             Thread.currentThread().interrupt();
         }
     }
+
     /**
      * Displays all persons in the address book.
      */
