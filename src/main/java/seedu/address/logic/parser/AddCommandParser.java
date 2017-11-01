@@ -73,7 +73,7 @@ public class AddCommandParser implements Parser<AddCommand> {
      * If postal code is not specified and can be found in address, return
      * postal code found in address, else return postal code entered
      * @throws IllegalValueException if postal code entered is not exactly 6 digit
-     * and/or more than the postal code upper range
+     * and/or more than the postal code upper range.
      */
     private PostalCode getPostalCode(Optional<String> address, Optional<String> postalCode)
             throws IllegalValueException {

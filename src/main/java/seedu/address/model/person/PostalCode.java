@@ -49,7 +49,7 @@ public class PostalCode {
     }
 
     /**
-     * Returns true if a valide postal code is present
+     * Returns true if a valid postal code is present.
      * @return
      */
     public boolean isPresentPostalCode() {

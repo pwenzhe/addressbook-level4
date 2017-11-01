@@ -17,7 +17,7 @@ import seedu.address.model.person.ReadOnlyPerson;
 
 // @@author johnweikangong
 /**
- * The Instagram browser panel of the app.
+ * The Instagram browser panel of the App.
  */
 public class InstagramBrowserPanel extends UiPart<Region> {
 

@@ -298,4 +298,5 @@ public class MainWindow extends UiPart<Region> {
     void releaseResources() {
         personInformationPanel.releaseResources();
     }
+    // @@author
 }

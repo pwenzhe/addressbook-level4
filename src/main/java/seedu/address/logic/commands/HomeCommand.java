@@ -5,7 +5,7 @@ import seedu.address.commons.events.ui.ChangeInformationPanelRequestEvent;
 
 // @@author johnweikangong
 /**
- * Shows home panel of the app.
+ * Shows home panel of the App.
  */
 public class HomeCommand extends Command {
 

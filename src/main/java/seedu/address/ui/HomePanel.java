@@ -13,7 +13,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 
 // @@author johnweikangong
 /**
- * The home panel of the app.
+ * The home panel of the App.
  */
 public class HomePanel extends UiPart<Region> {
 

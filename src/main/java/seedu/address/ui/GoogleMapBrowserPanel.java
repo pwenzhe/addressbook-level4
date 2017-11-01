@@ -17,7 +17,7 @@ import seedu.address.model.person.ReadOnlyPerson;
 
 // @@author johnweikangong
 /**
- * The google map browser panel of the app.
+ * The google map browser panel of the App.
  */
 public class GoogleMapBrowserPanel extends UiPart<Region> {
 

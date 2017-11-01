@@ -5,7 +5,7 @@ import seedu.address.commons.events.ui.ChangeInformationPanelRequestEvent;
 
 // @@author johnweikangong
 /**
- * Shows help panel of the app.
+ * Shows help panel of the App.
  */
 public class HelpCommand extends Command {
 
