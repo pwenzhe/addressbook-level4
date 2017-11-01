@@ -2,7 +2,7 @@
 ###### \java\seedu\address\commons\events\ui\ChangeInformationPanelRequestEvent.java
 ``` java
 /**
- * Indicates a request for Information Panel change
+ * Indicates a request for Information Panel change.
  */
 public class ChangeInformationPanelRequestEvent extends BaseEvent {
 
@@ -25,7 +25,7 @@ public class ChangeInformationPanelRequestEvent extends BaseEvent {
 ###### \java\seedu\address\logic\commands\HelpCommand.java
 ``` java
 /**
- * Shows help panel of the app.
+ * Shows help panel of the App.
  */
 public class HelpCommand extends Command {
 
@@ -48,7 +48,7 @@ public class HelpCommand extends Command {
 ###### \java\seedu\address\logic\commands\HomeCommand.java
 ``` java
 /**
- * Shows home panel of the app.
+ * Shows home panel of the App.
  */
 public class HomeCommand extends Command {
 
@@ -74,7 +74,7 @@ public class HomeCommand extends Command {
      * If postal code is not specified and can be found in address, return
      * postal code found in address, else return postal code entered
      * @throws IllegalValueException if postal code entered is not exactly 6 digit
-     * and/or more than the postal code upper range
+     * and/or more than the postal code upper range.
      */
     private PostalCode getPostalCode(Optional<String> address, Optional<String> postalCode)
             throws IllegalValueException {
@@ -136,7 +136,7 @@ public class PostalCode {
     }
 
     /**
-     * Returns true if a valide postal code is present
+     * Returns true if a valid postal code is present.
      * @return
      */
     public boolean isPresentPostalCode() {
@@ -165,7 +165,7 @@ public class PostalCode {
 ###### \java\seedu\address\ui\GoogleMapBrowserPanel.java
 ``` java
 /**
- * The google map browser panel of the app.
+ * The google map browser panel of the App.
  */
 public class GoogleMapBrowserPanel extends UiPart<Region> {
 
@@ -229,11 +229,9 @@ public class GoogleMapBrowserPanel extends UiPart<Region> {
 ###### \java\seedu\address\ui\HelpPanel.java
 ``` java
 /**
- * The help panel of the app.
+ * The help panel of the App.
  */
 public class HelpPanel extends UiPart<Region> {
-
-    public static final String USERGUIDE_FILE_PATH = "/docs/UserGuide.html";
 
     private static final String FXML = "HelpPanel.fxml";
 
@@ -246,7 +244,7 @@ public class HelpPanel extends UiPart<Region> {
 ###### \java\seedu\address\ui\HomePanel.java
 ``` java
 /**
- * The home panel of the app.
+ * The home panel of the App.
  */
 public class HomePanel extends UiPart<Region> {
 
@@ -279,7 +277,7 @@ public class HomePanel extends UiPart<Region> {
 ###### \java\seedu\address\ui\InstagramBrowserPanel.java
 ``` java
 /**
- * The Instagram browser panel of the app.
+ * The Instagram browser panel of the App.
  */
 public class InstagramBrowserPanel extends UiPart<Region> {
 
@@ -425,7 +423,6 @@ public class InstagramBrowserPanel extends UiPart<Region> {
     void releaseResources() {
         personInformationPanel.releaseResources();
     }
-}
 ```
 ###### \java\seedu\address\ui\PersonDetailsPanel.java
 ``` java
@@ -683,6 +680,7 @@ public class PersonInformationPanel extends UiPart<Region> {
 ```
 ###### \resources\view\MainWindow.fxml
 ``` fxml
+
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Menu?>
@@ -696,7 +694,7 @@ public class PersonInformationPanel extends UiPart<Region> {
 
   <MenuBar fx:id="menuBar" nodeOrientation="LEFT_TO_RIGHT" VBox.vgrow="NEVER">
     <Menu mnemonicParsing="false" text="Bevy">
-         <MenuItem mnemonicParsing="false" onAction="#handleHome" text="Home" />
+         <MenuItem fx:id="homeMenuItem" mnemonicParsing="false" onAction="#handleHome" text="Home" />
       <MenuItem fx:id="exitMenuItem" mnemonicParsing="false" onAction="#handleExit" text="Exit" />
     </Menu>
       <Menu mnemonicParsing="false" text="Statistics">

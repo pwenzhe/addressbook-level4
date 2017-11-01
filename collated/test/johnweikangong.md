@@ -20,16 +20,16 @@ public class PostalCodeTest {
 
     @Test
     public void isValidAddress() {
-        // invalid postal codes
-        assertFalse(PostalCode.isValidPostalCode("@^&")); // special characters
-        assertFalse(PostalCode.isValidPostalCode("12345678")); // more than 6 digits long
-        assertFalse(PostalCode.isValidPostalCode("12345")); // less than 6 digits long
-        assertFalse(PostalCode.isValidPostalCode("915920")); // more than 800000
+        // Invalid postal codes
+        assertFalse(PostalCode.isValidPostalCode("@^&")); // Special characters
+        assertFalse(PostalCode.isValidPostalCode("12345678")); // More than 6 digits long
+        assertFalse(PostalCode.isValidPostalCode("12345")); // Less than 6 digits long
+        assertFalse(PostalCode.isValidPostalCode("915920")); // More than 800000
 
-        // valid postal code
-        assertTrue(Address.isValidAddress("000000")); // lower bound of postal code range
+        // Valid postal code
+        assertTrue(Address.isValidAddress("000000")); // Lower bound of postal code range
         assertTrue(Address.isValidAddress("450920"));
-        assertTrue(Address.isValidAddress("800000")); // upper bound of postal code range
+        assertTrue(Address.isValidAddress("800000")); // Upper bound of postal code range
     }
 }
 ```
@@ -53,13 +53,13 @@ public class GoogleMapBrowserPanelTest extends GuiUnitTest {
 
     @Test
     public void display() throws Exception {
-        // default web page
+        // Default web page
         URL expectedDefaultPageUrl = MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE);
         assertEquals(expectedDefaultPageUrl, googleMapBrowserPanelHandle.getLoadedUrl());
 
         String []segment = ALICE.getAddress().value.split("#");
 
-        // associated web page of a person
+        // Associated web page of a person
         postNow(selectionChangedEventStub);
         URL expectedPersonUrl = new URL(GOOGLEMAP_SEARCH_URL_PREFIX
                 + segment[0].replaceAll(" ", "+") + GOOGLEMAP_SEARCH_URL_SUFFIX);
@@ -89,11 +89,11 @@ public class InstagramBrowserPanelTest extends GuiUnitTest {
 
     @Test
     public void display() throws Exception {
-        // default web page
+        // Default web page
         URL expectedDefaultPageUrl = MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE);
         assertEquals(expectedDefaultPageUrl, instagramBrowserPanelHandle.getLoadedUrl());
 
-        // associated web page of a person
+        // Associated web page of a person
         postNow(selectionChangedEventStub);
         URL expectedPersonUrl = new URL(INSTAGRAM_SEARCH_URL_PREFIX
                 + ALICE.getName().fullName.replaceAll("\\s+", "") + "/");

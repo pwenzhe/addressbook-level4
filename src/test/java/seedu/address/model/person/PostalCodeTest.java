@@ -10,15 +10,15 @@ public class PostalCodeTest {
 
     @Test
     public void isValidAddress() {
-        // invalid postal codes
-        assertFalse(PostalCode.isValidPostalCode("@^&")); // special characters
-        assertFalse(PostalCode.isValidPostalCode("12345678")); // more than 6 digits long
-        assertFalse(PostalCode.isValidPostalCode("12345")); // less than 6 digits long
-        assertFalse(PostalCode.isValidPostalCode("915920")); // more than 800000
+        // Invalid postal codes
+        assertFalse(PostalCode.isValidPostalCode("@^&")); // Special characters
+        assertFalse(PostalCode.isValidPostalCode("12345678")); // More than 6 digits long
+        assertFalse(PostalCode.isValidPostalCode("12345")); // Less than 6 digits long
+        assertFalse(PostalCode.isValidPostalCode("915920")); // More than 800000
 
-        // valid postal code
-        assertTrue(Address.isValidAddress("000000")); // lower bound of postal code range
+        // Valid postal code
+        assertTrue(Address.isValidAddress("000000")); // Lower bound of postal code range
         assertTrue(Address.isValidAddress("450920"));
-        assertTrue(Address.isValidAddress("800000")); // upper bound of postal code range
+        assertTrue(Address.isValidAddress("800000")); // Upper bound of postal code range
     }
 }
