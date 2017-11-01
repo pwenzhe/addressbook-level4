@@ -457,9 +457,10 @@ _Figure 4.4.1: Find Month Sequence Diagram_
 
 === Birthday Statistics
 
-_Figure 4.6.1: Birthday Statistics_
-
 The birthday statistics will show user a table of the number of people having their birthday in each month.
+
+image::BirthdayStatistics.JPG[width="800"]
+_Figure 4.6.1: Birthday Statistics_
 
 image::BirthdayStatisticsPanelClassDiagram.png[width="800"]
 _Figure 4.6.2: Birthday Statistics Panel Class Diagram_
