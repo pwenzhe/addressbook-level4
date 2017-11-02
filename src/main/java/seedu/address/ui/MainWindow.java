@@ -212,6 +212,16 @@ public class MainWindow extends UiPart<Region> {
     }
     // @@author
 
+    /**
+     * Initializes the theme on startup to the user preferred theme.
+     * @param theme
+     */
+    public void initTheme(String theme) {
+        String initThemePath = MainApp.class.getResource(FXML_FILE_FOLDER + theme + "Theme.css").toString();
+
+        getRoot().getStylesheets().add(initThemePath);
+    }
+
     public void hide() {
         primaryStage.hide();
     }
