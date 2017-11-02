@@ -283,10 +283,12 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
                 + INVALID_POSTALCODE_DESC_4 + ADDRESS_DESC_AMY + FAV_DESC_AMY;
         assertCommandFailure(command, PostalCode.MESSAGE_POSTALCODE_CONSTRAINTS);
 
+        // @@author pwenzhe
         /* Case: invalid favourite -> rejected */
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + BIRTHDAY_DESC_AMY + EMAIL_DESC_AMY
                 + POSTALCODE_DESC_AMY + ADDRESS_DESC_AMY + INVALID_FAVOURITE_DESC;
         assertCommandFailure(command, Favourite.MESSAGE_FAVOURITE_CONSTRAINTS);
+        // @@author
 
         /* Case: invalid tag -> rejected */
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + BIRTHDAY_DESC_AMY + EMAIL_DESC_AMY

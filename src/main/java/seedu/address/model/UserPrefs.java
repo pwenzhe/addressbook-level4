@@ -12,7 +12,9 @@ public class UserPrefs {
     private GuiSettings guiSettings;
     private String addressBookFilePath = "data/addressbook.xml";
     private String addressBookName = "MyAddressBook";
+    // @@author pwenzhe
     private String addressBookTheme = "Bright";
+    // @@author
 
     public UserPrefs() {
         this.setGuiSettings(500, 500, 0, 0);
@@ -46,6 +48,7 @@ public class UserPrefs {
         this.addressBookName = addressBookName;
     }
 
+    // @@author pwenzhe
     public String getAddressBookTheme() {
         return addressBookTheme;
     }
@@ -57,6 +60,7 @@ public class UserPrefs {
             this.addressBookTheme = "Bright";
         }
     }
+    // @@author
 
     @Override
     public boolean equals(Object other) {
@@ -86,7 +90,9 @@ public class UserPrefs {
         sb.append("Gui Settings : " + guiSettings.toString());
         sb.append("\nLocal data file location : " + addressBookFilePath);
         sb.append("\nAddressBook name : " + addressBookName);
+        // @@author pwenzhe
         sb.append("\nAddressBook theme : " + addressBookTheme);
+        // @@author pwenzhe
         return sb.toString();
     }
 

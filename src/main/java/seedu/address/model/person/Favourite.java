@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 
+// @@author pwenzhe
 /**
  * Represents a Person's favourite status in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidFav(String)}

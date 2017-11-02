@@ -57,7 +57,9 @@ public class UiManager extends ComponentManager implements Ui {
             mainWindow = new MainWindow(primaryStage, config, prefs, logic);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
+            // @@author pwenzhe
             mainWindow.initTheme(prefs.getAddressBookTheme());
+            // @@author
 
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));
@@ -71,6 +73,7 @@ public class UiManager extends ComponentManager implements Ui {
         mainWindow.changeInformationPanel(event);
     }
 
+    // @@author pwenzhe
     @Override
     public void changeTheme() {
         mainWindow.changeTheme();

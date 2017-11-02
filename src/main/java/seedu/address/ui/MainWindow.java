@@ -212,6 +212,7 @@ public class MainWindow extends UiPart<Region> {
     }
     // @@author
 
+    // @@author pwenzhe
     /**
      * Initializes the theme on startup to the user preferred theme.
      * @param theme
@@ -221,6 +222,7 @@ public class MainWindow extends UiPart<Region> {
 
         getRoot().getStylesheets().add(initThemePath);
     }
+    // @@author
 
     public void hide() {
         primaryStage.hide();
