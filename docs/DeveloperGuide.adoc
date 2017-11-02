@@ -225,7 +225,7 @@ _Figure 3.3.4 : Interactions Inside the Logic Component for the `delete 1` Comma
 === Model component
 
 image::ModelClassDiagram.png[width="800"]
-_Figure 2.4.1 : Structure of the Model Component_
+_Figure 3.4.1 : Structure of the Model Component_
 
 *API* : link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model.java`]
 
@@ -239,7 +239,7 @@ The `Model`,
 === Storage component
 
 image::StorageClassDiagram.png[width="800"]
-_Figure 2.5.1 : Structure of the Storage Component_
+_Figure 3.5.1 : Structure of the Storage Component_
 
 *API* : link:{repoURL}/src/main/java/seedu/address/storage/Storage.java[`Storage.java`]
 
@@ -264,6 +264,7 @@ The undo/redo mechanism is facilitated by an `UndoRedoStack`, which resides insi
 `UndoRedoStack` only deals with `UndoableCommands`. Commands that cannot be undone will inherit from `Command` instead. The following diagram shows the inheritance diagram for commands:
 
 image::LogicCommandClassDiagram.png[width="800"]
+_Figure 4.1.1 : Structure of the Logic Command Component_
 
 As you can see from the diagram, `UndoableCommand` adds an extra layer between the abstract `Command` class and concrete commands that can be undone, such as the `DeleteCommand`. Note that extra tasks need to be done when executing a command in an _undoable_ way, such as saving the state of the address book before execution. `UndoableCommand` contains the high-level algorithm for those extra tasks while the child classes implements the details of how to execute the specific command. Note that this technique of putting the high-level algorithm in the parent class and lower-level steps of the algorithm in child classes is also known as the https://www.tutorialspoint.com/design_pattern/template_pattern.htm[template pattern].
 
@@ -303,10 +304,12 @@ Suppose that the user has just launched the application. The `UndoRedoStack` wil
 The user executes a new `UndoableCommand`, `delete 5`, to delete the 5th person in the address book. The current state of the address book is saved before the `delete 5` command executes. The `delete 5` command will then be pushed onto the `undoStack` (the current state is saved together with the command).
 
 image::UndoRedoStartingStackDiagram.png[width="800"]
+_Figure 4.1.2 : Starting Stack of Undo/Redo_
 
 As the user continues to use the program, more commands are added into the `undoStack`. For example, the user may execute `add n/David ...` to add a new person.
 
 image::UndoRedoNewCommand1StackDiagram.png[width="800"]
+_Figure 4.1.3 : Stack of Undo/Redo after user inputs_
 
 [NOTE]
 If a command fails its execution, it will not be pushed to the `UndoRedoStack` at all.
@@ -316,6 +319,7 @@ The user now decides that adding the person was a mistake, and decides to undo t
 We will pop the most recent command out of the `undoStack` and push it back to the `redoStack`. We will restore the address book to the state before the `add` command executed.
 
 image::UndoRedoExecuteUndoStackDiagram.png[width="800"]
+_Figure 4.1.4 : Stack of Undo/Redo changes according to command_
 
 [NOTE]
 If the `undoStack` is empty, then there are no other commands left to be undone, and an `Exception` will be thrown when popping the `undoStack`.
@@ -323,6 +327,7 @@ If the `undoStack` is empty, then there are no other commands left to be undone,
 The following sequence diagram shows how the undo operation works:
 
 image::UndoRedoSequenceDiagram.png[width="800"]
+_Figure 4.1.5 : Sequence Diagram of undo command_
 
 The redo does the exact opposite (pops from `redoStack`, push to `undoStack`, and restores the address book to the state after the command is executed).
 
@@ -332,14 +337,17 @@ If the `redoStack` is empty, then there are no other commands left to be redone,
 The user now decides to execute a new command, `clear`. As before, `clear` will be pushed into the `undoStack`. This time the `redoStack` is no longer empty. It will be purged as it no longer make sense to redo the `add n/David` command (this is the behavior that most modern desktop applications follow).
 
 image::UndoRedoNewCommand2StackDiagram.png[width="800"]
+_Figure 4.1.6 : Stack of Undo/Redo after clear command_
 
 Commands that are not undoable are not added into the `undoStack`. For example, `list`, which inherits from `Command` rather than `UndoableCommand`, will not be added after execution:
 
 image::UndoRedoNewCommand3StackDiagram.png[width="800"]
+_Figure 4.1.7 : Stack of Undo/Redo after list command_
 
 The following activity diagram summarize what happens inside the `UndoRedoStack` when a user executes a new command:
 
 image::UndoRedoActivityDiagram.png[width="200"]
+_Figure 4.1.8 : Activity diagram of Undo/Redo_
 
 ==== Design Considerations
 
@@ -407,21 +415,24 @@ Certain properties of the application can be controlled (e.g App name, logging l
 The list will be sorted in alphabetical order whenever a new person is added.
 
 image::SortSequenceDiagram.png[width="300"]
-_Figure 4.4.1: Sorting Sequence Diagram_
+_Figure 4.4.1: Sorting Sequence Diagram using addPerson_
 
-. Following the flow of the diagram, when a person is added, the addPerson method will be called in `AddressBook`.
+image::SortSequenceDiagram2.png[width="300"]
+_Figure 4.4.2: Sorting Sequence Diagram using updatePerson_
+
+. Following the flow of the diagram, when a person is added or edited, the addPerson or updatePerson method will be respectively called in `AddressBook`.
 . `UniquePersonList` will sort the added person by comparing the favourite status and then the names in the current list and insert the persons at the correct slot.
 . The sorted contact list will then be returned.
 
 ==== Design Consideration
 
 **Aspect:** Type of implementation to sort contact list. +
-**Alternative 1 (current choice):** Sort the list while new persons are added. +
-**Pros:** More convenient for users as the list will be sorted once a new person is added. +
+**Alternative 1 (current choice):** Sort the list while new persons are added or persons are edited. +
+**Pros:** More convenient for users as the list will be sorted after either input. +
 **Cons:** List will only be sorted when new person is added. May cause limitation if there are commands that will mess up the order. +
 **Alternative 2:** Creating a separate sort command to sort list. +
 **Pros:** A command that will always allow the list to be sorted in order. +
-**Cons:** It will cause inconvenience as user have to manually type in the command to sort the list whenever they add a new person. +
+**Cons:** It will cause inconvenience as user have to manually type in the command to sort the list whenever they add a new person or change their favourite status. +
 
 === Birthday
 
@@ -499,8 +510,8 @@ image::InstagramPanelSequenceDiagram.png[width="400"]
 _Figure 4.7.3: InstagramBrowserPanel Sequence Diagram_
 
 As shown from the sequence diagram, when a user selects a new person, the InstagramBrowserPanel handles the new selection event and display the selected
-person's instagram based on the name in the details. For example, if the selected person's name is `Alex Yeoh`, InstagramBrowserPanel will use `AlexYeoh` as part of the URL parameter to display the person's
-instagram page.
+person's Instagram based on the name in the details. For example, if the selected person's name is `Alex Yeoh`, InstagramBrowserPanel will use `AlexYeoh` as part of the URL parameter to display the person's
+Instagram page.
 
 Similarly, the GoogleMapBrowserPanel will display the map of the selected person's home location using either the postal code or the address in the person details.
 For example, if the postal code is `150159`, GoogleMapBrowserPanel will use this value to display the person's location. If the postal code is not available, address will be used. For example,
@@ -562,15 +573,44 @@ will be used to construct a `DeleteCommand`. `HashSet` prevents the duplicates o
 
 
 === Dynamic Information Panel
-The information panel has the capability of changing panel depending on the request event. home, select and help command are the current commands
-that will raise `ChangeInformationPanelRequestEvent()`.
 
+The information panel has the capability of changing panel depending on the request event. Home, select and help command are the current commands
+that will raise `ChangeInformationPanelRequestEvent()`.
 
 Below are the respective commands and their requested panel.
 
 . *Home Command*: Request home panel.
 . *Select Command*: Request selected person's information panel.
 . *Help Command*: Request help panel.
+
+=== Changing Themes
+
+The theme of the application can be changed via a request event. The `changetheme` command raises the `ChangeThemeRequestEvent()`. There are two themes, namely dark and bright.+
+
+The sequence diagram below shows how the theme is changed.
+
+image::ThemeSequenceDiagram.png[width="800"]
+_Figure 4.10.1 ThemeCommand Sequence Diagram_
+
+From the sequence diagram, this operation extends into the Model and UI components.
+
+Below is a detailed explanation of the extension.
+
+. The `changetheme` command is sent to the `AddressBookParser` then calls on the `ThemeCommand`.
+. `ThemeCommand` posts a `ChangeThemeRequestEvent()` which will be received by the `MainApp`.
+. `MainApp` then calls the `changeTheme()` from `UiManager`.
+. `UiManager` invokes the `MainWindow` to change the CSS files active accordingly.
+. `UiManager` then updates the `UserPref` with the theme preference.
+
+==== Design Consideration
+
+**Aspect:** Type of implementation to change and store theme. +
+**Alternative 1 (current choice):** Make a new command that changes and stores the theme. +
+**Pros:** Lets the user change the theme and automatically saves it under preferences. +
+**Cons:** Code for the theme command involves 3 different components and can be messy.  +
+**Alternative 2:** Creating a separate command for changing theme and saving the theme. +
+**Pros:** Makes the code simpler with different commands using lesser components. +
+**Cons:** It is less convenient for the user as it requires an additional input for saving the theme. +
 
 == Documentation
 
