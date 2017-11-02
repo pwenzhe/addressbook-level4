@@ -69,7 +69,7 @@ Exits the app.
 ====
 *Command Format*
 
-* Items in `UPPER_CASE` are the parameters to be entered by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+* Items in `UPPER_CASE` are the parameters to be entered by you e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 * Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 * Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 * Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -77,7 +77,7 @@ Exits the app.
 
 === Viewing help : `help`, `sos`
 
-Opens the help panel which shows the guidelines to use Bevy. +
+Shows you the help panel which displays the commands to use Bevy. +
 Format: `help` +
 Command Alias: `sos`
 
@@ -95,7 +95,7 @@ Command Alias: `a`
 * There are restrictions for each parameters:
 ** Name: Person names should contain alphanumeric characters and spaces, and it should not be blank.
 ** Phone: Phone should only contain numbers and it should not be blank. It should be at least 3 digits long.
-** Birthday: Birthday must be in the format DDMMYYYY, separated by '/' or '-' or '.' or ' '.
+** Birthday: Birthday must be in the format DDMMYY, separated by '/' or '-' or '.' or ' '.
              The month can be entered as a number or name of the month. The date entered must be a valid.
 ** Email: Person email should be 2 aphanumeric/ period strings separated by '@'.
 ** Address: Person address can take any values, and it should not be blank.
@@ -124,7 +124,7 @@ _Figure 4.2.1.1 Adding a New Contact_
 
 === Listing all persons : `list`, `l`
 
-Shows a list of all persons in the address book. +
+Shows you a list of all persons in the address book. +
 Format: `list` +
 Command Alias: `l`
 
@@ -170,12 +170,25 @@ When editing tags, the existing tags of the person will be removed i.e adding of
 From Figure 4.4.1, index 4, Bernice Yu has the tags, colleagues and friends.
 After entering the command, the previous tags are replaced with a single tag, family.
 
-*3. Editing Fields*
+*3. Editing Favourite*
+
+image::EditFavBefore.png[width="790"]
+_Figure 4.4.4 Before editing favourite_
+
+Command: `edit 1 f/yes`
+
+image::EditFav.png[width="790"]
+_Figure 4.4.4 Editing favourite_
+
+You can edit a person's favourite status. If no value is entered after `f/`, it will default to 'no'. +
+The list is then sorted to put your favourites at the top.
+
+*4. Editing Other Fields*
 
 Command: `edit 7 n/Jackie Lam e/jackielam@hotmail.com`
 
 image::EditFields.jpg[width="790"]
-_Figure 4.4.4 Editing Fields_
+_Figure 4.4.5 Editing other fields_
 
 You can edit more than one field at the same time.
 From Figure 4.4.1, index 7 is David Li.
@@ -184,7 +197,7 @@ After executing the command, the name and email is changed as requested.
 === Locating persons by name, phone number or birthday: `find`, `f`
 
 Finds persons whose names, phone numbers or birthday month contain any of the given keywords. +
-Format: `find KEYWORD [MORE_KEYWORDS]` +
+Format to find by name or phone number: `find KEYWORD [MORE_KEYWORDS]` +
 Format to find month: `find m/MONTH` +
 Command Alias: `f`
 
@@ -194,14 +207,14 @@ Command Alias: `f`
 * Only the name, phone number and birthday are searched
 * To find the month, user has to inclue `m/` to ensure that it does not clash with name search
 * Only full words will be matched for names e.g. `Han` will not match `Hans`
-* Phone numbers will match all numbers than contain the given number e.g. `123' will match `91234567`
+* Phone numbers will match all numbers than contain the given number e.g. `123` will match `91234567`
 * Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 ****
 
 Examples:
 
 * `find John` +
-Returns `john` and `John Doe`
+Returns `John` and `John Doe`
 * `find Betsy Tim John 123` +
 Returns any person having names `Betsy`, `Tim`, or `John`, or any person with phone number containing `123`.
 * `find m/Feb` +
@@ -209,7 +222,7 @@ Returns all person that have their birthday in the month of Feb.
 
 === Deleting persons : `delete`, `d`
 
-Delete the specified persons from the address book. +
+Deletes the specified persons from the address book. +
 Format: `delete INDEX RANGES` +
 Command Alias: `d`
 
@@ -248,7 +261,7 @@ Command Alias: `stats`
 image::BirthdayStatistics.jpg[width="790"]
 _Figure 4.7.1:Birthday Statistics_
 
-=== Selecting a person : `select` `s`
+=== Selecting a person : `select`, `s`
 
 Selects the person at the specified index shown in the current listing of persons. +
 Format: `select INDEX` +
@@ -338,7 +351,7 @@ Clears all entries from the address book. +
 Format: `clear` +
 Command Alias: `c`
 
-=== Changing the theme: `changetheme` `ct`
+=== Changing the theme: `changetheme`, `ct`
 
 Changes the theme of the application between the bright and dark theme. +
 Format: `changetheme` +
@@ -351,7 +364,9 @@ image::DarkTheme.jpg[width="790"]
 _Figure 4.13.2: Dark Theme_
 
 As you can see from Figure 4.13.1, it shows the bright theme, which is the default theme used.
-After entering the command, the colour scheme will be changed to the dark theme as seen from Figure 4.12.2.
+After entering the command, the colour scheme will be changed to the dark theme as seen from Figure 4.13.2.
+Bevy will automatically save the last theme that you have chosen under the preferences so that you need not changes
+when you relaunch the application.
 
 === Viewing home: `home`, `ho`
 
@@ -362,7 +377,7 @@ Command Alias: `ho`
 image::Home.jpg[width="790"]
 _Figure 4.14.1: Viewing Home_
 
-=== Exiting the program : `exit` `x`
+=== Exiting the program : `exit`, `x`
 
 Exits the program. +
 Format: `exit` +
@@ -375,8 +390,10 @@ There is no need to save manually.
 
 == FAQ
 
-*Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
+*Q*: How do I transfer my data to another computer? +
+*A*: Install the app in the other computer and copy the `data` folder, `config.json` and `preferences.json` files from
+your previous application folder and put them into the same location as you placed the application in the other
+computer.
 
 *Q*: I do not see the correct Instagram page of my friend, what should I do? +
 *A*: The Instagram page displayed users your friend's name as the account name.
