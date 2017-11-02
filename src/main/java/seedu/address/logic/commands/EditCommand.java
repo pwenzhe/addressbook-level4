@@ -220,6 +220,7 @@ public class EditCommand extends UndoableCommand {
             return Optional.ofNullable(postalCode);
         }
 
+        // @@author pwenzhe
         public void setFavourite(Favourite favourite) {
             this.favourite = favourite;
         }
@@ -227,6 +228,7 @@ public class EditCommand extends UndoableCommand {
         public Optional<Favourite> getFavourite() {
             return Optional.ofNullable(favourite);
         }
+        // @@author
 
         public void setTags(Set<Tag> tags) {
             this.tags = tags;

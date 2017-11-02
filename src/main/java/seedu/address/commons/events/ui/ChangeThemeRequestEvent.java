@@ -2,6 +2,7 @@ package seedu.address.commons.events.ui;
 
 import seedu.address.commons.events.BaseEvent;
 
+// @@author pwenzhe
 /**
  * Indicates a request for theme change.
  */

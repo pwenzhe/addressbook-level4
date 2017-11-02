@@ -35,7 +35,9 @@
             <Label fx:id="postalCode" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
       </GridPane>
+       <!-- @@author pwenzhe -->
       <Label fx:id="name" layoutX="20.0" layoutY="14.0" styleClass="personLabel" text="Label">
+          <!--// @@author -->
          <padding>
             <Insets bottom="10.0" />
          </padding></Label>

@@ -17,7 +17,9 @@ public class Name {
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
+    // @@author pwenzhe
     public static final String NAME_VALIDATION_REGEX = "[[A-Z0-9]$\\p{Alnum}][[A-Z0-9]$\\p{Alnum} ]*";
+    // @@author
 
     public final String fullName;
 
@@ -29,6 +31,7 @@ public class Name {
     public Name(String name) throws IllegalValueException {
         requireNonNull(name);
         String trimmedName = name.trim();
+        // @@author pwenzhe
         String[] nameArr = trimmedName.split(" ");
         StringBuilder upperCaseName = new StringBuilder();
         for (int i = 0; i < nameArr.length; i++) {
@@ -43,6 +46,7 @@ public class Name {
             throw new IllegalValueException(MESSAGE_NAME_CONSTRAINTS);
         }
         this.fullName = trimmedcasedName;
+        // @@author
     }
 
     /**

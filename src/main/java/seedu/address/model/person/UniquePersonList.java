@@ -115,6 +115,7 @@ public class UniquePersonList implements Iterable<Person> {
     }
     //@@author Valerieyue
 
+    // @@author pwenzhe
     /**
      * Compare Persons by favourite status and then name
      */
@@ -139,6 +140,7 @@ public class UniquePersonList implements Iterable<Person> {
 
         return compare;
     }
+    // @@author
 
 
     @Override

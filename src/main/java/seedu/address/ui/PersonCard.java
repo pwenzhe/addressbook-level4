@@ -77,6 +77,7 @@ public class PersonCard extends UiPart<Region> {
         });
     }
 
+    // @@author pwenzhe
     /**
      * Initialise favourite image
      * @param person
@@ -86,6 +87,7 @@ public class PersonCard extends UiPart<Region> {
             favourite.setVisible(false);
         }
     }
+    // @@author
 
     private String getColorForTag(String tagName) {
         if (!tagColors.containsKey(tagName)) {

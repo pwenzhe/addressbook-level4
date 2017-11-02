@@ -206,10 +206,12 @@ public class MainApp extends Application {
         ui.changeInformationPanel(event);
     }
 
+    // @@author pwenzhe
     @Subscribe
     public void handleChangeThemeRequestEvent(ChangeThemeRequestEvent event) {
         ui.changeTheme();
     }
+    // @@author
 
     @Subscribe
     public void handleExitAppRequestEvent(ExitAppRequestEvent event) {

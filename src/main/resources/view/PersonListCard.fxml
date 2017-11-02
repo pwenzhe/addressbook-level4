@@ -29,6 +29,7 @@
           </minWidth>
         </Label>
         <Label fx:id="name" prefHeight="20.0" styleClass="cell_big_label" text="\$first" />
+        <!--@@author pwenzhe-->
             <VBox />
         <Region HBox.hgrow="ALWAYS" />
         <ImageView fx:id="favourite" translateY="-5.0">
@@ -36,6 +37,7 @@
             <Image url="@../images/favourite_star.png" />
           </image>
         </ImageView>
+        <!--@@author-->
       </HBox>
       <FlowPane fx:id="tags" />
     </VBox>
