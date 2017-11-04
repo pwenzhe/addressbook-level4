@@ -198,49 +198,6 @@ public class Birthday {
 ###### \java\seedu\address\model\person\UniquePersonList.java
 ``` java
 
-    /**
-     * Compare Persons by favourite status and then name
-     */
-    public int comparePeople(Person p1, Person p2) {
-        int compare;
-        String p1Fav = "";
-        String p2Fav = "";
-        if (p1.getFavourite().getFavourite()) {
-            p1Fav = "1";
-        } else {
-            p1Fav = "2";
-        }
-        if (p2.getFavourite().getFavourite()) {
-            p2Fav = "1";
-        } else {
-            p2Fav = "2";
-        }
-        compare = p1Fav.compareTo(p2Fav);
-        if (compare == 0) {
-            compare = p1.getName().toString().compareTo(p2.getName().toString());
-        }
-
-        return compare;
-    }
-
-
-    @Override
-    public Iterator<Person> iterator() {
-        return internalList.iterator();
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof UniquePersonList // instanceof handles nulls
-                        && this.internalList.equals(((UniquePersonList) other).internalList));
-    }
-
-    @Override
-    public int hashCode() {
-        return internalList.hashCode();
-    }
-}
 ```
 ###### \java\seedu\address\ui\BirthdayStatisticsPanel.java
 ``` java
@@ -365,25 +322,4 @@ public class BirthdayStatisticsPanel extends UiPart<Region> {
     public void handleHelp() {
         changeInformationPanel(new ChangeInformationPanelRequestEvent(HELP_PANEL));
     }
-
-    void show() {
-        primaryStage.show();
-    }
-
-    /**
-     * Closes the application.
-     */
-    @FXML
-    public void handleExit() {
-        raise(new ExitAppRequestEvent());
-    }
-
-    public PersonListPanel getPersonListPanel() {
-        return this.personListPanel;
-    }
-
-    void releaseResources() {
-        personInformationPanel.releaseResources();
-    }
-}
 ```

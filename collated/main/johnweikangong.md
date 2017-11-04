@@ -357,6 +357,9 @@ public class InstagramBrowserPanel extends UiPart<Region> {
         helpPanel = new HelpPanel();
         informationPanelPlaceholder.getChildren().add(helpPanel.getRoot());
 
+        birthdayStatisticsPanel = new BirthdayStatisticsPanel(logic.getAddressBook());
+        informationPanelPlaceholder.getChildren().add(birthdayStatisticsPanel.getRoot());
+
         homePanel = new HomePanel(logic.getAddressBook());
         informationPanelPlaceholder.getChildren().add(homePanel.getRoot());
     }
@@ -367,7 +370,7 @@ public class InstagramBrowserPanel extends UiPart<Region> {
             return; // Short circuit if the current information panel is the same as the requested information panel
         } else {
             informationPanelPlaceholder.getChildren().removeAll(homePanel.getRoot(), personInformationPanel.getRoot(),
-                    helpPanel.getRoot());
+                    helpPanel.getRoot(), birthdayStatisticsPanel.getRoot());
 
             if (event.getPanelRequestEvent().equals(PERSON_INFORMATION_PANEL)) {
                 informationPanelPlaceholder.getChildren().add(personInformationPanel.getRoot());
@@ -375,6 +378,8 @@ public class InstagramBrowserPanel extends UiPart<Region> {
                 informationPanelPlaceholder.getChildren().add(homePanel.getRoot());
             } else if (event.getPanelRequestEvent().equals((HELP_PANEL))) {
                 informationPanelPlaceholder.getChildren().add(helpPanel.getRoot());
+            } else if (event.getPanelRequestEvent().equals((BIRTHDAY_STATISTICS_PANEL))) {
+                informationPanelPlaceholder.getChildren().add(birthdayStatisticsPanel.getRoot());
             }
         }
 
@@ -410,13 +415,6 @@ public class InstagramBrowserPanel extends UiPart<Region> {
         changeInformationPanel(new ChangeInformationPanelRequestEvent(HOME_PANEL));
     }
 
-    /**
-     * Opens the help panel.
-     */
-    @FXML
-    public void handleHelp() {
-        changeInformationPanel(new ChangeInformationPanelRequestEvent(HELP_PANEL));
-    }
 ```
 ###### \java\seedu\address\ui\MainWindow.java
 ``` java
@@ -530,10 +528,6 @@ public class PersonInformationPanel extends UiPart<Region> {
         mainWindow.changeInformationPanel(event);
     }
 
-    @Override
-    public void changeTheme() {
-        mainWindow.changeTheme();
-    }
 ```
 ###### \resources\view\BrightTheme.css
 ``` css
@@ -738,7 +732,6 @@ public class PersonInformationPanel extends UiPart<Region> {
   <StackPane fx:id="statusbarPlaceholder" />
    <stylesheets>
       <URL value="@Extensions.css" />
-      <URL value="@BrightTheme.css" />
    </stylesheets>
 </VBox>
 ```
@@ -778,12 +771,6 @@ public class PersonInformationPanel extends UiPart<Region> {
             <Label fx:id="postalCode" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
       </GridPane>
-      <Label fx:id="name" layoutX="20.0" layoutY="14.0" styleClass="personLabel" text="Label">
-         <padding>
-            <Insets bottom="10.0" />
-         </padding></Label>
-   </children>
-</AnchorPane>
 ```
 ###### \resources\view\PersonInformationPanel.fxml
 ``` fxml
