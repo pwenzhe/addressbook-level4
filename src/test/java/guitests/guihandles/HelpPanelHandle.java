@@ -2,6 +2,7 @@ package guitests.guihandles;
 
 import javafx.scene.Node;
 
+// @@author johnweikangong
 /**
  * A handler for the {@code HomePanel} of the UI
  */

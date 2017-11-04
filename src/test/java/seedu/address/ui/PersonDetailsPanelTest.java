@@ -19,6 +19,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.model.person.ReadOnlyPerson;
 
+// @@author johnweikangong
 public class PersonDetailsPanelTest extends GuiUnitTest {
     private static final ObservableList<ReadOnlyPerson> TYPICAL_PERSONS =
             FXCollections.observableList(getTypicalPersons());

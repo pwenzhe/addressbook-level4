@@ -1,4 +1,107 @@
 # johnweikangong
+###### \java\guitests\guihandles\HelpPanelHandle.java
+``` java
+/**
+ * A handler for the {@code HomePanel} of the UI
+ */
+public class HelpPanelHandle extends NodeHandle<Node> {
+
+    public static final String HELP_PANEL_ID = "#helpPanel";
+
+    public HelpPanelHandle(Node helpPanelNode) {
+        super(helpPanelNode);
+    }
+
+    /**
+     * Returns the HomePanel node.
+     */
+    public Node getHelpPanelNode() {
+        return getRootNode();
+    }
+}
+```
+###### \java\guitests\guihandles\HomePanelHandle.java
+``` java
+/**
+ * A handler for the {@code HomePanel} of the UI
+ */
+public class HomePanelHandle extends NodeHandle<Node> {
+
+    public static final String HOME_PANEL_ID = "#homePanel";
+
+    public HomePanelHandle(Node homePanelNode) {
+        super(homePanelNode);
+    }
+
+    /**
+     * Returns the HomePanel node.
+     */
+    public Node getHomePanelNode() {
+        return getRootNode();
+    }
+}
+```
+###### \java\guitests\guihandles\PersonDetailsPanelHandle.java
+``` java
+/**
+ * Provides a handle for {@code PersonDetailsPanel}.
+ */
+public class PersonDetailsPanelHandle extends NodeHandle<Node> {
+    public static final String PERSON_DETAILS_VIEW_ID = "#personDetailsPanel";
+    private static final String NAME_ID = "#name";
+    private static final String PHONE_ID = "#phone";
+    private static final String BIRTHDAY_ID = "#birthday";
+    private static final String EMAIL_ID = "#email";
+    private static final String ADDRESS_ID = "#address";
+    private static final String POSTALCODE_ID = "#postalCode";
+
+    private final Label name;
+    private final Label phone;
+    private final Label birthday;
+    private final Label email;
+    private final Label address;
+    private final Label postalCode;
+
+    public PersonDetailsPanelHandle(Node personDetailsPanelNode) {
+        super(personDetailsPanelNode);
+
+        this.name = getChildNode(NAME_ID);
+        this.phone = getChildNode(PHONE_ID);
+        this.birthday = getChildNode(BIRTHDAY_ID);
+        this.email = getChildNode(EMAIL_ID);
+        this.address = getChildNode(ADDRESS_ID);
+        this.postalCode = getChildNode(POSTALCODE_ID);
+    }
+
+    public PersonDetailsPanelHandle getPersonDetailsPanelHandle() {
+        return this;
+    }
+
+    public String getName() {
+        return name.getText();
+    }
+
+    public String getPhone() {
+        return phone.getText();
+    }
+
+    public String getBirthday() {
+        return birthday.getText();
+    }
+
+    public String getEmail() {
+        return email.getText();
+    }
+
+    public String getAddress() {
+        return address.getText();
+    }
+
+    public String getPostalCode() {
+        return postalCode.getText();
+    }
+}
+```
 ###### \java\seedu\address\logic\commands\HomeCommandTest.java
 ``` java
 public class HomeCommandTest {
@@ -53,13 +156,13 @@ public class GoogleMapBrowserPanelTest extends GuiUnitTest {
 
     @Test
     public void display() throws Exception {
-        // Default web page
+        // Default web page.
         URL expectedDefaultPageUrl = MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE);
         assertEquals(expectedDefaultPageUrl, googleMapBrowserPanelHandle.getLoadedUrl());
 
         String []segment = ALICE.getAddress().value.split("#");
 
-        // Associated web page of a person
+        // Associated web page of a person.
         postNow(selectionChangedEventStub);
         URL expectedPersonUrl = new URL(GOOGLEMAP_SEARCH_URL_PREFIX
                 + segment[0].replaceAll(" ", "+") + GOOGLEMAP_SEARCH_URL_SUFFIX);
@@ -89,11 +192,11 @@ public class InstagramBrowserPanelTest extends GuiUnitTest {
 
     @Test
     public void display() throws Exception {
-        // Default web page
+        // Default web page.
         URL expectedDefaultPageUrl = MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE);
         assertEquals(expectedDefaultPageUrl, instagramBrowserPanelHandle.getLoadedUrl());
 
-        // Associated web page of a person
+        // Associated web page of a person.
         postNow(selectionChangedEventStub);
         URL expectedPersonUrl = new URL(INSTAGRAM_SEARCH_URL_PREFIX
                 + ALICE.getName().fullName.replaceAll("\\s+", "") + "/");
@@ -102,6 +205,140 @@ public class InstagramBrowserPanelTest extends GuiUnitTest {
         assertEquals(expectedPersonUrl, instagramBrowserPanelHandle.getLoadedUrl());
     }
 }
+```
+###### \java\seedu\address\ui\PersonDetailsPanelTest.java
+``` java
+public class PersonDetailsPanelTest extends GuiUnitTest {
+    private static final ObservableList<ReadOnlyPerson> TYPICAL_PERSONS =
+            FXCollections.observableList(getTypicalPersons());
+
+    private static final JumpToListRequestEvent JUMP_TO_SECOND_EVENT = new JumpToListRequestEvent(INDEX_SECOND_PERSON);
+
+    private PersonListPanelHandle personListPanelHandle;
+    private PersonDetailsPanelHandle personDetailsPanelHandle;
+
+    @Before
+    public void setUp() {
+        PersonListPanel personListPanel = new PersonListPanel(TYPICAL_PERSONS);
+        PersonDetailsPanel personDetailsPanel = new PersonDetailsPanel();
+
+        uiPartRule.setUiPart(personDetailsPanel);
+        personListPanelHandle = new PersonListPanelHandle(getChildNode(personListPanel.getRoot(),
+                PersonListPanelHandle.PERSON_LIST_VIEW_ID));
+        personDetailsPanelHandle = new PersonDetailsPanelHandle(getChildNode(personDetailsPanel.getRoot(),
+                PersonDetailsPanelHandle.PERSON_DETAILS_VIEW_ID));
+    }
+
+    @Test
+    public void display() {
+        for (int i = 0; i < TYPICAL_PERSONS.size(); i++) {
+            personListPanelHandle.navigateToCard(TYPICAL_PERSONS.get(i));
+            ReadOnlyPerson expectedPerson = TYPICAL_PERSONS.get(i);
+            PersonCardHandle actualCard = personListPanelHandle.getPersonCardHandle(i);
+
+            PersonDetailsPanelHandle actualPersonDetailsPanel = personDetailsPanelHandle.getPersonDetailsPanelHandle();
+            assertCardDisplaysPerson(expectedPerson, actualCard);
+
+            assertPersonDetailsPanelDisplaysPerson(expectedPerson, actualPersonDetailsPanel);
+            assertEquals(Integer.toString(i + 1) + ". ", actualCard.getId());
+        }
+    }
+
+    @Test
+    public void handleJumpToListRequestEvent() {
+        postNow(JUMP_TO_SECOND_EVENT);
+        guiRobot.pauseForHuman();
+
+        PersonCardHandle expectedCard = personListPanelHandle.getPersonCardHandle(INDEX_SECOND_PERSON.getZeroBased());
+        PersonCardHandle selectedCard = personListPanelHandle.getHandleToSelectedCard();
+
+        ReadOnlyPerson expectedPerson = TYPICAL_PERSONS.get(INDEX_SECOND_PERSON.getZeroBased());
+        PersonDetailsPanelHandle actualPersonDetailsPanel = personDetailsPanelHandle.getPersonDetailsPanelHandle();
+
+        assertCardEquals(expectedCard, selectedCard);
+        assertPersonDetailsPanelDisplaysPerson(expectedPerson, actualPersonDetailsPanel);
+
+
+    }
+}
+```
+###### \java\seedu\address\ui\testutil\GuiTestAssert.java
+``` java
+    /**
+     * Asserts that {@code actualPersonDetailsPanel} is empty
+     */
+    public static void assertEmptyPersonDetailsPanel(PersonDetailsPanelHandle actualPersonDetailsPanel) {
+        assertEquals("", actualPersonDetailsPanel.getName());
+        assertEquals("", actualPersonDetailsPanel.getPhone());
+        assertEquals("", actualPersonDetailsPanel.getBirthday());
+        assertEquals("", actualPersonDetailsPanel.getEmail());
+        assertEquals("", actualPersonDetailsPanel.getAddress());
+        assertEquals("", actualPersonDetailsPanel.getPostalCode());
+    }
+
+    /**
+     * Asserts that {@code actualPersonDetailsPanel} displays the details of {@code expectedPersonDetailsPanel}
+     */
+    public static void assertPersonDetailsPanelDisplaysPerson(ReadOnlyPerson expectedPerson,
+                                                  PersonDetailsPanelHandle actualPersonDetailsPanel) {
+        assertEquals(expectedPerson.getName().fullName, actualPersonDetailsPanel.getName());
+        assertEquals(expectedPerson.getPhone().value, actualPersonDetailsPanel.getPhone());
+        assertEquals(expectedPerson.getBirthday().value, actualPersonDetailsPanel.getBirthday());
+        assertEquals(expectedPerson.getEmail().value, actualPersonDetailsPanel.getEmail());
+        assertEquals(expectedPerson.getAddress().value, actualPersonDetailsPanel.getAddress());
+        assertEquals(expectedPerson.getPostalCode().value, actualPersonDetailsPanel.getPostalCode());
+    }
+```
+###### \java\systemtests\AddressBookSystemTest.java
+``` java
+    /**
+     * Executes {@code handle} in the application's {@code MainMenu}
+     * Method returns after UI components have been updated.
+     */
+    protected void executeHandle(String handle) {
+        rememberStates();
+
+        // Injects a fixed clock before executing a command so that the time stamp shown in the status bar
+        // after each command is predictable and also different from the previous command.
+        clockRule.setInjectedClockToCurrentTime();
+
+        if (homePanel.equals(handle)) {
+            Platform.runLater(() -> testApp.getMainWindow().handleHome());
+        } else if (helpPanel.equals(handle)) {
+            Platform.runLater(() -> testApp.getMainWindow().handleHelp());
+        } else if (birthdayStatisticsPanel.equals(handle)) {
+            Platform.runLater(() -> testApp.getMainWindow().handleBirthdayStatistics());
+        }
+
+        try {
+            Thread.sleep(250);
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
+    }
+```
+###### \java\systemtests\AddressBookSystemTest.java
+``` java
+    /**
+     * Asserts that the information panel shows correct panel.
+     */
+    protected void assertInformationPanelShowsCorrectPanel(String expectedInformationPanelId) {
+        assertEquals(expectedInformationPanelId, getCurrentInformationPanel());
+    }
+
+    /**
+     * Asserts that the theme before changing is not the same as the expected theme.
+      */
+    protected void assertThemeBeforeChangingNotSame(String expectedThemeAllPaths) {
+        assertNotEquals(expectedThemeAllPaths, getCurrentStyleSheet());
+    }
+
+    /**
+     * Asserts that the theme after changing is the same as the expected theme.
+      */
+    protected void assertThemeAfterChangingSame(String expectedThemeAllPaths) {
+        assertEquals(expectedThemeAllPaths, getCurrentStyleSheet());
+    }
 ```
 ###### \java\systemtests\ChangeInformationPanelSystemTest.java
 ``` java
@@ -121,18 +358,18 @@ public class ChangeInformationPanelSystemTest extends AddressBookSystemTest {
         assertHandleSuccess("birthdayStatisticsPanel", birthdayStatisticsPanelId, "");
 
         /* Case: Changes information panel of address book using select command word, no leading spaces
-         * and trailing alphanumeric characters and spaces -> information panel changed to person information panel
+         * and trailing alphanumeric characters and spaces -> information panel changed to person information panel.
          */
         String selectCommand = SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased();
         assertCommandSuccess(selectCommand, personInformationPanelId, INDEX_FIRST_PERSON);
 
         /* Case: Change information panel of address book using help command word, no leading spaces
-         * and trailing alphanumeric characters and spaces -> information panel changed to help panel
+         * and trailing alphanumeric characters and spaces -> information panel changed to help panel.
          */
         assertCommandSuccess(HelpCommand.COMMAND_WORD, helpPanelId, HelpCommand.MESSAGE_SUCCESS);
 
         /* Case: Change information panel of address book using home command word, no leading spaces
-         * and trailing alphanumeric characters and spaces -> information panel changed to home panel
+         * and trailing alphanumeric characters and spaces -> information panel changed to home panel.
         */
         assertCommandSuccess(HomeCommand.COMMAND_WORD, homePanelId, HomeCommand.MESSAGE_SUCCESS);
 
@@ -143,36 +380,36 @@ public class ChangeInformationPanelSystemTest extends AddressBookSystemTest {
                 BirthdayStatisticsCommand.MESSAGE_SUCCESS);
 
         /* Case: Changes information panel of address book using select command word, no leading spaces
-         * and trailing alphanumeric characters and spaces -> information panel changed to person information panel
+         * and trailing alphanumeric characters and spaces -> information panel changed to person information panel.
         */
         selectCommand = SelectCommand.COMMAND_WORD + " " + INDEX_SECOND_PERSON.getOneBased();
         assertCommandSuccess(selectCommand, personInformationPanelId, INDEX_SECOND_PERSON);
 
         /* Case: Changes information panel of address book using help command word, with leading spaces
-         * and trailing alphanumeric characters and spaces -> information panel changed to help panel
+         * and trailing alphanumeric characters and spaces -> information panel changed to help panel.
         */
         assertCommandSuccess("   " + HelpCommand.COMMAND_WORD + " 232##$$% ",
                 helpPanelId, HelpCommand.MESSAGE_SUCCESS);
 
         /* Case: Changes information panel of address book using home command word, with leading spaces
-         * and trailing alphanumeric characters and spaces -> information panel changed to home panel
+         * and trailing alphanumeric characters and spaces -> information panel changed to home panel.
         */
         assertCommandSuccess("       " + HomeCommand.COMMAND_WORD + "  $#%@   ",
                 homePanelId, HomeCommand.MESSAGE_SUCCESS);
 
         /* Case: Changes information panel of address book using select command word, with leading spaces
-         * and trailing spaces -> information panel changed to person information panel
+         * and trailing spaces -> information panel changed to person information panel.
         */
         selectCommand = "   " + SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " ";
         assertCommandSuccess(selectCommand, personInformationPanelId, INDEX_FIRST_PERSON);
 
         /* Case: Changes information panel of address book using help command alias, no leading spaces
-         * and trailing alphanumeric characters and spaces -> information panel changed to help panel
+         * and trailing alphanumeric characters and spaces -> information panel changed to help panel.
         */
         assertCommandSuccess(HelpCommand.COMMAND_ALIAS, helpPanelId, HelpCommand.MESSAGE_SUCCESS);
 
         /* Case: Changes information panel of address book using home command alias, no leading spaces
-         * and trailing alphanumeric characters and spaces -> information panel changed to home panel
+         * and trailing alphanumeric characters and spaces -> information panel changed to home panel.
         */
         assertCommandSuccess(HomeCommand.COMMAND_ALIAS, homePanelId, HomeCommand.MESSAGE_SUCCESS);
 
@@ -183,13 +420,13 @@ public class ChangeInformationPanelSystemTest extends AddressBookSystemTest {
                 BirthdayStatisticsCommand.MESSAGE_SUCCESS);
 
         /* Case: Changes information panel of address book using help command alias, with leading spaces
-         * and trailing alphanumeric characters and spaces -> information panel changed to help panel
+         * and trailing alphanumeric characters and spaces -> information panel changed to help panel.
         */
         assertCommandSuccess("      " + HelpCommand.COMMAND_ALIAS + " 2##$$% ",
                 helpPanelId, HelpCommand.MESSAGE_SUCCESS);
 
         /* Case: Changes information panel of address book using home command alias, with leading spaces
-         * and trailing alphanumeric characters and spaces -> information panel changed to home panel
+         * and trailing alphanumeric characters and spaces -> information panel changed to home panel.
         */
         assertCommandSuccess("  " + HomeCommand.COMMAND_WORD + "  $#%323@21   ",
                 homePanelId, HomeCommand.MESSAGE_SUCCESS);
@@ -200,22 +437,22 @@ public class ChangeInformationPanelSystemTest extends AddressBookSystemTest {
         assertCommandSuccess("  " + BirthdayStatisticsCommand.COMMAND_WORD + "  $#%543@$   ",
                 birthdayStatisticsPanelId, BirthdayStatisticsCommand.MESSAGE_SUCCESS);
 
-        /* Case: Mixed case home command word -> rejected */
+        /* Case: Mixed case home command word -> rejected. */
         assertCommandFailure("HoME", MESSAGE_UNKNOWN_COMMAND);
 
-        /* Case: Mixed case home command alias -> rejected */
+        /* Case: Mixed case home command alias -> rejected. */
         assertCommandFailure("hO", MESSAGE_UNKNOWN_COMMAND);
 
-        /* Case: Mixed case birthday statistics command word -> rejected */
+        /* Case: Mixed case birthday statistics command word -> rejected. */
         assertCommandFailure("staTIStics", MESSAGE_UNKNOWN_COMMAND);
 
-        /* Case: Mixed case birthday statistics command alias -> rejected */
+        /* Case: Mixed case birthday statistics command alias -> rejected. */
         assertCommandFailure("stATs", MESSAGE_UNKNOWN_COMMAND);
 
-        /* Case: Mixed case help command word -> rejected */
+        /* Case: Mixed case help command word -> rejected. */
         assertCommandFailure("hElP", MESSAGE_UNKNOWN_COMMAND);
 
-        /* Case: Mixed case help command alias -> rejected */
+        /* Case: Mixed case help command alias -> rejected. */
         assertCommandFailure("sOs", MESSAGE_UNKNOWN_COMMAND);
     }
 
@@ -402,7 +639,7 @@ public class ChangeThemeSystemTest extends AddressBookSystemTest {
     public void delete() {
         /* ----------------- Performing delete operation while an unfiltered list is being shown -------------------- */
 
-        /* Case: delete the first person in the list, command with leading spaces and trailing spaces -> deleted */
+        /* Case: delete the first person in the list, command with leading spaces and trailing spaces -> deleted. */
         Model expectedModel = getModel();
         String command = "     " + DeleteCommand.COMMAND_WORD + "      " + INDEX_FIRST_PERSON.getOneBased() + "       ";
         List<ReadOnlyPerson> deletedPerson = removePerson(expectedModel, INDEX_FIRST_PERSON);
@@ -415,7 +652,7 @@ public class ChangeThemeSystemTest extends AddressBookSystemTest {
         deletedPerson.clear();
         zeroBasedIndexes.clear();
 
-        /* Case: delete multiple person in the list, without overlapping range -> deleted */
+        /* Case: delete multiple person in the list, without overlapping range -> deleted. */
         Model modelBeforeDeletingMultiple = getModel();
         command = DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + "-"
                 + INDEX_SECOND_PERSON.getOneBased() + " " + INDEX_THIRD_PERSON.getOneBased() + "-"
@@ -433,12 +670,12 @@ public class ChangeThemeSystemTest extends AddressBookSystemTest {
         deletedPerson.clear();
         zeroBasedIndexes.clear();
 
-        /* Case: undo deleting multiple persons in the list, without overlap -> multiple persons restored */
+        /* Case: undo deleting multiple persons in the list, without overlap -> multiple persons restored. */
         command = UndoCommand.COMMAND_WORD;
         expectedResultMessage = UndoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, modelBeforeDeletingMultiple, expectedResultMessage);
 
-        /* Case: delete multiple person in the list, with overlapping range -> deleted */
+        /* Case: delete multiple person in the list, with overlapping range -> deleted. */
         expectedModel = getModel();
         command = DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + "-"
                 + INDEX_SECOND_PERSON.getOneBased() + " " + INDEX_SECOND_PERSON.getOneBased() + "-"
@@ -454,41 +691,41 @@ public class ChangeThemeSystemTest extends AddressBookSystemTest {
         deletedPerson.clear();
         zeroBasedIndexes.clear();
 
-        /* Case: undo deleting multiple persons in the list, with overlap -> multiple persons restored */
+        /* Case: undo deleting multiple persons in the list, with overlap -> multiple persons restored. */
         command = UndoCommand.COMMAND_WORD;
         expectedResultMessage = UndoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, modelBeforeDeletingMultiple, expectedResultMessage);
 
-        /* Case: delete the last person in the list -> deleted */
+        /* Case: delete the last person in the list -> deleted. */
         Model modelBeforeDeletingLast = getModel();
         Index lastPersonIndex = getLastIndex(modelBeforeDeletingLast);
         assertCommandSuccess(lastPersonIndex);
 
-        /* Case: undo deleting the last person in the list -> last person restored */
+        /* Case: undo deleting the last person in the list -> last person restored. */
         command = UndoCommand.COMMAND_WORD;
         expectedResultMessage = UndoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, modelBeforeDeletingLast, expectedResultMessage);
 
-        /* Case: redo deleting the last person in the list -> last person deleted again */
+        /* Case: redo deleting the last person in the list -> last person deleted again. */
         command = RedoCommand.COMMAND_WORD;
         removePerson(modelBeforeDeletingLast, lastPersonIndex);
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, modelBeforeDeletingLast, expectedResultMessage);
 
-        /* Case: delete the middle person in the list -> deleted */
+        /* Case: delete the middle person in the list -> deleted. */
         Index middlePersonIndex = getMidIndex(getModel());
         assertCommandSuccess(middlePersonIndex);
 
         /* ------------------ Performing delete operation while a filtered list is being shown ---------------------- */
 
-        /* Case: filtered person list, delete index within bounds of address book and person list -> deleted */
+        /* Case: filtered person list, delete index within bounds of address book and person list -> deleted. */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
         Index index = INDEX_FIRST_PERSON;
         assertTrue(index.getZeroBased() < getModel().getFilteredPersonList().size());
         assertCommandSuccess(index);
 
         /* Case: filtered person list, delete index within bounds of address book but out of bounds of person list
-         * -> rejected
+         * -> rejected.
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
         int invalidIndex = getModel().getAddressBook().getPersonList().size();
@@ -497,7 +734,7 @@ public class ChangeThemeSystemTest extends AddressBookSystemTest {
 
         /* --------------------- Performing delete operation while a person card is selected ------------------------ */
 
-        /* Case: delete the selected person -> person list panel selects the person before the deleted person */
+        /* Case: delete the selected person -> person list panel selects the person before the deleted person. */
         showAllPersons();
         expectedModel = getModel();
         Index selectedIndex = getLastIndex(expectedModel);
@@ -515,27 +752,27 @@ public class ChangeThemeSystemTest extends AddressBookSystemTest {
 
         /* --------------------------------- Performing invalid delete operation ------------------------------------ */
 
-        /* Case: invalid index (0) -> rejected */
+        /* Case: invalid index (0) -> rejected. */
         command = DeleteCommand.COMMAND_WORD + " 0";
         assertCommandFailure(command, MESSAGE_INVALID_DELETE_COMMAND_FORMAT);
 
-        /* Case: invalid index (-1) -> rejected */
+        /* Case: invalid index (-1) -> rejected. */
         command = DeleteCommand.COMMAND_WORD + " -1";
         assertCommandFailure(command, MESSAGE_INVALID_DELETE_COMMAND_FORMAT);
 
-        /* Case: invalid index (size + 1) -> rejected */
+        /* Case: invalid index (size + 1) -> rejected. */
         Index outOfBoundsIndex = Index.fromOneBased(
                 getModel().getAddressBook().getPersonList().size() + 1);
         command = DeleteCommand.COMMAND_WORD + " " + outOfBoundsIndex.getOneBased();
         assertCommandFailure(command, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
-        /* Case: invalid arguments (alphabets) -> rejected */
+        /* Case: invalid arguments (alphabets) -> rejected. */
         assertCommandFailure(DeleteCommand.COMMAND_WORD + " abc", MESSAGE_INVALID_DELETE_COMMAND_FORMAT);
 
-        /* Case: invalid arguments (extra argument) -> rejected */
+        /* Case: invalid arguments (extra argument) -> rejected. */
         assertCommandFailure(DeleteCommand.COMMAND_WORD + " 1 abc", MESSAGE_INVALID_DELETE_COMMAND_FORMAT);
 
-        /* Case: mixed case command word -> rejected */
+        /* Case: mixed case command word -> rejected. */
         assertCommandFailure("DelETE 1", MESSAGE_UNKNOWN_COMMAND);
     }
 ```

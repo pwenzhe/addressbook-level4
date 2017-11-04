@@ -52,6 +52,7 @@ public class ParserUtil {
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
 
+    // @@author johnweikangong-reused
     /**
      * Parses {@code List<String> allRangedIndices} into a {@code List<IndexRange> indexRanges}
      * and returns it, providing a list of index ranges using the IndexRange class
@@ -69,6 +70,7 @@ public class ParserUtil {
 
         return indexRanges;
     }
+    // @@author
 
     /**
      * Parses {@code String rangedIndices} into a {@code IndexRange}

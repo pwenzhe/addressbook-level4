@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+// @@author johnweikangong-reused
 /**
 * Represents an ascending index range with a start and end (inclusive).
 * Start and end are both zero-based index.

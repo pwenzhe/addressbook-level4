@@ -142,6 +142,7 @@ public abstract class AddressBookSystemTest {
         waitUntilBrowserLoaded(getGoogleMapBrowserPanel());
     }
 
+    // @@author johnweikangong
     /**
      * Executes {@code handle} in the application's {@code MainMenu}
      * Method returns after UI components have been updated.
@@ -167,6 +168,7 @@ public abstract class AddressBookSystemTest {
             Thread.currentThread().interrupt();
         }
     }
+    // @@author
 
     /**
      * Displays all persons in the address book.
@@ -284,6 +286,7 @@ public abstract class AddressBookSystemTest {
         assertEquals(COMMAND_BOX_ERROR_STYLE, getCommandBox().getStyleClass());
     }
 
+    // @@author johnweikangong
     /**
      * Asserts that the information panel shows correct panel.
      */
@@ -304,6 +307,7 @@ public abstract class AddressBookSystemTest {
     protected void assertThemeAfterChangingSame(String expectedThemeAllPaths) {
         assertEquals(expectedThemeAllPaths, getCurrentStyleSheet());
     }
+    // @@author
 
     /**
      * Asserts that the entire status bar remains the same.

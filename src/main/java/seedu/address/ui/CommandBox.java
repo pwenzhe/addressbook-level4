@@ -32,7 +32,7 @@ public class CommandBox extends UiPart<Region> {
 
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
-    private static final int maxSuggestions = 10;
+    private static final int maxSuggestionsSize = 8;
     private static final String[] suggestions = {"add", "a", "a n/ p/ b/ e/ a/ pc/ ", "clear", "c", "changetheme", "ct",
         "delete", "d", "edit", "e", "e n/ p/ b/ e/ a/ pc", "exit", "x", "find", "f", "help", "sos", "history", "h",
         "home", "ho", "list", "l", "statistics", "stats", "select", "s", "undo", "u", "redo", "r"};
@@ -58,7 +58,7 @@ public class CommandBox extends UiPart<Region> {
         historySnapshot = logic.getHistorySnapshot();
     }
 
-    // @author johnweikangong
+    // @@author johnweikangong
     /**
      * Observes the text input and show matched suggestions.
      */
@@ -89,7 +89,7 @@ public class CommandBox extends UiPart<Region> {
      */
     private void showPopup(List<String> matchedSuggestions) {
         List<CustomMenuItem> menuItems = new ArrayList<>();
-        int maxMenuItemsSize = Math.min(matchedSuggestions.size(), maxSuggestions);
+        int maxMenuItemsSize = Math.min(matchedSuggestions.size(), maxSuggestionsSize);
 
         for (int i = 0; i < maxMenuItemsSize; i++) {
             Label suggestionLabel = new Label(matchedSuggestions.get(i));

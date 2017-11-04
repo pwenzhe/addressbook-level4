@@ -162,6 +162,59 @@ public class PostalCode {
 
 }
 ```
+###### \java\seedu\address\ui\CommandBox.java
+``` java
+    /**
+     * Observes the text input and show matched suggestions.
+     */
+    private void addSuggestionsListener() {
+        commandTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            String textInput = commandTextField.getText();
+
+            List<String> matchedSuggestions = setOfSuggestions.stream()
+                    .filter(e -> e.toLowerCase().contains(textInput.toLowerCase()))
+                    .collect(Collectors.toList());
+
+            if (textInput == null || textInput.isEmpty() || matchedSuggestions.isEmpty()) {
+                suggestionsPopup.hide();
+            } else {
+                showPopup(matchedSuggestions);
+
+                if (!suggestionsPopup.isShowing()) {
+                    suggestionsPopup.show(this.commandTextField, Side.BOTTOM, 0, 0); // Popup position.
+                }
+            }
+        });
+    }
+
+    /**
+     * Shows the set of suggestions in the context menu with the {@code matchedSuggestions}.
+     *
+     * @param matchedSuggestions The set of matching suggestions.
+     */
+    private void showPopup(List<String> matchedSuggestions) {
+        List<CustomMenuItem> menuItems = new ArrayList<>();
+        int maxMenuItemsSize = Math.min(matchedSuggestions.size(), maxSuggestions);
+
+        for (int i = 0; i < maxMenuItemsSize; i++) {
+            Label suggestionLabel = new Label(matchedSuggestions.get(i));
+            suggestionLabel.setPrefHeight(20);
+            CustomMenuItem item = new CustomMenuItem(suggestionLabel, true);
+            menuItems.add(item);
+            logger.info(suggestionLabel.getText());
+
+            // On selecting a menu item, set the selected menu item into the command text field and close popup.
+            item.setOnAction(actionEvent -> {
+                commandTextField.setText(suggestionLabel.getText());
+                commandTextField.positionCaret(suggestionLabel.getText().length());
+                suggestionsPopup.hide();
+            });
+        }
+
+        suggestionsPopup.getItems().clear();
+        suggestionsPopup.getItems().addAll(menuItems);
+    }
+```
 ###### \java\seedu\address\ui\GoogleMapBrowserPanel.java
 ``` java
 /**

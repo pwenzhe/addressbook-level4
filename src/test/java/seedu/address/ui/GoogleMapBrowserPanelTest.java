@@ -37,13 +37,13 @@ public class GoogleMapBrowserPanelTest extends GuiUnitTest {
 
     @Test
     public void display() throws Exception {
-        // Default web page
+        // Default web page.
         URL expectedDefaultPageUrl = MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE);
         assertEquals(expectedDefaultPageUrl, googleMapBrowserPanelHandle.getLoadedUrl());
 
         String []segment = ALICE.getAddress().value.split("#");
 
-        // Associated web page of a person
+        // Associated web page of a person.
         postNow(selectionChangedEventStub);
         URL expectedPersonUrl = new URL(GOOGLEMAP_SEARCH_URL_PREFIX
                 + segment[0].replaceAll(" ", "+") + GOOGLEMAP_SEARCH_URL_SUFFIX);
