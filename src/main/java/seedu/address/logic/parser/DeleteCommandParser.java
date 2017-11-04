@@ -23,9 +23,9 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
     public DeleteCommand parse(String args) throws ParseException {
         try {
             final List<String> rangedIndices = Arrays.asList(args.trim().split("\\s+"));
-            final List<IndexRange> indexRange = ParserUtil.parseRangedIndices(rangedIndices);
+            final List<IndexRange> indexRanges = ParserUtil.parseRangedIndices(rangedIndices);
 
-            return new DeleteCommand(new HashSet<>(IndexRange.getAllValues(indexRange)));
+            return new DeleteCommand(new HashSet<>(IndexRange.getAllValues(indexRanges)));
         } catch (IllegalValueException ive) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));

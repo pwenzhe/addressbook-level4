@@ -33,9 +33,9 @@ public class CommandBox extends UiPart<Region> {
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
     private static final int maxSuggestions = 10;
-    private static final String[] suggestions = {"a", "a n/ p/ b/ e/ a/ pc/ ", "add", "c", "clear", "ct", "changetheme",
-        "d", "delete", "e", "e n/ p/ b/ e/ a/ pc", "edit", "x", "exit", "f", "find", "sos", "help", "h", "history",
-        "ho", "home", "l", "list", "stats", "statistics", "s", "select", "u", "undo", "r", "redo"};
+    private static final String[] suggestions = {"add", "a", "a n/ p/ b/ e/ a/ pc/ ", "clear", "c", "changetheme", "ct",
+        "delete", "d", "edit", "e", "e n/ p/ b/ e/ a/ pc", "exit", "x", "find", "f", "help", "sos", "history", "h",
+        "home", "ho", "list", "l", "statistics", "stats", "select", "s", "undo", "u", "redo", "r"};
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private final Logic logic;
     private ListElementPointer historySnapshot;
@@ -48,25 +48,24 @@ public class CommandBox extends UiPart<Region> {
     public CommandBox(Logic logic) {
         super(FXML);
         this.logic = logic;
-        this.setOfSuggestions = new HashSet<>(Arrays.asList(suggestions)); // Prevents duplicates
-        this.suggestionsPopup = new ContextMenu(); // Initalise popup menu
+        this.setOfSuggestions = new HashSet<>(Arrays.asList(suggestions));
+        this.suggestionsPopup = new ContextMenu(); // Initalise popup menu.
 
-        addSuggestionsListener();
+        addSuggestionsListener(); // Observes the text input and show matched suggestions.
 
         // Calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
         historySnapshot = logic.getHistorySnapshot();
     }
 
+    // @author johnweikangong
     /**
-     * Observes the text input and show matched suggestions
+     * Observes the text input and show matched suggestions.
      */
     private void addSuggestionsListener() {
-        // Add suggestions to matchedSuggestions by listening to the current text input
         commandTextField.textProperty().addListener((observable, oldValue, newValue) -> {
             String textInput = commandTextField.getText();
 
-            // Match all possible suggestions based on text input, case insensitive
             List<String> matchedSuggestions = setOfSuggestions.stream()
                     .filter(e -> e.toLowerCase().contains(textInput.toLowerCase()))
                     .collect(Collectors.toList());
@@ -77,14 +76,14 @@ public class CommandBox extends UiPart<Region> {
                 showPopup(matchedSuggestions);
 
                 if (!suggestionsPopup.isShowing()) {
-                    suggestionsPopup.show(this.commandTextField, Side.BOTTOM, 0, 0); // Popup position
+                    suggestionsPopup.show(this.commandTextField, Side.BOTTOM, 0, 0); // Popup position.
                 }
             }
         });
     }
 
     /**
-     * Show the set of suggestions in the context menu with the given matched suggestions.
+     * Shows the set of suggestions in the context menu with the {@code matchedSuggestions}.
      *
      * @param matchedSuggestions The set of matching suggestions.
      */
@@ -94,13 +93,12 @@ public class CommandBox extends UiPart<Region> {
 
         for (int i = 0; i < maxMenuItemsSize; i++) {
             Label suggestionLabel = new Label(matchedSuggestions.get(i));
-            //entryLabel.setGraphic(Styles.buildTextFlow(result, searchReauest));
             suggestionLabel.setPrefHeight(20);
             CustomMenuItem item = new CustomMenuItem(suggestionLabel, true);
             menuItems.add(item);
             logger.info(suggestionLabel.getText());
 
-            // On selecting a menu item, set the selected menu item into the command text field and close popup
+            // On selecting a menu item, set the selected menu item into the command text field and close popup.
             item.setOnAction(actionEvent -> {
                 commandTextField.setText(suggestionLabel.getText());
                 commandTextField.positionCaret(suggestionLabel.getText().length());
@@ -111,6 +109,7 @@ public class CommandBox extends UiPart<Region> {
         suggestionsPopup.getItems().clear();
         suggestionsPopup.getItems().addAll(menuItems);
     }
+    // @@author
 
     /**
      * Handles the key press event, {@code keyEvent}.
@@ -120,7 +119,7 @@ public class CommandBox extends UiPart<Region> {
         switch (keyEvent.getCode()) {
         case UP:
             // As up and down buttons will alter the position of the caret,
-            // consuming it causes the caret's position to remain unchanged
+            // consuming it causes the caret's position to remain unchanged.
             keyEvent.consume();
             navigateToPreviousInput();
             break;
@@ -128,8 +127,12 @@ public class CommandBox extends UiPart<Region> {
             keyEvent.consume();
             navigateToNextInput();
             break;
+        case ESCAPE:
+            keyEvent.consume();
+            suggestionsPopup.hide();
+            break;
         default:
-            // let JavaFx handle the keypress
+            // Let JavaFx handle the keypress.
         }
     }
 
@@ -177,14 +180,14 @@ public class CommandBox extends UiPart<Region> {
             CommandResult commandResult = logic.execute(commandTextField.getText());
             initHistory();
             historySnapshot.next();
-            // process result of the command
+            // Process result of the command.
             commandTextField.setText("");
             logger.info("Result: " + commandResult.feedbackToUser);
             raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
 
         } catch (CommandException | ParseException e) {
             initHistory();
-            // handle command failure
+            // Handle command failure.
             setStyleToIndicateCommandFailure();
             logger.info("Invalid command: " + commandTextField.getText());
             raise(new NewResultAvailableEvent(e.getMessage()));
@@ -196,7 +199,7 @@ public class CommandBox extends UiPart<Region> {
      */
     private void initHistory() {
         historySnapshot = logic.getHistorySnapshot();
-        // add an empty string to represent the most-recent end of historySnapshot, to be shown to
+        // Add an empty string to represent the most-recent end of historySnapshot, to be shown to
         // the user if she tries to navigate past the most-recent end of the historySnapshot.
         historySnapshot.add("");
     }
