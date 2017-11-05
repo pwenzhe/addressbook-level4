@@ -12,8 +12,9 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.tag.Tag;
 
+// @@author johnweikangong
 /**
- * Stores addressbook data in a Csv file
+ * Stores the addressbook in a CSV file.
  */
 public class CsvFileStorage implements FileStorage {
     private static final String WORD_SEPARATOR = ", ";
@@ -60,9 +61,8 @@ public class CsvFileStorage implements FileStorage {
         StringBuilder sb = new StringBuilder();
 
         for (String data : personData) {
-
             if (data.contains(",")) {
-               data = data.replace(",", "");
+                data = data.replace(",", "");
             }
 
             sb.append(data);
@@ -70,7 +70,6 @@ public class CsvFileStorage implements FileStorage {
         }
 
         tags.forEach(tag -> sb.append(tag + " "));
-
         sb.append("\n");
         writer.append(sb.toString());
     }

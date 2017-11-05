@@ -11,7 +11,6 @@ public class UserPrefs {
 
     private GuiSettings guiSettings;
     private String addressBookFilePath = "data/addressbook.xml";
-    private String csvFilePath = "";
     private String addressBookName = "MyAddressBook";
     // @@author pwenzhe
     private String addressBookTheme = "Bright";

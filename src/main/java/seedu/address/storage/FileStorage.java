@@ -8,8 +8,9 @@ import java.util.Set;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.tag.Tag;
 
+// @@author johnweikangong
 /**
- * Represents a storage for {@link CsvFileStorage}.
+ * Stores the addressbook in a CSV file.
  */
 public interface FileStorage {
 
@@ -19,7 +20,7 @@ public interface FileStorage {
     String getCsvFilePath();
 
     /**
-     * Saves the given {@link CsvFileStorage} to the storage.
+     * Saves the given {@code addressBook} to the CSV file.
      * @param addressBook cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */

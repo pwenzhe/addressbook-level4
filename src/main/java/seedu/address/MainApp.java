@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -14,6 +15,7 @@ import seedu.address.commons.core.Config;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Version;
+import seedu.address.commons.events.storage.ExportToFileRequestEvent;
 import seedu.address.commons.events.ui.ChangeInformationPanelRequestEvent;
 import seedu.address.commons.events.ui.ChangeThemeRequestEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
@@ -197,7 +199,6 @@ public class MainApp extends Application {
         ui.stop();
         try {
             storage.saveUserPrefs(userPrefs);
-            storage.saveToCsvFile(logic.getAddressBook());
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }
@@ -216,6 +217,13 @@ public class MainApp extends Application {
     @Subscribe
     public void handleChangeThemeRequestEvent(ChangeThemeRequestEvent event) {
         ui.changeTheme();
+    }
+    // @@author
+
+    // @@author johnweikangong
+    @Subscribe
+    public void handleExportToFileRequestEvent(ExportToFileRequestEvent event) throws IOException {
+        storage.saveToCsvFile(logic.getAddressBook());
     }
     // @@author
 

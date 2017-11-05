@@ -68,7 +68,7 @@ public class StorageManager extends ComponentManager implements Storage {
 
     @Override
     public Optional<ReadOnlyAddressBook> readAddressBook(String filePath) throws DataConversionException, IOException {
-        logger.fine("Attempting to read data from file: " + filePath);
+        logger.fine("Attempting to read data from XML file: " + filePath);
         return addressBookStorage.readAddressBook(filePath);
     }
 
@@ -79,10 +79,11 @@ public class StorageManager extends ComponentManager implements Storage {
 
     @Override
     public void saveAddressBook(ReadOnlyAddressBook addressBook, String filePath) throws IOException {
-        logger.fine("Attempting to write to data file: " + filePath);
+        logger.fine("Attempting to write data to XML file: " + filePath);
         addressBookStorage.saveAddressBook(addressBook, filePath);
     }
 
+    // @@author johnweikangong
     // ================ File methods ==============================
 
     @Override
@@ -92,7 +93,7 @@ public class StorageManager extends ComponentManager implements Storage {
 
     @Override
     public void saveToCsvFile(ReadOnlyAddressBook addressBook) throws IOException {
-        logger.fine("Attempting to write to CSV file.");
+        logger.fine("Attempting to write data to CSV file.");
         csvFileStorage.saveToCsvFile(addressBook);
     }
 
@@ -100,6 +101,7 @@ public class StorageManager extends ComponentManager implements Storage {
     public void writeLine(Writer writer, List<String> personData, Set<Tag> tags) throws IOException {
         csvFileStorage.writeLine(writer, personData, tags);
     }
+    // @@author
 
     @Override
     @Subscribe
