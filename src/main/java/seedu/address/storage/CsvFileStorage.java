@@ -4,16 +4,19 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.tag.Tag;
 
 /**
- * Stores addressbook data in a CSV file
+ * Stores addressbook data in a Csv file
  */
 public class CsvFileStorage implements FileStorage {
-    private static final char WORD_SEPARATOR = ',';
+    private static final String WORD_SEPARATOR = ", ";
 
     private static String filePath;
 
@@ -36,10 +39,13 @@ public class CsvFileStorage implements FileStorage {
             FileWriter writer = new FileWriter(filePath);
             List<ReadOnlyPerson> persons = addressBook.getPersonList();
 
+            writeLine(writer, Arrays.asList("Name", "Phone", "Birthday", "Email", "Address", "Postal Code",
+                    "Favourite", "Tags"), new HashSet<>());
+
             for (ReadOnlyPerson person : persons) {
                 writeLine(writer, Arrays.asList(person.getName().fullName, person.getPhone().value,
                         person.getBirthday().value, person.getEmail().value, person.getAddress().value,
-                        person.getPostalCode().value));
+                        person.getPostalCode().value, person.getFavourite().value), person.getTags());
             }
 
             writer.flush();
@@ -50,18 +56,20 @@ public class CsvFileStorage implements FileStorage {
     }
 
     @Override
-    public void writeLine(Writer writer, List<String> values) throws IOException {
-        boolean isFirstWord = true;
+    public void writeLine(Writer writer, List<String> personData, Set<Tag> tags) throws IOException {
         StringBuilder sb = new StringBuilder();
 
-        for (String value : values) {
-            if (!isFirstWord) {
-                sb.append(WORD_SEPARATOR);
+        for (String data : personData) {
+
+            if (data.contains(",")) {
+               data = data.replace(",", "");
             }
 
-            sb.append(value);
-            isFirstWord = false;
+            sb.append(data);
+            sb.append(WORD_SEPARATOR);
         }
+
+        tags.forEach(tag -> sb.append(tag + " "));
 
         sb.append("\n");
         writer.append(sb.toString());

@@ -31,6 +31,7 @@ public class Name {
     public Name(String name) throws IllegalValueException {
         requireNonNull(name);
         String trimmedName = name.trim();
+
         // @@author pwenzhe
         String[] nameArr = trimmedName.split(" ");
         StringBuilder capitalisedName = new StringBuilder();

@@ -3,8 +3,10 @@ package seedu.address.storage;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents a storage for {@link CsvFileStorage}.
@@ -23,5 +25,5 @@ public interface FileStorage {
      */
     void saveToCsvFile(ReadOnlyAddressBook addressBook) throws IOException;
 
-    void writeLine(Writer writer, List<String> values) throws IOException;
+    void writeLine(Writer writer, List<String> personData, Set<Tag> tags) throws IOException;
 }

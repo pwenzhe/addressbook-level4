@@ -197,6 +197,7 @@ public class MainApp extends Application {
         ui.stop();
         try {
             storage.saveUserPrefs(userPrefs);
+            storage.saveToCsvFile(logic.getAddressBook());
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }
@@ -204,10 +205,12 @@ public class MainApp extends Application {
         System.exit(0);
     }
 
+    // @@author johnweikangong
     @Subscribe
     public void handleChangeInformationPanelRequestEvent(ChangeInformationPanelRequestEvent event) {
         ui.changeInformationPanel(event);
     }
+    // @@author
 
     // @@author pwenzhe
     @Subscribe
