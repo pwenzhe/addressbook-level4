@@ -222,7 +222,6 @@ public class BirthdayStatisticsPanel extends UiPart<Region> {
 
         // Get an array with the English month names.
         String[] months = DateFormatSymbols.getInstance(Locale.ENGLISH).getShortMonths();
-        logger.info("Month: " + Arrays.toString(months));
         // Convert it to a list and add it to our ObservableList of months.
         monthNames.addAll(Arrays.asList(months));
 
@@ -290,14 +289,17 @@ public class BirthdayStatisticsPanel extends UiPart<Region> {
         for (int i = 0; i < monthCounter.length; i++) {
             series.getData().add(new XYChart.Data<>(monthNames.get(i), monthCounter[i]));
         }
-        barChart.getData().clear();
-        barChart.getData().add(series);
+
+        Platform.runLater(()-> {
+            barChart.getData().clear();
+            barChart.getData().add(series);
+        });
 
     }
 
     @Subscribe
     public void handleAddressBookChangedEvent(AddressBookChangedEvent abce) {
-        logger.info("Birthday statistics updated");
+        logger.info("Birthday statistics updated.");
         setPersonData(abce.data);
     }
 }

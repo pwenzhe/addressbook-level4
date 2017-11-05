@@ -45,10 +45,10 @@ public class ExportCommand extends Command {
     public static final String COMMAND_WORD = "export";
     public static final String COMMAND_ALIAS = "ex";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exports your contacts into a CSV file.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exports your friends into a CSV file.\n"
             + "Example: " + COMMAND_WORD;
 
-    public static final String MESSAGE_SUCCESS = "Successfully exported your contacts at Bevy.csv.";
+    public static final String MESSAGE_SUCCESS = "Successfully exported your friends to Bevy.csv file.";
 
     @Override
     public CommandResult execute() {
@@ -217,9 +217,9 @@ public class PostalCode {
  * Stores the addressbook in a CSV file.
  */
 public class CsvFileStorage implements FileStorage {
-    private static final String WORD_SEPARATOR = ", ";
+    private static final String WORD_SEPARATOR = ",";
 
-    private static String filePath;
+    private String filePath;
 
     public CsvFileStorage(String filePath) {
         this.filePath = filePath;
@@ -230,12 +230,16 @@ public class CsvFileStorage implements FileStorage {
         return filePath;
     }
 
+    @Override
+    public void saveToCsvFile(ReadOnlyAddressBook addressBook) throws IOException {
+        saveToCsvFile(addressBook, filePath);
+    }
+
     /**
      * Saves the given addressbook data to the specified file.
      */
     @Override
-    public void saveToCsvFile(ReadOnlyAddressBook addressBook)
-            throws IOException {
+    public void saveToCsvFile(ReadOnlyAddressBook addressBook, String filePath) throws IOException {
         try {
             FileWriter writer = new FileWriter(filePath);
             List<ReadOnlyPerson> persons = addressBook.getPersonList();
@@ -256,7 +260,10 @@ public class CsvFileStorage implements FileStorage {
         }
     }
 
-    @Override
+    /**
+     * Using {@code writer}, writes the {@code personData} and {@code tags} into a line on the file
+     * @throws IOException if there was any problem writing to the file.
+     */
     public void writeLine(Writer writer, List<String> personData, Set<Tag> tags) throws IOException {
         StringBuilder sb = new StringBuilder();
 
@@ -269,7 +276,7 @@ public class CsvFileStorage implements FileStorage {
             sb.append(WORD_SEPARATOR);
         }
 
-        tags.forEach(tag -> sb.append(tag + " "));
+        tags.forEach(tag -> sb.append(tag));
         sb.append("\n");
         writer.append(sb.toString());
     }
@@ -294,7 +301,10 @@ public interface FileStorage {
      */
     void saveToCsvFile(ReadOnlyAddressBook addressBook) throws IOException;
 
-    void writeLine(Writer writer, List<String> personData, Set<Tag> tags) throws IOException;
+    /**
+     * @see #saveToCsvFile(ReadOnlyAddressBook)
+     */
+    void saveToCsvFile(ReadOnlyAddressBook addressBook, String filePath) throws IOException;
 }
 ```
 ###### \java\seedu\address\storage\Storage.java
@@ -308,7 +318,7 @@ public interface FileStorage {
     void saveToCsvFile(ReadOnlyAddressBook addressBook) throws IOException;
 
     @Override
-    void writeLine(Writer writer, List<String> personData, Set<Tag> tags) throws IOException;
+    void saveToCsvFile(ReadOnlyAddressBook addressBook, String filePath) throws IOException;
 ```
 ###### \java\seedu\address\storage\StorageManager.java
 ``` java
@@ -322,13 +332,13 @@ public interface FileStorage {
     @Override
     public void saveToCsvFile(ReadOnlyAddressBook addressBook) throws IOException {
         logger.fine("Attempting to write data to CSV file.");
-        csvFileStorage.saveToCsvFile(addressBook);
+        csvFileStorage.saveToCsvFile(addressBook, csvFileStorage.getCsvFilePath());
     }
 
     @Override
-    public void writeLine(Writer writer, List<String> personData, Set<Tag> tags) throws IOException {
-        csvFileStorage.writeLine(writer, personData, tags);
-    }
+    public void saveToCsvFile(ReadOnlyAddressBook addressBook, String filePath) throws IOException {
+        logger.fine("Attempting to write data to CSV file.");
+        csvFileStorage.saveToCsvFile(addressBook, filePath);
 ```
 ###### \java\seedu\address\ui\CommandBox.java
 ``` java
@@ -496,8 +506,10 @@ public class HomePanel extends UiPart<Region> {
     }
 
     private void setAppData(int totalPersons, int totalTags) {
-        this.totalPersonsAndTags.setText("You have " + totalPersons + " friends and " + totalTags + " tags");
-        this.tipsText.setText(tips[random.nextInt(tips.length)]);
+        Platform.runLater(() -> {
+            this.totalPersonsAndTags.setText("You have " + totalPersons + " friends and " + totalTags + " tags");
+            this.tipsText.setText(tips[random.nextInt(tips.length)]);
+        });
     }
 
     @Subscribe

@@ -102,6 +102,21 @@ public class PersonDetailsPanelHandle extends NodeHandle<Node> {
     }
 }
 ```
+###### \java\seedu\address\logic\commands\ExportCommandTest.java
+``` java
+public class ExportCommandTest {
+    @Rule
+    public final EventsCollectorRule eventsCollectorRule = new EventsCollectorRule();
+
+    @Test
+    public void execute_export_success() {
+        CommandResult result = new ExportCommand().execute();
+        assertEquals(MESSAGE_SUCCESS, result.feedbackToUser);
+        assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof ExportToFileRequestEvent);
+        assertTrue(eventsCollectorRule.eventsCollector.getSize() == 1);
+    }
+}
+```
 ###### \java\seedu\address\logic\commands\HomeCommandTest.java
 ``` java
 public class HomeCommandTest {
@@ -133,6 +148,72 @@ public class PostalCodeTest {
         assertTrue(Address.isValidAddress("000000")); // Lower bound of postal code range
         assertTrue(Address.isValidAddress("450920"));
         assertTrue(Address.isValidAddress("800000")); // Upper bound of postal code range
+    }
+}
+```
+###### \java\seedu\address\storage\CsvFileStorageTest.java
+``` java
+public class CsvFileStorageTest {
+    private static final String TEST_DATA_FOLDER = FileUtil.getPath(
+            "./src/test/data/CsvFileStorageTest/");
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
+    @Rule
+    public TemporaryFolder testFolder = new TemporaryFolder();
+
+    @Test
+    public void saveToCsvFile_allInOrder_success() throws Exception {
+        String filePath = TEST_DATA_FOLDER + "ActualBevy.csv";
+        AddressBook original = getTypicalAddressBook();
+        CsvFileStorage csvFileStorage = new CsvFileStorage(filePath);
+
+        // Save in new file and assert file contents
+        csvFileStorage.saveToCsvFile(original, filePath);
+        List<String> expectedFileContent = Files.readAllLines(Paths.get(TEST_DATA_FOLDER + "ExpectedBevy1.csv"));
+        List<String> actualFileContent = Files.readAllLines(Paths.get(filePath));
+        assertEquals(expectedFileContent, actualFileContent);
+
+        // Modify data by adding and removing same person, overwrite existing file, and assert file contents
+        List<ReadOnlyPerson> keys = new ArrayList<>();
+        keys.add(new Person(HOON));
+
+        original.addPerson(new Person(HOON));
+        original.removePersons(keys);
+        csvFileStorage.saveToCsvFile(original, filePath);
+        actualFileContent = Files.readAllLines(Paths.get(filePath));
+        assertEquals(expectedFileContent, actualFileContent);
+
+        // Modify data by adding new person, overwrite existing file, and assert file contents
+        original.addPerson(new Person(IDA));
+        csvFileStorage.saveToCsvFile(original, filePath);
+        expectedFileContent = Files.readAllLines(Paths.get(TEST_DATA_FOLDER + "ExpectedBevy2.csv"));
+        actualFileContent = Files.readAllLines(Paths.get(filePath));
+        assertEquals(expectedFileContent, actualFileContent);
+    }
+
+    @Test
+    public void saveToCsvFile_nullAddressBook_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        saveToCsvFile(null, "SomeFile.xml");
+    }
+
+    @Test
+    public void saveToCsvFile_nullFilePath_throwsNullPointerException() throws IOException {
+        thrown.expect(NullPointerException.class);
+        saveToCsvFile(new AddressBook(), null);
+    }
+
+    /**
+     * Saves {@code addressBook} at the specified {@code filePath}.
+     */
+    private void saveToCsvFile(ReadOnlyAddressBook addressBook, String filePath) {
+        try {
+            new CsvFileStorage(filePath).saveToCsvFile(addressBook);
+        } catch (IOException ioe) {
+            throw new AssertionError("There should not be an error writing to the CSV file.", ioe);
+        }
     }
 }
 ```
