@@ -10,7 +10,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <StackPane fx:id="helpPanel" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox>
@@ -34,6 +33,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -179,57 +179,37 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="Find" GridPane.rowIndex="7">
+                  <Label text="Find" GridPane.rowIndex="8">
                      <GridPane.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="find James Jake" GridPane.columnIndex="3" GridPane.rowIndex="7">
+                  <Label text="find James Jake" GridPane.columnIndex="3" GridPane.rowIndex="8">
                      <GridPane.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="f" GridPane.columnIndex="2" GridPane.rowIndex="7">
+                  <Label text="f" GridPane.columnIndex="2" GridPane.rowIndex="8">
                      <GridPane.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="find" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                  <Label text="find" GridPane.columnIndex="1" GridPane.rowIndex="8">
                      <GridPane.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="Help" GridPane.rowIndex="8">
+                  <Label text="Help" GridPane.rowIndex="9">
                      <GridPane.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="help" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                  <Label text="help" GridPane.columnIndex="1" GridPane.rowIndex="9">
                      <GridPane.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="sos" GridPane.columnIndex="2" GridPane.rowIndex="8">
-                     <GridPane.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </GridPane.margin>
-                  </Label>
-                  <Label text="-" GridPane.columnIndex="3" GridPane.rowIndex="8">
-                     <GridPane.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </GridPane.margin>
-                  </Label>
-                  <Label text="History" GridPane.rowIndex="9">
-                     <GridPane.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </GridPane.margin>
-                  </Label>
-                  <Label text="history" GridPane.columnIndex="1" GridPane.rowIndex="9">
-                     <GridPane.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </GridPane.margin>
-                  </Label>
-                  <Label text="h" GridPane.columnIndex="2" GridPane.rowIndex="9">
+                  <Label text="sos" GridPane.columnIndex="2" GridPane.rowIndex="9">
                      <GridPane.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </GridPane.margin>
@@ -239,17 +219,17 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="List" GridPane.rowIndex="10">
+                  <Label text="History" GridPane.rowIndex="10">
                      <GridPane.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="list" GridPane.columnIndex="1" GridPane.rowIndex="10">
+                  <Label text="history" GridPane.columnIndex="1" GridPane.rowIndex="10">
                      <GridPane.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="l" GridPane.columnIndex="2" GridPane.rowIndex="10">
+                  <Label text="h" GridPane.columnIndex="2" GridPane.rowIndex="10">
                      <GridPane.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </GridPane.margin>
@@ -259,17 +239,17 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="Select" GridPane.rowIndex="11">
+                  <Label text="List" GridPane.rowIndex="11">
                      <GridPane.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="select" GridPane.columnIndex="1" GridPane.rowIndex="11">
+                  <Label text="list" GridPane.columnIndex="1" GridPane.rowIndex="11">
                      <GridPane.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="s" GridPane.columnIndex="2" GridPane.rowIndex="11">
+                  <Label text="l" GridPane.columnIndex="2" GridPane.rowIndex="11">
                      <GridPane.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </GridPane.margin>
@@ -279,17 +259,17 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="Undo" GridPane.rowIndex="12">
+                  <Label text="Select" GridPane.rowIndex="12">
                      <GridPane.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="undo" GridPane.columnIndex="1" GridPane.rowIndex="12">
+                  <Label text="select" GridPane.columnIndex="1" GridPane.rowIndex="12">
                      <GridPane.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="u" GridPane.columnIndex="2" GridPane.rowIndex="12">
+                  <Label text="s" GridPane.columnIndex="2" GridPane.rowIndex="12">
                      <GridPane.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </GridPane.margin>
@@ -299,17 +279,37 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="Redo" GridPane.rowIndex="13">
+                  <Label text="Undo" GridPane.rowIndex="13">
                      <GridPane.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="r" GridPane.columnIndex="2" GridPane.rowIndex="13">
+                  <Label text="undo" GridPane.columnIndex="1" GridPane.rowIndex="13">
+                     <GridPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label text="u" GridPane.columnIndex="2" GridPane.rowIndex="13">
                      <GridPane.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </GridPane.margin>
                   </Label>
                   <Label text="-" GridPane.columnIndex="3" GridPane.rowIndex="13">
+                     <GridPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label text="Redo" GridPane.rowIndex="14">
+                     <GridPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label text="r" GridPane.columnIndex="2" GridPane.rowIndex="14">
+                     <GridPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label text="-" GridPane.columnIndex="3" GridPane.rowIndex="14">
                      <GridPane.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </GridPane.margin>
@@ -334,10 +334,30 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="redo" GridPane.columnIndex="1" GridPane.rowIndex="13">
+                  <Label text="redo" GridPane.columnIndex="1" GridPane.rowIndex="14">
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding>
+                  </Label>
+                  <Label text="Export" GridPane.rowIndex="7">
+                     <GridPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label text="Export" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                     <GridPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label text="ex" GridPane.columnIndex="2" GridPane.rowIndex="7">
+                     <GridPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label text="-" GridPane.columnIndex="3" GridPane.rowIndex="7">
+                     <GridPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </GridPane.margin>
                   </Label>
                </children>
                <VBox.margin>
