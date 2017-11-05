@@ -17,7 +17,7 @@ import seedu.address.model.tag.Tag;
  * Stores the addressbook in a CSV file.
  */
 public class CsvFileStorage implements FileStorage {
-    private static final String WORD_SEPARATOR = ", ";
+    private static final String WORD_SEPARATOR = ",";
 
     private String filePath;
 
@@ -76,7 +76,7 @@ public class CsvFileStorage implements FileStorage {
             sb.append(WORD_SEPARATOR);
         }
 
-        tags.forEach(tag -> sb.append(tag + " "));
+        tags.forEach(tag -> sb.append(tag));
         sb.append("\n");
         writer.append(sb.toString());
     }
