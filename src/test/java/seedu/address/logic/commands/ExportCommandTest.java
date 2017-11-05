@@ -16,7 +16,7 @@ public class ExportCommandTest {
     public final EventsCollectorRule eventsCollectorRule = new EventsCollectorRule();
 
     @Test
-    public void execute_help_success() {
+    public void execute_export_success() {
         CommandResult result = new ExportCommand().execute();
         assertEquals(MESSAGE_SUCCESS, result.feedbackToUser);
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof ExportToFileRequestEvent);

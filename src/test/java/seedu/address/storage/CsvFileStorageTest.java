@@ -33,12 +33,6 @@ public class CsvFileStorageTest {
     @Rule
     public TemporaryFolder testFolder = new TemporaryFolder();
 
-    private String addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
-        return prefsFileInTestDataFolder != null
-                ? TEST_DATA_FOLDER + prefsFileInTestDataFolder
-                : null;
-    }
-
     @Test
     public void saveToCsvFile_allInOrder_success() throws Exception {
         String filePath = TEST_DATA_FOLDER + "ActualBevy.csv";
