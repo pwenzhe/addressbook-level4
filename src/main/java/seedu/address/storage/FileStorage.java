@@ -1,12 +1,8 @@
 package seedu.address.storage;
 
 import java.io.IOException;
-import java.io.Writer;
-import java.util.List;
-import java.util.Set;
 
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.tag.Tag;
 
 // @@author johnweikangong
 /**

@@ -56,6 +56,10 @@ public class CsvFileStorage implements FileStorage {
         }
     }
 
+    /**
+     * Using {@code writer}, writes the {@code personData} and {@code tags} into a line on the file
+     * @throws IOException if there was any problem writing to the file.
+     */
     public void writeLine(Writer writer, List<String> personData, Set<Tag> tags) throws IOException {
         StringBuilder sb = new StringBuilder();
 
