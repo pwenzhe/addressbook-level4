@@ -369,7 +369,7 @@
     -fx-fill: black;
 }
 
-#welcomeContentText {
+#welcomeContentText, #tipsText {
     -fx-fill: #818181;
 }
 

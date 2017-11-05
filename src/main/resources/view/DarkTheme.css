@@ -362,7 +362,7 @@
     -fx-fill: white;
 }
 
-#welcomeContentText {
+#welcomeContentText, #tipsText {
     -fx-fill: #D6D6D6;
 }
 

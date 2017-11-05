@@ -33,9 +33,9 @@ public class CommandBox extends UiPart<Region> {
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
     private static final int maxSuggestionsSize = 8;
-    private static final String[] suggestions = {"add", "a", "a n/ p/ b/ e/ a/ pc/ ", "clear", "c", "changetheme", "ct",
-        "delete", "d", "edit", "e", "e n/ p/ b/ e/ a/ pc", "exit", "x", "find", "f", "help", "sos", "history", "h",
-        "home", "ho", "list", "l", "statistics", "stats", "select", "s", "undo", "u", "redo", "r"};
+    private static final String[] suggestions = {"add", "a", "a n/ p/ b/ e/ a/ pc/", "clear", "c", "changetheme",
+        "ct", "delete", "d", "edit", "e", "e n/ p/ b/ e/ a/ pc/", "exit", "x", "find", "f", "help", "sos", "history",
+        "h", "home", "ho", "list", "l", "statistics", "stats", "select", "s", "undo", "u", "redo", "r"};
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private final Logic logic;
     private ListElementPointer historySnapshot;
