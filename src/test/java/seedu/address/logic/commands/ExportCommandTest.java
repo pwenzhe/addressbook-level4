@@ -8,7 +8,6 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import seedu.address.commons.events.storage.ExportToFileRequestEvent;
-import seedu.address.commons.events.ui.ChangeInformationPanelRequestEvent;
 import seedu.address.ui.testutil.EventsCollectorRule;
 
 // @@author johnweikangong
