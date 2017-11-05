@@ -1,6 +1,8 @@
 package seedu.address.storage;
 
 import java.io.IOException;
+import java.io.Writer;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -22,12 +24,14 @@ public class StorageManager extends ComponentManager implements Storage {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private AddressBookStorage addressBookStorage;
     private UserPrefsStorage userPrefsStorage;
+    private FileStorage csvFileStorage;
 
-
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage,
+                          FileStorage csvFileStorage) {
         super();
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
+        this.csvFileStorage = csvFileStorage;
     }
 
     // ================ UserPrefs methods ==============================
@@ -77,7 +81,23 @@ public class StorageManager extends ComponentManager implements Storage {
         addressBookStorage.saveAddressBook(addressBook, filePath);
     }
 
+    // ================ File methods ==============================
 
+    @Override
+    public String getCsvFilePath() {
+        return csvFileStorage.getCsvFilePath();
+    }
+
+    @Override
+    public void saveToCsvFile(ReadOnlyAddressBook addressBook) throws IOException {
+        logger.fine("Attempting to write to CSV file.");
+        csvFileStorage.saveToCsvFile(addressBook);
+    }
+
+    @Override
+    public void writeLine(Writer writer, List<String> values) throws IOException {
+        csvFileStorage.writeLine(writer, values);
+    }
     @Override
     @Subscribe
     public void handleAddressBookChangedEvent(AddressBookChangedEvent event) {

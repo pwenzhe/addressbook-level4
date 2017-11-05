@@ -12,7 +12,7 @@ import seedu.address.model.UserPrefs;
 /**
  * API of the Storage component
  */
-public interface Storage extends AddressBookStorage, UserPrefsStorage {
+public interface Storage extends AddressBookStorage, UserPrefsStorage, FileStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
@@ -24,11 +24,19 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage {
     String getAddressBookFilePath();
 
     @Override
+    String getUserPrefsFilePath();
+
+    @Override
+    String getCsvFilePath();
+
+    @Override
     Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException;
 
     @Override
     void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
 
+    @Override
+    void saveToCsvFile(ReadOnlyAddressBook addressBook) throws IOException;
     /**
      * Saves the current version of the Address Book to the hard disk.
      *   Creates the data file if it is missing.
