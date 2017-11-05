@@ -19,7 +19,7 @@ import seedu.address.model.tag.Tag;
 public class CsvFileStorage implements FileStorage {
     private static final String WORD_SEPARATOR = ", ";
 
-    private static String filePath;
+    private String filePath;
 
     public CsvFileStorage(String filePath) {
         this.filePath = filePath;
