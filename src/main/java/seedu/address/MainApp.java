@@ -6,7 +6,6 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 
 import javafx.application.Application;
 import javafx.application.Platform;
