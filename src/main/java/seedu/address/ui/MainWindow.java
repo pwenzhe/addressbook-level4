@@ -315,10 +315,6 @@ public class MainWindow extends UiPart<Region> {
         raise(new ExitAppRequestEvent());
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return this.personListPanel;
-    }
-
     // @@author johnweikangong
     void releaseResources() {
         personInformationPanel.releaseResources();

@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
@@ -46,8 +47,10 @@ public class HomePanel extends UiPart<Region> {
     }
 
     private void setAppData(int totalPersons, int totalTags) {
-        this.totalPersonsAndTags.setText("You have " + totalPersons + " friends and " + totalTags + " tags");
-        this.tipsText.setText(tips[random.nextInt(tips.length)]);
+        Platform.runLater(() -> {
+            this.totalPersonsAndTags.setText("You have " + totalPersons + " friends and " + totalTags + " tags");
+            this.tipsText.setText(tips[random.nextInt(tips.length)]);
+        });
     }
 
     @Subscribe
