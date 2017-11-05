@@ -21,4 +21,9 @@ public interface FileStorage {
      * @throws IOException if there was any problem writing to the file.
      */
     void saveToCsvFile(ReadOnlyAddressBook addressBook) throws IOException;
+
+    /**
+     * @see #saveToCsvFile(ReadOnlyAddressBook)
+     */
+    void saveToCsvFile(ReadOnlyAddressBook addressBook, String filePath) throws IOException;
 }

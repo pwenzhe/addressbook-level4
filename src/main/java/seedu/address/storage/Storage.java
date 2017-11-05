@@ -40,6 +40,9 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage, FileStora
     // @@author johnweikangong
     @Override
     void saveToCsvFile(ReadOnlyAddressBook addressBook) throws IOException;
+
+    @Override
+    void saveToCsvFile(ReadOnlyAddressBook addressBook, String filePath) throws IOException;
     // @@author
 
     /**

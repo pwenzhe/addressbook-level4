@@ -30,12 +30,16 @@ public class CsvFileStorage implements FileStorage {
         return filePath;
     }
 
+    @Override
+    public void saveToCsvFile(ReadOnlyAddressBook addressBook) throws IOException {
+        saveToCsvFile(addressBook, filePath);
+    }
+
     /**
      * Saves the given addressbook data to the specified file.
      */
     @Override
-    public void saveToCsvFile(ReadOnlyAddressBook addressBook)
-            throws IOException {
+    public void saveToCsvFile(ReadOnlyAddressBook addressBook, String filePath) throws IOException {
         try {
             FileWriter writer = new FileWriter(filePath);
             List<ReadOnlyPerson> persons = addressBook.getPersonList();

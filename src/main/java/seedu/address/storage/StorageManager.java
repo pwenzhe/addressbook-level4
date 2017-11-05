@@ -89,9 +89,14 @@ public class StorageManager extends ComponentManager implements Storage {
     @Override
     public void saveToCsvFile(ReadOnlyAddressBook addressBook) throws IOException {
         logger.fine("Attempting to write data to CSV file.");
-        csvFileStorage.saveToCsvFile(addressBook);
+        csvFileStorage.saveToCsvFile(addressBook, csvFileStorage.getCsvFilePath());
     }
-    // @@author
+
+    @Override
+    public void saveToCsvFile(ReadOnlyAddressBook addressBook, String filePath) throws IOException {
+        logger.fine("Attempting to write data to CSV file.");
+        csvFileStorage.saveToCsvFile(addressBook, filePath);
+    }   // @@author
 
     @Override
     @Subscribe
