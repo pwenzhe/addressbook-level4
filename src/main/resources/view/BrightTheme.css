@@ -404,3 +404,11 @@
 #bevyAssistant {
     -fx-fill: black;
 }
+
+.chart-title {
+    -fx-text-fill: black;
+}
+
+.axis.label {
+    -fx-text-fill: black;
+}

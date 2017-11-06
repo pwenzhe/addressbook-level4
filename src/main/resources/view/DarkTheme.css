@@ -397,3 +397,10 @@
 #bevyAssistant {
     -fx-fill: white;
 }
+.chart-title {
+    -fx-text-fill: white;
+}
+
+.axis.label {
+    -fx-text-fill: white;
+}
