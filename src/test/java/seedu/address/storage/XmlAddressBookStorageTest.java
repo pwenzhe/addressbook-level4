@@ -69,12 +69,12 @@ public class XmlAddressBookStorageTest {
         AddressBook original = getTypicalAddressBook();
         XmlAddressBookStorage xmlAddressBookStorage = new XmlAddressBookStorage(filePath);
 
-        //Save in new file and read back
+        // Save in new file and read back
         xmlAddressBookStorage.saveAddressBook(original, filePath);
         ReadOnlyAddressBook readBack = xmlAddressBookStorage.readAddressBook(filePath).get();
         assertEquals(original, new AddressBook(readBack));
 
-        //Modify data, overwrite exiting file, and read back
+        // Modify data, overwrite exiting file, and read back
         List<ReadOnlyPerson> keys = new ArrayList<>();
         keys.add(new Person(HOON));
 
@@ -84,10 +84,10 @@ public class XmlAddressBookStorageTest {
         readBack = xmlAddressBookStorage.readAddressBook(filePath).get();
         assertEquals(original, new AddressBook(readBack));
 
-        //Save and read without specifying file path
+        // Save and read without specifying file path
         original.addPerson(new Person(IDA));
-        xmlAddressBookStorage.saveAddressBook(original); //file path not specified
-        readBack = xmlAddressBookStorage.readAddressBook().get(); //file path not specified
+        xmlAddressBookStorage.saveAddressBook(original); // File path not specified
+        readBack = xmlAddressBookStorage.readAddressBook().get(); // File path not specified
         assertEquals(original, new AddressBook(readBack));
 
     }

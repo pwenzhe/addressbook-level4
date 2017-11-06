@@ -1,4 +1,17 @@
 # johnweikangong
+###### \java\seedu\address\commons\events\storage\ExportToFileRequestEvent.java
+``` java
+/**
+ * Indicates a request to export addressbook to CSV file.
+ */
+public class ExportToFileRequestEvent extends BaseEvent {
+
+    @Override
+    public String toString() {
+        return this.getClass().toString();
+    }
+}
+```
 ###### \java\seedu\address\commons\events\ui\ChangeInformationPanelRequestEvent.java
 ``` java
 /**
@@ -19,6 +32,28 @@ public class ChangeInformationPanelRequestEvent extends BaseEvent {
     @Override
     public String toString() {
         return this.getClass().getSimpleName();
+    }
+}
+```
+###### \java\seedu\address\logic\commands\ExportCommand.java
+``` java
+/**
+ * Exports the addressbook to CSV file.
+ */
+public class ExportCommand extends Command {
+
+    public static final String COMMAND_WORD = "export";
+    public static final String COMMAND_ALIAS = "ex";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exports your friends into a CSV file.\n"
+            + "Example: " + COMMAND_WORD;
+
+    public static final String MESSAGE_SUCCESS = "Successfully exported your friends to Bevy.csv file.";
+
+    @Override
+    public CommandResult execute() {
+        EventsCenter.getInstance().post(new ExportToFileRequestEvent());
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 }
 ```
@@ -88,6 +123,20 @@ public class HomeCommand extends Command {
         } else {
             return ParserUtil.parsePostalCode(postalCode).get();
         }
+    }
+```
+###### \java\seedu\address\MainApp.java
+``` java
+    @Subscribe
+    public void handleChangeInformationPanelRequestEvent(ChangeInformationPanelRequestEvent event) {
+        ui.changeInformationPanel(event);
+    }
+```
+###### \java\seedu\address\MainApp.java
+``` java
+    @Subscribe
+    public void handleExportToFileRequestEvent(ExportToFileRequestEvent event) throws IOException {
+        storage.saveToCsvFile(logic.getAddressBook());
     }
 ```
 ###### \java\seedu\address\model\person\PostalCode.java
@@ -161,6 +210,189 @@ public class PostalCode {
     }
 
 }
+```
+###### \java\seedu\address\storage\CsvFileStorage.java
+``` java
+/**
+ * Stores the addressbook in a CSV file.
+ */
+public class CsvFileStorage implements FileStorage {
+    private static final String WORD_SEPARATOR = ",";
+
+    private String filePath;
+
+    public CsvFileStorage(String filePath) {
+        this.filePath = filePath;
+    }
+
+    @Override
+    public String getCsvFilePath() {
+        return filePath;
+    }
+
+    @Override
+    public void saveToCsvFile(ReadOnlyAddressBook addressBook) throws IOException {
+        saveToCsvFile(addressBook, filePath);
+    }
+
+    /**
+     * Saves the given addressbook data to the specified file.
+     */
+    @Override
+    public void saveToCsvFile(ReadOnlyAddressBook addressBook, String filePath) throws IOException {
+        try {
+            FileWriter writer = new FileWriter(filePath);
+            List<ReadOnlyPerson> persons = addressBook.getPersonList();
+
+            writeLine(writer, Arrays.asList("Name", "Phone", "Birthday", "Email", "Address", "Postal Code",
+                    "Favourite", "Tags"), new HashSet<>());
+
+            for (ReadOnlyPerson person : persons) {
+                writeLine(writer, Arrays.asList(person.getName().fullName, person.getPhone().value,
+                        person.getBirthday().value, person.getEmail().value, person.getAddress().value,
+                        person.getPostalCode().value, person.getFavourite().value), person.getTags());
+            }
+
+            writer.flush();
+            writer.close();
+        } catch (IOException ioe) {
+            assert false : "Unexpected exception " + ioe.getMessage();
+        }
+    }
+
+    /**
+     * Using {@code writer}, writes the {@code personData} and {@code tags} into a line on the file
+     * @throws IOException if there was any problem writing to the file.
+     */
+    public void writeLine(Writer writer, List<String> personData, Set<Tag> tags) throws IOException {
+        StringBuilder sb = new StringBuilder();
+
+        for (String data : personData) {
+            if (data.contains(",")) {
+                data = data.replace(",", "");
+            }
+
+            sb.append(data);
+            sb.append(WORD_SEPARATOR);
+        }
+
+        tags.forEach(tag -> sb.append(tag));
+        sb.append("\n");
+        writer.append(sb.toString());
+    }
+}
+```
+###### \java\seedu\address\storage\FileStorage.java
+``` java
+/**
+ * Stores the addressbook in a CSV file.
+ */
+public interface FileStorage {
+
+    /**
+     * Returns the file path of the CSV data file.
+     */
+    String getCsvFilePath();
+
+    /**
+     * Saves the given {@code addressBook} to the CSV file.
+     * @param addressBook cannot be null.
+     * @throws IOException if there was any problem writing to the file.
+     */
+    void saveToCsvFile(ReadOnlyAddressBook addressBook) throws IOException;
+
+    /**
+     * @see #saveToCsvFile(ReadOnlyAddressBook)
+     */
+    void saveToCsvFile(ReadOnlyAddressBook addressBook, String filePath) throws IOException;
+}
+```
+###### \java\seedu\address\storage\Storage.java
+``` java
+    @Override
+    String getCsvFilePath();
+```
+###### \java\seedu\address\storage\Storage.java
+``` java
+    @Override
+    void saveToCsvFile(ReadOnlyAddressBook addressBook) throws IOException;
+
+    @Override
+    void saveToCsvFile(ReadOnlyAddressBook addressBook, String filePath) throws IOException;
+```
+###### \java\seedu\address\storage\StorageManager.java
+``` java
+    // ================ File methods ==============================
+
+    @Override
+    public String getCsvFilePath() {
+        return csvFileStorage.getCsvFilePath();
+    }
+
+    @Override
+    public void saveToCsvFile(ReadOnlyAddressBook addressBook) throws IOException {
+        logger.fine("Attempting to write data to CSV file.");
+        csvFileStorage.saveToCsvFile(addressBook, csvFileStorage.getCsvFilePath());
+    }
+
+    @Override
+    public void saveToCsvFile(ReadOnlyAddressBook addressBook, String filePath) throws IOException {
+        logger.fine("Attempting to write data to CSV file.");
+        csvFileStorage.saveToCsvFile(addressBook, filePath);
+    }
+```
+###### \java\seedu\address\ui\CommandBox.java
+``` java
+    /**
+     * Observes the text input and show matched suggestions.
+     */
+    private void addSuggestionsListener() {
+        commandTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            String textInput = commandTextField.getText();
+
+            List<String> matchedSuggestions = setOfSuggestions.stream()
+                    .filter(e -> e.toLowerCase().contains(textInput.toLowerCase()))
+                    .collect(Collectors.toList());
+
+            if (textInput == null || textInput.isEmpty() || matchedSuggestions.isEmpty()) {
+                suggestionsPopup.hide();
+            } else {
+                showPopup(matchedSuggestions);
+
+                if (!suggestionsPopup.isShowing()) {
+                    suggestionsPopup.show(this.commandTextField, Side.BOTTOM, 0, 0); // Popup position.
+                }
+            }
+        });
+    }
+
+    /**
+     * Shows the set of suggestions in the context menu with the {@code matchedSuggestions}.
+     *
+     * @param matchedSuggestions The set of matching suggestions.
+     */
+    private void showPopup(List<String> matchedSuggestions) {
+        List<CustomMenuItem> menuItems = new ArrayList<>();
+        int maxMenuItemsSize = Math.min(matchedSuggestions.size(), maxSuggestionsSize);
+
+        for (int i = 0; i < maxMenuItemsSize; i++) {
+            Label suggestionLabel = new Label(matchedSuggestions.get(i));
+            suggestionLabel.setPrefHeight(20);
+            CustomMenuItem item = new CustomMenuItem(suggestionLabel, true);
+            menuItems.add(item);
+            logger.info(suggestionLabel.getText());
+
+            // On selecting a menu item, set the selected menu item into the command text field and close popup.
+            item.setOnAction(actionEvent -> {
+                commandTextField.setText(suggestionLabel.getText());
+                commandTextField.positionCaret(suggestionLabel.getText().length());
+                suggestionsPopup.hide();
+            });
+        }
+
+        suggestionsPopup.getItems().clear();
+        suggestionsPopup.getItems().addAll(menuItems);
+    }
 ```
 ###### \java\seedu\address\ui\GoogleMapBrowserPanel.java
 ``` java
@@ -249,28 +481,42 @@ public class HelpPanel extends UiPart<Region> {
 public class HomePanel extends UiPart<Region> {
 
     private static final String FXML = "HomePanel.fxml";
+    private static String[] tips = {
+        "Not sure what to do? Type sos to find out more!",
+        "Want to add a contact? Type a and let Bevy complete the rest!",
+        "Wondering whose birthday is coming? Type stats to find out!",
+        "Did you know? Bevy can help you complete your commands!",
+        "Type s to select a contact and see more of the person!",
+        "Not sure how to edit? Type e and let Bevy do the rest!",
+        "Did you know? Bevy can help you find your contacts." };
+    private static Random random = new Random();
 
     @FXML
     private Label totalPersonsAndTags;
+
+    @FXML
+    private Text tipsText;
 
     private final Logger logger = LogsCenter.getLogger(this.getClass());
 
     public HomePanel(ReadOnlyAddressBook readOnlyAddressBook) {
         super(FXML);
-        setData(readOnlyAddressBook.getPersonList().size(), readOnlyAddressBook.getTagList().size());
+        setAppData(readOnlyAddressBook.getPersonList().size(), readOnlyAddressBook.getTagList().size());
 
         registerAsAnEventHandler(this);
     }
 
-    private void setData(int totalPersons, int totalTags) {
-        this.totalPersonsAndTags.setText("You have " + totalPersons + " friends and " + totalTags + " tags");
+    private void setAppData(int totalPersons, int totalTags) {
+        Platform.runLater(() -> {
+            this.totalPersonsAndTags.setText("You have " + totalPersons + " friends and " + totalTags + " tags");
+            this.tipsText.setText(tips[random.nextInt(tips.length)]);
+        });
     }
 
     @Subscribe
     public void handleAddressBookChangedEvent(AddressBookChangedEvent abce) {
-        logger.info("Home panel new status: " + abce.data.getPersonList().size() + " persons and "
-                + abce.data.getTagList().size());
-        setData(abce.data.getPersonList().size(), abce.data.getTagList().size());
+        logger.info("Home panel new status: " + abce.data.getPersonList().size() + " persons ");
+        setAppData(abce.data.getPersonList().size(), abce.data.getTagList().size());
     }
 }
 ```
@@ -357,6 +603,9 @@ public class InstagramBrowserPanel extends UiPart<Region> {
         helpPanel = new HelpPanel();
         informationPanelPlaceholder.getChildren().add(helpPanel.getRoot());
 
+        birthdayStatisticsPanel = new BirthdayStatisticsPanel(logic.getAddressBook());
+        informationPanelPlaceholder.getChildren().add(birthdayStatisticsPanel.getRoot());
+
         homePanel = new HomePanel(logic.getAddressBook());
         informationPanelPlaceholder.getChildren().add(homePanel.getRoot());
     }
@@ -367,7 +616,7 @@ public class InstagramBrowserPanel extends UiPart<Region> {
             return; // Short circuit if the current information panel is the same as the requested information panel
         } else {
             informationPanelPlaceholder.getChildren().removeAll(homePanel.getRoot(), personInformationPanel.getRoot(),
-                    helpPanel.getRoot());
+                    helpPanel.getRoot(), birthdayStatisticsPanel.getRoot());
 
             if (event.getPanelRequestEvent().equals(PERSON_INFORMATION_PANEL)) {
                 informationPanelPlaceholder.getChildren().add(personInformationPanel.getRoot());
@@ -375,6 +624,8 @@ public class InstagramBrowserPanel extends UiPart<Region> {
                 informationPanelPlaceholder.getChildren().add(homePanel.getRoot());
             } else if (event.getPanelRequestEvent().equals((HELP_PANEL))) {
                 informationPanelPlaceholder.getChildren().add(helpPanel.getRoot());
+            } else if (event.getPanelRequestEvent().equals((BIRTHDAY_STATISTICS_PANEL))) {
+                informationPanelPlaceholder.getChildren().add(birthdayStatisticsPanel.getRoot());
             }
         }
 
@@ -410,13 +661,6 @@ public class InstagramBrowserPanel extends UiPart<Region> {
         changeInformationPanel(new ChangeInformationPanelRequestEvent(HOME_PANEL));
     }
 
-    /**
-     * Opens the help panel.
-     */
-    @FXML
-    public void handleHelp() {
-        changeInformationPanel(new ChangeInformationPanelRequestEvent(HELP_PANEL));
-    }
 ```
 ###### \java\seedu\address\ui\MainWindow.java
 ``` java
@@ -530,10 +774,6 @@ public class PersonInformationPanel extends UiPart<Region> {
         mainWindow.changeInformationPanel(event);
     }
 
-    @Override
-    public void changeTheme() {
-        mainWindow.changeTheme();
-    }
 ```
 ###### \resources\view\BrightTheme.css
 ``` css
@@ -541,7 +781,7 @@ public class PersonInformationPanel extends UiPart<Region> {
     -fx-fill: black;
 }
 
-#welcomeContentText {
+#welcomeContentText, #tipsText {
     -fx-fill: #818181;
 }
 
@@ -583,7 +823,7 @@ public class PersonInformationPanel extends UiPart<Region> {
     -fx-fill: white;
 }
 
-#welcomeContentText {
+#welcomeContentText, #tipsText {
     -fx-fill: #D6D6D6;
 }
 
@@ -630,6 +870,7 @@ public class PersonInformationPanel extends UiPart<Region> {
 ```
 ###### \resources\view\HomePanel.fxml
 ``` fxml
+
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
@@ -651,7 +892,7 @@ public class PersonInformationPanel extends UiPart<Region> {
                <Font name="Segoe UI Semibold" size="18.0" />
             </font>
          </Text>
-         <Text fx:id="welcomeContentText" fill="#464646" strokeType="OUTSIDE" strokeWidth="0.0" text="Not sure what to do? Type help to find out more!">
+         <Text fx:id="tipsText" fill="#464646" strokeType="OUTSIDE" strokeWidth="0.0" text="\$tips">
             <font>
                <Font name="Segoe UI Semibold" size="18.0" />
             </font>
@@ -738,7 +979,6 @@ public class PersonInformationPanel extends UiPart<Region> {
   <StackPane fx:id="statusbarPlaceholder" />
    <stylesheets>
       <URL value="@Extensions.css" />
-      <URL value="@BrightTheme.css" />
    </stylesheets>
 </VBox>
 ```
@@ -778,12 +1018,6 @@ public class PersonInformationPanel extends UiPart<Region> {
             <Label fx:id="postalCode" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
       </GridPane>
-      <Label fx:id="name" layoutX="20.0" layoutY="14.0" styleClass="personLabel" text="Label">
-         <padding>
-            <Insets bottom="10.0" />
-         </padding></Label>
-   </children>
-</AnchorPane>
 ```
 ###### \resources\view\PersonInformationPanel.fxml
 ``` fxml

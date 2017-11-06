@@ -31,7 +31,7 @@ public class DeleteCommand extends UndoableCommand {
         this.zeroBasedTargetIndexes = zeroBasedTargetIndexes;
     }
 
-
+    // @@author johnweikangong-reused
     @Override
     public CommandResult executeUndoableCommand() throws CommandException {
 
@@ -52,6 +52,7 @@ public class DeleteCommand extends UndoableCommand {
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete.size(),
                 StringUtil.toIndexedListString(zeroBasedTargetIndexes, personToDelete)));
     }
+    // @@author
 
     @Override
     public boolean equals(Object other) {

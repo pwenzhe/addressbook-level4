@@ -66,9 +66,6 @@ public class MainWindow extends UiPart<Region> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private MenuItem exitMenuItem;
-
-    @FXML
     private StackPane personListPanelPlaceholder;
 
     @FXML
@@ -103,9 +100,8 @@ public class MainWindow extends UiPart<Region> {
     }
 
     private void setAccelerators() {
-        setAccelerator(homeMenuItem, KeyCombination.valueOf("F1"));
-        setAccelerator(helpMenuItem, KeyCombination.valueOf("F2"));
-        setAccelerator(exitMenuItem, KeyCombination.valueOf("Esc"));
+        setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(homeMenuItem, KeyCombination.valueOf("F2"));
     }
 
     /**
@@ -317,10 +313,6 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     public void handleExit() {
         raise(new ExitAppRequestEvent());
-    }
-
-    public PersonListPanel getPersonListPanel() {
-        return this.personListPanel;
     }
 
     // @@author johnweikangong

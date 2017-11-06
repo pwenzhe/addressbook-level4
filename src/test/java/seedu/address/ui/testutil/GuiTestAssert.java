@@ -33,6 +33,7 @@ public class GuiTestAssert {
                 actualCard.getTags());
     }
 
+    // @@author johnweikangong
     /**
      * Asserts that {@code actualPersonDetailsPanel} is empty
      */
@@ -57,6 +58,8 @@ public class GuiTestAssert {
         assertEquals(expectedPerson.getAddress().value, actualPersonDetailsPanel.getAddress());
         assertEquals(expectedPerson.getPostalCode().value, actualPersonDetailsPanel.getPostalCode());
     }
+    // @@author
+
     /**
      * Asserts that the list in {@code personListPanelHandle} displays the details of {@code persons} correctly and
      * in the correct order.

@@ -1,5 +1,5 @@
 # pwenzhe
-###### \src\main\java\seedu\address\commons\events\ui\ChangeThemeRequestEvent.java
+###### \java\seedu\address\commons\events\ui\ChangeThemeRequestEvent.java
 ``` java
 /**
  * Indicates a request for theme change.
@@ -12,7 +12,7 @@ public class ChangeThemeRequestEvent extends BaseEvent {
     }
 }
 ```
-###### \src\main\java\seedu\address\logic\commands\EditCommand.java
+###### \java\seedu\address\logic\commands\EditCommand.java
 ``` java
         public void setFavourite(Favourite favourite) {
             this.favourite = favourite;
@@ -22,7 +22,7 @@ public class ChangeThemeRequestEvent extends BaseEvent {
             return Optional.ofNullable(favourite);
         }
 ```
-###### \src\main\java\seedu\address\logic\commands\ThemeCommand.java
+###### \java\seedu\address\logic\commands\ThemeCommand.java
 ``` java
 /**
  * Changes theme of the app.
@@ -44,14 +44,14 @@ public class ThemeCommand extends Command {
     }
 }
 ```
-###### \src\main\java\seedu\address\MainApp.java
+###### \java\seedu\address\MainApp.java
 ``` java
     @Subscribe
     public void handleChangeThemeRequestEvent(ChangeThemeRequestEvent event) {
         ui.changeTheme();
     }
 ```
-###### \src\main\java\seedu\address\model\person\Favourite.java
+###### \java\seedu\address\model\person\Favourite.java
 ``` java
 /**
  * Represents a Person's favourite status in the address book.
@@ -143,28 +143,31 @@ public class Favourite {
     }
 }
 ```
-###### \src\main\java\seedu\address\model\person\Name.java
+###### \java\seedu\address\model\person\Name.java
 ``` java
     public static final String NAME_VALIDATION_REGEX = "[[A-Z0-9]$\\p{Alnum}][[A-Z0-9]$\\p{Alnum} ]*";
 ```
-###### \src\main\java\seedu\address\model\person\Name.java
+###### \java\seedu\address\model\person\Name.java
 ``` java
         String[] nameArr = trimmedName.split(" ");
-        StringBuilder upperCaseName = new StringBuilder();
-        for (int i = 0; i < nameArr.length; i++) {
-            upperCaseName.append(Character.toUpperCase(nameArr[i].charAt(0)));
-            upperCaseName.append(nameArr[i].substring(1));
-            if (i < nameArr.length - 1) {
-                upperCaseName.append(' ');
+        StringBuilder capitalisedName = new StringBuilder();
+
+        if (!isValidName(name)) {
+            throw new IllegalValueException(MESSAGE_NAME_CONSTRAINTS);
+        } else {
+            for (int i = 0; i < nameArr.length; i++) {
+                capitalisedName.append(Character.toUpperCase(nameArr[i].charAt(0)));
+                capitalisedName.append(nameArr[i].substring(1));
+
+                if (i < nameArr.length - 1) {
+                    capitalisedName.append(' ');
+                }
             }
         }
-        String trimmedcasedName = upperCaseName.toString();
-        if (!isValidName(trimmedcasedName)) {
-            throw new IllegalValueException(MESSAGE_NAME_CONSTRAINTS);
-        }
-        this.fullName = trimmedcasedName;
+
+        this.fullName = capitalisedName.toString();
 ```
-###### \src\main\java\seedu\address\model\person\UniquePersonList.java
+###### \java\seedu\address\model\person\UniquePersonList.java
 ``` java
     /**
      * Compare Persons by favourite status and then name
@@ -191,11 +194,11 @@ public class Favourite {
         return compare;
     }
 ```
-###### \src\main\java\seedu\address\model\UserPrefs.java
+###### \java\seedu\address\model\UserPrefs.java
 ``` java
     private String addressBookTheme = "Bright";
 ```
-###### \src\main\java\seedu\address\model\UserPrefs.java
+###### \java\seedu\address\model\UserPrefs.java
 ``` java
     public String getAddressBookTheme() {
         return addressBookTheme;
@@ -209,18 +212,18 @@ public class Favourite {
         }
     }
 ```
-###### \src\main\java\seedu\address\model\UserPrefs.java
+###### \java\seedu\address\model\UserPrefs.java
 ``` java
         sb.append("\nAddressBook theme : " + addressBookTheme);
 ```
-###### \src\main\java\seedu\address\model\UserPrefs.java
+###### \java\seedu\address\model\UserPrefs.java
 ``` java
         return sb.toString();
     }
 
 }
 ```
-###### \src\main\java\seedu\address\ui\MainWindow.java
+###### \java\seedu\address\ui\MainWindow.java
 ``` java
     /**
      * Initializes the theme on startup to the user preferred theme.
@@ -232,7 +235,7 @@ public class Favourite {
         getRoot().getStylesheets().add(initThemePath);
     }
 ```
-###### \src\main\java\seedu\address\ui\PersonCard.java
+###### \java\seedu\address\ui\PersonCard.java
 ``` java
     /**
      * Initialise favourite image
@@ -244,11 +247,11 @@ public class Favourite {
         }
     }
 ```
-###### \src\main\java\seedu\address\ui\UiManager.java
+###### \java\seedu\address\ui\UiManager.java
 ``` java
             mainWindow.initTheme(prefs.getAddressBookTheme());
 ```
-###### \src\main\java\seedu\address\ui\UiManager.java
+###### \java\seedu\address\ui\UiManager.java
 ``` java
     @Override
     public void changeTheme() {
@@ -256,7 +259,7 @@ public class Favourite {
         this.prefs.setAddressBookTheme();
     }
 ```
-###### \src\main\resources\view\BrightTheme.css
+###### \resources\view\BrightTheme.css
 ``` css
 .background {
     -fx-background-color: derive(#dddddd, 20%);
@@ -624,11 +627,11 @@ public class Favourite {
 }
 
 ```
-###### \src\main\resources\view\PersonDetailsPanel.fxml
+###### \resources\view\PersonDetailsPanel.fxml
 ``` fxml
       <Label fx:id="name" layoutX="20.0" layoutY="14.0" styleClass="personLabel" text="Label">
 ```
-###### \src\main\resources\view\PersonListCard.fxml
+###### \resources\view\PersonListCard.fxml
 ``` fxml
             <VBox />
         <Region HBox.hgrow="ALWAYS" />
@@ -638,40 +641,7 @@ public class Favourite {
           </image>
         </ImageView>
 ```
-###### \src\main\resources\view\PersonListPanel.fxml
+###### \resources\view\PersonListPanel.fxml
 ``` fxml
 <VBox styleClass="listPanel" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-```
-###### \src\test\java\seedu\address\logic\parser\AddCommandParserTest.java
-``` java
-        // invalid favourite
-        assertParseFailure(parser, AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_BOB + BIRTHDAY_DESC_BOB
-                        + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + INVALID_FAVOURITE_DESC + TAG_DESC_HUSBAND
-                        + TAG_DESC_FRIEND,
-                Favourite.MESSAGE_FAVOURITE_CONSTRAINTS);
-```
-###### \src\test\java\systemtests\AddCommandSystemTest.java
-``` java
-        /* Case: invalid favourite -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + BIRTHDAY_DESC_AMY + EMAIL_DESC_AMY
-                + POSTALCODE_DESC_AMY + ADDRESS_DESC_AMY + INVALID_FAVOURITE_DESC;
-        assertCommandFailure(command, Favourite.MESSAGE_FAVOURITE_CONSTRAINTS);
-```
-###### \unused\MainWindow.java
-``` java
-
-/**
- * Changes the stylesheet used by GUI.
- */
-public void changeTheme(int theme) {
-    String brightTheme = "view/BrightTheme.css";
-    String darkTheme = "view/DarkTheme.css";
-    if (theme == 0) {
-        getRoot().getStylesheets().remove(darkTheme);
-        getRoot().getStylesheets().add(brightTheme);
-    } else {
-        getRoot().getStylesheets().remove(brightTheme);
-        getRoot().getStylesheets().add(darkTheme);
-    }
-}
 ```

@@ -31,21 +31,25 @@ public class Name {
     public Name(String name) throws IllegalValueException {
         requireNonNull(name);
         String trimmedName = name.trim();
+
         // @@author pwenzhe
         String[] nameArr = trimmedName.split(" ");
-        StringBuilder upperCaseName = new StringBuilder();
-        for (int i = 0; i < nameArr.length; i++) {
-            upperCaseName.append(Character.toUpperCase(nameArr[i].charAt(0)));
-            upperCaseName.append(nameArr[i].substring(1));
-            if (i < nameArr.length - 1) {
-                upperCaseName.append(' ');
+        StringBuilder capitalisedName = new StringBuilder();
+
+        if (!isValidName(name)) {
+            throw new IllegalValueException(MESSAGE_NAME_CONSTRAINTS);
+        } else {
+            for (int i = 0; i < nameArr.length; i++) {
+                capitalisedName.append(Character.toUpperCase(nameArr[i].charAt(0)));
+                capitalisedName.append(nameArr[i].substring(1));
+
+                if (i < nameArr.length - 1) {
+                    capitalisedName.append(' ');
+                }
             }
         }
-        String trimmedcasedName = upperCaseName.toString();
-        if (!isValidName(trimmedcasedName)) {
-            throw new IllegalValueException(MESSAGE_NAME_CONSTRAINTS);
-        }
-        this.fullName = trimmedcasedName;
+
+        this.fullName = capitalisedName.toString();
         // @@author
     }
 
