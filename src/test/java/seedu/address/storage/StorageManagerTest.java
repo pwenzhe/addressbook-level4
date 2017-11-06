@@ -6,6 +6,9 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -55,6 +58,13 @@ public class StorageManagerTest {
         assertEquals(original, retrieved);
     }
 
+    // @@author johnweikangong
+    @Test
+    public void getUserPrefsFilePath() {
+        assertNotNull(storageManager.getUserPrefsFilePath());
+    }
+    // @@author
+
     @Test
     public void addressBookReadSave() throws Exception {
         /*
@@ -72,6 +82,28 @@ public class StorageManagerTest {
     public void getAddressBookFilePath() {
         assertNotNull(storageManager.getAddressBookFilePath());
     }
+
+    // @@author johnweikangong
+    @Test
+    public void saveToCsvFile() throws IOException {
+        /*
+         * Note: This is an integration test that verifies the StorageManager is properly wired to the
+         * {@link CsvFileStorage} class.
+         * More extensive testing of CsvFileStorage saving is done in {@link CsvFileStorageTest} class.
+         */
+        AddressBook original = getTypicalAddressBook();
+        storageManager.saveToCsvFile(original);
+        List<String> expectedFileContent = Files.readAllLines(
+                Paths.get(CsvFileStorageTest.TEST_DATA_FOLDER + "StorageManagerTestExpectedBevy.csv"));
+        List<String> actualFileContent = Files.readAllLines(Paths.get(storageManager.getCsvFilePath()));
+        assertEquals(expectedFileContent, actualFileContent);
+    }
+
+    @Test
+    public void getFileStorageFilePath() {
+        assertNotNull(storageManager.getCsvFilePath());
+    }
+    // @@author
 
     @Test
     public void handleAddressBookChangedEvent_exceptionThrown_eventRaised() {
