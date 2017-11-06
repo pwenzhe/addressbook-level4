@@ -242,9 +242,6 @@ public class BirthdayStatisticsPanel extends UiPart<Region> {
         for (ReadOnlyPerson p : readOnlyAddressBook.getPersonList()) {
             String month = p.getBirthday().toString().replaceAll("[^a-zA-Z]+", "");
             switch(month) {
-            case "Jan":
-                monthInt = 0;
-                break;
             case "Feb":
                 monthInt = 1;
                 break;
@@ -278,7 +275,7 @@ public class BirthdayStatisticsPanel extends UiPart<Region> {
             case "Dec":
                 monthInt = 11;
                 break;
-            default:
+            default: // Jan
                 monthInt = 0;
                 break;
             }

@@ -339,6 +339,7 @@ public interface FileStorage {
     public void saveToCsvFile(ReadOnlyAddressBook addressBook, String filePath) throws IOException {
         logger.fine("Attempting to write data to CSV file.");
         csvFileStorage.saveToCsvFile(addressBook, filePath);
+    }
 ```
 ###### \java\seedu\address\ui\CommandBox.java
 ``` java

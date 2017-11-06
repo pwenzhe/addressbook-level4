@@ -91,11 +91,20 @@ public class StorageManagerTest {
          * {@link CsvFileStorage} class.
          * More extensive testing of CsvFileStorage saving is done in {@link CsvFileStorageTest} class.
          */
+
+        // Saves in new file with no filepath specified and asserts file contents.
         AddressBook original = getTypicalAddressBook();
         storageManager.saveToCsvFile(original);
         List<String> expectedFileContent = Files.readAllLines(
                 Paths.get(CsvFileStorageTest.TEST_DATA_FOLDER + "StorageManagerTestExpectedBevy.csv"));
         List<String> actualFileContent = Files.readAllLines(Paths.get(storageManager.getCsvFilePath()));
+        assertEquals(expectedFileContent, actualFileContent);
+
+        // Saves in new file with filepath specified and asserts file contents.
+        storageManager.saveToCsvFile(original, storageManager.getCsvFilePath());
+        expectedFileContent = Files.readAllLines(
+                Paths.get(CsvFileStorageTest.TEST_DATA_FOLDER + "StorageManagerTestExpectedBevy.csv"));
+        actualFileContent = Files.readAllLines(Paths.get(storageManager.getCsvFilePath()));
         assertEquals(expectedFileContent, actualFileContent);
     }
 

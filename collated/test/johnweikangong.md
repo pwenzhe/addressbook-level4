@@ -154,7 +154,7 @@ public class PostalCodeTest {
 ###### \java\seedu\address\storage\CsvFileStorageTest.java
 ``` java
 public class CsvFileStorageTest {
-    private static final String TEST_DATA_FOLDER = FileUtil.getPath(
+    public static final String TEST_DATA_FOLDER = FileUtil.getPath(
             "./src/test/data/CsvFileStorageTest/");
 
     @Rule
@@ -165,17 +165,19 @@ public class CsvFileStorageTest {
 
     @Test
     public void saveToCsvFile_allInOrder_success() throws Exception {
-        String filePath = TEST_DATA_FOLDER + "ActualBevy.csv";
+        String filePath = TEST_DATA_FOLDER + "CsvFileStorageTestActualBevy.csv";
         AddressBook original = getTypicalAddressBook();
         CsvFileStorage csvFileStorage = new CsvFileStorage(filePath);
 
-        // Save in new file and assert file contents
+        // Saves in new file and assert file contents.
         csvFileStorage.saveToCsvFile(original, filePath);
-        List<String> expectedFileContent = Files.readAllLines(Paths.get(TEST_DATA_FOLDER + "ExpectedBevy1.csv"));
+        List<String> expectedFileContent = Files.readAllLines(Paths.get(
+                TEST_DATA_FOLDER + "CsvFileStorageTestExpectedBevy1.csv"));
         List<String> actualFileContent = Files.readAllLines(Paths.get(filePath));
         assertEquals(expectedFileContent, actualFileContent);
 
-        // Modify data by adding and removing same person, overwrite existing file, and assert file contents
+        // Modify data by adding and removing same person, save and
+        // overwrite existing file, and assert file contents.
         List<ReadOnlyPerson> keys = new ArrayList<>();
         keys.add(new Person(HOON));
 
@@ -185,10 +187,12 @@ public class CsvFileStorageTest {
         actualFileContent = Files.readAllLines(Paths.get(filePath));
         assertEquals(expectedFileContent, actualFileContent);
 
-        // Modify data by adding new person, overwrite existing file, and assert file contents
+        // Modify data by adding new person, save and overwrite
+        // existing file, and assert file contents.
         original.addPerson(new Person(IDA));
         csvFileStorage.saveToCsvFile(original, filePath);
-        expectedFileContent = Files.readAllLines(Paths.get(TEST_DATA_FOLDER + "ExpectedBevy2.csv"));
+        expectedFileContent = Files.readAllLines(Paths.get(
+                TEST_DATA_FOLDER + "CsvFileStorageTestExpectedBevy2.csv"));
         actualFileContent = Files.readAllLines(Paths.get(filePath));
         assertEquals(expectedFileContent, actualFileContent);
     }
@@ -216,6 +220,44 @@ public class CsvFileStorageTest {
         }
     }
 }
+```
+###### \java\seedu\address\storage\StorageManagerTest.java
+``` java
+    @Test
+    public void getUserPrefsFilePath() {
+        assertNotNull(storageManager.getUserPrefsFilePath());
+    }
+```
+###### \java\seedu\address\storage\StorageManagerTest.java
+``` java
+    @Test
+    public void saveToCsvFile() throws IOException {
+        /*
+         * Note: This is an integration test that verifies the StorageManager is properly wired to the
+         * {@link CsvFileStorage} class.
+         * More extensive testing of CsvFileStorage saving is done in {@link CsvFileStorageTest} class.
+         */
+
+        // Saves in new file with no filepath specified and asserts file contents.
+        AddressBook original = getTypicalAddressBook();
+        storageManager.saveToCsvFile(original);
+        List<String> expectedFileContent = Files.readAllLines(
+                Paths.get(CsvFileStorageTest.TEST_DATA_FOLDER + "StorageManagerTestExpectedBevy.csv"));
+        List<String> actualFileContent = Files.readAllLines(Paths.get(storageManager.getCsvFilePath()));
+        assertEquals(expectedFileContent, actualFileContent);
+
+        // Saves in new file with filepath specified and asserts file contents.
+        storageManager.saveToCsvFile(original, storageManager.getCsvFilePath());
+        expectedFileContent = Files.readAllLines(
+                Paths.get(CsvFileStorageTest.TEST_DATA_FOLDER + "StorageManagerTestExpectedBevy.csv"));
+        actualFileContent = Files.readAllLines(Paths.get(storageManager.getCsvFilePath()));
+        assertEquals(expectedFileContent, actualFileContent);
+    }
+
+    @Test
+    public void getFileStorageFilePath() {
+        assertNotNull(storageManager.getCsvFilePath());
+    }
 ```
 ###### \java\seedu\address\ui\GoogleMapBrowserPanelTest.java
 ``` java

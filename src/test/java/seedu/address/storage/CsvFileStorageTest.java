@@ -39,14 +39,15 @@ public class CsvFileStorageTest {
         AddressBook original = getTypicalAddressBook();
         CsvFileStorage csvFileStorage = new CsvFileStorage(filePath);
 
-        // Save in new file and assert file contents
+        // Saves in new file and assert file contents.
         csvFileStorage.saveToCsvFile(original, filePath);
         List<String> expectedFileContent = Files.readAllLines(Paths.get(
                 TEST_DATA_FOLDER + "CsvFileStorageTestExpectedBevy1.csv"));
         List<String> actualFileContent = Files.readAllLines(Paths.get(filePath));
         assertEquals(expectedFileContent, actualFileContent);
 
-        // Modify data by adding and removing same person, overwrite existing file, and assert file contents
+        // Modify data by adding and removing same person, save and
+        // overwrite existing file, and assert file contents.
         List<ReadOnlyPerson> keys = new ArrayList<>();
         keys.add(new Person(HOON));
 
@@ -56,7 +57,8 @@ public class CsvFileStorageTest {
         actualFileContent = Files.readAllLines(Paths.get(filePath));
         assertEquals(expectedFileContent, actualFileContent);
 
-        // Modify data by adding new person, overwrite existing file, and assert file contents
+        // Modify data by adding new person, save and overwrite
+        // existing file, and assert file contents.
         original.addPerson(new Person(IDA));
         csvFileStorage.saveToCsvFile(original, filePath);
         expectedFileContent = Files.readAllLines(Paths.get(
