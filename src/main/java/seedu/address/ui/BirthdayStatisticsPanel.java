@@ -109,6 +109,7 @@ public class BirthdayStatisticsPanel extends UiPart<Region> {
         Platform.runLater(()-> {
             barChart.getData().clear();
             barChart.getData().add(series);
+            barChart.setLegendVisible(false);
         });
 
     }
