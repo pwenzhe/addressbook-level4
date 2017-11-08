@@ -21,6 +21,7 @@ import seedu.address.logic.commands.HomeCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.TagStatisticsCommand;
 import seedu.address.logic.commands.ThemeCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -111,6 +112,10 @@ public class AddressBookParser {
         case BirthdayStatisticsCommand.COMMAND_WORD:
         case BirthdayStatisticsCommand.COMMAND_ALIAS:
             return new BirthdayStatisticsCommand();
+
+        case TagStatisticsCommand.COMMAND_WORD:
+        case TagStatisticsCommand.COMMAND_ALIAS:
+            return new TagStatisticsCommand();
 
         case ExportCommand.COMMAND_WORD:
         case ExportCommand.COMMAND_ALIAS:
