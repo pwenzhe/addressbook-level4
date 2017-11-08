@@ -1,8 +1,5 @@
 package seedu.address.ui;
 
-
-import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -57,8 +54,9 @@ public class TagStatisticsPanel extends UiPart<Region> {
             Set<Tag> personTags = person.getTags();
             for (Tag tag : personTags) {
                 // to prevent adding duplicated tags
-                if (!tagNames.contains(tag.getTagName()))
+                if (!tagNames.contains(tag.getTagName())) {
                     tagNames.add(tag.getTagName());
+                }
             }
         }
         Logger.getLogger(tagNames.toString());
