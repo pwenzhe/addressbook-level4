@@ -8,7 +8,7 @@ import seedu.address.commons.events.ui.ChangeInformationPanelRequestEvent;
  */
 public class BirthdayStatisticsCommand extends Command {
 
-    public static final String COMMAND_WORD = "birthday statistics";
+    public static final String COMMAND_WORD = "birthdaystatistics";
     public static final String COMMAND_ALIAS = "bstats";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows the birthday statistics.\n"

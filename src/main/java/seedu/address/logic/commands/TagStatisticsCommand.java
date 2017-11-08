@@ -8,7 +8,7 @@ import seedu.address.commons.events.ui.ChangeInformationPanelRequestEvent;
  */
 public class TagStatisticsCommand extends Command {
 
-    public static final String COMMAND_WORD = "tag statistics";
+    public static final String COMMAND_WORD = "tagstatistics";
     public static final String COMMAND_ALIAS = "tstats";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows the tag statistics.\n"
