@@ -606,6 +606,9 @@ public class InstagramBrowserPanel extends UiPart<Region> {
         birthdayStatisticsPanel = new BirthdayStatisticsPanel(logic.getAddressBook());
         informationPanelPlaceholder.getChildren().add(birthdayStatisticsPanel.getRoot());
 
+        tagStatisticsPanel = new TagStatisticsPanel(logic.getAddressBook());
+        informationPanelPlaceholder.getChildren().add(tagStatisticsPanel.getRoot());
+
         homePanel = new HomePanel(logic.getAddressBook());
         informationPanelPlaceholder.getChildren().add(homePanel.getRoot());
     }
@@ -616,16 +619,18 @@ public class InstagramBrowserPanel extends UiPart<Region> {
             return; // Short circuit if the current information panel is the same as the requested information panel
         } else {
             informationPanelPlaceholder.getChildren().removeAll(homePanel.getRoot(), personInformationPanel.getRoot(),
-                    helpPanel.getRoot(), birthdayStatisticsPanel.getRoot());
+                    helpPanel.getRoot(), birthdayStatisticsPanel.getRoot(), tagStatisticsPanel.getRoot());
 
             if (event.getPanelRequestEvent().equals(PERSON_INFORMATION_PANEL)) {
                 informationPanelPlaceholder.getChildren().add(personInformationPanel.getRoot());
-            } else if (event.getPanelRequestEvent().equals((HOME_PANEL))) {
+            } else if (event.getPanelRequestEvent().equals(HOME_PANEL)) {
                 informationPanelPlaceholder.getChildren().add(homePanel.getRoot());
-            } else if (event.getPanelRequestEvent().equals((HELP_PANEL))) {
+            } else if (event.getPanelRequestEvent().equals(HELP_PANEL)) {
                 informationPanelPlaceholder.getChildren().add(helpPanel.getRoot());
-            } else if (event.getPanelRequestEvent().equals((BIRTHDAY_STATISTICS_PANEL))) {
+            } else if (event.getPanelRequestEvent().equals(BIRTHDAY_STATISTICS_PANEL)) {
                 informationPanelPlaceholder.getChildren().add(birthdayStatisticsPanel.getRoot());
+            } else if (event.getPanelRequestEvent().equals(TAG_STATISTICS_PANEL)) {
+                informationPanelPlaceholder.getChildren().add(tagStatisticsPanel.getRoot());
             }
         }
 
@@ -816,6 +821,14 @@ public class PersonInformationPanel extends UiPart<Region> {
 #bevyAssistant {
     -fx-fill: black;
 }
+
+.chart-title {
+    -fx-text-fill: black;
+}
+
+.axis-label {
+    -fx-text-fill: black;
+}
 ```
 ###### \resources\view\DarkTheme.css
 ``` css
@@ -857,6 +870,13 @@ public class PersonInformationPanel extends UiPart<Region> {
 
 #bevyAssistant {
     -fx-fill: white;
+}
+.chart-title {
+    -fx-text-fill: white;
+}
+
+.axis-label {
+    -fx-text-fill: white;
 }
 ```
 ###### \resources\view\GoogleMapBrowserPanel.fxml

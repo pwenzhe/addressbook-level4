@@ -167,6 +167,29 @@ public class Favourite {
 
         this.fullName = capitalisedName.toString();
 ```
+###### \java\seedu\address\model\person\PersonContainsKeywordsPredicate.java
+``` java
+                || keywords.stream()
+                        .filter(num -> num.matches("\\d+"))
+                        .anyMatch(number -> person.getPhone().toString().contains(number))
+                || keywords.stream()
+                        .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword))
+                || keywords.stream()
+                        .anyMatch(email -> person.getEmail().toString().contains(email))
+                || keywords.stream()
+                        .anyMatch(address -> StringUtil
+                                .containsWordIgnoreCase(person.getAddress().toString(), address))
+                || keywords.stream()
+                        .filter(postal -> postal.matches("\\d+"))
+                        .anyMatch(postalCode -> person.getPostalCode().toString().contains(postalCode))
+                || keywords.stream()
+                        .anyMatch(tag -> StringUtil.containsWordIgnoreCase(person.getTags().stream()
+                                .map(i -> i.toString()).collect(Collectors.joining(" "))
+                                .replaceAll("\\[|\\]|\\,", " "), tag))
+                || keywords.stream()
+                        .filter(fav -> fav.toLowerCase().matches("favourite"))
+                        .anyMatch(favourite -> person.getFavourite().toString().matches("yes"));
+```
 ###### \java\seedu\address\model\person\UniquePersonList.java
 ``` java
     /**
