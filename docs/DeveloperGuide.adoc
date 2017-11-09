@@ -420,6 +420,7 @@ _Figure 4.4.1: Sorting Sequence Diagram using addPerson_
 image::SortSequenceDiagram2.png[width="300"]
 _Figure 4.4.2: Sorting Sequence Diagram using updatePerson_
 
+// tag::favourite[]
 . Following the flow of the diagram, when a person is added or edited, the addPerson or updatePerson method will be respectively called in `AddressBook`.
 . `UniquePersonList` will sort the added person by comparing the favourite status and then the names in the current list and insert the persons at the correct slot.
 . The sorted contact list will then be returned.
@@ -433,6 +434,7 @@ _Figure 4.4.2: Sorting Sequence Diagram using updatePerson_
 **Alternative 2:** Creating a separate sort command to sort list. +
 **Pros:** A command that will always allow the list to be sorted in order. +
 **Cons:** It will cause inconvenience as user have to manually type in the command to sort the list whenever they add a new person or change their favourite status. +
+// end::favourite[]
 
 === Birthday
 
@@ -583,6 +585,7 @@ Below are the respective commands and their requested panel.
 . *Select Command*: Request selected person's information panel.
 . *Help Command*: Request help panel.
 
+// tag::changetheme[]
 === Changing Themes
 
 The theme of the application can be changed via a request event. The `changetheme` command raises the `ChangeThemeRequestEvent()`. There are two themes, namely dark and bright.+
@@ -611,6 +614,7 @@ Below is a detailed explanation of the extension.
 **Alternative 2:** Creating a separate command for changing theme and saving the theme. +
 **Pros:** Makes the code simpler with different commands using lesser components. +
 **Cons:** It is less convenient for the user as it requires an additional input for saving the theme. +
+// end::changetheme[]
 
 == Documentation
 
