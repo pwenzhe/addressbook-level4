@@ -60,9 +60,31 @@ public class PersonContainsKeywordsPredicateTest {
         predicate = new PersonContainsKeywordsPredicate(Arrays.asList("aLIce", "bOB"));
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
+        // @@author pwenzhe
         // Name and phone keyword
         predicate = new PersonContainsKeywordsPredicate(Arrays.asList("Alice", "12345"));
         assertTrue(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345").build()));
+
+        // Address keywords
+        predicate = new PersonContainsKeywordsPredicate(Arrays.asList("Main", "Street"));
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice").withAddress("Main Street").build()));
+
+        // Email keyword
+        predicate = new PersonContainsKeywordsPredicate(Arrays.asList("alice@email.com"));
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice").withEmail("alice@email.com").build()));
+
+        // Postal code keyword
+        predicate = new PersonContainsKeywordsPredicate(Arrays.asList("123456"));
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice").withPostalCode("123456").build()));
+
+        // Tag keyword
+        predicate = new PersonContainsKeywordsPredicate(Arrays.asList("friends"));
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice").withTags("friends").build()));
+
+        // Favourite keyword
+        predicate = new PersonContainsKeywordsPredicate(Arrays.asList("favourite"));
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice").withFavourite("yes").build()));
+        // @@author
     }
 
     @Test
@@ -74,10 +96,5 @@ public class PersonContainsKeywordsPredicateTest {
         // Non-matching keyword
         predicate = new PersonContainsKeywordsPredicate(Arrays.asList("Carol"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
-
-        // Keywords match email and address, but does not match name
-        predicate = new PersonContainsKeywordsPredicate(Arrays.asList("alice@email.com", "Main", "Street"));
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice")
-                .withEmail("alice@email.com").withAddress("Main Street").build()));
     }
 }
