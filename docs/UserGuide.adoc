@@ -16,22 +16,24 @@ By: `Team Bevy`      Since: `Aug 2017`      Licence: `MIT`
 
 == Introduction
 
-Have you ever forgotten that special friend's birthday? Or that memorable event you had with
-a friend?
+image::Ui.png[width="800"]
+_Figure 1.1 Bevy UI_
 
-In today's interconnectedness, we are making more friends than we can ever imagine, but
-at the same time, we are losing many of them because of our forgetfulness. If that is you,
-then this app is for you.
+Have you ever forgotten that special friend's birthday? Or that name of the friend you just spoke to?
 
-Bevy is a powerful app that helps you to remember your friends again. It simplifies your friends' information in a
-single place and provide more. Bevy is smart to know what your friends are up to in their social media and even gives
-you a sneak peek into their location.
+In today's globalised world, we are making more friends than we can ever imagine, but
+at the same time, we are losing many of them because of our forgetfulness. If that is you, don't worry,
+we have just the solution for you.
+
+Introducing Bevy, a powerful app that helps you to remember your friends again. It simplifies your friends' information in a
+single place and provide more. Bevy is smart to know what your friends are up to in their social media, gives
+you a sneak peek into their location and even does statistics analysis for you.
 
 Excited? We are too, because we *love* connecting you with Bevy.
 
 == About
 
-Bevy is easy to use, with an elegant user interface and a simple Command Line Interface.
+Bevy is easy to use, with a simple user interface and a powerful Command Line Interface.
 This User Guide provides you concise instructions on how to use the app.
 
 == Quick Start
@@ -45,46 +47,43 @@ This app will not work with earlier versions of Java 8.
 .  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
 .  Copy the file to the folder you want to use as the home folder for your Address Book.
 .  Double-click the app icon to start the app.
-+
-image::Ui.png[width="790"]
-_Figure 3.4.1 GUI_
-+
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
-e.g. typing *`help`* or *`sos`* and pressing kbd:[Enter] will show the help window.
+e.g. typing *`help`* or *`sos`* and pressing kbd:[Enter] will show the help panel.
 .  Some example commands you can try:
 
-* *`list`* +
+* *`list`* or *`l`*
++
 Lists all contacts.
 * **`add`**`n/John Doe p/98765432 b/01 05 95 e/johnd@u.nus.edu a/John street, block 123, #01-01 pc/159656 f/yes t/friends` +
-Adds a contact named `John Doe` to the Address Book.
-* **`delete`**`3` +
+Adds a person named `John Doe` to the Address Book.
+* *`delete 3`* or *`d 3`* +
 Deletes the 3rd contact shown in the current list.
-* *`exit`* +
+* *`exit`* or *`x`* +
 Exits the app.
 
-.  Refer to the link:#features[Features] section below for details of each command.
+. Refer to the link:#features[Features] section below for details of each command.
 
 == Features
 
 ====
 *Command Format*
 
-* Items in `UPPER_CASE` are the parameters to be entered by you e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Items in `UPPER_CASE` are the parameters that you *must* enter e.g. `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+* Items in square brackets are optional, you can chose not to enter them e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (0 times), `t/friend`, `t/friend t/family` etc.
+* Parameters can be entered in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 ====
 
-=== Viewing help : `help`, `sos`
+=== Viewing help : `help` `sos`
 
 Shows you the help panel which displays the commands to use Bevy. +
 Format: `help` +
 Command Alias: `sos`
 
-image::ViewingHelp.JPG[width="790"]
+image::ViewingHelp.JPG[width="800"]
 _Figure 4.1.1:Viewing Help_
 
-=== Adding a person: `add`, `a`
+=== Adding a person: `add` `a` `Improved since v1.3`
 
 Adds a person to the address book. +
 
@@ -112,7 +111,7 @@ These features can be further explained using examples.
 
 Command: `add p/89893878 n/brandon tan t/friend b/25-9-94 e/brandon@gmail.com a/Blk 433, Bedok Street 10, 520433 f/no t/family`
 
-image::AddCommand.jpg[width="790"]
+image::AddCommand.jpg[width="800"]
 _Figure 4.2.1.1 Adding a New Contact_
 
 * From Figure 4.2.1.1, you can observe the following features:
@@ -122,13 +121,13 @@ _Figure 4.2.1.1 Adding a New Contact_
 ** A person can have any number of tags.
 ** Note that birthday can be added in a number of format, and it will be saved in the contact in the standard format.
 
-=== Listing all persons : `list`, `l`
+=== Listing all persons : `list` `l`
 
 Shows you a list of all persons in the address book. +
 Format: `list` +
 Command Alias: `l`
 
-=== Editing a person : `edit`, `e`
+=== Editing a person : `edit` `e` `Improved since v1.3`
 
 Edits an existing person in the address book. +
 Format: `edit INDEX [n/NAME] [p/PHONE] [b/BIRTHDAY] [e/EMAIL] [a/ADDRESS] [f/FAVOURITE] [t/TAG]...`
@@ -143,7 +142,7 @@ Command Alias: `e`
 Examples: +
 The examples will show you how to use the edit command in more detail.
 
-image::EditBefore.jpg[width="790"]
+image::EditBefore.jpg[width="800"]
 Figure 4.4.1 Before edit command
 
 Figure 4.4.1 shows the initial state before any edits. Subsequent edits will be changed with respect to this figure.
@@ -152,7 +151,7 @@ Figure 4.4.1 shows the initial state before any edits. Subsequent edits will be 
 
 Command: `edit 4 t/`
 
-image::RemoveTag.jpg[width="790"]
+image::RemoveTag.jpg[width="800"]
 _Figure 4.4.2 Removing Tag_
 
 You can remove all the person's tags by typing `t/` without specifying any tags after it. +
@@ -163,25 +162,27 @@ After entering the command, all tags are removed as seen from Figure 4.4.2.
 
 Command: `edit 4 t/family`
 
-image::EditTag.jpg[width="790"]
+image::EditTag.jpg[width="800"]
 _Figure 4.4.3 Editing tag_
 
 When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative. +
+
 From Figure 4.4.1, index 4, Bernice Yu has the tags, colleagues and friends.
 After entering the command, the previous tags are replaced with a single tag, family.
 
 // tag::editfav[]
 *3. Editing Favourite*
 
-image::EditFavBefore.png[width="790"]
+image::EditFavBefore.PNG[width="800"]
 _Figure 4.4.4 Before editing favourite_
 
 Command: `edit 1 f/yes`
 
-image::EditFav.png[width="790"]
-_Figure 4.4.4 Editing favourite_
+image::EditFavAfter.png[width="800"]
+_Figure 4.4.5 Editing favourite_
 
 You can edit a person's favourite status. If no value is entered after `f/`, it will default to 'no'. +
+
 The list is then sorted to put your favourites at the top.
 // end::editfav[]
 
@@ -189,15 +190,15 @@ The list is then sorted to put your favourites at the top.
 
 Command: `edit 7 n/Jackie Lam e/jackielam@hotmail.com`
 
-image::EditFields.jpg[width="790"]
-_Figure 4.4.5 Editing other fields_
+image::EditFields.jpg[width="800"]
+_Figure 4.4.6 Editing other fields_
 
 You can edit more than one field at the same time.
 From Figure 4.4.1, index 7 is David Li.
 After executing the command, the name and email is changed as requested.
 
 // tag::find[]
-=== Locating persons by name, phone number or birthday: `find`, `f`
+=== Locating persons by name, phone number or birthday: `find`, `f` `Improved since v1.5rc`
 
 Finds persons by any details that matches the keywords provided. +
 Format to find by name or phone number: `find KEYWORD [MORE_KEYWORDS]` +
@@ -226,7 +227,7 @@ Returns any person having names `Betsy`, `Tim`, or `John`, or any person with ph
 Returns all person that have their birthday in the month of Feb.
 // end::find[]
 
-=== Deleting persons : `delete`, `d`
+=== Deleting persons : `delete` `d` `Improved since v1.3`
 
 Deletes the specified persons from the address book. +
 Format: `delete INDEX RANGES` +
@@ -258,16 +259,16 @@ Deletes the 1st person listed in the results of the `find` command.
 `delete 2-3 1-3 5-6` +
 Delete the 1st to 3rd, 5th and 6th person listed in the results of the `find` command.
 
-=== Show Birthday Statistics: `statistics`, `stats`
+=== Show Birthday Statistics: `statistics` `stats` `Since v1.4`
 
 Shows a table that indicates the number of people having their birthdays in a particular month. +
 Format: `statistics` +
 Command Alias: `stats`
 
-image::BirthdayStatistics.jpg[width="790"]
+image::BirthdayStatistics.jpg[width="800"]
 _Figure 4.7.1:Birthday Statistics_
 
-=== Selecting a person : `select`, `s`
+=== Selecting a person : `select` `s`
 
 Selects the person at the specified index shown in the current listing of persons. +
 Format: `select INDEX` +
@@ -289,7 +290,7 @@ Selects the 2nd person listed in the address book. +
 `select 1` +
 Selects the 1st person listed in the results of the `find` command.
 
-=== Listing entered commands: `history`, `h`
+=== Listing entered commands: `history` `h`
 
 Lists all the commands that you have entered in reverse chronological order. +
 Format: `history` +
@@ -301,7 +302,7 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 ====
 
 // tag::undoredo[]
-=== Undoing previous command: `undo`, `u`
+=== Undoing previous command: `undo` `u`
 
 Restores the address book to the state before the previous _undoable_ command was executed. +
 Format: `undo` +
@@ -328,7 +329,7 @@ The `undo` command fails as there are no undoable commands executed previously.
 `undo` (Reverses the `clear` command) +
 `undo` (Reverses the `delete 1` command) +
 
-=== Redoing the previously undone command: `redo`, `r`
+=== Redoing the previously undone command: `redo` `r`
 
 Reverses the most recent `undo` command. +
 Format: `redo` +
@@ -351,23 +352,24 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (Reapplies the `delete 1` command) +
 `redo` (Reapplies the `clear` command) +
 
-=== Clearing all entries: `clear`, `c`
+=== Clearing all entries: `clear` `c`
 
 Clears all entries from the address book. +
 Format: `clear` +
 Command Alias: `c`
 
 // tag::changetheme[]
-=== Changing the theme: `changetheme`, `ct`
+=== Changing the theme: `changetheme`, `ct` `Since v1.0`
+=======
 
 Changes the theme of the application between the bright and dark theme. +
 Format: `changetheme` +
 Command Alias: `ct`
 
-image::BrightTheme.jpg[width="790"]
+image::BrightTheme.jpg[width="800"]
 _Figure 4.13.1: Bright Theme_
 
-image::DarkTheme.jpg[width="790"]
+image::DarkTheme.jpg[width="800"]
 _Figure 4.13.2: Dark Theme_
 
 As you can see from Figure 4.13.1, it shows the bright theme, which is the default theme used.
@@ -376,16 +378,23 @@ Bevy will automatically save the last theme that you have chosen under the prefe
 when you relaunch the application.
 // end::changetheme[]
 
-=== Viewing home: `home`, `ho`
+=== Viewing home: `home` `ho` `Since v1.4`
 
 Opens the home panel which shows the Bevy logo and application status. +
 Format: `home` +
 Command Alias: `ho`
 
-image::Home.jpg[width="790"]
+image::Home.jpg[width="800"]
 _Figure 4.14.1: Viewing Home_
 
-=== Exiting the program : `exit`, `x`
+=== Export data out of Bevy: `export` `ex` `Since v1.5rc`
+
+image::ExportData.png[width="800"]
+_Figure 4.15.1: Exporting your data out of Bevy_
+
+You can export all your data out onto a .csv file as shown above, which is used by thousands of applications out there.
+
+=== Exiting the program : `exit` `x`
 
 Exits the program. +
 Format: `exit` +
@@ -431,6 +440,7 @@ because we know you have many friends.
 
 |Exit |`exit` |`x` |- |-
 
+|Export |`export` |`ex` |- |-
 |Find |`find` |`f` |`find KEYWORD [MORE_KEYWORDS]` |`find James Jake`
 
 |Help |`help` |`sos` |- |-
@@ -441,7 +451,7 @@ because we know you have many friends.
 
 |List |`list` |`l` |- |-
 
-|Birthday Statistics |`statistics` |`stats` |- |-
+|Birthday Statistics |`birthdaystatistics` |`bstats` |- |-
 
 |Select |`select` |`s` |- |-
 

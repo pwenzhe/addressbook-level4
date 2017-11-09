@@ -584,16 +584,36 @@ Below are the respective commands and their requested panel.
 . *Home Command*: Request home panel.
 . *Select Command*: Request selected person's information panel.
 . *Help Command*: Request help panel.
+. *Birthday Statistics Command*: Request birthday statistics panel.
+. *Tag Statistics Command*: Request tag statistics panel.
+
+The sequence diagram below shows how the panel are changed based on the command entered, using home command as an example.
+
+`Diagram to be added`
+
+=== Suggestions Popup menu
+
+image::Suggestions.png[width="800"]
+_Figure 4.7.1: Suggestions Popup menu_
+
+As shown above, Bevy can suggests menu based on the current text input on the command box.
+
+=== Export data
+
+image::ExportData.png[width="790"]
+_Figure 4.11.1: Exporting your data out of Bevy_
+
+As shown above, Bevy can export data out onto a .csv file.
 
 // tag::changetheme[]
 === Changing Themes
 
-The theme of the application can be changed via a request event. The `changetheme` command raises the `ChangeThemeRequestEvent()`. There are two themes, namely dark and bright.+
+The theme of the application can be changed via a request event. The `changetheme` command raises the `ChangeThemeRequestEvent()`. There are two themes, namely dark and bright. +
 
 The sequence diagram below shows how the theme is changed.
 
 image::ThemeSequenceDiagram.png[width="800"]
-_Figure 4.10.1 ThemeCommand Sequence Diagram_
+_Figure 4.12.1 ThemeCommand Sequence Diagram_
 
 From the sequence diagram, this operation extends into the Model and UI components.
 
