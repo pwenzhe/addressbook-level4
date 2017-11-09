@@ -43,7 +43,7 @@ public class PersonContainsKeywordsPredicate implements Predicate<ReadOnlyPerson
                 || keywords.stream()
                         .filter(fav -> fav.matches("favourite"))
                         .anyMatch(favourite -> person.getFavourite().toString().matches("yes"));
-                // @@author
+        // @@author
     }
 
     @Override
