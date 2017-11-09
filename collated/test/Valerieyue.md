@@ -99,6 +99,7 @@ public class BirthdayTest {
     }
 }
 ```
+
 ###### \java\systemtests\AddCommandSystemTest.java
 ``` java
         /* Case: add a person with all fields same as another person in the address book except birthday -> added. */
@@ -116,6 +117,7 @@ public class BirthdayTest {
                 .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withPostalCode(VALID_POSTALCODE_AMY).build();
         assertCommandSuccess(person);
 ```
+
 ###### \java\systemtests\ChangeInformationPanelSystemTest.java
 ``` java
         /* Case: Change information panel of address book using birthday statistics command word, no leading spaces

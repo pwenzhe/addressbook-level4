@@ -220,6 +220,12 @@ public class Birthday {
         return this.tagName;
     }
 ```
+###### \java\seedu\address\model\tag\Tag.java
+``` java
+    public String getTagName() {
+        return this.tagName;
+    }
+```
 ###### \java\seedu\address\ui\BirthdayStatisticsPanel.java
 ``` java
 /**
