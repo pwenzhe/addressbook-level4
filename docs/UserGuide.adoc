@@ -82,7 +82,7 @@ Format: `help` +
 Command Alias: `sos`
 
 image::ViewingHelp.JPG[width="800"]
-_Figure 4.1.1:Viewing Help_
+_Figure 4.1.1 Viewing Help_
 // end::help[]
 
 === Adding a person: `add` `a` `Improved since v1.3`
