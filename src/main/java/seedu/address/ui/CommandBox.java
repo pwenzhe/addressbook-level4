@@ -35,8 +35,8 @@ public class CommandBox extends UiPart<Region> {
     private static final int maxSuggestionsSize = 8;
     private static final String[] suggestions = {"add", "a", "a n/ p/ b/ e/ a/ pc/", "clear", "c", "changetheme",
         "ct", "delete", "d", "edit", "e", "e n/ p/ b/ e/ a/ pc/", "exit", "x", "export", "ex", "find", "f", "help",
-        "sos", "history", "h", "home", "ho", "list", "l", "statistics", "stats", "select", "s", "undo", "u",
-        "redo", "r"};
+        "sos", "history", "h", "home", "ho", "list", "l", "birthdaystatistics", "bstats", "tagstatistics", "tstats",
+        "select", "s", "undo", "u", "redo", "r"};
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private final Logic logic;
     private ListElementPointer historySnapshot;

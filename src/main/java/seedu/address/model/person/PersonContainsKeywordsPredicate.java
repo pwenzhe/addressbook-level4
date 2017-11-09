@@ -19,6 +19,7 @@ public class PersonContainsKeywordsPredicate implements Predicate<ReadOnlyPerson
     @Override
     public boolean test(ReadOnlyPerson person) {
         return
+                //@@author Valerieyue
                 keywords.stream().filter(input -> input.substring(0, 2).equals("m/"))
                         .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getBirthday().value,
                                 keyword.substring(2)))

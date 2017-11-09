@@ -84,6 +84,7 @@ Command Alias: `sos`
 image::ViewingHelp.JPG[width="790"]
 _Figure 4.1.1:Viewing Help_
 
+// tag::add[]
 === Adding a person: `add`, `a`
 
 Adds a person to the address book. +
@@ -116,11 +117,12 @@ image::AddCommand.jpg[width="790"]
 _Figure 4.2.1.1 Adding a New Contact_
 
 * From Figure 4.2.1.1, you can observe the following features:
-** You need not add the name in a specific order.
+** You need not add the parameters in a specific order.
 ** The first letter of each word of the name will be automatically capitalised when saved in the database.
 ** Postal code can be retrieved from the address without specifying `pc/`.
 ** A person can have any number of tags.
 ** Note that birthday can be added in a number of format, and it will be saved in the contact in the standard format.
+// end::add[]
 
 === Listing all persons : `list`, `l`
 
@@ -254,14 +256,26 @@ Deletes the 1st person listed in the results of the `find` command.
 `delete 2-3 1-3 5-6` +
 Delete the 1st to 3rd, 5th and 6th person listed in the results of the `find` command.
 
-=== Show Birthday Statistics: `statistics`, `stats`
+// tag::statistics[]
+=== Show Birthday Statistics: `birthdaystatistics`, `bstats`
 
 Shows a table that indicates the number of people having their birthdays in a particular month. +
-Format: `statistics` +
-Command Alias: `stats`
+Format: `birthdaystatistics` +
+Command Alias: `bstats`
 
 image::BirthdayStatistics.jpg[width="790"]
 _Figure 4.7.1:Birthday Statistics_
+
+=== Show Tag Statistics: `tagstatistics`, `tstats`
+
+Shows a table that indicates the number of people who has the same tag. +
+Format: 'tagstatistics` +
+Command Alias: `tstats`
+
+image::TagStatistics.JPG[width="790"]
+_Figure 4.8.1: Tag Statistics_
+
+// end::statistics[]
 
 === Selecting a person : `select`, `s`
 
@@ -360,12 +374,12 @@ Format: `changetheme` +
 Command Alias: `ct`
 
 image::BrightTheme.jpg[width="790"]
-_Figure 4.13.1: Bright Theme_
+_Figure 4.14.1: Bright Theme_
 
 image::DarkTheme.jpg[width="790"]
-_Figure 4.13.2: Dark Theme_
+_Figure 4.14.2: Dark Theme_
 
-As you can see from Figure 4.13.1, it shows the bright theme, which is the default theme used.
+As you can see from Figure 4.14.1, it shows the bright theme, which is the default theme used.
 After entering the command, the colour scheme will be changed to the dark theme as seen from Figure 4.13.2.
 Bevy will automatically save the last theme that you have chosen under the preferences so that you need not changes
 when you relaunch the application.
@@ -377,7 +391,7 @@ Format: `home` +
 Command Alias: `ho`
 
 image::Home.jpg[width="790"]
-_Figure 4.14.1: Viewing Home_
+_Figure 4.15.1: Viewing Home_
 
 === Exiting the program : `exit`, `x`
 
@@ -435,7 +449,9 @@ because we know you have many friends.
 
 |List |`list` |`l` |- |-
 
-|Birthday Statistics |`statistics` |`stats` |- |-
+|Birthday Statistics |`birthdaystatistics` |`bstats` |- |-
+
+|Tag Statistics |`tagstatistics` |`tstats` |- |-
 
 |Select |`select` |`s` |- |-
 
