@@ -16,7 +16,7 @@ By: `Team Bevy`      Since: `Aug 2017`      Licence: `MIT`
 
 == Introduction
 
-image::Ui.png[width="790"]
+image::Ui.png[width="800"]
 _Figure 1.1 Bevy UI_
 
 Have you ever forgotten that special friend's birthday? Or that name of the friend you just spoke to?
@@ -61,7 +61,7 @@ Deletes the 3rd contact shown in the current list.
 * *`exit`* or *`x`* +
 Exits the app.
 
-.  Refer to the link:#features[Features] section below for details of each command.
+. Refer to the link:#features[Features] section below for details of each command.
 
 == Features
 
@@ -80,7 +80,7 @@ Shows you the help panel which displays the commands to use Bevy. +
 Format: `help` +
 Command Alias: `sos`
 
-image::ViewingHelp.JPG[width="790"]
+image::ViewingHelp.JPG[width="800"]
 _Figure 4.1.1:Viewing Help_
 
 === Adding a person: `add` `a` `Improved since v1.3`
@@ -111,7 +111,7 @@ These features can be further explained using examples.
 
 Command: `add p/89893878 n/brandon tan t/friend b/25-9-94 e/brandon@gmail.com a/Blk 433, Bedok Street 10, 520433 f/no t/family`
 
-image::AddCommand.jpg[width="790"]
+image::AddCommand.jpg[width="800"]
 _Figure 4.2.1.1 Adding a New Contact_
 
 * From Figure 4.2.1.1, you can observe the following features:
@@ -142,7 +142,7 @@ Command Alias: `e`
 Examples: +
 The examples will show you how to use the edit command in more detail.
 
-image::EditBefore.jpg[width="790"]
+image::EditBefore.jpg[width="800"]
 Figure 4.4.1 Before edit command
 
 Figure 4.4.1 shows the initial state before any edits. Subsequent edits will be changed with respect to this figure.
@@ -151,7 +151,7 @@ Figure 4.4.1 shows the initial state before any edits. Subsequent edits will be 
 
 Command: `edit 4 t/`
 
-image::RemoveTag.jpg[width="790"]
+image::RemoveTag.jpg[width="800"]
 _Figure 4.4.2 Removing Tag_
 
 You can remove all the person's tags by typing `t/` without specifying any tags after it. +
@@ -162,7 +162,7 @@ After entering the command, all tags are removed as seen from Figure 4.4.2.
 
 Command: `edit 4 t/family`
 
-image::EditTag.jpg[width="790"]
+image::EditTag.jpg[width="800"]
 _Figure 4.4.3 Editing tag_
 
 When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative. +
@@ -172,12 +172,12 @@ After entering the command, the previous tags are replaced with a single tag, fa
 
 *3. Editing Favourite*
 
-image::EditFavBefore.PNG[width="790"]
+image::EditFavBefore.PNG[width="800"]
 _Figure 4.4.4 Before editing favourite_
 
 Command: `edit 1 f/yes`
 
-image::EditFavAfter.png[width="790"]
+image::EditFavAfter.png[width="800"]
 _Figure 4.4.5 Editing favourite_
 
 You can edit a person's favourite status. If no value is entered after `f/`, it will default to 'no'. +
@@ -188,7 +188,7 @@ The list is then sorted to put your favourites at the top.
 
 Command: `edit 7 n/Jackie Lam e/jackielam@hotmail.com`
 
-image::EditFields.jpg[width="790"]
+image::EditFields.jpg[width="800"]
 _Figure 4.4.6 Editing other fields_
 
 You can edit more than one field at the same time.
@@ -261,7 +261,7 @@ Shows a table that indicates the number of people having their birthdays in a pa
 Format: `statistics` +
 Command Alias: `stats`
 
-image::BirthdayStatistics.jpg[width="790"]
+image::BirthdayStatistics.jpg[width="800"]
 _Figure 4.7.1:Birthday Statistics_
 
 === Selecting a person : `select` `s`
@@ -360,10 +360,10 @@ Changes the theme of the application between the bright and dark theme. +
 Format: `changetheme` +
 Command Alias: `ct`
 
-image::BrightTheme.jpg[width="790"]
+image::BrightTheme.jpg[width="800"]
 _Figure 4.13.1: Bright Theme_
 
-image::DarkTheme.jpg[width="790"]
+image::DarkTheme.jpg[width="800"]
 _Figure 4.13.2: Dark Theme_
 
 As you can see from Figure 4.13.1, it shows the bright theme, which is the default theme used.
@@ -377,12 +377,12 @@ Opens the home panel which shows the Bevy logo and application status. +
 Format: `home` +
 Command Alias: `ho`
 
-image::Home.jpg[width="790"]
+image::Home.jpg[width="800"]
 _Figure 4.14.1: Viewing Home_
 
 === Export data out of Bevy: `export` `ex` `Since v1.5rc`
 
-image::ExportData.png[width="790"]
+image::ExportData.png[width="800"]
 _Figure 4.15.1: Exporting your data out of Bevy_
 
 You can export all your data out onto a .csv file as shown above, which is used by thousands of applications out there.
@@ -444,7 +444,7 @@ because we know you have many friends.
 
 |List |`list` |`l` |- |-
 
-|Birthday Statistics |`statistics` |`stats` |- |-
+|Birthday Statistics |`birthdaystatistics` |`bstats` |- |-
 
 |Select |`select` |`s` |- |-
 
