@@ -411,6 +411,7 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
 
 // tag::sort[]
+// tag::favourite[]
 === Sorting
 
 The list will be sorted in alphabetical order whenever a new person is added.
@@ -435,6 +436,7 @@ _Figure 4.4.2: Sorting Sequence Diagram using updatePerson_
 **Pros:** A command that will always allow the list to be sorted in order. +
 **Cons:** It will cause inconvenience as user have to manually type in the command to sort the list whenever they add a new person or change their favourite status. +
 // end::sort[]
+// end::favourite[]
 
 // tag::birthdayfield[]
 === Birthday
@@ -622,6 +624,7 @@ _Figure 4.11.1: Exporting your data out of Bevy_
 
 As shown above, Bevy can export data out onto a .csv file.
 
+// tag::changetheme[]
 === Changing Themes
 
 The theme of the application can be changed via a request event. The `changetheme` command raises the `ChangeThemeRequestEvent()`. There are two themes, namely dark and bright. +
@@ -650,6 +653,7 @@ Below is a detailed explanation of the extension.
 **Alternative 2:** Creating a separate command for changing theme and saving the theme. +
 **Pros:** Makes the code simpler with different commands using lesser components. +
 **Cons:** It is less convenient for the user as it requires an additional input for saving the theme. +
+// end::changetheme[]
 
 == Documentation
 

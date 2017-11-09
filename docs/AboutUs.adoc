@@ -30,7 +30,7 @@ Responsibilities: Logic
 
 === Poon Wenzhe
 image::poonwenzhe.jpg[width="150", align="left"]
-{empty}[http://github.com/pwenzhe[github]] [<<#, portfolio>>]
+{empty}[http://github.com/pwenzhe[github]] [<<poonwenzhe#, portfolio>>]
 
 Role: Developer +
 Responsibilities: UI
