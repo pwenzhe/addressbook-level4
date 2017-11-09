@@ -170,6 +170,7 @@ When editing tags, the existing tags of the person will be removed i.e adding of
 From Figure 4.4.1, index 4, Bernice Yu has the tags, colleagues and friends.
 After entering the command, the previous tags are replaced with a single tag, family.
 
+// tag::editfav[]
 *3. Editing Favourite*
 
 image::EditFavBefore.PNG[width="800"]
@@ -183,6 +184,7 @@ _Figure 4.4.5 Editing favourite_
 You can edit a person's favourite status. If no value is entered after `f/`, it will default to 'no'. +
 
 The list is then sorted to put your favourites at the top.
+// end::editfav[]
 
 *4. Editing Other Fields*
 
@@ -195,6 +197,7 @@ You can edit more than one field at the same time.
 From Figure 4.4.1, index 7 is David Li.
 After executing the command, the name and email is changed as requested.
 
+// tag::find[]
 === Locating persons by name, phone number or birthday: `find`, `f` `Improved since v1.5rc`
 
 Finds persons by any details that matches the keywords provided. +
@@ -222,6 +225,7 @@ Returns `John` and `John Doe`
 Returns any person having names `Betsy`, `Tim`, or `John`, or any person with phone number containing `123`.
 * `find m/Feb` +
 Returns all person that have their birthday in the month of Feb.
+// end::find[]
 
 === Deleting persons : `delete` `d` `Improved since v1.3`
 
@@ -354,7 +358,9 @@ Clears all entries from the address book. +
 Format: `clear` +
 Command Alias: `c`
 
-=== Changing the theme: `changetheme` `ct` `Since v1.0`
+// tag::changetheme[]
+=== Changing the theme: `changetheme`, `ct` `Since v1.0`
+=======
 
 Changes the theme of the application between the bright and dark theme. +
 Format: `changetheme` +
@@ -370,6 +376,7 @@ As you can see from Figure 4.13.1, it shows the bright theme, which is the defau
 After entering the command, the colour scheme will be changed to the dark theme as seen from Figure 4.13.2.
 Bevy will automatically save the last theme that you have chosen under the preferences so that you need not changes
 when you relaunch the application.
+// end::changetheme[]
 
 === Viewing home: `home` `ho` `Since v1.4`
 
