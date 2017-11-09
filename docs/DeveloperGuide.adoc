@@ -1,4 +1,4 @@
-= Bevy - Developer Guide `v1.4`
+= Bevy - Developer Guide `v1.5rc`
 :toc:
 :toc-title:
 :toc-placement: preamble

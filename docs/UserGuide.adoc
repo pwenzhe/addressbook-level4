@@ -1,4 +1,4 @@
-= Bevy - User Guide `v1.4`
+= Bevy - User Guide `v1.5rc`
 :toc:
 :toc-title:
 :toc-placement: preamble
@@ -196,7 +196,7 @@ After executing the command, the name and email is changed as requested.
 
 === Locating persons by name, phone number or birthday: `find`, `f`
 
-Finds persons whose names, phone numbers or birthday month contain any of the given keywords. +
+Finds persons by any details that matches the keywords provided. +
 Format to find by name or phone number: `find KEYWORD [MORE_KEYWORDS]` +
 Format to find month: `find m/MONTH` +
 Command Alias: `f`
@@ -204,10 +204,12 @@ Command Alias: `f`
 ****
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name, phone number and birthday are searched
-* To find the month, user has to inclue `m/` to ensure that it does not clash with name search
-* Only full words will be matched for names e.g. `Han` will not match `Hans`
-* Phone numbers will match all numbers than contain the given number e.g. `123` will match `91234567`
+* All person details are searched.
+* To find the month, user has to inclue `m/` to ensure that it does not clash with name search.
+* Other searches will match with any person detail. e.g. `Clement` will match a person with name `Clement` as well as a person whose address is `Clement Road`
+* Only full words will be matched for names, addresses, and tags. e.g. `Han` will not match `Hans`
+* Phone numbers and postal codes will match all numbers than contain the given number e.g. `123` will match `91234567`
+* Emails will match if it contains the given keyword. e.g. `john` will match `john@email.com`
 * Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 ****
 
