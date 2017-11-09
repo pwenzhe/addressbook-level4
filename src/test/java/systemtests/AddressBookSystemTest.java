@@ -59,6 +59,7 @@ public abstract class AddressBookSystemTest {
     private static final String homePanel = "homePanel";
     private static final String helpPanel = "helpPanel";
     private static final String birthdayStatisticsPanel = "birthdayStatisticsPanel";
+    private static final String tagStatisticsPanel = "tagStatisticsPanel";
 
     private MainWindowHandle mainWindowHandle;
     private TestApp testApp;
@@ -160,6 +161,8 @@ public abstract class AddressBookSystemTest {
             Platform.runLater(() -> testApp.getMainWindow().handleHelp());
         } else if (birthdayStatisticsPanel.equals(handle)) {
             Platform.runLater(() -> testApp.getMainWindow().handleBirthdayStatistics());
+        } else if (tagStatisticsPanel.equals(handle)) {
+            Platform.runLater(() -> testApp.getMainWindow().handleTagStatistics());
         }
 
         try {

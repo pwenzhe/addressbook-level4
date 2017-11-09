@@ -12,6 +12,7 @@ import seedu.address.logic.commands.BirthdayStatisticsCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HomeCommand;
 import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.TagStatisticsCommand;
 import seedu.address.model.Model;
 
 // @@author johnweikangong
@@ -23,12 +24,15 @@ public class ChangeInformationPanelSystemTest extends AddressBookSystemTest {
         final String personInformationPanelId = "[SplitPane[id=personInformationPanel, styleClass=split-pane]]";
         final String helpPanelId = "[StackPane[id=helpPanel]]";
         final String birthdayStatisticsPanelId = "[StackPane[id=birthdayStatisticsPanel]]";
+        final String tagStatisticsPanelId = "[StackPane[id=tagStatisticsPanel]]";
 
         assertHandleSuccess("helpPanel", helpPanelId, "");
 
         assertHandleSuccess("homePanel", homePanelId, "");
 
         assertHandleSuccess("birthdayStatisticsPanel", birthdayStatisticsPanelId, "");
+
+        assertHandleSuccess("tagStatisticsPanel", tagStatisticsPanelId, "");
 
         /* Case: Changes information panel of address book using select command word, no leading spaces
          * and trailing alphanumeric characters and spaces -> information panel changed to person information panel.
@@ -46,11 +50,19 @@ public class ChangeInformationPanelSystemTest extends AddressBookSystemTest {
         */
         assertCommandSuccess(HomeCommand.COMMAND_WORD, homePanelId, HomeCommand.MESSAGE_SUCCESS);
 
+        //@@author Valerieyue
         /* Case: Change information panel of address book using birthday statistics command word, no leading spaces
          * and trailing alphanumeric characters and spaces -> information panel changed to birthday statistics panel.
         */
         assertCommandSuccess(BirthdayStatisticsCommand.COMMAND_WORD, birthdayStatisticsPanelId,
                 BirthdayStatisticsCommand.MESSAGE_SUCCESS);
+
+        /* Case: Change information panel of address book using tag statistics command word, no leading spaces
+         * and trailing alphanumeric characters and spaces -> information panel changed to tag statistics panel.
+        */
+        assertCommandSuccess(TagStatisticsCommand.COMMAND_WORD, tagStatisticsPanelId,
+                TagStatisticsCommand.MESSAGE_SUCCESS);
+        //@@author
 
         /* Case: Changes information panel of address book using select command word, no leading spaces
          * and trailing alphanumeric characters and spaces -> information panel changed to person information panel.
@@ -86,11 +98,19 @@ public class ChangeInformationPanelSystemTest extends AddressBookSystemTest {
         */
         assertCommandSuccess(HomeCommand.COMMAND_ALIAS, homePanelId, HomeCommand.MESSAGE_SUCCESS);
 
+        //@@author Valerieyue
         /* Case: Changes information panel of address book using birthday statistics command alias, no leading spaces
          * and trailing alphanumeric characters and spaces -> information panel changed to birthday statistics panel.
         */
         assertCommandSuccess(BirthdayStatisticsCommand.COMMAND_ALIAS, birthdayStatisticsPanelId,
                 BirthdayStatisticsCommand.MESSAGE_SUCCESS);
+
+        /* Case: Changes information panel of address book using tag statistics command alias, no leading spaces
+         * and trailing alphanumeric characters and spaces -> information panel changed to tag statistics panel.
+        */
+        assertCommandSuccess(TagStatisticsCommand.COMMAND_ALIAS, tagStatisticsPanelId,
+                TagStatisticsCommand.MESSAGE_SUCCESS);
+        //@@author
 
         /* Case: Changes information panel of address book using help command alias, with leading spaces
          * and trailing alphanumeric characters and spaces -> information panel changed to help panel.
@@ -104,11 +124,19 @@ public class ChangeInformationPanelSystemTest extends AddressBookSystemTest {
         assertCommandSuccess("  " + HomeCommand.COMMAND_WORD + "  $#%323@21   ",
                 homePanelId, HomeCommand.MESSAGE_SUCCESS);
 
+        //@@author Valerieyue
         /* Case: Changes information panel of address book using birthday statistics command alias, with leading spaces
          * and trailing alphanumeric characters and spaces -> information panel changed to birthday statistics panel.
         */
         assertCommandSuccess("  " + BirthdayStatisticsCommand.COMMAND_WORD + "  $#%543@$   ",
                 birthdayStatisticsPanelId, BirthdayStatisticsCommand.MESSAGE_SUCCESS);
+
+        /* Case: Changes information panel of address book using tag statistics command alias, with leading spaces
+         * and trailing alphanumeric characters and spaces -> information panel changed to tag statistics panel.
+        */
+        assertCommandSuccess("  " + TagStatisticsCommand.COMMAND_WORD + "  $#%543@$   ",
+                tagStatisticsPanelId, TagStatisticsCommand.MESSAGE_SUCCESS);
+        //@@author
 
         /* Case: Mixed case home command word -> rejected. */
         assertCommandFailure("HoME", MESSAGE_UNKNOWN_COMMAND);
@@ -116,11 +144,19 @@ public class ChangeInformationPanelSystemTest extends AddressBookSystemTest {
         /* Case: Mixed case home command alias -> rejected. */
         assertCommandFailure("hO", MESSAGE_UNKNOWN_COMMAND);
 
+        //@@author Valerieyue
         /* Case: Mixed case birthday statistics command word -> rejected. */
-        assertCommandFailure("staTIStics", MESSAGE_UNKNOWN_COMMAND);
+        assertCommandFailure("birTHDaystaTIStics", MESSAGE_UNKNOWN_COMMAND);
 
         /* Case: Mixed case birthday statistics command alias -> rejected. */
-        assertCommandFailure("stATs", MESSAGE_UNKNOWN_COMMAND);
+        assertCommandFailure("bstATs", MESSAGE_UNKNOWN_COMMAND);
+
+        /* Case: Mixed case tag statistics command word -> rejected. */
+        assertCommandFailure("tagstaTIStics", MESSAGE_UNKNOWN_COMMAND);
+
+        /* Case: Mixed case tag statistics command alias -> rejected. */
+        assertCommandFailure("tstATs", MESSAGE_UNKNOWN_COMMAND);
+        //@@author
 
         /* Case: Mixed case help command word -> rejected. */
         assertCommandFailure("hElP", MESSAGE_UNKNOWN_COMMAND);

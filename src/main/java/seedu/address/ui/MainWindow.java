@@ -35,6 +35,7 @@ public class MainWindow extends UiPart<Region> {
     private static final String BIRTHDAY_STATISTICS_PANEL = "BirthdayStatisticsPanel";
     private static final String PERSON_INFORMATION_PANEL = "PersonInformationPanel";
     private static final String HELP_PANEL = "HelpPanel";
+    private static final String TAG_STATISTICS_PANEL = "TagStatisticsPanel";
     private static final int MIN_HEIGHT = 800;
     private static final int MIN_WIDTH = 1500;
 
@@ -49,6 +50,7 @@ public class MainWindow extends UiPart<Region> {
     private PersonInformationPanel personInformationPanel;
     private HelpPanel helpPanel;
     private BirthdayStatisticsPanel birthdayStatisticsPanel;
+    private TagStatisticsPanel tagStatisticsPanel;
     private Config config;
     private UserPrefs prefs;
     private String currentInformationPanel;
@@ -162,6 +164,9 @@ public class MainWindow extends UiPart<Region> {
         birthdayStatisticsPanel = new BirthdayStatisticsPanel(logic.getAddressBook());
         informationPanelPlaceholder.getChildren().add(birthdayStatisticsPanel.getRoot());
 
+        tagStatisticsPanel = new TagStatisticsPanel(logic.getAddressBook());
+        informationPanelPlaceholder.getChildren().add(tagStatisticsPanel.getRoot());
+
         homePanel = new HomePanel(logic.getAddressBook());
         informationPanelPlaceholder.getChildren().add(homePanel.getRoot());
     }
@@ -172,16 +177,18 @@ public class MainWindow extends UiPart<Region> {
             return; // Short circuit if the current information panel is the same as the requested information panel
         } else {
             informationPanelPlaceholder.getChildren().removeAll(homePanel.getRoot(), personInformationPanel.getRoot(),
-                    helpPanel.getRoot(), birthdayStatisticsPanel.getRoot());
+                    helpPanel.getRoot(), birthdayStatisticsPanel.getRoot(), tagStatisticsPanel.getRoot());
 
             if (event.getPanelRequestEvent().equals(PERSON_INFORMATION_PANEL)) {
                 informationPanelPlaceholder.getChildren().add(personInformationPanel.getRoot());
-            } else if (event.getPanelRequestEvent().equals((HOME_PANEL))) {
+            } else if (event.getPanelRequestEvent().equals(HOME_PANEL)) {
                 informationPanelPlaceholder.getChildren().add(homePanel.getRoot());
-            } else if (event.getPanelRequestEvent().equals((HELP_PANEL))) {
+            } else if (event.getPanelRequestEvent().equals(HELP_PANEL)) {
                 informationPanelPlaceholder.getChildren().add(helpPanel.getRoot());
-            } else if (event.getPanelRequestEvent().equals((BIRTHDAY_STATISTICS_PANEL))) {
+            } else if (event.getPanelRequestEvent().equals(BIRTHDAY_STATISTICS_PANEL)) {
                 informationPanelPlaceholder.getChildren().add(birthdayStatisticsPanel.getRoot());
+            } else if (event.getPanelRequestEvent().equals(TAG_STATISTICS_PANEL)) {
+                informationPanelPlaceholder.getChildren().add(tagStatisticsPanel.getRoot());
             }
         }
 
@@ -291,6 +298,14 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     public void handleBirthdayStatistics() {
         changeInformationPanel(new ChangeInformationPanelRequestEvent(BIRTHDAY_STATISTICS_PANEL));
+    }
+
+    /**
+     * Opens the tag statistics panel.
+     */
+    @FXML
+    public void handleTagStatistics() {
+        changeInformationPanel(new ChangeInformationPanelRequestEvent(TAG_STATISTICS_PANEL));
     }
     //@@author Valerieyue
 
