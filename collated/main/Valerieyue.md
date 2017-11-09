@@ -6,8 +6,8 @@
  */
 public class BirthdayStatisticsCommand extends Command {
 
-    public static final String COMMAND_WORD = "statistics";
-    public static final String COMMAND_ALIAS = "stats";
+    public static final String COMMAND_WORD = "birthdaystatistics";
+    public static final String COMMAND_ALIAS = "bstats";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows the birthday statistics.\n"
             + "Example: " + COMMAND_WORD;
@@ -24,24 +24,37 @@ public class BirthdayStatisticsCommand extends Command {
 }
 
 ```
+###### \java\seedu\address\logic\commands\TagStatisticsCommand.java
+``` java
+/**
+ * Shows the tag statistics.
+ */
+public class TagStatisticsCommand extends Command {
+
+    public static final String COMMAND_WORD = "tagstatistics";
+    public static final String COMMAND_ALIAS = "tstats";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows the tag statistics.\n"
+            + "Example: " + COMMAND_WORD;
+    public static final String TAG_STATISTICS_PANEL_REQUEST_EVENT = "TagStatisticsPanel";
+
+    public static final String MESSAGE_SUCCESS = "Tag statistics displayed";
+
+    @Override
+    public CommandResult execute() {
+        EventsCenter.getInstance()
+                .post(new ChangeInformationPanelRequestEvent(TAG_STATISTICS_PANEL_REQUEST_EVENT));
+        return new CommandResult(MESSAGE_SUCCESS);
+    }
+}
+
+
+```
 ###### \java\seedu\address\logic\parser\AddCommandParser.java
 ``` java
     private static Optional<String> areValuePresent(Optional<String> checkPresent) {
         return Optional.of(checkPresent.orElse(""));
     }
-```
-###### \java\seedu\address\logic\parser\AddCommandParser.java
-``` java
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
-
-}
 ```
 ###### \java\seedu\address\model\person\Birthday.java
 ``` java
@@ -199,6 +212,12 @@ public class Birthday {
 ``` java
 
 ```
+###### \java\seedu\address\model\tag\Tag.java
+``` java
+    public String getTagName() {
+        return this.tagName;
+    }
+```
 ###### \java\seedu\address\ui\BirthdayStatisticsPanel.java
 ``` java
 /**
@@ -290,6 +309,7 @@ public class BirthdayStatisticsPanel extends UiPart<Region> {
         Platform.runLater(()-> {
             barChart.getData().clear();
             barChart.getData().add(series);
+            barChart.setLegendVisible(false);
         });
 
     }
@@ -310,6 +330,14 @@ public class BirthdayStatisticsPanel extends UiPart<Region> {
     public void handleBirthdayStatistics() {
         changeInformationPanel(new ChangeInformationPanelRequestEvent(BIRTHDAY_STATISTICS_PANEL));
     }
+
+    /**
+     * Opens the tag statistics panel.
+     */
+    @FXML
+    public void handleTagStatistics() {
+        changeInformationPanel(new ChangeInformationPanelRequestEvent(TAG_STATISTICS_PANEL));
+    }
 ```
 ###### \java\seedu\address\ui\MainWindow.java
 ``` java
@@ -321,4 +349,81 @@ public class BirthdayStatisticsPanel extends UiPart<Region> {
     public void handleHelp() {
         changeInformationPanel(new ChangeInformationPanelRequestEvent(HELP_PANEL));
     }
+```
+###### \java\seedu\address\ui\TagStatisticsPanel.java
+``` java
+/**
+ * The birthday statistics panel of the App.
+ */
+public class TagStatisticsPanel extends UiPart<Region> {
+
+    private static final String FXML = "TagStatisticsPanel.fxml";
+
+    @FXML
+    private BarChart<String, Integer> barChart;
+
+    @FXML
+    private CategoryAxis xAxis;
+
+    private final Logger logger = LogsCenter.getLogger(this.getClass());
+    private ObservableList<String> tagNames = FXCollections.observableArrayList();
+
+    public TagStatisticsPanel(ReadOnlyAddressBook readOnlyAddressBook) {
+        super(FXML);
+        setPersonData(readOnlyAddressBook);
+        barChart.setCategoryGap(10);
+        barChart.setTitle("Tags Statistics");
+        xAxis.setLabel("Tags");
+        registerAsAnEventHandler(this);
+    }
+
+    private void setPersonData(ReadOnlyAddressBook readOnlyAddressBook) {
+        XYChart.Series<String, Integer> series = new XYChart.Series<>();
+
+        // Get an array with the tags.
+        tagNames.clear();
+        for (ReadOnlyPerson person : readOnlyAddressBook.getPersonList()) {
+            Set<Tag> personTags = person.getTags();
+            for (Tag tag : personTags) {
+                // to prevent adding duplicated tags
+                if (!tagNames.contains(tag.getTagName())) {
+                    tagNames.add(tag.getTagName());
+                }
+            }
+        }
+        Logger.getLogger(tagNames.toString());
+
+        // Assign the tag as categories for the horizontal axis.
+        xAxis.setCategories(tagNames);
+
+        // Count the number of people who have the same tag.
+        int[] tagCounter = new int[tagNames.size()];
+        for (ReadOnlyPerson p : readOnlyAddressBook.getPersonList()) {
+            String tagString = p.getTags().toString();
+            String[] tagArray = tagString.split(",");
+            for (int k = 0; k < tagArray.length; k++) {
+                String tag = tagArray[k].replaceAll("[^a-zA-Z]+", "");
+                tagCounter[tagNames.indexOf(tag)]++;
+            }
+        }
+
+        // Create a XYChart.Data object for each month. Add it to the series.
+        for (int i = 0; i < tagCounter.length; i++) {
+            series.getData().add(new XYChart.Data<>(tagNames.get(i), tagCounter[i]));
+        }
+
+        Platform.runLater(()-> {
+            barChart.getData().clear();
+            barChart.getData().add(series);
+            barChart.setLegendVisible(false);
+        });
+
+    }
+
+    @Subscribe
+    public void handleAddressBookChangedEvent(AddressBookChangedEvent abce) {
+        logger.info("Tag statistics updated.");
+        setPersonData(abce.data);
+    }
+}
 ```
