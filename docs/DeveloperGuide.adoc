@@ -544,6 +544,7 @@ is fully managed by the browser and Google Map page itself. +
 **Pros:** Integrates well, as we can simplify the experience for users. +
 **Cons:** Difficult to implement, as there is a steep learning curve to master Google Map API. +
 
+// tag::deleteMultiplePersons[]
 === Delete Multiple Persons
 
 The Delete mechanism has been extended to support deleting multiple persons.
@@ -572,8 +573,9 @@ will be used to construct a `DeleteCommand`. `HashSet` prevents the duplicates o
 **Pros:** Index that are not a range can be directly passed into this list. +
 **Cons:** Difficult to implement, duplicates of index will occur and requires iterating through the list and adding into a `HashSet`
  to remove duplicates +
+// end::deleteMultiplePersons[]
 
-
+// tag::dynamicInformationPanel[]
 === Dynamic Information Panel
 
 The information panel has the capability of changing panel depending on the request event. Home, select and help command are the current commands
@@ -591,6 +593,8 @@ The sequence diagram below shows how the panel are changed based on the command 
 
 `Diagram to be added`
 
+// end::dynamicInformationPanel[]
+
 === Suggestions Popup menu
 
 image::Suggestions.png[width="800"]
@@ -598,12 +602,14 @@ _Figure 4.7.1: Suggestions Popup menu_
 
 As shown above, Bevy can suggests menu based on the current text input on the command box.
 
+// tag::export[]
 === Export data
 
 image::ExportData.png[width="790"]
 _Figure 4.11.1: Exporting your data out of Bevy_
 
 As shown above, Bevy can export data out onto a .csv file.
+// end::export[]
 
 // tag::changetheme[]
 === Changing Themes

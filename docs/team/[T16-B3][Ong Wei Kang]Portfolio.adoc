@@ -1,0 +1,104 @@
+= Ong Wei Kang - Project Portfolio
+ifdef::env-github,env-browser[:outfilesuffix: .adoc]
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== Project: Bevy
+
+Bevy is easy to use, with a simple user interface and a powerful Command Line Interface.
+
+*Code contributed*: [https://github.com/CS2103AUG2017-T16-B3/main/blob/master/collated/main/johnweikangong.md[Functional code]] [https://github.com/CS2103AUG2017-T16-B3/main/blob/master/collated/test/johnweikangong.md[Test code]] [https://github.com/CS2103AUG2017-T16-B3/main/blob/master/collated/main/johnweikangong-reused.md[Reused Code]]
+
+=== Enhancement Added: Delete Multiple Persons
+
+==== External behavior
+
+---
+Start of Extract [from: User Guide] written by Ong Wei Kang
+
+include::../UserGuide.adoc[tag=deleteMultiplePersons]
+
+End of Extract
+
+---
+
+==== Justification
+
+Users can quickly export the data into a .csv file which is used by thousands of applications
+out there.
+
+==== Implementation
+
+---
+Start of Extract [from: Developer Guide] written by Ong Wei Kang
+
+include::../DeveloperGuide.adoc[tag=deleteMultiplePersons]
+
+End of Extract
+
+---
+
+=== Enhancement Added: Dynamic Information Panel
+
+==== External behavior
+
+---
+Start of Extract [from: User Guide] written by Ong Wei Kang
+
+include::../UserGuide.adoc[tag=home]
+
+include::../UserGuide.adoc[tag=help]
+
+End of Extract
+
+---
+
+==== Justification
+
+UI is more dynamic, as the panels can be changed according to user's command. This provides
+a much cleaner UI interface.
+
+==== Implementation
+
+---
+Start of Extract [from: Developer Guide] written by Ong Wei Kang
+
+include::../DeveloperGuide.adoc[tag=dynamicInformationPanel]
+
+End of Extract
+
+---
+
+=== Enhancement Added: Export
+
+==== External behavior
+
+---
+Start of Extract [from: User Guide] written by Ong Wei Kang
+
+include::../UserGuide.adoc[tag=export]
+
+End of Extract
+
+---
+
+==== Justification
+
+Deleting multiple persons helps to reduce the hassle of typing many lines of command just to delete a few persons.
+This greatly improves user experience.
+
+==== Implementation
+
+---
+Start of Extract [from: Developer Guide] written by Ong Wei Kang
+
+include::../DeveloperGuide.adoc[tag=export]
+
+End of Extract
+
+---
+
+=== Other contributions
+
+* Wrote additional tests to increase coverage from 91% to 92.2% (Pull requests https://github.com/CS2103AUG2017-T16-B3/main/pull/51[#51], https://github.com/CS2103AUG2017-T16-B3/main/pull/65[#65])
+

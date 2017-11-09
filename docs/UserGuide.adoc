@@ -74,6 +74,7 @@ Exits the app.
 * Parameters can be entered in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 ====
 
+// tag::help[]
 === Viewing help : `help` `sos`
 
 Shows you the help panel which displays the commands to use Bevy. +
@@ -81,7 +82,8 @@ Format: `help` +
 Command Alias: `sos`
 
 image::ViewingHelp.JPG[width="800"]
-_Figure 4.1.1:Viewing Help_
+_Figure 4.1.1 Viewing Help_
+// end::help[]
 
 === Adding a person: `add` `a` `Improved since v1.3`
 
@@ -227,6 +229,7 @@ Returns any person having names `Betsy`, `Tim`, or `John`, or any person with ph
 Returns all person that have their birthday in the month of Feb.
 // end::find[]
 
+// tag::deleteMultiplePersons[]
 === Deleting persons : `delete` `d` `Improved since v1.3`
 
 Deletes the specified persons from the address book. +
@@ -258,6 +261,7 @@ Deletes the 1st person listed in the results of the `find` command.
 * `find John` +
 `delete 2-3 1-3 5-6` +
 Delete the 1st to 3rd, 5th and 6th person listed in the results of the `find` command.
+// end::deleteMultiplePersons[]
 
 === Show Birthday Statistics: `statistics` `stats` `Since v1.4`
 
@@ -351,6 +355,7 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `undo` (Reverses the `delete 1` command) +
 `redo` (Reapplies the `delete 1` command) +
 `redo` (Reapplies the `clear` command) +
+// end::undoredo[]
 
 === Clearing all entries: `clear` `c`
 
@@ -378,6 +383,7 @@ Bevy will automatically save the last theme that you have chosen under the prefe
 when you relaunch the application.
 // end::changetheme[]
 
+// tag::home[]
 === Viewing home: `home` `ho` `Since v1.4`
 
 Opens the home panel which shows the Bevy logo and application status. +
@@ -386,13 +392,16 @@ Command Alias: `ho`
 
 image::Home.jpg[width="800"]
 _Figure 4.14.1: Viewing Home_
+// end::home[]
 
+// tag::export[]
 === Export data out of Bevy: `export` `ex` `Since v1.5rc`
 
 image::ExportData.png[width="800"]
 _Figure 4.15.1: Exporting your data out of Bevy_
 
 You can export all your data out onto a .csv file as shown above, which is used by thousands of applications out there.
+// end::export[]
 
 === Exiting the program : `exit` `x`
 
