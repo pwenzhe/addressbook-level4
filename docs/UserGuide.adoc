@@ -172,7 +172,7 @@ After entering the command, the previous tags are replaced with a single tag, fa
 
 *3. Editing Favourite*
 
-image::EditFavBefore.png[width="790"]
+image::EditFavBefore.PNG[width="790"]
 _Figure 4.4.4 Before editing favourite_
 
 Command: `edit 1 f/yes`
