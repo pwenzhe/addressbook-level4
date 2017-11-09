@@ -1,0 +1,103 @@
+= Valerie Yue - Project Portfolio
+ifdef::env-github,env-browser[:outfilesuffix: .adoc]
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== Project: Bevy
+Bevy is a desktop address book application for user to store their contacts.
+The user interacts with it using a CLI, and it has a GUI created with JavaFX.
+It is written in Java, and has about 6 kLoC.
+
+*Code contributed*: [https://github.com/CS2103AUG2017-T16-B3/main/blob/master/collated/main/Valerieyue.md[Functional code]] [https://github.com/CS2103AUG2017-T16-B3/main/blob/master/collated/test/Valerieyue.md[Test code]]
+
+== Enhancement Added:
+
+=== 1. Birthday Field
+
+==== External behavior
+User can add in their contacts' birthday date while adding this person on to Bevy.
+
+---
+#Start of Extract [from: User Guide]#
+
+include::../UserGuide.adoc[tag=add]
+
+#End of Extract#
+
+---
+
+==== Justification
+
+This feature allows user to store their contacts' birthday date.
+This feature is to fulfill based on the user stories that we have created.
+The main purpose of Bevy is to help users to remember as many details about their friends as possible.
+Their contacts' birthday will be one of the information that we feel that is important for user to remember.
+
+The birthday date can be entered in a number of format for user's convenience.
+The month can be entered as a number or as the shorthand form of the month. (eg. Jan or 1)
+The year can be entered with only the last 2 digits. (eg. 1954 or 54)
+Whatever the format entered, the date will be saved into a readable format for user convenience.
+
+==== Implementation
+
+---
+#Start of Extract [from: Developer Guide]#
+
+include::../DeveloperGuide.adoc[tag=birthdayfield]
+
+#End of Extract#
+
+---
+
+=== 2. Statistics
+
+==== External behavior
+User can view 2 different statistics.
+Birthday statistics allow user to view the number of people having their birthday in a particular month.
+Tag statistics allow user to view the number of people having the same tag.
+
+---
+#Start of Extract [from: User Guide]#
+
+include::../UserGuide.adoc[tag=statistics]
+
+#End of Extract#
+
+---
+
+==== Justification
+
+These statistics will give users more information about their contacts.
+It will make it for useful for users to be able to view these information at a glance and also add more purpose for the features, adding tag and birthday.
+
+==== Implementation
+
+---
+#Start of Extract [from: Developer Guide]#
+
+include::../DeveloperGuide.adoc[tag=statistics]
+
+#End of Extract#
+
+---
+
+=== Enhancement Proposed: Add command `calendar`
+
+Allow users to view all the birthdays easily using a calendar.
+This would act as an additional convenience for user to view their friend's birthdays.
+
+=== Other contributions
+
+==== 1. Make Fields Optional
+Make fields optional when adding a new contact. +
+(Pull request https://github.com/CS2103AUG2017-T16-B3/main/pull/28[#28])
+
+==== 2. Sorting
+Added sort function such that the list will always be sorted according to alphabetical order without the need of an additional command. +
+(Pull requests https://github.com/CS2103AUG2017-T16-B3/main/pull/6[#6])
+
+#Start of Extract [from: Developer Guide]#
+
+include::../DeveloperGuide.adoc[tag=sort]
+
+#End of Extract#

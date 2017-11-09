@@ -113,7 +113,7 @@ public class UniquePersonList implements Iterable<Person> {
         Comparator<Person> comparator = (p1, p2) -> (comparePeople(p1, p2));
         Collections.sort(internalList, comparator);
     }
-    //@@author Valerieyue
+    //@@author
 
     // @@author pwenzhe
     /**

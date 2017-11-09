@@ -18,6 +18,8 @@ public class MainWindowHandle extends StageHandle {
     private final InstagramBrowserPanelHandle instagramBrowserPanel;
     private final GoogleMapBrowserPanelHandle googleMapBrowserPanel;
     private final StatusBarFooterHandle statusBarFooter;
+    private final BirthdayStatisticsPanelHandle birthdayStatisticsPanel;
+    private final TagStatisticsPanelHandle tagStatisticsPanel;
 
     public MainWindowHandle(Stage stage) {
         super(stage);
@@ -37,6 +39,10 @@ public class MainWindowHandle extends StageHandle {
         googleMapBrowserPanel = new GoogleMapBrowserPanelHandle(
                 getChildNode(GoogleMapBrowserPanelHandle.GOOGLEMAP_BROWSER_ID));
         statusBarFooter = new StatusBarFooterHandle(getChildNode(StatusBarFooterHandle.STATUS_BAR_PLACEHOLDER));
+        birthdayStatisticsPanel = new BirthdayStatisticsPanelHandle(
+                getChildNode(BirthdayStatisticsPanelHandle.BIRTHDAY_STATISTICS_PANEL_ID));
+        tagStatisticsPanel = new TagStatisticsPanelHandle(
+                getChildNode(TagStatisticsPanelHandle.TAG_STATISTICS_PANEL_ID));
     }
 
     public MainMenuHandle getMainMenu() {
@@ -81,5 +87,13 @@ public class MainWindowHandle extends StageHandle {
 
     public StatusBarFooterHandle getStatusBarFooter() {
         return statusBarFooter;
+    }
+
+    public BirthdayStatisticsPanelHandle getBirthdayStatisticsPanel() {
+        return birthdayStatisticsPanel;
+    }
+
+    public TagStatisticsPanelHandle getTagStatisticsPanel() {
+        return tagStatisticsPanel;
     }
 }

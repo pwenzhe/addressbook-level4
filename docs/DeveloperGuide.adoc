@@ -410,6 +410,8 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
 
+// tag::sort[]
+// tag::favourite[]
 === Sorting
 
 The list will be sorted in alphabetical order whenever a new person is added.
@@ -420,7 +422,6 @@ _Figure 4.4.1: Sorting Sequence Diagram using addPerson_
 image::SortSequenceDiagram2.png[width="300"]
 _Figure 4.4.2: Sorting Sequence Diagram using updatePerson_
 
-// tag::favourite[]
 . Following the flow of the diagram, when a person is added or edited, the addPerson or updatePerson method will be respectively called in `AddressBook`.
 . `UniquePersonList` will sort the added person by comparing the favourite status and then the names in the current list and insert the persons at the correct slot.
 . The sorted contact list will then be returned.
@@ -434,8 +435,10 @@ _Figure 4.4.2: Sorting Sequence Diagram using updatePerson_
 **Alternative 2:** Creating a separate sort command to sort list. +
 **Pros:** A command that will always allow the list to be sorted in order. +
 **Cons:** It will cause inconvenience as user have to manually type in the command to sort the list whenever they add a new person or change their favourite status. +
+// end::sort[]
 // end::favourite[]
 
+// tag::birthdayfield[]
 === Birthday
 
 The birthday feature allows user to store their friends' birthdays.
@@ -467,10 +470,13 @@ _Figure 4.4.1: Find Month Sequence Diagram_
 **Alternative 2:** Creating a separate find command only for searching month. +
 **Pros:** Makes the code simpler and more direct as there is a command reserved for each of the command. +
 **Cons:** This would make it more complicated for the user to use as there is a different command for the different search. +
+// end::birthdayfield[]
 
-=== Birthday Statistics
+// tag::statistics[]
+=== Birthday/ Tag Statistics
 
 The birthday statistics will show user a table of the number of people having their birthday in each month.
+While the tag statistics will show user a table of the number of people who has the same tag.
 
 image::BirthdayStatistics.JPG[width="800"]
 _Figure 4.6.1: Birthday Statistics_
@@ -492,6 +498,19 @@ _Figure 4.6.2: Birthday Statistics Sequence Diagram_
 . `MainWindow` will wait for `BirthdayStatisticsPanel` to create the table through the method `setPersonData` and after that,
 it will raise a `handleAddressBookChangedEvent` method and will return by raising the `ChangeInformationPanelRequestEvent` to `MainWindow`.
 . `MainWindow` will show the table after the end of execution.
+
+The implementation for tag statistics is similar to the birthday statistics.
+
+==== Design Consideration
+
+**Aspect:** Command style for statistics +
+**Alternative 1 (current choice):** Use a separate command for each statistics. +
+**Pros:** Easy to implement. Straight forward for users as each statistics has it's own command. The command alias makes it easy for users. +
+**Alternative 2:** Combine both statistics as a single command and create a parse function for user to choose which statistics they would like to view. +
+**Pros:** User can choose the statistics that they want to use using a single command. +
+**Cons:** An additional parse function has to be written to parse the command entered. Also it may also make the command more complicated for users +
+
+// end::statistics[]
 
 === Instagram/Google Map Browser Panel
 

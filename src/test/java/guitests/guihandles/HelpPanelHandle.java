@@ -4,7 +4,7 @@ import javafx.scene.Node;
 
 // @@author johnweikangong
 /**
- * A handler for the {@code HomePanel} of the UI
+ * A handler for the {@code HelpPanel} of the UI
  */
 public class HelpPanelHandle extends NodeHandle<Node> {
 
@@ -15,7 +15,7 @@ public class HelpPanelHandle extends NodeHandle<Node> {
     }
 
     /**
-     * Returns the HomePanel node.
+     * Returns the HelpPanel node.
      */
     public Node getHelpPanelNode() {
         return getRootNode();

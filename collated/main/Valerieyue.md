@@ -198,6 +198,12 @@ public class Birthday {
 }
 
 ```
+###### \java\seedu\address\model\person\PersonContainsKeywordsPredicate.java
+``` java
+                keywords.stream().filter(input -> input.substring(0, 2).equals("m/"))
+                        .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getBirthday().value,
+                                keyword.substring(2)))
+```
 ###### \java\seedu\address\model\person\UniquePersonList.java
 ``` java
     /**
@@ -208,9 +214,11 @@ public class Birthday {
         Collections.sort(internalList, comparator);
     }
 ```
-###### \java\seedu\address\model\person\UniquePersonList.java
+###### \java\seedu\address\model\tag\Tag.java
 ``` java
-
+    public String getTagName() {
+        return this.tagName;
+    }
 ```
 ###### \java\seedu\address\model\tag\Tag.java
 ``` java
