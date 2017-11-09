@@ -177,8 +177,8 @@ _Figure 4.4.4 Before editing favourite_
 
 Command: `edit 1 f/yes`
 
-image::EditFav.png[width="790"]
-_Figure 4.4.4 Editing favourite_
+image::EditFavAfter.png[width="790"]
+_Figure 4.4.5 Editing favourite_
 
 You can edit a person's favourite status. If no value is entered after `f/`, it will default to 'no'. +
 
@@ -189,7 +189,7 @@ The list is then sorted to put your favourites at the top.
 Command: `edit 7 n/Jackie Lam e/jackielam@hotmail.com`
 
 image::EditFields.jpg[width="790"]
-_Figure 4.4.5 Editing other fields_
+_Figure 4.4.6 Editing other fields_
 
 You can edit more than one field at the same time.
 From Figure 4.4.1, index 7 is David Li.
