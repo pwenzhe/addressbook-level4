@@ -16,6 +16,9 @@ By: `Team Bevy`      Since: `Aug 2017`      Licence: `MIT`
 
 == Introduction
 
+image::Ui.png[width="790"]
+_Figure 1.1 Bevy UI_
+
 Have you ever forgotten that special friend's birthday? Or that name of the friend you just spoke to?
 
 In today's globalised world, we are making more friends than we can ever imagine, but
@@ -29,8 +32,6 @@ you a sneak peek into their location and even does statistics analysis for you.
 Excited? We are too, because we *love* connecting you with Bevy.
 
 == About
-image::Ui.png[width="790"]
-_Figure 2.1 GUI_
 
 Bevy is easy to use, with a simple user interface and a powerful Command Line Interface.
 This User Guide provides you concise instructions on how to use the app.
