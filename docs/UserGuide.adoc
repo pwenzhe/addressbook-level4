@@ -445,10 +445,10 @@ _Figure 4.18.5: The birthday statistics panel after entering birthday statistics
 image::TagStatistics.JPG[width="800"]
 _Figure 4.18.6: The tag statistics panel after entering tag statistics command_
 
-=== Suggestion Popup Menu
+=== Suggestions Popup Menu
 
-Bevy is able to understand you and offers suggestions to complete your command. The suggestion popup
-menu will appear when you start typing in the command box. Below is an example of the suggestion popup
+Bevy is able to understand you and offers suggestions to complete your command. The suggestions popup
+menu will appear when you start typing in the command box. Below is an example of the suggestions popup
 menu.
 
 === Saving the data
