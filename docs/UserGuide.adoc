@@ -1,4 +1,4 @@
-= Bevy - User Guide `v1.5rc`
+= Bevy - User Guide `v1.5`
 :toc:
 :toc-title:
 :toc-placement: preamble
@@ -19,7 +19,7 @@ By: `Team Bevy`      Since: `Aug 2017`      Licence: `MIT`
 image::Ui.png[width="800"]
 _Figure 1.1 Bevy UI_
 
-Have you ever forgotten that special friend's birthday? Or that name of the friend you just spoke to?
+Have you ever forgotten that special friend's birthday? Or the name of that friend you just spoke to?
 
 In today's globalised world, we are making more friends than we can ever imagine, but
 at the same time, we are losing many of them because of our forgetfulness. If that is you, don't worry,
@@ -27,7 +27,7 @@ we have just the solution for you.
 
 Introducing Bevy, a powerful app that helps you to remember your friends again. It simplifies your friends' information in a
 single place and provide more. Bevy is smart to know what your friends are up to in their social media, gives
-you a sneak peek into their location and even does statistics analysis for you.
+you a sneak peek into their location and even provides statistics analysis for you.
 
 Excited? We are too, because we *love* connecting you with Bevy.
 
@@ -275,7 +275,7 @@ Command Alias: `bstats`
 image::BirthdayStatistics.jpg[width="800"]
 _Figure 4.7.1:Birthday Statistics_
 
-=== Show Tag Statistics: `tagstatistics`, `tstats`
+=== Show Tag Statistics: `tagstatistics`, `tstats` `Since v1.5rc`
 
 Shows a table that indicates the number of people who has the same tag. +
 Format: 'tagstatistics` +
@@ -379,7 +379,6 @@ Command Alias: `c`
 
 // tag::changetheme[]
 === Changing the theme: `changetheme`, `ct` `Since v1.0`
-=======
 
 Changes the theme of the application between the bright and dark theme. +
 Format: `changetheme` +
@@ -411,9 +410,9 @@ _Figure 4.15.1: Viewing Home_
 === Export data out of Bevy: `export` `ex` `Since v1.5rc`
 
 image::ExportData.png[width="800"]
-_Figure 4.15.1: Exporting your data out of Bevy_
+_Figure 4.16.1: Exporting your data out of Bevy_
 
-You can export all your data out onto a .csv file as shown above, which is used by thousands of applications out there.
+You can export all your data in Bevy out into a .csv file as shown above, which is used by thousands of applications out there.
 // end::export[]
 
 === Exiting the program : `exit` `x`
@@ -422,9 +421,39 @@ Exits the program. +
 Format: `exit` +
 Command Alias: `x`
 
+=== Dynamic Information Panel
+image::DynamicInformationPanel.png[width="800"]
+_Figure 4.18.1: The dynamic information panel, next to the list of contacts_
+
+The information panel, labelled in the diagram above, has the capability of changing panel depending on the command you enter.
+
+Below are the respective commands and their panel.
+
+image::Home.JPG[width="800"]
+_Figure 4.18.2: The home panel after entering home command_
+
+image::BrowserPanels.png[width="800"]
+_Figure 4.18.3: The person details panel after entering select command_
+
+
+image::ViewingHelp.JPG[width="800"]
+_Figure 4.18.4: The help panel after entering help command_
+
+image::BirthdayStatistics.JPG[width="800"]
+_Figure 4.18.5: The birthday statistics panel after entering birthday statistics command_
+
+image::TagStatistics.JPG[width="800"]
+_Figure 4.18.6: The tag statistics panel after entering tag statistics command_
+
+=== Suggestion Popup Menu
+
+Bevy is able to understand you and offers suggestions to complete your command. The suggestion popup
+menu will appear when you start typing in the command box. Below is an example of the suggestion popup
+menu.
+
 === Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data. +
+Address book data are saved in the hard disk automatically after any command that changes the data.
 There is no need to save manually.
 
 == FAQ
@@ -435,7 +464,7 @@ your previous application folder and put them into the same location as you plac
 computer.
 
 *Q*: I do not see the correct Instagram page of my friend, what should I do? +
-*A*: The Instagram page displayed users your friend's name as the account name.
+*A*: The Instagram display uses your friend's name as the account name.
 If your friend uses a different account name, it might show the incorrect page.
 
 *Q*: Why am I able to add another friend with the same details? +
@@ -444,6 +473,9 @@ because we know you have many friends.
 
 *Q*: My question is not on the FAQ list, what can I do? +
 *A*: Please do not hesitate to link:{repoURL}/blob/master/docs/AboutUs.adoc[email] us for any questions or comments.
+
+*Q*: Where do I find the export file after entering the export command? +
+*A*: The file is named `Bevy.csv` and will be created in the same location as your Bevy app.
 
 == Command Summary
 
