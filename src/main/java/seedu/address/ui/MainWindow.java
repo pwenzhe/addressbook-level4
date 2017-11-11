@@ -65,6 +65,12 @@ public class MainWindow extends UiPart<Region> {
     private MenuItem homeMenuItem;
 
     @FXML
+    private MenuItem birthdayStatisticsMenuItem;
+
+    @FXML
+    private MenuItem tagStatisticsMenuItem;
+
+    @FXML
     private MenuItem helpMenuItem;
 
     @FXML
@@ -104,6 +110,8 @@ public class MainWindow extends UiPart<Region> {
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
         setAccelerator(homeMenuItem, KeyCombination.valueOf("F2"));
+        setAccelerator(birthdayStatisticsMenuItem, KeyCombination.valueOf("F3"));
+        setAccelerator(tagStatisticsMenuItem, KeyCombination.valueOf("F4"));
     }
 
     /**
