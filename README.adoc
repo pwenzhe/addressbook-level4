@@ -14,7 +14,7 @@ endif::[]
 ifndef::env-github[]
 image::images/Ui.png[width="800"]
 endif::[]
-_Figure 1 Bevy UI_
+_Figure 1: Bevy UI_
 
 Have you ever forgotten that special friend's birthday? Or that name of the friend you just spoke to?
 
