@@ -20,8 +20,8 @@
     </Menu>
       <Menu mnemonicParsing="false" text="Statistics">
          <items>
-            <MenuItem mnemonicParsing="false" text="Birthday" />
-            <MenuItem mnemonicParsing="false" text="Tags" />
+            <MenuItem fx:id="birthdayStatisticsMenuItem" mnemonicParsing="false" onAction="#handleBirthdayStatistics" text="Birthday" />
+            <MenuItem fx:id="tagStatisticsMenuItem" mnemonicParsing="false" onAction="#handleTagStatistics" text="Tag" />
          </items>
       </Menu>
     <Menu mnemonicParsing="false" text="Help">
