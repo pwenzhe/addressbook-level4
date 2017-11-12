@@ -397,10 +397,24 @@
 #bevyAssistant {
     -fx-fill: white;
 }
+
+/* @@author Valerieyue */
 .chart-title {
     -fx-text-fill: white;
 }
 
 .axis-label {
     -fx-text-fill: white;
+}
+
+.axis {
+    -fx-tick-label-fill: white;
+}
+
+.chart-plot-background {
+    -fx-background-color: grey
+}
+
+.default-color0.chart-bar {
+    -fx-bar-fill: #D099DF
 }

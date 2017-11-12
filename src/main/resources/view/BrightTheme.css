@@ -405,10 +405,30 @@
     -fx-fill: black;
 }
 
+/* @@author Valerieyue */
 .chart-title {
     -fx-text-fill: black;
 }
 
 .axis-label {
     -fx-text-fill: black;
+}
+
+.axis {
+    -fx-tick-label-fill: black;
+}
+
+.chart-plot-background {
+    -fx-background-color: #D6D6D6
+}
+
+.default-color0.chart-bar {
+    -fx-bar-fill: #7AD9C5
+}
+
+.chart-vertical-grid-lines {
+    -fx-stroke: white
+}
+.chart-horizontal-grid-lines {
+    -fx-stroke: white
 }

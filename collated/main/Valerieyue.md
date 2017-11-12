@@ -220,12 +220,6 @@ public class Birthday {
         return this.tagName;
     }
 ```
-###### \java\seedu\address\model\tag\Tag.java
-``` java
-    public String getTagName() {
-        return this.tagName;
-    }
-```
 ###### \java\seedu\address\ui\BirthdayStatisticsPanel.java
 ``` java
 /**
@@ -433,5 +427,56 @@ public class TagStatisticsPanel extends UiPart<Region> {
         logger.info("Tag statistics updated.");
         setPersonData(abce.data);
     }
+}
+```
+###### \resources\view\BrightTheme.css
+``` css
+.chart-title {
+    -fx-text-fill: black;
+}
+
+.axis-label {
+    -fx-text-fill: black;
+}
+
+.axis {
+    -fx-tick-label-fill: black;
+}
+
+.chart-plot-background {
+    -fx-background-color: #D6D6D6
+}
+
+.default-color0.chart-bar {
+    -fx-bar-fill: #7AD9C5
+}
+
+.chart-vertical-grid-lines {
+    -fx-stroke: white
+}
+.chart-horizontal-grid-lines {
+    -fx-stroke: white
+}
+```
+###### \resources\view\DarkTheme.css
+``` css
+.chart-title {
+    -fx-text-fill: white;
+}
+
+.axis-label {
+    -fx-text-fill: white;
+}
+
+.axis {
+    -fx-tick-label-fill: white;
+}
+
+.chart-plot-background {
+    -fx-background-color: grey
+}
+
+.default-color0.chart-bar {
+    -fx-bar-fill: #D099DF
 }
 ```
