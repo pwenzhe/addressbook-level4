@@ -439,7 +439,7 @@ _Figure 4.4.2: Sorting Sequence Diagram using updatePerson_
 // end::favourite[]
 
 // tag::birthdayfield[]
-=== Birthday
+=== Birthday/ Find Month
 
 The birthday feature allows user to store their friends' birthdays.
 Restrictions are set to ensure that the date entered is valid.
@@ -456,9 +456,9 @@ _Figure 4.4.1: Find Month Sequence Diagram_
 
 . Following the flow of the diagram, the command `find m/Jan` will be sent to the `LogicManager`.
 . `AddressBookParser` will parse the `find` command and call the `FindCommandParser`.
-. `FindCommandParser` will parse the remaining command, in this case `m/Jan` and call `FindCommand`.
-. `FindCommand` will execute and call `PersonContainsKeywordsPredicate`.
-. In `PersonContainsKeywordsPredicate`, this is where the list is filtered to find the contacts who has their birthday in Jan.
+. `FindCommandParser` will parse the remaining command, in this case `m/Jan` and call `PersonContainsKeywordsPredicate`.
+. `PersonContainsKeywordsPredicate` will filter the list and return to `FindCommandPaser`.
+. `FindCommandParser` will then call `FindCommand` and execute the command.
 . The list will then be returned to `LogicManager`.
 
 ==== Design Consideration
@@ -485,19 +485,17 @@ image::BirthdayStatisticsPanelClassDiagram.png[width="800"]
 _Figure 4.6.2: Birthday Statistics Panel Class Diagram_
 
 As shown from the class diagram, the birthday statistics class diagram extends the UiParts.
-The birthday statistics panel will display the information when user enter the command word, `statistics`.
+The birthday statistics panel will display the information when user enter the command word, `birthdaystatistics` or `tagstatistics`.
 
 The following sequence diagram shows how the birthday statistics table is called.
 
-image::BirthdayStatisticsSequenceDiagram.png[width="800"]
+image::BirthdayStatisticsSequenceDiagram(edit).png[width="800"]
 _Figure 4.6.2: Birthday Statistics Sequence Diagram_
 
-. Following the flow of the diagram, the command `statistics` will be sent to the `LogicManager`.
-. `AddressBookParser` will parse the `statistics` command and will call the `BirthdyaStatisticsCommand`.
-. This command will trigger the `HandleBirthdayStatistics` method within the `MainWindow` and `BirthdayStatisticsPanel`.
-. `MainWindow` will wait for `BirthdayStatisticsPanel` to create the table through the method `setPersonData` and after that,
-it will raise a `handleAddressBookChangedEvent` method and will return by raising the `ChangeInformationPanelRequestEvent` to `MainWindow`.
-. `MainWindow` will show the table after the end of execution.
+. Following the flow of the diagram, the command `birthdaystatistics` will be executed by `BirthdayStatisticsCommand`.
+. `BirthdyaStatisticsCommand` will request for an event change by calling `ChangeInformationPanelRequestEvent`.
+. `ChangeInformationPanelRequestEvent` will change the panel to birthday statistics panel as requested and return to `BirtdayStatisticsCommand`.
+. `BirthdayStatisticsCommand` will then post birthday statistics panel on `EventsCenter`.
 
 The implementation for tag statistics is similar to the birthday statistics.
 
@@ -584,6 +582,8 @@ will be used to construct a `DeleteCommand`. `HashSet` prevents the duplicates o
 . `DeleteCommand` will execute and a sub list of person to delete will be produced to delete the person information in `Model`.
 . `DeleteCommand` will generate the result and return it.
 
+==== Design Consideration
+
 **Aspect:** Type of implementation for storing index range +
 **Alternative 1 (current choice):** Use a `IndexRange` class to store the start and end index of index range. +
 **Pros:** Easy to implement, a list of `IndexRange` can be constructed to store each index range +
@@ -617,7 +617,7 @@ The sequence diagram below shows how the panel are changed based on the command 
 === Suggestions Popup menu
 
 image::Suggestions.png[width="800"]
-_Figure 4.7.1: Suggestions Popup menu_
+_Figure 4.10.1: Suggestions Popup menu_
 
 As shown above, Bevy can suggests menu based on the current text input on the command box.
 

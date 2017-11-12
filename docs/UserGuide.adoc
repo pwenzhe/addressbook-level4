@@ -123,6 +123,7 @@ _Figure 4.2.1.1 Adding a New Contact_
 ** Postal code can be retrieved from the address without specifying `pc/`.
 ** A person can have any number of tags.
 ** Note that birthday can be added in a number of format, and it will be saved in the contact in the standard format.
+** After entering the command, you can see that Brandon Tan has been added as index number 11.
 // end::add[]
 
 === Listing all persons : `list` `l`
@@ -153,25 +154,25 @@ Figure 4.4.1 shows the initial state before any edits. Subsequent edits will be 
 
 *1. Removing Tag*
 
-Command: `edit 4 t/`
+Command: `edit 10 t/`
 
 image::RemoveTag.jpg[width="800"]
 _Figure 4.4.2 Removing Tag_
 
 You can remove all the person's tags by typing `t/` without specifying any tags after it. +
-From Figure 4.4.1, index 4 is Bernice Yu and has the tags colleagues and friends.
+From Figure 4.4.1, index 10 is Bernice Yu and has the tags colleagues and friends.
 After entering the command, all tags are removed as seen from Figure 4.4.2.
 
 *2. Editing Tag*
 
-Command: `edit 4 t/family`
+Command: `edit 10 t/family`
 
 image::EditTag.jpg[width="800"]
 _Figure 4.4.3 Editing tag_
 
 When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative. +
 
-From Figure 4.4.1, index 4, Bernice Yu has the tags, colleagues and friends.
+From Figure 4.4.1, index 10, Bernice Yu has the tags, colleagues and friends.
 After entering the command, the previous tags are replaced with a single tag, family.
 
 // tag::editfav[]
@@ -192,13 +193,13 @@ The list is then sorted to put your favourites at the top.
 
 *4. Editing Other Fields*
 
-Command: `edit 7 n/Jackie Lam e/jackielam@hotmail.com`
+Command: `edit 12 n/Jackie Lam e/jackielam@hotmail.com`
 
 image::EditFields.jpg[width="800"]
 _Figure 4.4.6 Editing other fields_
 
 You can edit more than one field at the same time.
-From Figure 4.4.1, index 7 is David Li.
+From Figure 4.4.1, index 12 is David Li.
 After executing the command, the name and email is changed as requested.
 
 // tag::find[]
@@ -266,18 +267,18 @@ Delete the 1st to 3rd, 5th and 6th person listed in the results of the `find` co
 // end::deleteMultiplePersons[]
 
 // tag::statistics[]
-=== Show Birthday Statistics: `birthdaystatistics`, `bstats` `Since v1.4`
+=== Showing Birthday Statistics: `birthdaystatistics`, `bstats` `Since v1.4`
 
-Shows a table that indicates the number of people having their birthdays in a particular month. +
+Birthday statistics shows you the number of people having their birthdays in a particular month. +
 Format: `birthdaystatistics` +
 Command Alias: `bstats`
 
-image::BirthdayStatistics.jpg[width="800"]
+image::BirthdayStatistics.JPG[width="800"]
 _Figure 4.7.1:Birthday Statistics_
 
-=== Show Tag Statistics: `tagstatistics`, `tstats` `Since v1.5rc`
+=== Showing Tag Statistics: `tagstatistics`, `tstats` `Since v1.5rc`
 
-Shows a table that indicates the number of people who has the same tag. +
+Tag statistics shows you the number of people who has the same tag. +
 Format: 'tagstatistics` +
 Command Alias: `tstats`
 

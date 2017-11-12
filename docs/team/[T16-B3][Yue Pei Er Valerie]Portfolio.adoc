@@ -2,6 +2,7 @@
 ifdef::env-github,env-browser[:outfilesuffix: .adoc]
 :imagesDir: ../images
 :stylesDir: ../stylesheets
+:repoURL: https://github.com/CS2103AUG2017-T16-B3/main
 
 == Project: Bevy
 Bevy is a desktop address book application for user to store their contacts.
@@ -12,15 +13,19 @@ It is written in Java, and has about 6 kLoC.
 
 == Enhancement Added:
 
-=== 1. Birthday Field
-
-==== External behavior
-User can add in their contacts' birthday date while adding this person on to Bevy.
+=== 1. Birthday Field/ Find Month
+User can add in their contacts' birthday date when adding a person on to Bevy.
+They can also find the people who have their birthday in the same month.
 
 ---
+
+==== External behavior
+
 #Start of Extract [from: User Guide]#
 
 include::../UserGuide.adoc[tag=add]
+
+include::../UserGuide.adoc[tag=find]
 
 #End of Extract#
 
@@ -28,19 +33,15 @@ include::../UserGuide.adoc[tag=add]
 
 ==== Justification
 
-This feature allows user to store their contacts' birthday date.
-This feature is to fulfill based on the user stories that we have created.
 The main purpose of Bevy is to help users to remember as many details about their friends as possible.
-Their contacts' birthday will be one of the information that we feel that is important for user to remember.
+Their contacts' birthday will be one of the information that we feel that is important for users to remember.
 
-The birthday date can be entered in a number of format for user's convenience.
-The month can be entered as a number or as the shorthand form of the month. (eg. Jan or 1)
-The year can be entered with only the last 2 digits. (eg. 1954 or 54)
-Whatever the format entered, the date will be saved into a readable format for user convenience.
+Bevy's find command for month will further add convenience for user to keep track of their contact's birthdays.
+
+---
 
 ==== Implementation
 
----
 #Start of Extract [from: Developer Guide]#
 
 include::../DeveloperGuide.adoc[tag=birthdayfield]
@@ -48,15 +49,17 @@ include::../DeveloperGuide.adoc[tag=birthdayfield]
 #End of Extract#
 
 ---
+---
 
 === 2. Statistics
-
-==== External behavior
-User can view 2 different statistics.
-Birthday statistics allow user to view the number of people having their birthday in a particular month.
+User can view 2 different statistics - Birthday and Tag statistics. +
+Birthday statistics allow user to view the number of people having their birthday in a particular month. +
 Tag statistics allow user to view the number of people having the same tag.
 
 ---
+
+==== External behavior
+
 #Start of Extract [from: User Guide]#
 
 include::../UserGuide.adoc[tag=statistics]
@@ -68,11 +71,12 @@ include::../UserGuide.adoc[tag=statistics]
 ==== Justification
 
 These statistics will give users more information about their contacts.
-It will make it for useful for users to be able to view these information at a glance and also add more purpose for the features, adding tag and birthday.
-
-==== Implementation
+It will be more convenient for users to be able to view these information at a glance.
+This feature will also make the two fields, tag and birthday more useful.
 
 ---
+==== Implementation
+
 #Start of Extract [from: Developer Guide]#
 
 include::../DeveloperGuide.adoc[tag=statistics]
@@ -80,11 +84,7 @@ include::../DeveloperGuide.adoc[tag=statistics]
 #End of Extract#
 
 ---
-
-=== Enhancement Proposed: Add command `calendar`
-
-Allow users to view all the birthdays easily using a calendar.
-This would act as an additional convenience for user to view their friend's birthdays.
+---
 
 === Other contributions
 
