@@ -12,7 +12,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 
 === Ong Wei Kang
 image::ongweikang.jpg[width="150", align="left"]
-{empty}[http://johnweikangong.github.io[homepage]] [https://github.com/johnweikangong[github]] [<<#, portfolio>>]
+{empty}[http://johnweikangong.github.io[homepage]] [https://github.com/johnweikangong[github]] [https://github.com/CS2103AUG2017-T16-B3/main/blob/master/docs/team/%5BT16-B3%5D%5BOng%20Wei%20Kang%5DPortfolio.adoc[portfolio]]
 
 Role: Developer +
 Responsibilities: Testing, Git Expert
@@ -21,7 +21,7 @@ Responsibilities: Testing, Git Expert
 
 === Yue Pei Er Valerie
 image::Valerie.png[width="150", align="left"]
-{empty}[http://github.com/Valerieyue[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/Valerieyue[github]] [https://github.com/CS2103AUG2017-T16-B3/main/blob/master/docs/team/valerieyue.adoc[portfolio]]
 
 Role: Developer +
 Responsibilities: Logic
@@ -30,7 +30,7 @@ Responsibilities: Logic
 
 === Poon Wenzhe
 image::poonwenzhe.jpg[width="150", align="left"]
-{empty}[http://github.com/pwenzhe[github]] [<<poonwenzhe#, portfolio>>]
+{empty}[http://github.com/pwenzhe[github]] [https://github.com/CS2103AUG2017-T16-B3/main/blob/master/docs/team/poonwenzhe.adoc[portfolio]]
 
 Role: Developer +
 Responsibilities: UI
