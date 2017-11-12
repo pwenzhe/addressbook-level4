@@ -206,7 +206,7 @@ After executing the command, the name and email is changed as requested.
 === Locating persons by name, phone number or birthday: `find`, `f` `Improved since v1.5rc`
 
 Finds persons by any details that matches the keywords provided. +
-Format to find by name or phone number: `find KEYWORD [MORE_KEYWORDS]` +
+Format: `find KEYWORD [MORE_KEYWORDS]` +
 Format to find month: `find m/MONTH` +
 Command Alias: `f`
 
@@ -410,10 +410,13 @@ _Figure 4.15.1: Viewing Home_
 // tag::export[]
 === Export data out of Bevy: `export` `ex` `Since v1.5rc`
 
+You can export all your data in Bevy out into a .csv file as shown above, which is used by thousands of applications out there. +
+Format: `export` +
+Command Alias: `ex`
+
 image::ExportData.png[width="800"]
 _Figure 4.16.1: Exporting your data out of Bevy_
 
-You can export all your data in Bevy out into a .csv file as shown above, which is used by thousands of applications out there.
 // end::export[]
 
 === Exiting the program : `exit` `x`
@@ -487,6 +490,8 @@ because we know you have many friends.
 |Command |Keyword |Alias | Format | Examples
 |Add |`add` |`a` | `add n/NAME p/PHONE_NUMBER [b/BIRTHDAY] [e/EMAIL] [a/ADDRESS] [pc/POSTAL_CODE] [f/FAVOURITE] [t/TAG]...` |`add n/James Ho p/92224444 b/24 09 89 e/jamesho@example.com a/123, Clementi Rd pc/234665 f/no t/friend t/colleague`
 
+|Birthday Statistics |`birthdaystatistics` |`bstats` |- |-
+
 |Clear |`clear` |`c` |- |-
 
 |Change Theme |`changetheme` |`ct` |- |-
@@ -508,11 +513,9 @@ because we know you have many friends.
 
 |List |`list` |`l` |- |-
 
-|Birthday Statistics |`birthdaystatistics` |`bstats` |- |-
+|Select |`select` |`s` |- |-
 
 |Tag Statistics |`tagstatistics` |`tstats` |- |-
-
-|Select |`select` |`s` |- |-
 
 |Undo |`undo` |`u` |- |-
 

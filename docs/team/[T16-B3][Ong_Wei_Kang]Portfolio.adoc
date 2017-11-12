@@ -2,7 +2,6 @@
 ifdef::env-github,env-browser[:outfilesuffix: .adoc]
 :imagesDir: ../images
 :stylesDir: ../stylesheets
-:repoURL: https://github.com/CS2103AUG2017-T16-B3/main
 
 == Project: Bevy
 
