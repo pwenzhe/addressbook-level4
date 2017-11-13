@@ -17,7 +17,11 @@ By: `Team Bevy`      Since: `Aug 2017`      Licence: `MIT`
 == Introduction
 This test script shows you the step by step instructions to perform manual testing on Bevy.
 
-== Loading the Sample Data
+== Setting up
+. Download the latest Bevy release https://github.com/CS2103AUG2017-T16-B3/main/releases[here].
+. Create a folder named `data` in the same location as the jar file.
+. Ensure that the file `[T16-B3][Bevy]SampleData.xml` is saved in the data folder.
+. Run Bevy and you will be able to see the data.
 
 == Commands
 
@@ -28,7 +32,7 @@ Format: `help` +
 Command Alias: `sos`
 
 ****
-* Bevy's has it's own build in help function to show you the available commands
+* Bevy has it's own build in help panel to show you the available commands
 ****
 
 ==== Manual Testing
@@ -69,10 +73,10 @@ The person  marked as favourite will be pin to the top of the list with a yellow
 . Command: `a n/ben tan p/89489898 b/13.9.03 a/Blk 234, Pasir Ris Street 11, 510234 f/y` +
 Expected Result: Name capitalised, date reformatted, postal code extracted, person pinned as favourites.
 
-. Command: `a p/82909897 +
+. Command: `a p/82909897` +
 Expected Result: Invalid command format as name is not added.
 
-. Command: `a p/90988787 n/mabel tay b/32/4/09 +
+. Command: `a p/90988787 n/mabel tay b/32/4/09` +
 Expected Result: Unable to add due to invalid date.
 
 ---
@@ -113,10 +117,8 @@ Expected Result: `John` and `John Doe`
 Expected Result: Returns any person having names `Betsy`, `Tim`, or `John`, or any person with phone number containing `123`.
 . Command: `find m/Feb` +
 Expected Result: Returns all person that have their birthday in the month of `Feb`.
-. Command: `f bedok` +
-Expected Result: Returns all person that has their address in `Bedok`.
-. Command: `f favourite` +
-Expected Result: Returns all person pinned as favourite.
+. Command: `f bedok favourite` +
+Expected Result: Returns all person that has their address in `Bedok` and all person pinned as favourite.
 
 ---
 
@@ -153,7 +155,8 @@ Command Alias: `h`
 
 ==== Manual Testing
 . Command: `h` +
-Expected Result: The list of commands that you have entered in reverse chronological order.
+Expected Result: The list of commands that you have entered in reverse chronological order:
+`delete 2-3 1-3 5-6` `find John` `d 1` `find favourite` etc...
 
 ---
 
@@ -164,7 +167,7 @@ Format: `clear` +
 Command Alias: `c`
 
 === Manual Testing
-. =Command: 'c' +
+. Command: `c` +
 Expected Result: List will be cleared.
 
 ---
@@ -269,7 +272,7 @@ Expected Result: The tag statistics will appear on the panel.
 . Command: `d 9` +
 Expected Result: The tag `pretty` has been removed from the bar chart.
 
-. Command: `a n/Mary tay p/89007776 t/happy
+. Command: `a n/Mary tay p/89007776 t/happy` +
 Expected Result: A new bar will be shown to reflect the added new tag.
 
 ---

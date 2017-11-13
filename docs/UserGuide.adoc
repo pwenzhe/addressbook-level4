@@ -88,7 +88,7 @@ _Figure 4.1.1 Viewing Help_
 // tag::add[]
 === Adding a person: `add`, `a` `Improved since v1.3`
 
-Adds a person to the address book. +
+You can add a new person on Bevy with the add command and store details about your friends. +
 
 Format: `add n/NAME p/PHONE_NUMBER [b/BIRTHDAY] [e/EMAIL] [a/ADDRESS] [pc/POSTAL_CODE] [f/FAVOURITE] [t/TAG]...` +
 Command Alias: `a`
@@ -108,7 +108,7 @@ Command Alias: `a`
 
 Examples: +
 There are a number of features that are available in the add command.
-These features can be further explained using examples.
+These features can be further illustrated using the following example.
 
 *1. Adding a new Contact*
 
@@ -205,7 +205,7 @@ After executing the command, the name and email is changed as requested.
 // tag::find[]
 === Locating persons by name, phone number or birthday: `find`, `f` `Improved since v1.5rc`
 
-Finds persons by any details that matches the keywords provided. +
+You can find your friends by any details that matches the keywords provided. +
 Format: `find KEYWORD [MORE_KEYWORDS]` +
 Format to find month: `find m/MONTH` +
 Command Alias: `f`
@@ -406,6 +406,7 @@ Command Alias: `ho`
 
 image::Home.jpg[width="800"]
 _Figure 4.15.1: Viewing Home_
+// end::home[]
 
 // tag::export[]
 === Export data out of Bevy: `export` `ex` `Since v1.5rc`

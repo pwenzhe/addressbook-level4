@@ -24,8 +24,8 @@ End of Extract
 
 ==== Justification
 
-Users can quickly export the data into a .csv file which is used by thousands of applications
-out there.
+Deleting multiple persons helps to reduce the hassle of typing many lines of command just to delete a few persons.
+This greatly improves user experience.
 
 ==== Implementation
 
@@ -84,8 +84,8 @@ End of Extract
 
 ==== Justification
 
-Deleting multiple persons helps to reduce the hassle of typing many lines of command just to delete a few persons.
-This greatly improves user experience.
+Users can quickly export the data into a .csv file which is used by thousands of applications
+out there.
 
 ==== Implementation
 
