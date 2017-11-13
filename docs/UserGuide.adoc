@@ -412,7 +412,7 @@ _Figure 4.15.1: Viewing Home_
 // tag::export[]
 === Export data out of Bevy: `export`, `ex` `Since v1.5rc`
 
-You can export all your data in Bevy out into a .csv file as shown above, which is used by thousands of applications out there. +
+You can export all your data out of Bevy onto Bevy.csv file as shown below, which is used by thousands of applications out there. +
 Format: `export` +
 Command Alias: `ex`
 
