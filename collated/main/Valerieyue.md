@@ -354,6 +354,7 @@ public class BirthdayStatisticsPanel extends UiPart<Region> {
 ```
 ###### \java\seedu\address\ui\TagStatisticsPanel.java
 ``` java
+
 /**
  * The birthday statistics panel of the App.
  */
@@ -405,7 +406,9 @@ public class TagStatisticsPanel extends UiPart<Region> {
             String[] tagArray = tagString.split(",");
             for (int k = 0; k < tagArray.length; k++) {
                 String tag = tagArray[k].replaceAll("[^a-zA-Z]+", "");
-                tagCounter[tagNames.indexOf(tag)]++;
+                if (tagNames.indexOf(tag) >= 0 && tagNames.indexOf(tag) < tagNames.size()) {
+                    tagCounter[tagNames.indexOf(tag)]++;
+                }
             }
         }
 
