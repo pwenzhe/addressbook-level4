@@ -445,7 +445,7 @@ The birthday feature allows user to store their friends' birthdays.
 Restrictions are set to ensure that the date entered is valid.
 There are a few format that the user can enter the date.
 The birthday class will reformat the birthday entered to ensure that the birthday saved in the contact list is standardised.
-This will make it easier for users to view and also assist in executing find command for month.
+This will make it easier for users to view. The converted format can also assist in executing `find` command for month.
 
 After adding the birthday, users can search for a particular month and the list will show the people who were born in the same month, sorted according to the day.
 
@@ -469,7 +469,7 @@ _Figure 4.4.1: Find Month Sequence Diagram_
 **Cons:** It may make the code for find command more complicated. +
 **Alternative 2:** Creating a separate find command only for searching month. +
 **Pros:** Makes the code simpler and more direct as there is a command reserved for each of the command. +
-**Cons:** This would make it more complicated for the user to use as there is a different command for the different search. +
+**Cons:** This would make it more complicated for the user to use as there is a different command used for different search. +
 // end::birthdayfield[]
 
 // tag::statistics[]
@@ -508,7 +508,7 @@ parameter in the event.
 **Pros:** Easy to implement. Straight forward for users as each statistics has it's own command. The command alias makes it easy for users. +
 **Alternative 2:** Combine both statistics as a single command and create a parse function for user to choose which statistics they would like to view. +
 **Pros:** User can choose the statistics that they want to use using a single command. +
-**Cons:** An additional parse function has to be written to parse the command entered. Also it may also make the command more complicated for users +
+**Cons:** An additional parse function has to be written to parse the command entered. +
 
 // end::statistics[]
 
