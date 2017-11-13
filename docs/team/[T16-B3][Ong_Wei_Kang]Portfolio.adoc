@@ -4,7 +4,7 @@ ifdef::env-github,env-browser[:outfilesuffix: .adoc]
 :stylesDir: ../stylesheets
 
 == Project: Bevy
-Bevy is a powerful app that helps you to remember your friends again. It simplifies your friends' information in a
+Bevy is a powerful application that helps you to remember your friends again. It simplifies your friends' information in a
 single place and provide more. Bevy is smart to know what your friends are up to in their social media, gives
 you a sneak peek into their location and even provides statistics analysis for you.
 

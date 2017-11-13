@@ -416,10 +416,10 @@ Certain properties of the application can be controlled (e.g App name, logging l
 
 The list will be sorted whenever a new person is added or when a person is edited. The list will be sorted alphabetically while keeping the favourite persons at the top of the list.
 
-image::SortSequenceDiagram.png[width="300"]
+image::SortSequenceDiagram.png[width="800"]
 _Figure 4.4.1: Sorting Sequence Diagram using addPerson_
 
-image::SortSequenceDiagram2.png[width="300"]
+image::SortSequenceDiagram2.png[width="800"]
 _Figure 4.4.2: Sorting Sequence Diagram using updatePerson_
 
 . Following the flow of the diagram, when a person is added or edited, the addPerson or updatePerson method will be respectively called in `AddressBook`.
@@ -490,7 +490,7 @@ The birthday/tag statistics panel will display the information depending on the 
 The following sequence diagram shows how the birthday/tag statistics command is executed to display the respective panels,
 using birthday statistics command as an example.
 
-image::BirthdayStatisticsCommandSequenceDiagram.png[width="400"]
+image::BirthdayStatisticsCommandSequenceDiagram.png[width="800"]
 _Figure 4.6.3: Birthday Statistics Command Sequence Diagram_
 
 . Following the flow of the diagram, the `LogicManager` will execute  the `birthdaystatistics` command.
@@ -523,46 +523,46 @@ The browser panels display visual information about the selected person.
 image::BrowserPanelsClassDiagram.png[width="400"]
 _Figure 4.7.2: Browser Panels Class Diagram_
 
-As shown from the class diagram, both browser panels extends the UiParts. The browser panels are responsible for displaying information on the selected
-person based on the person details.
+As shown from the class diagram, both browser panels extends the UiParts. The browser panels are responsible for displaying
+Instagram page and Google Maps location of the selected person.
 
-The following sequence diagram shows how the browser operation works, using InstagramBrowserPanel as an exmaple:
+The following sequence diagram shows how the browser panel operation works, using InstagramBrowserPanel as an exmaple:
 
-image::InstagramBrowserPanelSequenceDiagram.png[width="400"]
+image::InstagramBrowserPanelSequenceDiagram.png[width="800"]
 _Figure 4.7.3: InstagramBrowserPanel Sequence Diagram_
 
 As shown from the sequence diagram, when a user selects a new person, the InstagramBrowserPanel handles the new selection event and display the selected
-person's Instagram based on the name in the details. For example, if the selected person's name is `Alex Yeoh`, InstagramBrowserPanel will use `AlexYeoh` as part of the URL parameter to display the person's
+person's Instagram based on the name in the person details. For example, if the selected person's name is `Alex Yeoh`, InstagramBrowserPanel will use `AlexYeoh` as part of the URL parameter to display the person's
 Instagram page.
 
-Similarly, the GoogleMapBrowserPanel will display the map of the selected person's home location using either the postal code or the address in the person details.
-For example, if the postal code is `150159`, GoogleMapBrowserPanel will use this value to display the person's location. If the postal code is not available, address will be used. For example,
-if the address is `ABC 123 Street`, GoogleMapBrowserPanel will use `ABC+123+Street` as part of the URL parameter to display
-the person's location.
+Similarly, the GoogleMapBrowserPanel will display the Google Maps location of the selected person using the address in the person details.
+For example, if the address is `ABC 123 Street`, GoogleMapBrowserPanel will use `ABC+123+Street` as part of the URL parameter to display
+the Google Maps location of the person.
 
 [NOTE]
-If the address contains `#` characters, GoogleMapBrowserPanel will ignore any substring after this character
+If the address contains `#` characters, GoogleMapBrowserPanel will ignore any substring after this character.
 
 ==== Design Considerations
 
-**Aspect:** Type of implementation for Instagram +
+**Aspect:** Type of implementation for Instagram. +
 **Alternative 1 (current choice):** Use browser to display selected person's instagram page. +
-**Pros:** Easy to implement, since the components needed is the JavaFX scene and instagram URL parameter. The user interaction
- is fully managed by the browser and instagram page itself. +
-**Cons:** Some user's instagram page cannot be found using just their name. +
-**Alternative 2:** Use Instagram API to construct an intergrated Instagram component +
-**Pros:** Integrates well, as users can use one-time login authentication to sync with Instagram and we can find users with similar names from user's followers. +
+**Pros:** Easy to implement, since the components needed is the JavaFX and instagram URL parameter. The user interaction
+ is fully managed by the browser and Instagram website. +
+**Cons:** The UI of Instagram cannot be customised to the application's UI design.  +
+**Alternative 2:** Use Instagram API to construct an intergrated Instagram component. +
+**Pros:** Integrates well, as UI design is customisable. Furthermore, users can use one-time login authentication to sync with
+Instagram and users with similar names can be found from user's followers. +
 **Cons:** Difficult to implement, as there is a steep learning curve to master Instagram API. +
 
 
-**Aspect:** Type of implementation for Google Map +
-**Alternative 1 (current choice):** Use browser to display selected person's location. +
-**Pros:** Easy to implement, since the componenets needed is the JavaFX scene and Google Map URL parameter. The user interaction
-is fully managed by the browser and Google Map page itself. +
-**Cons:** We can not customise the visual display of Google Map. +
-**Alternative 2:** Use Google Map API to construct an intergrated Google Map component +
-**Pros:** Integrates well, as we can simplify the experience for users. +
-**Cons:** Difficult to implement, as there is a steep learning curve to master Google Map API. +
+**Aspect:** Type of implementation for Google Maps. +
+**Alternative 1 (current choice):** Use browser to display the selected person's Google Maps location. +
+**Pros:** Easy to implement, since the componenets needed is the JavaFX and Google Maps URL parameter. The user interaction
+is fully managed by the browser and Google Maps website. +
+**Cons:** The UI of Google Maps cannot be customised to the application's UI design. +
+**Alternative 2:** Use Google Maps API to construct an integrated Google Maps component. +
+**Pros:** Integrates well, as UI design is customisable. +
+**Cons:** Difficult to implement, as there is a steep learning curve to master Google Maps API. +
 // end::instagramGoogleMapBrowserPanel[]
 
 // tag::deleteMultiplePersons[]
@@ -581,21 +581,21 @@ Below is a detailed explanation of the extension.
 . `AddressBookParser` will parse the `delete` command and call the `DeleteCommandParser`.
 . `DeleteCommandParser` will parse the index ranges into a list of `IndexRange` class using the `ParserUtil`, where each `IndexRange`
 object contains the start and end index of each range.
-. This list will then be converted into a `HashSet` of indexes, which
+. This list will then be converted into a `HashSet` of Integer indexes, which
 will be used to construct a `DeleteCommand`. `HashSet` prevents the duplicates of indexes.
-. `DeleteCommand` will execute and a sub list of person to delete will be produced to delete the person information in `Model`.
+. `DeleteCommand` will execute and a sub list of person to delete will be produced to delete the persons in `Model`.
 . `DeleteCommand` will generate the result and return it.
 
 ==== Design Consideration
 
-**Aspect:** Type of implementation for storing index range +
+**Aspect:** Type of implementation for storing index range. +
 **Alternative 1 (current choice):** Use a `IndexRange` class to store the start and end index of index range. +
-**Pros:** Easy to implement, a list of `IndexRange` can be constructed to store each index range +
-**Cons:** Some index may not be a range, therefore does not need the `IndexRange` class +
-**Alternative 2:** Directly parse the index ranges into a list of integers +
+**Pros:** Easy to implement, a list of `IndexRange` can be constructed to store each index range. +
+**Cons:** Some index may not be a range, therefore does not need the `IndexRange`. +
+**Alternative 2:** Directly parse the index ranges into a list of integers. +
 **Pros:** Index that are not a range can be directly passed into this list. +
 **Cons:** Difficult to implement, duplicates of index will occur and requires iterating through the list and adding into a `HashSet`
- to remove duplicates +
+ to remove duplicates. +
 // end::deleteMultiplePersons[]
 
 // tag::homeHelpCommand[]
@@ -604,7 +604,7 @@ will be used to construct a `DeleteCommand`. `HashSet` prevents the duplicates o
 image::Home.JPG[width="800"]
 _Figure 4.9.1: Home Panel_
 
-The home command show users the home panel of the app. This panel displays the total number of
+The home command show users the home panel of the application. This panel displays the total number of
 people and tags. It will also display randomised tips and advices below the welcome text.
 
 image::ViewingHelp.JPG[width="800"]
@@ -621,7 +621,7 @@ information depending on the command entered.
 
 The following sequence diagram shows how the home/help command is executed to display the respective panels, using the home command as an exmaple.
 
-image::HomeCommandSequenceDiagram.png[width="400"]
+image::HomeCommandSequenceDiagram.png[width="800"]
 _Figure 4.9.4: Home Command Sequence Diagram_
 
 . Following the flow of the diagram, the `LogicManager` will execute  the `Home` command.
@@ -630,7 +630,7 @@ as the parameter of the event.
 . `MainApp` will handle the new event and push to the `Ui`, which will push to the `MainWindow`.
 . In `MainWindow` class, `changeInformationPanel()` will perform the panel change depending on the
 parameter in the event.
-. `Home` will then return `CommandResult` with `MESSAGE_SUCCESS` as the parameter back to the `LogicManager`.
+. `HomeCommand` will return the result message upon successful execution.
 // end::homeHelpCommand[]
 
 // tag::dynamicInformationPanel[]
@@ -639,9 +639,9 @@ parameter in the event.
 image::DynamicInformationPanel.png[width="800"]
 _Figure 4.10.1: Change Information Panel Sequence Diagram_
 
-The information panel, seen above has the capability of changing panel depending on the command entered. Home, help, select,
-birthday statistics and tag statistics command are the current commands
-that will post new `ChangeInformationPanelRequestEvent(panel)` event.
+The information panel, seen above, has the capability of changing panel depending on the command entered. Home, help, select,
+birthday statistics and tag statistics command are the current commands that will post new
+`ChangeInformationPanelRequestEvent(panel)` event to request for a change of panel.
 
 Below are the respective commands and their requested panel.
 
@@ -665,11 +665,11 @@ information panel.
 
 ==== Design Consideration
 
-**Aspect:** Type of Information Panel +
+**Aspect:** Type of Information Panel: Dynamic/Static. +
 **Alternative 1 (current choice):** Use a dynamic information panel that will change depending on the commands. +
 **Pros:** Provides a much cleaner, clutter-free UI experience, as there is no need to put all UI element into a static
-display. +
-**Cons:** Extra implementation required for individual commands that will require changing of the panel. +
+information panel. +
+**Cons:** Extra implementation required for individual commands requires changing of the panel. +
 **Alternative 2:** Use a static information panel with all UI elements preloaded. +
 **Pros:** Easier implementation, as everything is loaded on start and displayed. No need for extra implementation for
  individual commands. +
@@ -683,11 +683,11 @@ image::Suggestions.png[width="800"]
 _Figure 4.11.1: Suggestions Popup menu_
 
 As shown above, Bevy can suggests words based on the current text input on the command box.
-The suggestions are preloaded using keywords from the features in Bevy.
+The suggestions are preloaded using keywords from the current features.
 
 ==== Design Consideration
 
-**Aspect:** Type of suggestions popup menu +
+**Aspect:** Type of suggestions popup menu. +
 **Alternative 1 (current choice):** Use JavaFX UI elements to create own suggestions popup menu method. +
 **Pros:** Provides a faster response time when users type in the command box. +
 **Cons:** Extra implementation required in writing the methods required to perform this feature. +
@@ -702,18 +702,18 @@ The suggestions are preloaded using keywords from the features in Bevy.
 image::ExportData.png[width="800"]
 _Figure 4.12.1: Exporting your data out of Bevy_
 
-Bevy can export address book data out onto a .csv file when users enter the export command. Seen in the figure above is the actual file Bevy exports the data to.
+Bevy can export AddressBook data onto Bevy.csv file when users enter the export command. Seen in the figure above is the actual file Bevy exports the data to.
 
-image::ExportCommandSequenceDiagram.png[width="400"]
+image::ExportCommandSequenceDiagram.png[width="800"]
 _Figure 4.12.2: Export Command Sequence Diagram_
 
-image::SaveToCsvFileSequenceDiagram.png[width="400"]
+image::SaveToCsvFileSequenceDiagram.png[width="800"]
 _Figure 4.12.3: Save to CSV File Sequence Diagram_
 
 . Following the flow of the diagrams, the `LogicManager` will execute  the `export` command.
-. `ExportCommand` will request for an event change, as seen in figure 4.12.2 by posting to the events center the event `ExportToFileRequestEvent`.
+. `ExportCommand` will request for an event change, as seen in figure 4.12.2 by posting to the events center the event `ExportToFileRequestEvent()`.
 . `MainApp` will handle the new event, as seen in figure 4.12.3 and save the current address book data using `StorageManager`.
-. `ExportCommand` will then return `CommandResult` with `MESSAGE_SUCCESS` as the parameter back to the `LogicManager`.
+. `ExportCommand` will return the result message upon successful execution.
 
 // end::export[]
 
