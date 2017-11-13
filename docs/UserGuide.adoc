@@ -491,10 +491,10 @@ because we know you have many friends.
 
 == Command Summary
 
-[width="99%",cols="10%, 10%, 5%, <30%, <40%",options="header",]
+[width="99%",cols="10%,10%,<5%,<30%,<45%",options="header",]
 |=======================================================================
 |Command |Keyword |Alias | Format | Examples
-|Add |`add` |`a` | `add n/NAME p/PHONE_NUMBER [b/BIRTHDAY] [e/EMAIL] [a/ADDRESS] [pc/POSTAL_CODE] [f/FAVOURITE] [t/TAG]...` |`add n/James Ho p/92224444 b/24 09 89 e/jamesho@example.com a/123, Clementi Rd pc/234665 f/no t/friend t/colleague`
+|Add |`add` |`a` |`add n/NAME p/PHONE_NUMBER [b/BIRTHDAY] [e/EMAIL] [a/ADDRESS] [pc/POSTAL_CODE] [f/FAVOURITE] [t/TAG]...` |`add n/James Ho p/92224444 b/24 09 89 e/jamesho@example.com a/123, Clementi Rd pc/234665 f/no t/friend t/colleague`
 
 |Birthday Statistics |`birthdaystatistics` |`bstats` |- |-
 
