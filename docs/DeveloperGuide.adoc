@@ -596,6 +596,7 @@ will be used to construct a `DeleteCommand`. `HashSet` prevents the duplicates o
  to remove duplicates +
 // end::deleteMultiplePersons[]
 
+// tag::homeHelpCOmmand[]
 === Home/Help Command
 
 image::Home.jpg[width="800"]
@@ -629,34 +630,70 @@ as the parameter of the event.
 . In `MainWindow` class, `changeInformationPanel()` will perform the panel change depending on the
 parameter in the event.
 . `Home` will then return `CommandResult` with `MESSAGE_SUCCESS` as the parameter back to the `LogicManager`.
+// end::homeHelpCommand[]
 
 // tag::dynamicInformationPanel[]
 === Dynamic Information Panel
 
-The information panel has the capability of changing panel depending on the command entered. Home, help, select,
+image::DynamicInformationPanel.png[width="800"]
+_Figure 4.10.1: Change Information Panel Sequence Diagram_
+
+The information panel, seen above has the capability of changing panel depending on the command entered. Home, help, select,
 birthday statistics and tag statistics command are the current commands
-that will raise `ChangeInformationPanelRequestEvent()`.
+that will post new `ChangeInformationPanelRequestEvent(panel)` event.
 
 Below are the respective commands and their requested panel.
 
-. *Home Command*: Request home panel.
-. *Help Command*: Request help panel.
-. *Select Command*: Request selected person's information panel.
-. *Birthday Statistics Command*: Request birthday statistics panel.
-. *Tag Statistics Command*: Request tag statistics panel.
+. *Home Command*: Home panel.
+. *Help Command*: Help panel.
+. *Select Command*: Selected person's information panel.
+. *Birthday Statistics Command*: Birthday statistics panel.
+. *Tag Statistics Command*: Tag statistics panel.
 
-The sequence diagram below shows how the panel are changed based on the command entered, using home command as an example.
+The sequence diagram below shows how the panel are changed after the respective commands post events to the events center.
 
-`Diagram to be added`
+image::ChangeInformationPanelSequenceDiagram.png[width="800"]
+_Figure 4.10.2: Change Information Panel Sequence Diagram_
 
+. Following the flow of the diagram, `MainApp` will handle the new event and push to the `Ui`, which will push to the `MainWindow`.
+. In `MainWindow` class, `changeInformationPanel()` will perform the panel change depending on the
+parameter in the event.
+
+Refer to the respective command implementation for more in-depth explanation of how the commands change the
+information panel.
+
+==== Design Consideration
+
+**Aspect:** Type of Information Panel +
+**Alternative 1 (current choice):** Use a dynamic information panel that will change depending on the commands. +
+**Pros:** Provides a much cleaner, clutter-free UI experience, as there is no need to put all UI element into a static
+display. +
+**Cons:** Extra implementation required for individual commands that will require changing of the panel. +
+**Alternative 2:** Use a static information panel with all UI elements preloaded. +
+**Pros:** Easier implementation, as everything is loaded on start and displayed. No need for extra implementation for
+ individual commands. +
+**Cons:** Creates a cluttered UI experience that may confuse users. +
 // end::dynamicInformationPanel[]
 
+// tag::suggestionsPopupMenu[]
 === Suggestions Popup menu
 
 image::Suggestions.png[width="800"]
-_Figure 4.10.1: Suggestions Popup menu_
+_Figure 4.11.1: Suggestions Popup menu_
 
-As shown above, Bevy can suggests menu based on the current text input on the command box.
+As shown above, Bevy can suggests words based on the current text input on the command box.
+The suggestions are preloaded using keywords from the features in Bevy.
+
+==== Design Consideration
+
+**Aspect:** Type of suggestions popup menu +
+**Alternative 1 (current choice):** Use JavaFX UI elements to create own suggestions popup menu method. +
+**Pros:** Provides a faster response time when users type in the command box. +
+**Cons:** Extra implementation required in writing the methods required to perform this feature. +
+**Alternative 2:** Use a pre-defined JavaFX suggestions popup menu method: `TextFields.bindAutoCompletion()`. +
+**Pros:** Easier implementation, as the pre-defined JavaFX method reduce the implementation drastically. +
+**Cons:** Provides a slower response time when users type in the command box, affecting user experience. +
+//end::suggestionsPopupMenu[]
 
 // tag::export[]
 === Export data
