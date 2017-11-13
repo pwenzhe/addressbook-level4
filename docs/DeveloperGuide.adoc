@@ -12,7 +12,7 @@ endif::[]
 ifdef::env-github,env-browser[:outfilesuffix: .adoc]
 :repoURL: https://github.com/CS2103AUG2017-T16-B3/main
 
-By: `Team Bevy`      Since: `Aug 2017`      Licence: `MIT`
+By: `Team Bevy`      Since: `Aug 2017`      Licence: `MIT`
 
 == Introduction
 
@@ -439,7 +439,7 @@ _Figure 4.4.2 : Sorting Sequence Diagram using updatePerson_
 // end::favourite[]
 
 // tag::birthdayfield[]
-=== Birthday/ Find Month
+=== Birthday / Find Month
 
 The birthday feature allows user to store their friends' birthdays.
 Restrictions are set to ensure that the date entered is valid.
@@ -1242,7 +1242,7 @@ Pros:
 
 Cons:
 
-* Expansive, cost $5 per month
+* Expensive, costs $5 per month
 * Complicated user interface and features
 * Commands are restricted to CLI. It would be better if there are more GUI commands.
 * No feature to view person's social media directly
