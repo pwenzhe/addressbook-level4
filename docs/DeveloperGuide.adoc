@@ -627,9 +627,8 @@ _Figure 4.9.4: Home Command Sequence Diagram_
 . Following the flow of the diagram, the `LogicManager` will execute  the `Home` command.
 . `HomeCommand` will request for an event change by posting to the events center the event `ChangeInformationPanelRequestEvent`, with `HOME_PANEL_REQUEST_EVENT`
 as the parameter of the event.
-. `MainApp` will handle the new event and push to the `Ui`, which will push to the `MainWindow`.
-. In `MainWindow` class, `changeInformationPanel()` will perform the panel change depending on the
-parameter in the event.
+. `MainApp` will handle the new event and call `changeInformationPanel()` from the `Ui`, which will call `changeInformationPanel()` from the `MainWindow` to change the current information panel
+depending on the parameter in the event.
 . `HomeCommand` will return the result message upon successful execution.
 // end::homeHelpCommand[]
 
@@ -656,8 +655,8 @@ The sequence diagram below shows how the panel are changed after the respective 
 image::ChangeInformationPanelSequenceDiagram.png[width="800"]
 _Figure 4.10.2: Change Information Panel Sequence Diagram_
 
-. Following the flow of the diagram, `MainApp` will handle the new event and push to the `Ui`, which will push to the `MainWindow`.
-. In `MainWindow` class, `changeInformationPanel()` will perform the panel change depending on the
+Following the flow of the diagram, `MainApp` will handle the new event and call `changeInformationPanel()` from the `Ui`,
+which will call `changeInformationPanel()` from the `MainWindow` to change the current information panel depending on the
 parameter in the event.
 
 Refer to the respective command implementation for more in-depth explanation of how the commands change the
@@ -702,7 +701,7 @@ The suggestions are preloaded using keywords from the current features.
 image::ExportData.png[width="800"]
 _Figure 4.12.1: Exporting your data out of Bevy_
 
-Bevy can export AddressBook data onto Bevy.csv file when users enter the export command. Seen in the figure above is the actual file Bevy exports the data to.
+Bevy can export AddressBook data onto Bevy.csv file which is located in the same directory as addressbook.jar. Seen in the figure above is the actual file Bevy exports the data to.
 
 image::ExportCommandSequenceDiagram.png[width="800"]
 _Figure 4.12.2: Export Command Sequence Diagram_
@@ -712,7 +711,8 @@ _Figure 4.12.3: Save to CSV File Sequence Diagram_
 
 . Following the flow of the diagrams, the `LogicManager` will execute  the `export` command.
 . `ExportCommand` will request for an event change, as seen in figure 4.12.2 by posting to the events center the event `ExportToFileRequestEvent()`.
-. `MainApp` will handle the new event, as seen in figure 4.12.3 and save the current address book data using `StorageManager`.
+. `MainApp` will handle the new event and call `saveToCsvFile(addressBook)` from `StorageManager` as seen in figure 4.12.3 to save the current
+AddressBook data.
 . `ExportCommand` will return the result message upon successful execution.
 
 // end::export[]
@@ -733,8 +733,8 @@ Below is a detailed explanation of the extension.
 
 . The `changetheme` command is sent to the `AddressBookParser` which then calls on the `ThemeCommand`.
 . `ThemeCommand` posts a `ChangeThemeRequestEvent()` which will be received by the `MainApp`.
-. `MainApp` then calls the `changeTheme()` from `UiManager`.
-. `UiManager` invokes the `MainWindow` to change the CSS files active accordingly.
+. `MainApp` then calls the `changeTheme()` from `UiManager`, which will call `changeTheme()` from the `MainWindow` to change the
+active CSS files accordingly.
 . `UiManager` then updates the `UserPref` with the theme preference.
 
 ==== Design Consideration
