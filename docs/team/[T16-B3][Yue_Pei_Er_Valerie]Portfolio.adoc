@@ -30,7 +30,7 @@ include::../UserGuide.adoc[tag=find]
 === Justification
 
 The main purpose of Bevy is to help users to remember as many details about their friends as possible.
-Their contacts' birthday will be one of the information that we feel that is important for users to remember.
+Their contacts' birthday will be one of the information that we feel that is important for users to remember. 
 
 Bevy's find command for month will further add convenience for user to keep track of their contact's birthdays.
 
