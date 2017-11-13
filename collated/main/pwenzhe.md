@@ -51,6 +51,17 @@ public class ThemeCommand extends Command {
         ui.changeTheme();
     }
 ```
+###### \java\seedu\address\model\person\exceptions\PersonNotFoundException.java
+``` java
+/**
+ * Signals that the operation is unable to find the specified person.
+ */
+public class PersonNotFoundException extends Exception {
+    public PersonNotFoundException() {
+        super("Operation could not find the specified person");
+    }
+}
+```
 ###### \java\seedu\address\model\person\Favourite.java
 ``` java
 /**
@@ -187,7 +198,7 @@ public class Favourite {
                                 .map(i -> i.toString()).collect(Collectors.joining(" "))
                                 .replaceAll("\\[|\\]|\\,", " "), tag))
                 || keywords.stream()
-                        .filter(fav -> fav.toLowerCase().matches("favourite"))
+                        .filter(fav -> fav.toLowerCase().matches("favourite|fav|favs|favorite|favourites|favorites"))
                         .anyMatch(favourite -> person.getFavourite().toString().matches("yes"));
 ```
 ###### \java\seedu\address\model\person\UniquePersonList.java
