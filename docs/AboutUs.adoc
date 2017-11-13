@@ -1,0 +1,38 @@
+= About Us
+:relfileprefix: team/
+ifdef::env-github,env-browser[:outfilesuffix: .adoc]
+:imagesDir: images
+:stylesDir: stylesheets
+
+Bevy, a powerful Address Book developed by team https://github.com/orgs/CS2103AUG2017-T16-B3/teams/developers/members[Bevy]. +
+{empty} +
+We are a team based in the http://www.comp.nus.edu.sg[School of Computing, National University of Singapore].
+
+== Project Team
+
+=== Ong Wei Kang
+image::ongweikang.jpg[width="150", align="left"]
+{empty}[http://johnweikangong.github.io[homepage]] [https://github.com/johnweikangong[github]] [https://github.com/CS2103AUG2017-T16-B3/main/blob/master/docs/team/%5BT16-B3%5D%5BOng_Wei_Kang%5DPortfolio.adoc[portfolio]]
+
+Role: Developer +
+Responsibilities: Testing, Git Expert
+
+'''
+
+=== Yue Pei Er Valerie
+image::Valerie.png[width="150", align="left"]
+{empty}[http://github.com/Valerieyue[github]] [https://github.com/CS2103AUG2017-T16-B3/main/blob/master/docs/team/%5BT16-B3%5D%5BYue_Pei_Er_Valerie%5DPortfolio.adoc[portfolio]]
+
+Role: Developer +
+Responsibilities: Logic
+
+'''
+
+=== Poon Wenzhe
+image::poonwenzhe.jpg[width="150", align="left"]
+{empty}[http://github.com/pwenzhe[github]] [https://github.com/CS2103AUG2017-T16-B3/main/blob/master/docs/team/%5BT16-B3%5D%5BPoon_Wenzhe%5DPortfolio.adoc[portfolio]]
+
+Role: Developer +
+Responsibilities: UI
+
+'''
