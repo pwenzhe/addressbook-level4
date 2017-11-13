@@ -1,4 +1,4 @@
-= Bevy - Developer Guide `v1.5rc`
+= Bevy - Developer Guide `v1.5`
 :toc:
 :toc-title:
 :toc-placement: preamble
@@ -473,31 +473,33 @@ _Figure 4.4.1: Find Month Sequence Diagram_
 // end::birthdayfield[]
 
 // tag::statistics[]
-=== Birthday/ Tag Statistics
-
-The birthday statistics will show user a table of the number of people having their birthday in each month.
-While the tag statistics will show user a table of the number of people who has the same tag.
+=== Birthday/Tag Statistics Command
 
 image::BirthdayStatistics.JPG[width="800"]
 _Figure 4.6.1: Birthday Statistics_
 
-image::BirthdayStatisticsPanelClassDiagram.png[width="800"]
-_Figure 4.6.2: Birthday Statistics Panel Class Diagram_
+The birthday statistics will show users a table of the number of people having their birthday in each month,
+while the tag statistics will show user a table of the number of people who has the same tag.
 
-As shown from the class diagram, the birthday statistics class diagram extends the UiParts.
-The birthday statistics panel will display the information when user enter the command word, `birthdaystatistics` or `tagstatistics`.
+image::BirthdayTagStatisticsPanelClassDiagram.png[width="400"]
+_Figure 4.6.2: Birthday/Tag Statistics Panel Class Diagram_
 
-The following sequence diagram shows how the birthday statistics table is called.
+As shown from the class diagram, both panels extends the UiParts.
+The birthday/tag statistics panel will display the information depending on the command word, `birthdaystatistics` or `tagstatistics`.
 
-image::BirthdayStatisticsSequenceDiagram(edit).png[width="800"]
-_Figure 4.6.2: Birthday Statistics Sequence Diagram_
+The following sequence diagram shows how the birthday/tag statistics command is executed to display the respective panels,
+using birthday statistics command as an example.
 
-. Following the flow of the diagram, the command `birthdaystatistics` will be executed by `BirthdayStatisticsCommand`.
-. `BirthdyaStatisticsCommand` will request for an event change by calling `ChangeInformationPanelRequestEvent`.
-. `ChangeInformationPanelRequestEvent` will change the panel to birthday statistics panel as requested and return to `BirtdayStatisticsCommand`.
-. `BirthdayStatisticsCommand` will then post birthday statistics panel on `EventsCenter`.
+image::BirthdayStatisticsCommandSequenceDiagram.png[width="400"]
+_Figure 4.6.2: Birthday Statistics Command Sequence Diagram_
 
-The implementation for tag statistics is similar to the birthday statistics.
+. Following the flow of the diagram, the `LogicManager` will execute  the `birthdaystatistics` command.
+. `BirthdayStatisticsCommand` will request for an event change by posting to the events center the event `ChangeInformationPanelRequestEvent`, with `BIRTHDAY_STATISTICS_PANEL_REQUEST_EVENT`
+as the parameter of the event.
+. `MainApp` will handle the new event and push to the `Ui`, which will push to the `MainWindow`.
+. In `MainWindow`, `changeInformationPanel()` will perform the panel change depending on the
+parameter in the event.
+. `BirthdayStatistics` will then return `CommandResult` with `MESSAGE_SUCCESS` as the parameter back to the `LogicManager`.
 
 ==== Design Consideration
 
@@ -594,17 +596,52 @@ will be used to construct a `DeleteCommand`. `HashSet` prevents the duplicates o
  to remove duplicates +
 // end::deleteMultiplePersons[]
 
+=== Home/Help Command
+
+image::Home.jpg[width="800"]
+_Figure 4.9.1: Home Panel_
+
+The home command will show users the home panel of the app. This panel displays the total number of
+people and tags. It will also display randomised tips and advices below the welcome text.
+
+
+image::ViewingHelp.jpg[width="800"]
+_Figure 4.9.2: Help Panel_
+
+The help command will show users the help panel of the app. This panel displays a summarised table of
+commands for quick reference.
+
+image::HomeHelpPanelClassDiagram.png[width="400"]
+_Figure 4.9.3: Home/Help Panel Class Diagram_
+
+As shown from the class diagram, both panels extends the UiParts. The panels are responsible for displaying
+information depending on the command entered.
+
+The following sequence diagram shows how the home/help command is executed to display the respective panels, using the home command as an exmaple.
+
+image::HomeCommandSequenceDiagram.png[width="400"]
+_Figure 4.9.4: Home Command Sequence Diagram_
+
+. Following the flow of the diagram, the `LogicManager` will execute  the `Home` command.
+. `HomeCommand` will request for an event change by posting to the events center the event `ChangeInformationPanelRequestEvent`, with `HOME_PANEL_REQUEST_EVENT`
+as the parameter of the event.
+. `MainApp` will handle the new event and push to the `Ui`, which will push to the `MainWindow`.
+. In `MainWindow` class, `changeInformationPanel()` will perform the panel change depending on the
+parameter in the event.
+. `Home` will then return `CommandResult` with `MESSAGE_SUCCESS` as the parameter back to the `LogicManager`.
+
 // tag::dynamicInformationPanel[]
 === Dynamic Information Panel
 
-The information panel has the capability of changing panel depending on the request event. Home, select and help command are the current commands
+The information panel has the capability of changing panel depending on the command entered. Home, help, select,
+birthday statistics and tag statistics command are the current commands
 that will raise `ChangeInformationPanelRequestEvent()`.
 
 Below are the respective commands and their requested panel.
 
 . *Home Command*: Request home panel.
-. *Select Command*: Request selected person's information panel.
 . *Help Command*: Request help panel.
+. *Select Command*: Request selected person's information panel.
 . *Birthday Statistics Command*: Request birthday statistics panel.
 . *Tag Statistics Command*: Request tag statistics panel.
 
