@@ -527,7 +527,7 @@ person based on the person details.
 
 The following sequence diagram shows how the browser operation works, using InstagramBrowserPanel as an exmaple:
 
-image::InstagramPanelSequenceDiagram.png[width="400"]
+image::InstagramBrowserPanelSequenceDiagram.png[width="400"]
 _Figure 4.7.3: InstagramBrowserPanel Sequence Diagram_
 
 As shown from the sequence diagram, when a user selects a new person, the InstagramBrowserPanel handles the new selection event and display the selected
@@ -599,14 +599,14 @@ will be used to construct a `DeleteCommand`. `HashSet` prevents the duplicates o
 // tag::homeHelpCOmmand[]
 === Home/Help Command
 
-image::Home.jpg[width="800"]
+image::Home.JPG[width="800"]
 _Figure 4.9.1: Home Panel_
 
 The home command will show users the home panel of the app. This panel displays the total number of
 people and tags. It will also display randomised tips and advices below the welcome text.
 
 
-image::ViewingHelp.jpg[width="800"]
+image::ViewingHelp.JPG[width="800"]
 _Figure 4.9.2: Help Panel_
 
 The help command will show users the help panel of the app. This panel displays a summarised table of
@@ -698,10 +698,22 @@ The suggestions are preloaded using keywords from the features in Bevy.
 // tag::export[]
 === Export data
 
-image::ExportData.png[width="790"]
-_Figure 4.11.1: Exporting your data out of Bevy_
+image::ExportData.png[width="800"]
+_Figure 4.12.1: Exporting your data out of Bevy_
 
-As shown above, Bevy can export data out onto a .csv file.
+Bevy can export data out onto a .csv file when users enter the export command. Seen in the figure above is the actual file Bevy exports the data to.
+
+image::ExportCommandSequenceDiagram.png[width="400"]
+_Figure 4.12.2: Export Command Sequence Diagram_
+
+image::SaveToCsvFileSequenceDiagram.png[width="400"]
+_Figure 4.12.3: Save to CSV File Sequence Diagram_
+
+. Following the flow of the diagrams, the `LogicManager` will execute  the `export` command.
+. `ExportCommand` will request for an event change, as seen in figure 4.12.2 by posting to the events center the event `ExportToFileRequestEvent`.
+. `MainApp` will handle the new event, as seen in figure 4.12.3 and save the current addressbook data using `StorageManager`.
+. `ExportCommand` will then return `CommandResult` with `MESSAGE_SUCCESS` as the parameter back to the `LogicManager`.
+
 // end::export[]
 
 // tag::changetheme[]
@@ -712,13 +724,13 @@ The theme of the application can be changed via a request event. The `changethem
 The sequence diagram below shows how the theme is changed.
 
 image::ThemeSequenceDiagram.png[width="800"]
-_Figure 4.12.1 ThemeCommand Sequence Diagram_
+_Figure 4.13.1 ThemeCommand Sequence Diagram_
 
 From the sequence diagram, this operation extends into the Model and UI components.
 
 Below is a detailed explanation of the extension.
 
-. The `changetheme` command is sent to the `AddressBookParser` then calls on the `ThemeCommand`.
+. The `changetheme` command is sent to the `AddressBookParser` which then calls on the `ThemeCommand`.
 . `ThemeCommand` posts a `ChangeThemeRequestEvent()` which will be received by the `MainApp`.
 . `MainApp` then calls the `changeTheme()` from `UiManager`.
 . `UiManager` invokes the `MainWindow` to change the CSS files active accordingly.
