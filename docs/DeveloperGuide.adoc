@@ -1187,8 +1187,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 *MSS*
 
-1.  User requests to view the help information
-2.  AddressBook opens a new window containing the help information
+1.  User requests to view the help panel
+2.  AddressBook displays the help panel
 +
 Use case ends.
 
@@ -1391,38 +1391,54 @@ Use case ends.
 Use case ends.
 
 [discrete]
-=== Use case: Rename Tag
+=== Use case: Change theme
 
 *MSS*
 
-1. User requests to list all existing tags
-2. AddressBook shows a list of tags
-3. User requests to rename a tag in the list
-4. AddressBook renames the tag
-5. AddressBook updates the tag
+1. User requests to change application theme
+2. AddressBook changes the theme
 +
 Use case ends.
 
-*Extensions*
+[discrete]
+=== Use case: Export
 
-[none]
-* 2a. The list is empty.
+*MSS*
+
+1. User requests to export AddressBook database
+2. AddressBook exports database to Bevy.csv file
 +
 Use case ends.
 
-* 3a. The given index is invalid.
-+
-[none]
-** 3a1. AddressBook shows an error message.
-+
-Use case resumes at step 2.
+[discrete]
+===  Use case: View birthday statistics
 
-* 3b. Updated name already exist in the list of existing tags
+*MSS*
+
+1. User requests to display birthday statistics panel
+2. AddressBook displays birthday statistics panel
 +
-[none]
-** 3b1. AddressBook shows an error message.
+Use case ends.
+
+[discrete]
+=== Use case: View tag statistics
+
+*MSS*
+
+1. User requests to display tag statistics
+2. AddressBook displays tag statistics
 +
-Use case resumes at step 2.
+Use case ends.
+
+[discrete]
+=== Use case: View home panel
+
+*MSS*
+
+1. User requests to display home panel
+2. AddressBook displays home panel
++
+Use case ends.
 
 [appendix]
 == Non Functional Requirements
