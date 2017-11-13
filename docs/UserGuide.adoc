@@ -429,6 +429,7 @@ Exits the program. +
 Format: `exit` +
 Command Alias: `x`
 
+// tag::dynamicInformationPanel[]
 === Dynamic Information Panel
 image::DynamicInformationPanel.png[width="800"]
 _Figure 4.18.1: The dynamic information panel, next to the list of contacts_
@@ -452,6 +453,7 @@ _Figure 4.18.5: The birthday statistics panel after entering birthday statistics
 
 image::TagStatistics.JPG[width="800"]
 _Figure 4.18.6: The tag statistics panel after entering tag statistics command_
+// end::dynamicInformationPanel[]
 
 // tag::suggestionsPopupMenu[]
 === Suggestions Popup Menu
