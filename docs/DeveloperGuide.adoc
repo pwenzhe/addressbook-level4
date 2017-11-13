@@ -412,9 +412,9 @@ Certain properties of the application can be controlled (e.g App name, logging l
 
 // tag::sort[]
 // tag::favourite[]
-=== Favourite & Sorting
+=== Sorting/ Favourite
 
-The list will be sorted whenever a new person is added or when a person is edited. The list will be sorted alphabetically while keeping the favourite persons at the top of the list.
+The list will be sorted in alphabetical order whenever a new person is added or when a person is edited. The favourite persons will be pinned at the top of the list, sorted according to alphabetical order as well.
 
 image::SortSequenceDiagram.png[width="800"]
 _Figure 4.4.1 : Sorting Sequence Diagram using addPerson_
