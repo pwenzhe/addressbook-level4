@@ -554,6 +554,7 @@ If the address contains `#` characters, GoogleMapBrowserPanel will ignore any su
 Instagram and users with similar names can be found from user's followers. +
 **Cons:** Difficult to implement, as there is a steep learning curve to master Instagram API. +
 
+---
 
 **Aspect:** Type of implementation for Google Maps. +
 **Alternative 1 (current choice):** Use browser to display the selected person's Google Maps location. +
