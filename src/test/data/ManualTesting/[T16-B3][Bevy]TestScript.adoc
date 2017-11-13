@@ -117,8 +117,8 @@ Expected Result: `John` and `John Doe`
 Expected Result: Returns any person having names `Betsy`, `Tim`, or `John`, or any person with phone number containing `123`.
 . Command: `find m/Feb` +
 Expected Result: Returns all person that have their birthday in the month of `Feb`.
-. Command: `f bedok favourtie` +
-Expected Result: Returns all person that has their address in `Bedok` and sll person pinned as favourite.
+. Command: `f bedok favourite` +
+Expected Result: Returns all person that has their address in `Bedok` and all person pinned as favourite.
 
 ---
 
