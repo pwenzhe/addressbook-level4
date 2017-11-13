@@ -49,6 +49,22 @@
         // Favourite keyword
         predicate = new PersonContainsKeywordsPredicate(Arrays.asList("favourite"));
         assertTrue(predicate.test(new PersonBuilder().withName("Alice").withFavourite("yes").build()));
+
+        // Favourite keyword as 'favourites'
+        predicate = new PersonContainsKeywordsPredicate(Arrays.asList("favourites"));
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice").withFavourite("yes").build()));
+
+        // Favourite keyword as 'favorite'
+        predicate = new PersonContainsKeywordsPredicate(Arrays.asList("favorite"));
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice").withFavourite("yes").build()));
+
+        // Favourite keyword as 'favorites'
+        predicate = new PersonContainsKeywordsPredicate(Arrays.asList("favorites"));
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice").withFavourite("yes").build()));
+
+        // Favourite keyword as 'fav'
+        predicate = new PersonContainsKeywordsPredicate(Arrays.asList("fav"));
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice").withFavourite("yes").build()));
 ```
 ###### \java\systemtests\AddCommandSystemTest.java
 ``` java

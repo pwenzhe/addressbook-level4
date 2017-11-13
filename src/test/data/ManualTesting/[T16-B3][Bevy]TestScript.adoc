@@ -65,7 +65,9 @@ The postal code can be specified by the user using the prefix `pc/`.
 If it is not specified, Bevy will extract the postal code directly if the address contains a 6 digit number.
 
 . *Favourite* +
-The person  marked as favourite will be pin to the top of the list with a yellow star, sorted in alphabetical order.
+The person marked as favourite will be pin to the top of the list with a yellow star, sorted in alphabetical order.
+Specify `yes` or `no` after the `f/` prefix to indicate if a person is a favourite.
+If it is not specified, the person will not be a favourite by default.
 ****
 
 ==== Manual Testing
@@ -116,9 +118,9 @@ Expected Result: `John` and `John Doe`
 . Command: `find Betsy Tim John 123` +
 Expected Result: Returns any person having names `Betsy`, `Tim`, or `John`, or any person with phone number containing `123`.
 . Command: `find m/Feb` +
-Expected Result: Returns all person that have their birthday in the month of `Feb`.
+Expected Result: Returns all persons that have their birthday in the month of `Feb`.
 . Command: `f bedok favourite` +
-Expected Result: Returns all person that has their address in `Bedok` and all person pinned as favourite.
+Expected Result: Returns all persons that has their address in `Bedok` and all persons pinned as favourite.
 
 ---
 
