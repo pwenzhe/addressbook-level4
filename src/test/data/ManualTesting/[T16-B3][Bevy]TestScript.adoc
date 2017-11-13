@@ -33,7 +33,7 @@ Format: `help` +
 Command Alias: `sos`
 
 ****
-* Bevy has it's own build in help panel to show you the available commands
+* Bevy has its own build in help panel to show you the available commands
 ****
 
 ==== Manual Testing
@@ -165,7 +165,7 @@ Command Alias: `h`
 
 Second Command: `h` +
 Expected Result: The list of commands that you have entered in reverse chronological order:
-`delete 1-2 2-4 3-4` `find friend` `d 1` etc...
+`delete 1-2 2-4 3-4`, `find friend`, `d 1` etc...
 
 ---
 
@@ -254,7 +254,7 @@ Format: `birthdaystatistics` +
 Command Alias: `bstats`
 
 ****
-* The bar chart will be updated as you add or delete people from the contact list.
+* The bar chart will be updated as you add or delete people from the person list.
 ****
 
 ==== Manual Testing
@@ -278,7 +278,7 @@ Format: 'tagstatistics` +
 Command Alias: `tstats`
 
 ****
-* The bar chart will be updated as you add or delete people from the contact list.
+* The bar chart will be updated as you add or delete people from the person list.
 ****
 
 ==== Manual Testing

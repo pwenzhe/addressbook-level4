@@ -26,8 +26,8 @@ at the same time, we are losing many of them because of our forgetfulness. If th
 we have just the solution for you.
 
 Introducing Bevy, a powerful app that helps you to remember your friends again. It simplifies your friends' information in a
-single place and provide more. Bevy is smart to know what your friends are up to in their social media, gives
-you a sneak peek into their location and even provides statistics analysis for you.
+single place and provides more. Bevy is smart to know what your friends are up to in their social media, gives
+you a sneak peek into their location, and even provides statistical analysis for you.
 
 Excited? We are too, because we *love* connecting you with Bevy.
 
@@ -53,11 +53,11 @@ e.g. typing *`help`* or *`sos`* and pressing kbd:[Enter] will show the help pane
 
 * *`list`* or *`l`*
 +
-Lists all contacts.
+Lists all persons.
 * **`add`**`n/John Doe p/98765432 b/01 05 95 e/johnd@u.nus.edu a/John street, block 123, #01-01 pc/159656 f/yes t/friends` +
 Adds a person named `John Doe` to the Address Book.
 * *`delete 3`* or *`d 3`* +
-Deletes the 3rd contact shown in the current list.
+Deletes the 3rd persons shown in the current list.
 * *`exit`* or *`x`* +
 Exits the app.
 
@@ -95,14 +95,14 @@ Command Alias: `a`
 
 ****
 * There are restrictions for each parameters:
-** Name: Person names should contain alphanumeric characters and spaces, and it should not be blank.
+** Name: Name should contain alphanumeric characters and spaces, and it should not be blank.
 ** Phone: Phone should only contain numbers and it should not be blank. It should be at least 3 digits long.
 ** Birthday: Birthday must be in the format DDMMYY, separated by '/' or '-' or '.' or ' '.
              The month can be entered as a number or name of the month. The date entered must be a valid.
-** Email: Person email should be 2 aphanumeric/ period strings separated by '@'.
-** Address: Person address can take any values, and it should not be blank.
+** Email: Email should be 2 aphanumeric strings separated by '@'. Both strings can contain period, '.'.
+** Address: Address can be of any value, and it should not be blank.
 ** Postal Code: Postal code should only contain numbers and be exactly 6 digits long.
-** Favourite: Favourite should only be 'yes', 'y', 'no', 'n', and is case-insensitive. If unused or empty, the default
+** Favourite: Favourite should only be 'yes', 'y', 'no', or 'n', and is case-insensitive. If unused or empty, the default
                value is 'no'.
 ****
 
@@ -110,20 +110,20 @@ Examples: +
 There are a number of features that are available in the add command.
 These features can be further illustrated using the following example.
 
-*1. Adding a new Contact*
+*1. Adding a new Person*
 
 Command: `add p/89893878 n/brandon tan t/friend b/25-9-94 e/brandon@gmail.com a/Blk 433, Bedok Street 10, 520433 f/no t/family`
 
 image::AddCommand.jpg[width="800"]
-_Figure 4.2.1.1 Adding a New Contact_
+_Figure 4.2.1.1 Adding a new person_
 
 * From Figure 4.2.1.1, you can observe the following features:
 ** You need not add the parameters in a specific order.
 ** The first letter of each word of the name will be automatically capitalised when saved in the database.
 ** Postal code can be retrieved from the address without specifying `pc/`.
 ** A person can have any number of tags.
-** Note that birthday can be added in a number of format, and it will be saved in the contact in the standard format.
-** After entering the command, you can see that Brandon Tan has been added as index number 11.
+** Note that birthday can be added in a number of format, and it will be saved in the person in the standard format.
+** After entering the command, you can see that Brandon Tan has been added at index number 11.
 // end::add[]
 
 === Listing all persons : `list`, `l`
@@ -140,7 +140,7 @@ Command Alias: `e`
 
 ****
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the last person listing. The index *must be a positive integer* 1, 2, 3, ...
-* At least one of the optional fields must be provided.
+* You must provide one of the optional fields.
 * Existing values will be updated to the input values.
 ****
 
@@ -148,9 +148,7 @@ Examples: +
 The examples will show you how to use the edit command in more detail.
 
 image::EditBefore.jpg[width="800"]
-Figure 4.4.1 Before edit command
-
-Figure 4.4.1 shows the initial state before any edits. Subsequent edits will be changed with respect to this figure.
+_Figure 4.4.1 Shows the initial state before any edits. Subsequent edits will be changed with respect to this figure._
 
 *1. Removing Tag*
 
@@ -214,9 +212,9 @@ Command Alias: `f`
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * All person details are searched.
-* To find the month, include `m/` to ensure that it does not clash with name search.
+* To find the month, include `m/` and the month entered will not be used to search in other details.
 * Other searches will match with any person detail. e.g. `Clement` will match a person with name `Clement` as well as a person whose address is `Clement Road`
-* Only full words will be matched for names, addresses, and tags. e.g. `Han` will not match `Hans`
+* Only full words will be matched for names, addresses, and tags. e.g. `Han` will not match a person with name `Hans`
 * Phone numbers and postal codes will match all numbers than contain the given number e.g. `123` will match `91234567`
 * Emails will match if it contains the given keyword. e.g. `john` will match `john@email.com`
 * Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
@@ -231,7 +229,7 @@ Returns `John` and `John Doe`
 Returns any person having names `Betsy`, `Tim`, or `John`, or any person with phone number containing `123`.
 * `find m/Feb` +
 Returns all persons that have their birthday in the month of Feb.
-* `find favourite`
+* `find favourite` +
 Returns all persons that are favourited.
 // end::find[]
 
@@ -396,8 +394,8 @@ _Figure 4.14.2: Dark Theme_
 
 As you can see from Figure 4.14.1, it shows the bright theme, which is the default theme used.
 After entering the command, the colour scheme will be changed to the dark theme as seen from Figure 4.13.2.
-Bevy will automatically save the last theme that you have chosen under the preferences so that you need not changes
-when you relaunch the application.
+Bevy will automatically save the last theme that you have chosen under the preferences so that further launching of the
+application will use your last chosen theme.
 // end::changetheme[]
 
 // tag::home[]
@@ -432,7 +430,7 @@ Command Alias: `x`
 // tag::dynamicInformationPanel[]
 === Dynamic Information Panel
 image::DynamicInformationPanel.png[width="800"]
-_Figure 4.18.1: The dynamic information panel, next to the list of contacts_
+_Figure 4.18.1: The dynamic information panel, next to the list of persons_
 
 The information panel, labelled in the diagram above, has the capability of changing panel depending on the command you enter.
 
@@ -484,6 +482,11 @@ If your friend uses a different account name, it might show the incorrect page.
 *Q*: Why am I able to add another friend with the same details? +
 *A*: Please check that all fields are the same. Bevy allows adding of a similar person even if they are only a letter apart,
 because we know you have many friends.
+
+*Q*: I tried to undo and then redo a delete command and it seems to have deleted the wrong people, what should I do? +
+*A*: Use the undo command again to revert the delete. The redo command might not delete the same people as you originally intended
+as it merely executes the written command. If the list of people shown has changed between deleting and redoing the delete, the index
+used for the redone deletion might result in the wrong people being deleted.
 
 *Q*: My question is not on the FAQ list, what can I do? +
 *A*: Please do not hesitate to link:{repoURL}/blob/master/docs/AboutUs.adoc[email] us for any questions or comments.
