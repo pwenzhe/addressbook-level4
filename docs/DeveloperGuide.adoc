@@ -412,9 +412,9 @@ Certain properties of the application can be controlled (e.g App name, logging l
 
 // tag::sort[]
 // tag::favourite[]
-=== Sorting
+=== Favourite & Sorting
 
-The list will be sorted in alphabetical order whenever a new person is added.
+The list will be sorted whenever a new person is added or when a person is edited. The list will be sorted alphabetically while keeping the favourite persons at the top of the list.
 
 image::SortSequenceDiagram.png[width="300"]
 _Figure 4.4.1: Sorting Sequence Diagram using addPerson_
@@ -429,9 +429,9 @@ _Figure 4.4.2: Sorting Sequence Diagram using updatePerson_
 ==== Design Consideration
 
 **Aspect:** Type of implementation to sort contact list. +
-**Alternative 1 (current choice):** Sort the list while new persons are added or persons are edited. +
+**Alternative 1 (current choice):** Sort the list while new persons are added or when persons are edited. +
 **Pros:** More convenient for users as the list will be sorted after either input. +
-**Cons:** List will only be sorted when new person is added. May cause limitation if there are commands that will mess up the order. +
+**Cons:** Users have no option not to sort the list, and future implemented commands might mess up the order. +
 **Alternative 2:** Creating a separate sort command to sort list. +
 **Pros:** A command that will always allow the list to be sorted in order. +
 **Cons:** It will cause inconvenience as user have to manually type in the command to sort the list whenever they add a new person or change their favourite status. +
@@ -452,7 +452,7 @@ After adding the birthday, users can search for a particular month and the list 
 The following sequence diagram shows how find works when searching for a month.
 
 image::FindMonthSequenceDiagram.png[width="800"]
-_Figure 4.4.1: Find Month Sequence Diagram_
+_Figure 4.5.1: Find Month Sequence Diagram_
 
 . Following the flow of the diagram, the command `find m/Jan` will be sent to the `LogicManager`.
 . `AddressBookParser` will parse the `find` command and call the `FindCommandParser`.
@@ -491,7 +491,7 @@ The following sequence diagram shows how the birthday/tag statistics command is 
 using birthday statistics command as an example.
 
 image::BirthdayStatisticsCommandSequenceDiagram.png[width="400"]
-_Figure 4.6.2: Birthday Statistics Command Sequence Diagram_
+_Figure 4.6.3: Birthday Statistics Command Sequence Diagram_
 
 . Following the flow of the diagram, the `LogicManager` will execute  the `birthdaystatistics` command.
 . `BirthdayStatisticsCommand` will request for an event change by posting to the events center the event `ChangeInformationPanelRequestEvent`, with `BIRTHDAY_STATISTICS_PANEL_REQUEST_EVENT`
@@ -573,7 +573,7 @@ The Delete mechanism has been extended to support deleting multiple persons.
 The following sequence diagram shows how the delete operation works:
 
 image::DeletePersons1-3SequenceDiagram.png[width="800"]
-_Figure 4.7.1 : Interactions Inside the Logic Component for the `delete 1-3` Command_
+_Figure 4.8.1 : Interactions Inside the Logic Component for the `delete 1-3` Command_
 
 Below is a detailed explanation of the extension.
 

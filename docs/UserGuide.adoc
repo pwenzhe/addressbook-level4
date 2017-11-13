@@ -75,7 +75,7 @@ Exits the app.
 ====
 
 // tag::help[]
-=== Viewing help : `help` `sos`
+=== Viewing help : `help`, `sos`
 
 Shows you the help panel which displays the commands to use Bevy. +
 Format: `help` +
@@ -126,13 +126,13 @@ _Figure 4.2.1.1 Adding a New Contact_
 ** After entering the command, you can see that Brandon Tan has been added as index number 11.
 // end::add[]
 
-=== Listing all persons : `list` `l`
+=== Listing all persons : `list`, `l`
 
 Shows you a list of all persons in the address book. +
 Format: `list` +
 Command Alias: `l`
 
-=== Editing a person : `edit` `e` `Improved since v1.3`
+=== Editing a person : `edit`, `e` `Improved since v1.3`
 
 Edits an existing person in the address book. +
 Format: `edit INDEX [n/NAME] [p/PHONE] [b/BIRTHDAY] [e/EMAIL] [a/ADDRESS] [f/FAVOURITE] [t/TAG]...`
@@ -203,7 +203,7 @@ From Figure 4.4.1, index 12 is David Li.
 After executing the command, the name and email is changed as requested.
 
 // tag::find[]
-=== Locating persons by name, phone number or birthday: `find`, `f` `Improved since v1.5rc`
+=== Locating persons by details: `find`, `f` `Improved since v1.5rc`
 
 You can find your friends by any details that matches the keywords provided. +
 Format: `find KEYWORD [MORE_KEYWORDS]` +
@@ -214,12 +214,13 @@ Command Alias: `f`
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * All person details are searched.
-* To find the month, user has to inclue `m/` to ensure that it does not clash with name search.
+* To find the month, include `m/` to ensure that it does not clash with name search.
 * Other searches will match with any person detail. e.g. `Clement` will match a person with name `Clement` as well as a person whose address is `Clement Road`
 * Only full words will be matched for names, addresses, and tags. e.g. `Han` will not match `Hans`
 * Phone numbers and postal codes will match all numbers than contain the given number e.g. `123` will match `91234567`
 * Emails will match if it contains the given keyword. e.g. `john` will match `john@email.com`
 * Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* To find all favourite persons, use the keyword `favourite`, `favorite`, `favourites`, `favorites`, `fav`, or `favs`.
 ****
 
 Examples:
@@ -229,11 +230,13 @@ Returns `John` and `John Doe`
 * `find Betsy Tim John 123` +
 Returns any person having names `Betsy`, `Tim`, or `John`, or any person with phone number containing `123`.
 * `find m/Feb` +
-Returns all person that have their birthday in the month of Feb.
+Returns all persons that have their birthday in the month of Feb.
+* `find favourite`
+Returns all persons that are favourited.
 // end::find[]
 
 // tag::deleteMultiplePersons[]
-=== Deleting persons : `delete` `d` `Improved since v1.3`
+=== Deleting persons : `delete`, `d` `Improved since v1.3`
 
 Deletes the specified persons from the address book. +
 Format: `delete INDEX RANGES` +
@@ -309,7 +312,7 @@ Selects the 2nd person listed in the address book. +
 `select 1` +
 Selects the 1st person listed in the results of the `find` command.
 
-=== Listing entered commands: `history` `h`
+=== Listing entered commands: `history`, `h`
 
 Lists all the commands that you have entered in reverse chronological order. +
 Format: `history` +
@@ -321,7 +324,7 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 ====
 
 // tag::undoredo[]
-=== Undoing previous command: `undo` `u`
+=== Undoing previous command: `undo`, `u`
 
 Restores the address book to the state before the previous _undoable_ command was executed. +
 Format: `undo` +
@@ -348,7 +351,7 @@ The `undo` command fails as there are no undoable commands executed previously.
 `undo` (Reverses the `clear` command) +
 `undo` (Reverses the `delete 1` command) +
 
-=== Redoing the previously undone command: `redo` `r`
+=== Redoing the previously undone command: `redo`, `r`
 
 Reverses the most recent `undo` command. +
 Format: `redo` +
@@ -372,7 +375,7 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (Reapplies the `clear` command) +
 // end::undoredo[]
 
-=== Clearing all entries: `clear` `c`
+=== Clearing all entries: `clear`, `c`
 
 Clears all entries from the address book. +
 Format: `clear` +
@@ -398,7 +401,7 @@ when you relaunch the application.
 // end::changetheme[]
 
 // tag::home[]
-=== Viewing home: `home` `ho` `Since v1.4`
+=== Viewing home: `home`, `ho` `Since v1.4`
 
 Opens the home panel which shows the Bevy logo and application status. +
 Format: `home` +
@@ -409,7 +412,7 @@ _Figure 4.15.1: Viewing Home_
 // end::home[]
 
 // tag::export[]
-=== Export data out of Bevy: `export` `ex` `Since v1.5rc`
+=== Export data out of Bevy: `export`, `ex` `Since v1.5rc`
 
 You can export all your data in Bevy out into a .csv file as shown above, which is used by thousands of applications out there. +
 Format: `export` +
@@ -420,7 +423,7 @@ _Figure 4.16.1: Exporting your data out of Bevy_
 
 // end::export[]
 
-=== Exiting the program : `exit` `x`
+=== Exiting the program : `exit`, `x`
 
 Exits the program. +
 Format: `exit` +
@@ -506,6 +509,7 @@ because we know you have many friends.
 |Exit |`exit` |`x` |- |-
 
 |Export |`export` |`ex` |- |-
+
 |Find |`find` |`f` |`find KEYWORD [MORE_KEYWORDS]` |`find James Jake`
 
 |Help |`help` |`sos` |- |-
@@ -523,4 +527,3 @@ because we know you have many friends.
 |Undo |`undo` |`u` |- |-
 
 |Redo |`redo` |`r` |- |-
-

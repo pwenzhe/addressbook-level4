@@ -42,7 +42,7 @@ public class PersonContainsKeywordsPredicate implements Predicate<ReadOnlyPerson
                                 .map(i -> i.toString()).collect(Collectors.joining(" "))
                                 .replaceAll("\\[|\\]|\\,", " "), tag))
                 || keywords.stream()
-                        .filter(fav -> fav.toLowerCase().matches("favourite"))
+                        .filter(fav -> fav.toLowerCase().matches("favourite|fav|favs|favorite|favourites|favorites"))
                         .anyMatch(favourite -> person.getFavourite().toString().matches("yes"));
         // @@author
     }

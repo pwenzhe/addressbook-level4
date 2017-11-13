@@ -2,12 +2,12 @@
 ifdef::env-github,env-browser[:outfilesuffix: .adoc]
 :imagesDir: ../images
 :stylesDir: ../stylesheets
-:repoURL: https://github.com/CS2103AUG2017-T16-B3/main
 
 == Project: Bevy
-Bevy is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 6 kLoC.
+Bevy is a desktop address book application for user to store their contacts.
+The user interacts with it using a Command Line Interface, and it has a Graphical User Interface created with JavaFX.
 
-*Code contributed*: [{repoURL}/collated/main/pwenzhe.md[Functional code]] [{repoURL}/collated/test/pwenzhe.md[Test code]]
+*Code contributed*: [https://github.com/CS2103AUG2017-T16-B3/main/collated/main/pwenzhe.md[Functional code]] [https://github.com/CS2103AUG2017-T16-B3/main/collated/test/pwenzhe.md[Test code]]
 
 === Enhancement Added: Favourite Persons
 
@@ -24,7 +24,10 @@ include::../UserGuide.adoc[tag=editfav]
 
 ==== Justification
 
-To allow users to pin their favourite persons to the top. Editing the person list will automatically sort the list by favourite and name.
+Bevy aims to help users remember their friends.
+With the favourite feature, users can pin their favourite persons to the top.
+This allows them to easily access these persons at the top of the list
+as the list is sorted when a person is added or edited.
 
 ==== Implementation
 
@@ -52,7 +55,7 @@ include::../UserGuide.adoc[tag=changetheme]
 
 ==== Justification
 
-To allow users to change the theme based on their preferences.
+To allow users to change the theme based on their preference.
 
 ==== Implementation
 
@@ -78,7 +81,7 @@ include::../UserGuide.adoc[tag=find]
 
 ==== Justification
 
-To allow users to easily find persons based on any detail.
+To allow users to easily find persons based on any detail provided.
 
 === Other contributions
 
