@@ -7,7 +7,7 @@ ifdef::env-github,env-browser[:outfilesuffix: .adoc]
 Bevy is a desktop address book application for user to store their contacts.
 The user interacts with it using a Command Line Interface, and it has a Graphical User Interface created with JavaFX.
 
-*Code contributed*: [https://github.com/CS2103AUG2017-T16-B3/main/collated/main/pwenzhe.md[Functional code]] [https://github.com/CS2103AUG2017-T16-B3/main/collated/test/pwenzhe.md[Test code]]
+*Code contributed*: [https://github.com/CS2103AUG2017-T16-B3/main/blob/master/collated/main/pwenzhe.md[Functional code]] [https://github.com/CS2103AUG2017-T16-B3/main/blob/master/collated/test/pwenzhe.md[Test code]]
 
 === Enhancement Added: Favourite Persons
 
