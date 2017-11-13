@@ -473,31 +473,33 @@ _Figure 4.5.1: Find Month Sequence Diagram_
 // end::birthdayfield[]
 
 // tag::statistics[]
-=== Birthday/ Tag Statistics
-
-The birthday statistics will show user a table of the number of people having their birthday in each month.
-While the tag statistics will show user a table of the number of people who has the same tag.
+=== Birthday/Tag Statistics Command
 
 image::BirthdayStatistics.JPG[width="800"]
 _Figure 4.6.1: Birthday Statistics_
 
-image::BirthdayStatisticsPanelClassDiagram.png[width="800"]
-_Figure 4.6.2: Birthday Statistics Panel Class Diagram_
+The birthday statistics will show users a table of the number of people having their birthday in each month,
+while the tag statistics will show user a table of the number of people who has the same tag.
 
-As shown from the class diagram, the birthday statistics class diagram extends the UiParts.
-The birthday statistics panel will display the information when user enter the command word, `birthdaystatistics` or `tagstatistics`.
+image::BirthdayTagStatisticsPanelClassDiagram.png[width="400"]
+_Figure 4.6.2: Birthday/Tag Statistics Panel Class Diagram_
 
-The following sequence diagram shows how the birthday statistics table is called.
+As shown from the class diagram, both panels extends the UiParts.
+The birthday/tag statistics panel will display the information depending on the command word, `birthdaystatistics` or `tagstatistics`.
 
-image::BirthdayStatisticsSequenceDiagram(edit).png[width="800"]
-_Figure 4.6.3: Birthday Statistics Sequence Diagram_
+The following sequence diagram shows how the birthday/tag statistics command is executed to display the respective panels,
+using birthday statistics command as an example.
 
-. Following the flow of the diagram, the command `birthdaystatistics` will be executed by `BirthdayStatisticsCommand`.
-. `BirthdyaStatisticsCommand` will request for an event change by calling `ChangeInformationPanelRequestEvent`.
-. `ChangeInformationPanelRequestEvent` will change the panel to birthday statistics panel as requested and return to `BirtdayStatisticsCommand`.
-. `BirthdayStatisticsCommand` will then post birthday statistics panel on `EventsCenter`.
+image::BirthdayStatisticsCommandSequenceDiagram.png[width="400"]
+_Figure 4.6.3: Birthday Statistics Command Sequence Diagram_
 
-The implementation for tag statistics is similar to the birthday statistics.
+. Following the flow of the diagram, the `LogicManager` will execute  the `birthdaystatistics` command.
+. `BirthdayStatisticsCommand` will request for an event change by posting to the events center the event `ChangeInformationPanelRequestEvent`, with `BIRTHDAY_STATISTICS_PANEL_REQUEST_EVENT`
+as the parameter of the event.
+. `MainApp` will handle the new event and push to the `Ui`, which will push to the `MainWindow`.
+. In `MainWindow`, `changeInformationPanel()` will perform the panel change depending on the
+parameter in the event.
+. `BirthdayStatistics` will then return `CommandResult` with `MESSAGE_SUCCESS` as the parameter back to the `LogicManager`.
 
 ==== Design Consideration
 
@@ -510,6 +512,7 @@ The implementation for tag statistics is similar to the birthday statistics.
 
 // end::statistics[]
 
+// tag::instagramGoogleMapBrowserPanel[]
 === Instagram/Google Map Browser Panel
 
 image::BrowserPanels.png[width="800"]
@@ -525,7 +528,7 @@ person based on the person details.
 
 The following sequence diagram shows how the browser operation works, using InstagramBrowserPanel as an exmaple:
 
-image::InstagramPanelSequenceDiagram.png[width="400"]
+image::InstagramBrowserPanelSequenceDiagram.png[width="400"]
 _Figure 4.7.3: InstagramBrowserPanel Sequence Diagram_
 
 As shown from the sequence diagram, when a user selects a new person, the InstagramBrowserPanel handles the new selection event and display the selected
@@ -560,6 +563,7 @@ is fully managed by the browser and Google Map page itself. +
 **Alternative 2:** Use Google Map API to construct an intergrated Google Map component +
 **Pros:** Integrates well, as we can simplify the experience for users. +
 **Cons:** Difficult to implement, as there is a steep learning curve to master Google Map API. +
+// end::instagramGoogleMapBrowserPanel[]
 
 // tag::deleteMultiplePersons[]
 === Delete Multiple Persons
@@ -594,40 +598,123 @@ will be used to construct a `DeleteCommand`. `HashSet` prevents the duplicates o
  to remove duplicates +
 // end::deleteMultiplePersons[]
 
+// tag::homeHelpCommand[]
+=== Home/Help Command
+
+image::Home.JPG[width="800"]
+_Figure 4.9.1: Home Panel_
+
+The home command show users the home panel of the app. This panel displays the total number of
+people and tags. It will also display randomised tips and advices below the welcome text.
+
+image::ViewingHelp.JPG[width="800"]
+_Figure 4.9.2: Help Panel_
+
+The help command show users the help panel of the app. This panel displays a summarised table of
+commands for quick reference.
+
+image::HomeHelpPanelClassDiagram.png[width="400"]
+_Figure 4.9.3: Home/Help Panel Class Diagram_
+
+As shown from the class diagram, both panels extends the UiParts. The panels are responsible for displaying
+information depending on the command entered.
+
+The following sequence diagram shows how the home/help command is executed to display the respective panels, using the home command as an exmaple.
+
+image::HomeCommandSequenceDiagram.png[width="400"]
+_Figure 4.9.4: Home Command Sequence Diagram_
+
+. Following the flow of the diagram, the `LogicManager` will execute  the `Home` command.
+. `HomeCommand` will request for an event change by posting to the events center the event `ChangeInformationPanelRequestEvent`, with `HOME_PANEL_REQUEST_EVENT`
+as the parameter of the event.
+. `MainApp` will handle the new event and push to the `Ui`, which will push to the `MainWindow`.
+. In `MainWindow` class, `changeInformationPanel()` will perform the panel change depending on the
+parameter in the event.
+. `Home` will then return `CommandResult` with `MESSAGE_SUCCESS` as the parameter back to the `LogicManager`.
+// end::homeHelpCommand[]
+
 // tag::dynamicInformationPanel[]
 === Dynamic Information Panel
 
-The information panel has the capability of changing panel depending on the request event. Home, select and help command are the current commands
-that will raise `ChangeInformationPanelRequestEvent()`.
+image::DynamicInformationPanel.png[width="800"]
+_Figure 4.10.1: Change Information Panel Sequence Diagram_
+
+The information panel, seen above has the capability of changing panel depending on the command entered. Home, help, select,
+birthday statistics and tag statistics command are the current commands
+that will post new `ChangeInformationPanelRequestEvent(panel)` event.
 
 Below are the respective commands and their requested panel.
 
-. *Home Command*: Request home panel.
-. *Select Command*: Request selected person's information panel.
-. *Help Command*: Request help panel.
-. *Birthday Statistics Command*: Request birthday statistics panel.
-. *Tag Statistics Command*: Request tag statistics panel.
+. *Home Command*: Home panel.
+. *Help Command*: Help panel.
+. *Select Command*: Selected person's information panel.
+. *Birthday Statistics Command*: Birthday statistics panel.
+. *Tag Statistics Command*: Tag statistics panel.
 
-The sequence diagram below shows how the panel are changed based on the command entered, using home command as an example.
+The sequence diagram below shows how the panel are changed after the respective commands post events to the events center.
 
-`Diagram to be added`
+image::ChangeInformationPanelSequenceDiagram.png[width="800"]
+_Figure 4.10.2: Change Information Panel Sequence Diagram_
 
+. Following the flow of the diagram, `MainApp` will handle the new event and push to the `Ui`, which will push to the `MainWindow`.
+. In `MainWindow` class, `changeInformationPanel()` will perform the panel change depending on the
+parameter in the event.
+
+Refer to the respective command implementation for more in-depth explanation of how the commands change the
+information panel.
+
+==== Design Consideration
+
+**Aspect:** Type of Information Panel +
+**Alternative 1 (current choice):** Use a dynamic information panel that will change depending on the commands. +
+**Pros:** Provides a much cleaner, clutter-free UI experience, as there is no need to put all UI element into a static
+display. +
+**Cons:** Extra implementation required for individual commands that will require changing of the panel. +
+**Alternative 2:** Use a static information panel with all UI elements preloaded. +
+**Pros:** Easier implementation, as everything is loaded on start and displayed. No need for extra implementation for
+ individual commands. +
+**Cons:** Creates a cluttered UI experience that may confuse users. +
 // end::dynamicInformationPanel[]
 
+// tag::suggestionsPopupMenu[]
 === Suggestions Popup menu
 
 image::Suggestions.png[width="800"]
-_Figure 4.10.1: Suggestions Popup menu_
+_Figure 4.11.1: Suggestions Popup menu_
 
-As shown above, Bevy can suggests menu based on the current text input on the command box.
+As shown above, Bevy can suggests words based on the current text input on the command box.
+The suggestions are preloaded using keywords from the features in Bevy.
+
+==== Design Consideration
+
+**Aspect:** Type of suggestions popup menu +
+**Alternative 1 (current choice):** Use JavaFX UI elements to create own suggestions popup menu method. +
+**Pros:** Provides a faster response time when users type in the command box. +
+**Cons:** Extra implementation required in writing the methods required to perform this feature. +
+**Alternative 2:** Use a pre-defined JavaFX suggestions popup menu method: `TextFields.bindAutoCompletion()`. +
+**Pros:** Easier implementation, as the pre-defined JavaFX method reduce the implementation drastically. +
+**Cons:** Provides a slower response time when users type in the command box, affecting user experience. +
+//end::suggestionsPopupMenu[]
 
 // tag::export[]
-=== Export data
+=== Export Address Book Data
 
-image::ExportData.png[width="790"]
-_Figure 4.11.1: Exporting your data out of Bevy_
+image::ExportData.png[width="800"]
+_Figure 4.12.1: Exporting your data out of Bevy_
 
-As shown above, Bevy can export data out onto a .csv file.
+Bevy can export address book data out onto a .csv file when users enter the export command. Seen in the figure above is the actual file Bevy exports the data to.
+
+image::ExportCommandSequenceDiagram.png[width="400"]
+_Figure 4.12.2: Export Command Sequence Diagram_
+
+image::SaveToCsvFileSequenceDiagram.png[width="400"]
+_Figure 4.12.3: Save to CSV File Sequence Diagram_
+
+. Following the flow of the diagrams, the `LogicManager` will execute  the `export` command.
+. `ExportCommand` will request for an event change, as seen in figure 4.12.2 by posting to the events center the event `ExportToFileRequestEvent`.
+. `MainApp` will handle the new event, as seen in figure 4.12.3 and save the current address book data using `StorageManager`.
+. `ExportCommand` will then return `CommandResult` with `MESSAGE_SUCCESS` as the parameter back to the `LogicManager`.
+
 // end::export[]
 
 // tag::changetheme[]
@@ -638,13 +725,13 @@ The theme of the application can be changed via a request event. The `changethem
 The sequence diagram below shows how the theme is changed.
 
 image::ThemeSequenceDiagram.png[width="800"]
-_Figure 4.12.1 ThemeCommand Sequence Diagram_
+_Figure 4.13.1 ThemeCommand Sequence Diagram_
 
 From the sequence diagram, this operation extends into the Model and UI components.
 
 Below is a detailed explanation of the extension.
 
-. The `changetheme` command is sent to the `AddressBookParser` then calls on the `ThemeCommand`.
+. The `changetheme` command is sent to the `AddressBookParser` which then calls on the `ThemeCommand`.
 . `ThemeCommand` posts a `ChangeThemeRequestEvent()` which will be received by the `MainApp`.
 . `MainApp` then calls the `changeTheme()` from `UiManager`.
 . `UiManager` invokes the `MainWindow` to change the CSS files active accordingly.

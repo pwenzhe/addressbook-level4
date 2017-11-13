@@ -12,10 +12,10 @@ public class ExportCommand extends Command {
     public static final String COMMAND_WORD = "export";
     public static final String COMMAND_ALIAS = "ex";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exports your friends into a CSV file.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exports your contacts into a CSV file.\n"
             + "Example: " + COMMAND_WORD;
 
-    public static final String MESSAGE_SUCCESS = "Successfully exported your friends to Bevy.csv file.";
+    public static final String MESSAGE_SUCCESS = "Successfully exported your contacts to Bevy.csv file.";
 
     @Override
     public CommandResult execute() {
