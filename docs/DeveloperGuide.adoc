@@ -512,6 +512,7 @@ parameter in the event.
 
 // end::statistics[]
 
+// tag::instagramGoogleMapBrowserPanel[]
 === Instagram/Google Map Browser Panel
 
 image::BrowserPanels.png[width="800"]
@@ -562,6 +563,7 @@ is fully managed by the browser and Google Map page itself. +
 **Alternative 2:** Use Google Map API to construct an intergrated Google Map component +
 **Pros:** Integrates well, as we can simplify the experience for users. +
 **Cons:** Difficult to implement, as there is a steep learning curve to master Google Map API. +
+// end::instagramGoogleMapBrowserPanel[]
 
 // tag::deleteMultiplePersons[]
 === Delete Multiple Persons
@@ -596,20 +598,19 @@ will be used to construct a `DeleteCommand`. `HashSet` prevents the duplicates o
  to remove duplicates +
 // end::deleteMultiplePersons[]
 
-// tag::homeHelpCOmmand[]
+// tag::homeHelpCommand[]
 === Home/Help Command
 
 image::Home.JPG[width="800"]
 _Figure 4.9.1: Home Panel_
 
-The home command will show users the home panel of the app. This panel displays the total number of
+The home command show users the home panel of the app. This panel displays the total number of
 people and tags. It will also display randomised tips and advices below the welcome text.
-
 
 image::ViewingHelp.JPG[width="800"]
 _Figure 4.9.2: Help Panel_
 
-The help command will show users the help panel of the app. This panel displays a summarised table of
+The help command show users the help panel of the app. This panel displays a summarised table of
 commands for quick reference.
 
 image::HomeHelpPanelClassDiagram.png[width="400"]
@@ -696,12 +697,12 @@ The suggestions are preloaded using keywords from the features in Bevy.
 //end::suggestionsPopupMenu[]
 
 // tag::export[]
-=== Export data
+=== Export Address Book Data
 
 image::ExportData.png[width="800"]
 _Figure 4.12.1: Exporting your data out of Bevy_
 
-Bevy can export data out onto a .csv file when users enter the export command. Seen in the figure above is the actual file Bevy exports the data to.
+Bevy can export address book data out onto a .csv file when users enter the export command. Seen in the figure above is the actual file Bevy exports the data to.
 
 image::ExportCommandSequenceDiagram.png[width="400"]
 _Figure 4.12.2: Export Command Sequence Diagram_
@@ -711,7 +712,7 @@ _Figure 4.12.3: Save to CSV File Sequence Diagram_
 
 . Following the flow of the diagrams, the `LogicManager` will execute  the `export` command.
 . `ExportCommand` will request for an event change, as seen in figure 4.12.2 by posting to the events center the event `ExportToFileRequestEvent`.
-. `MainApp` will handle the new event, as seen in figure 4.12.3 and save the current addressbook data using `StorageManager`.
+. `MainApp` will handle the new event, as seen in figure 4.12.3 and save the current address book data using `StorageManager`.
 . `ExportCommand` will then return `CommandResult` with `MESSAGE_SUCCESS` as the parameter back to the `LogicManager`.
 
 // end::export[]
