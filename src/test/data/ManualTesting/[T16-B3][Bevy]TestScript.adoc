@@ -21,6 +21,7 @@ This test script shows you the step by step instructions to perform manual testi
 . Download the latest Bevy release https://github.com/CS2103AUG2017-T16-B3/main/releases[here].
 . Create a folder named `data` in the same location as the jar file.
 . Ensure that the file `[T16-B3][Bevy]SampleData.xml` is saved in the data folder.
+. Rename the file to `addressbook.xml`.
 . Run Bevy and you will be able to see the data.
 
 == Commands
@@ -73,7 +74,7 @@ If it is not specified, the person will not be a favourite by default.
 ==== Manual Testing
 
 . Command: `a n/ben tan p/89489898 b/13.9.03 a/Blk 234, Pasir Ris Street 11, 510234 f/y` +
-Expected Result: Name capitalised, date reformatted, postal code extracted, person pinned as favourites.
+Expected Result: Index 1 `Ben Tan` has been added. Name capitalised, date reformatted, postal code extracted, person pinned as favourites.
 
 . Command: `a p/82909897` +
 Expected Result: Invalid command format as name is not added.
@@ -90,13 +91,13 @@ Command Alias: `e`
 
 ==== Manual Testing
 . Command: `edit 10 t/` +
-Expected Result: All tags of index 10 has been removed.
+Expected Result: All tags of index 10 `Heinz Kurz` has been removed.
 
-. Command: `edit 11 t/friends` +
-Expected Result: All tags of index 11 has been replaced with `friends`.
+. Command: `edit 11 t/friend` +
+Expected Result: All tags of index 11 `Lydia Kunz` has been replaced with `friends`.
 
 . Command: `e 13 f/y` +
-Expected Result: Index 13 has been pinned to the top, indicated with a yellow star, sorted in alphabetical order.
+Expected Result: Index 13 `Michelle Ong` has been pinned and sorted alphabetically to the top with a new index 2, indicated with a yellow star.
 
 ---
 
@@ -113,14 +114,17 @@ Command Alias: `f`
 ****
 
 ==== Manual Testing
-. Command: `find John` +
-Expected Result: `John` and `John Doe`
-. Command: `find Betsy Tim John 123` +
-Expected Result: Returns any person having names `Betsy`, `Tim`, or `John`, or any person with phone number containing `123`.
+. Command: `find Cindy` +
+Expected Result: Returns index 1 `Cindy Lim`
+. Command: `find bernice hans 123` +
+Expected Result: Returns any person having any words in names or address matching the keyword, or phone, email or postal code
+containing the keyword. In this case, returns index 1 `Ong Wei Kang`, index 2 `Bernice Chiang`, index 3 `Hans Muster` and index 4 `Martin Mueller`
 . Command: `find m/Feb` +
-Expected Result: Returns all persons that have their birthday in the month of `Feb`.
+Expected Result: Returns all persons that have their birthday in the month of `Feb`. In this case, returns index 1 `Nicholas Tay`.
 . Command: `f bedok favourite` +
-Expected Result: Returns all persons that has their address in `Bedok` and all persons pinned as favourite.
+Expected Result: Returns all persons that has their address in `Bedok` and all persons pinned as `favourite`. In this case,
+returns index 1 `Ben Tan`, index 2 `Michelle Ong`, index 3 `Ong Wei Kang`, index 4 `Poon Wenzhe`, index 5 `Valerie Yue`, index 6
+`Hans Muster`, index 7 `Heinz Kurz` and index 8 `Ruth Mueller`.
 
 ---
 
@@ -135,17 +139,19 @@ Command Alias: `d`
 
 ==== Manual Testing
 
-. Command: `list` `delete 2` +
-Expected Result: Deletes the 2nd person listed in the address book.
+. First Command: `list` +
+Second Command: `delete 2` +
+Expected Result: After listing all the people in the address book, deletes the 2nd person listed in the address book. In this case, deletes index 2 `Michelle Ong`.
 
-. Command: `list` `delete 2-5` +
-Expected Result: Deletes the 2nd to 4th person listed in the address book.
+. First Command: `find favourite` +
+Second Command: `d 1` +
+Expected Result: After finding and listing all the results, deletes the 1st person listed in the results of the `find` command. In this case, deletes index 1 `Ben Tan`.
 
-. Command: `find favourite` `d 1` +
-Expected Result: Deletes the 1st person listed in the results of the `find` command.
-
-. Command: `find John` `delete 2-3 1-3 5-6` +
-Expected Result: Delete the 1st to 3rd, 5th and 6th person listed in the results of the `find` command.
+. First Command: `find friend` +
+Second Command: `delete 1-2 2-4 3-4` +
+Expected Result: After finding and listing all the results, Delete the 1st to 4th person listed in the results of the `find` command. In this case, deletes index 1 `Hans Muster`,
+index 2 `Lydia Kunz`, index 3 `Ryan Tiong` and index 4 `Samuel Teo`. The remaining person in currently shown is index 1
+`Werner Meyer`.
 
 ---
 
@@ -156,9 +162,10 @@ Format: `history` +
 Command Alias: `h`
 
 ==== Manual Testing
-. Command: `h` +
+
+Second Command: `h` +
 Expected Result: The list of commands that you have entered in reverse chronological order:
-`delete 2-3 1-3 5-6` `find John` `d 1` `find favourite` etc...
+`delete 1-2 2-4 3-4` `find friend` `d 1` etc...
 
 ---
 
@@ -168,9 +175,10 @@ Clears all entries from the address book. +
 Format: `clear` +
 Command Alias: `c`
 
-=== Manual Testing
-. Command: `c` +
-Expected Result: List will be cleared.
+==== Manual Testing
+. First Command: `l` +
+Second Command: `c` +
+Expected Result: After listing all persons, the list will be cleared.
 
 ---
 
@@ -182,13 +190,11 @@ Command Alias: `u`
 ==== Manual Testing
 
 . Command: `u` +
-Expected Result: Reverse the last clear command. List will be restored.
+Expected Result: Reverse the last clear command. In this case, restores the list.
 
 . Command: `u` +
-Expected Result: Reverse the last delete command `delete 2-3 1-3 5-6` +
-
-. Command: `a n/Jordan lim p/80445983 b/05 7 90 t/family` `history` `list` `u` +
-Expected Result: Reverse the add command as that was the last _undoable_ command entered.
+Expected Result: Reverse the last delete command. In this case, index 8 `Hans Muster`, index 10 `Lydia Kunz`, index 14 `Ryan Tiong`
+and index 15 `Samuel Teo` will be restored.  +
 
 ---
 
@@ -201,7 +207,9 @@ Command Alias: `r`
 ==== Manual Testing
 
 . Command: `r` +
-Expected Result: Reverses the last undo command `a n/Jordan lim p/80445983 b/05 7 90 t/family`. Jordan Lim will be added again.
+Expected Result: Reverses the last delete command, `delete 1-2 2-4 3-4`. In this case, deletes
+index 1 `Ong Wei Kang`, index 2 `Poon Wenzhe`, index 3 `Valerie Yue`
+and index 4 `Anna Best`.
 
 ---
 
@@ -211,8 +219,9 @@ Format: `list` +
 Command Alias: `l`
 
 ==== Manual Testing
+
 . Command: `l` +
-Expected Result: Shows the list of contacts in Bevy.
+Expected Result: Shows the list of all persons in Bevy.
 
 ---
 
@@ -229,15 +238,17 @@ Command Alias: `s`
 
 ==== Manual Testing
 
-. Command: `list` `select 2` +
-Selects the 2nd person listed in the address book. +
+. Command: `select 4` +
+Expected Result: Selects the 4th person listed in the address book. In this case, selects index 4 `Hans Muster`. +
 
-. Command: `find Betsy` `select 1` +
-Selects the 1st person listed in the results of the `find` command.
+. First Command: `find friend` +
+Second Command: `s 3` +
+After finding and listing all the results, selects the 1st person. In this case, selects index 3 `Ryan Tiong`. +
 
 ---
 
 === Birthday Statistics
+
 Birthday statistics shows you the number of people having their birthdays in a particular month. +
 Format: `birthdaystatistics` +
 Command Alias: `bstats`
@@ -247,14 +258,17 @@ Command Alias: `bstats`
 ****
 
 ==== Manual Testing
-. Command: `bstats` +
-Expected Result: The birthday statistics will appear on the panel.
+. First Command: `l` +
+Second Command: `bstats` +
+Expected Result: After listing all persons in the address book, the birthday statistics panel will appear.
 
-. Command: `d 4-6` +
-Expected Result: The number of people shown on March has decreased by 3.
+. Command: `d 1` +
+Expected Result: Deletes the person at index 1 `Bernice Chiang`. The number of people whose birthday is in September will decrease
+from 2 to 1.
 
-. Command: `a n/peter soh p/90098123 b/4-5-78` +
-Expected Result: The number of people who have their birthday on May will increase by 1.
+. Command: `u` +
+Expected Result: Person `Bernice Chiang` has been restored to index 1. The number of people whose birthday is on September
+will increase by from 1 to 2.
 
 ---
 
@@ -271,11 +285,8 @@ Command Alias: `tstats`
 . Command: `tstats` +
 Expected Result: The tag statistics will appear on the panel.
 
-. Command: `d 9` +
-Expected Result: The tag `pretty` has been removed from the bar chart.
-
-. Command: `a n/Mary tay p/89007776 t/happy` +
-Expected Result: A new bar will be shown to reflect the added new tag.
+. Command: `d 1` +
+Expected Result: Deletes person index 1 `Bernice Chiang`. The tag `friendly` decreases from 3 to 2 and the tag `sister` is removed.
 
 ---
 
@@ -287,7 +298,11 @@ Command Alias: `ct`
 
 ==== Manual Testing
 . Command: `ct` +
-Expected Result: Colour scheme will be changed to a darker theme.
+Expected Result: Theme will change to a dark theme.
+
+. Command: `x` +
+Expected Result: The application will be closed and the theme preference will be saved. When you reopen
+the application, it will still remain as dark theme.
 
 ---
 
@@ -298,8 +313,10 @@ Format: `home` +
 Command Alias: `ho`
 
 ==== Manual Testing
+
 . Command: `ho` +
-Expected Result: Returns to home page, with number of friends and tags updated after executing the previous commands.
+Expected Result: Returns to home panel, with number of friends and tags updated after executing the previous commands.
+In this case, the total number of friends and tags are 14 and 12 respectively.
 
 ---
 
@@ -310,8 +327,9 @@ Format: `export` +
 Command Alias: `ex`
 
 ==== Manual Testing
-. Command: `ex`
-Expected Result: The excel file can be found from >>>>>>
+
+. Command: `ex` +
+Expected Result: The exported .csv file named Bevy.csv can be found at the same directory as your addressbook.jar.
 
 ---
 
