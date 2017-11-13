@@ -117,7 +117,7 @@ When you are ready to start coding,
 The architecture section shows how Bevy is designed and will explain the reasons needed for this structure.
 
 image::Architecture.png[width="600"]
-_Figure 2.1.1 : Architecture Diagram_
+_Figure 3.1.1 : Architecture Diagram_
 
 The *_Architecture Diagram_* given above explains the high-level design of the application. The following is a quick overview of each component.
 
@@ -150,7 +150,7 @@ Each of the four components
 For example, the `Logic` component (see the class diagram given below) defines it's API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class.
 
 image::LogicClassDiagram.png[width="800"]
-_Figure 2.1.2 : Class Diagram of the Logic Component_
+_Figure 3.1.2 : Class Diagram of the Logic Component_
 
 [discrete]
 ==== Events-Driven nature of the design
@@ -158,7 +158,7 @@ _Figure 2.1.2 : Class Diagram of the Logic Component_
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the command `delete 1`.
 
 image::SDforDeletePerson.png[width="800"]
-_Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
+_Figure 3.1.3a : Component interactions for `delete 1` command (part 1)_
 
 [NOTE]
 Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed, instead of asking the `Storage` to save the updates to the hard disk.
@@ -166,7 +166,7 @@ Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time.
 
 image::SDforDeletePersonEventHandling.png[width="800"]
-_Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
+_Figure 3.1.3b : Component interactions for `delete 1` command (part 2)_
 
 [NOTE]
 Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct coupling between components.
@@ -176,7 +176,7 @@ The sections below give more details of each component.
 === UI component
 
 image::UiClassDiagram.png[width="800"]
-_Figure 2.2.1 : Structure of the UI Component_
+_Figure 3.2.1 : Structure of the UI Component_
 
 *API* : link:{repoURL}/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
 
@@ -198,7 +198,7 @@ image::LogicClassDiagram.png[width="800"]
 _Figure 3.3.1 : Structure of the Logic Component_
 
 image::LogicCommandClassDiagram.png[width="800"]
-_Figure 3.3.2 : Structure of Commands in the Logic Component. This diagram shows finer details concerning `XYZCommand` and `Command` in Figure 2.3.1_
+_Figure 3.3.2 : Structure of Commands in the Logic Component. This diagram shows finer details concerning `XYZCommand` and `Command` in Figure 3.3.1_
 
 *API* :
 link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
@@ -213,7 +213,7 @@ link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
 
 image::DeletePersons1SequenceDiagram.png[width="800"]
-_Figure 3.3.4 : Interactions Inside the Logic Component for the `delete 1` Command_
+_Figure 3.3.3 : Interactions Inside the Logic Component for the `delete 1` Command_
 
 .  Following the flow of the diagram, the command `delete 1` will be sent to `LogicManager`.
 .  `AddressBookParser` will parse the `delete` command and will call the `DeleteCommandParser`.
@@ -417,10 +417,10 @@ Certain properties of the application can be controlled (e.g App name, logging l
 The list will be sorted whenever a new person is added or when a person is edited. The list will be sorted alphabetically while keeping the favourite persons at the top of the list.
 
 image::SortSequenceDiagram.png[width="800"]
-_Figure 4.4.1: Sorting Sequence Diagram using addPerson_
+_Figure 4.4.1 : Sorting Sequence Diagram using addPerson_
 
 image::SortSequenceDiagram2.png[width="800"]
-_Figure 4.4.2: Sorting Sequence Diagram using updatePerson_
+_Figure 4.4.2 : Sorting Sequence Diagram using updatePerson_
 
 . Following the flow of the diagram, when a person is added or edited, the addPerson or updatePerson method will be respectively called in `AddressBook`.
 . `UniquePersonList` will sort the added person by comparing the favourite status and then the names in the current list and insert the persons at the correct slot.
@@ -452,7 +452,7 @@ After adding the birthday, users can search for a particular month and the list 
 The following sequence diagram shows how find works when searching for a month.
 
 image::FindMonthSequenceDiagram.png[width="800"]
-_Figure 4.5.1: Find Month Sequence Diagram_
+_Figure 4.5.1 : Find Month Sequence Diagram_
 
 . Following the flow of the diagram, the command `find m/Jan` will be sent to the `LogicManager`.
 . `AddressBookParser` will parse the `find` command and call the `FindCommandParser`.
@@ -476,13 +476,13 @@ _Figure 4.5.1: Find Month Sequence Diagram_
 === Birthday/Tag Statistics Command
 
 image::BirthdayStatistics.JPG[width="800"]
-_Figure 4.6.1: Birthday Statistics_
+_Figure 4.6.1 : Birthday Statistics_
 
 The birthday statistics will show users a table of the number of people having their birthday in each month,
 while the tag statistics will show user a table of the number of people who has the same tag.
 
 image::BirthdayTagStatisticsPanelClassDiagram.png[width="400"]
-_Figure 4.6.2: Birthday/Tag Statistics Panel Class Diagram_
+_Figure 4.6.2 : Birthday/Tag Statistics Panel Class Diagram_
 
 As shown from the class diagram, both panels extends the UiParts.
 The birthday/tag statistics panel will display the information depending on the command word, `birthdaystatistics` or `tagstatistics`.
@@ -491,7 +491,7 @@ The following sequence diagram shows how the birthday/tag statistics command is 
 using birthday statistics command as an example.
 
 image::BirthdayStatisticsCommandSequenceDiagram.png[width="800"]
-_Figure 4.6.3: Birthday Statistics Command Sequence Diagram_
+_Figure 4.6.3 : Birthday Statistics Command Sequence Diagram_
 
 . Following the flow of the diagram, the `LogicManager` will execute  the `birthdaystatistics` command.
 . `BirthdayStatisticsCommand` will request for an event change by posting to the events center the event `ChangeInformationPanelRequestEvent`, with `BIRTHDAY_STATISTICS_PANEL_REQUEST_EVENT`
@@ -516,12 +516,12 @@ parameter in the event.
 === Instagram/Google Map Browser Panel
 
 image::BrowserPanels.png[width="800"]
-_Figure 4.7.1: Browser Panels UI_
+_Figure 4.7.1 : Browser Panels UI_
 
 The browser panels display visual information about the selected person.
 
 image::BrowserPanelsClassDiagram.png[width="400"]
-_Figure 4.7.2: Browser Panels Class Diagram_
+_Figure 4.7.2 : Browser Panels Class Diagram_
 
 As shown from the class diagram, both browser panels extends the UiParts. The browser panels are responsible for displaying
 Instagram page and Google Maps location of the selected person.
@@ -529,7 +529,7 @@ Instagram page and Google Maps location of the selected person.
 The following sequence diagram shows how the browser panel operation works, using InstagramBrowserPanel as an exmaple:
 
 image::InstagramBrowserPanelSequenceDiagram.png[width="800"]
-_Figure 4.7.3: InstagramBrowserPanel Sequence Diagram_
+_Figure 4.7.3 : InstagramBrowserPanel Sequence Diagram_
 
 As shown from the sequence diagram, when a user selects a new person, the InstagramBrowserPanel handles the new selection event and display the selected
 person's Instagram based on the name in the person details. For example, if the selected person's name is `Alex Yeoh`, InstagramBrowserPanel will use `AlexYeoh` as part of the URL parameter to display the person's
@@ -602,19 +602,19 @@ will be used to construct a `DeleteCommand`. `HashSet` prevents the duplicates o
 === Home/Help Command
 
 image::Home.JPG[width="800"]
-_Figure 4.9.1: Home Panel_
+_Figure 4.9.1 : Home Panel_
 
 The home command show users the home panel of the application. This panel displays the total number of
 people and tags. It will also display randomised tips and advices below the welcome text.
 
 image::ViewingHelp.JPG[width="800"]
-_Figure 4.9.2: Help Panel_
+_Figure 4.9.2 : Help Panel_
 
 The help command show users the help panel of the app. This panel displays a summarised table of
 commands for quick reference.
 
 image::HomeHelpPanelClassDiagram.png[width="400"]
-_Figure 4.9.3: Home/Help Panel Class Diagram_
+_Figure 4.9.3 : Home/Help Panel Class Diagram_
 
 As shown from the class diagram, both panels extends the UiParts. The panels are responsible for displaying
 information depending on the command entered.
@@ -622,7 +622,7 @@ information depending on the command entered.
 The following sequence diagram shows how the home/help command is executed to display the respective panels, using the home command as an exmaple.
 
 image::HomeCommandSequenceDiagram.png[width="800"]
-_Figure 4.9.4: Home Command Sequence Diagram_
+_Figure 4.9.4 : Home Command Sequence Diagram_
 
 . Following the flow of the diagram, the `LogicManager` will execute  the `Home` command.
 . `HomeCommand` will request for an event change by posting to the events center the event `ChangeInformationPanelRequestEvent`, with `HOME_PANEL_REQUEST_EVENT`
@@ -636,7 +636,7 @@ depending on the parameter in the event.
 === Dynamic Information Panel
 
 image::DynamicInformationPanel.png[width="800"]
-_Figure 4.10.1: Change Information Panel Sequence Diagram_
+_Figure 4.10.1 : Change Information Panel Sequence Diagram_
 
 The information panel, seen above, has the capability of changing panel depending on the command entered. Home, help, select,
 birthday statistics and tag statistics command are the current commands that will post new
@@ -653,7 +653,7 @@ Below are the respective commands and their requested panel.
 The sequence diagram below shows how the panel are changed after the respective commands post events to the events center.
 
 image::ChangeInformationPanelSequenceDiagram.png[width="800"]
-_Figure 4.10.2: Change Information Panel Sequence Diagram_
+_Figure 4.10.2 : Change Information Panel Sequence Diagram_
 
 Following the flow of the diagram, `MainApp` will handle the new event and call `changeInformationPanel()` from the `Ui`,
 which will call `changeInformationPanel()` from the `MainWindow` to change the current information panel depending on the
@@ -679,7 +679,7 @@ information panel. +
 === Suggestions Popup menu
 
 image::Suggestions.png[width="800"]
-_Figure 4.11.1: Suggestions Popup menu_
+_Figure 4.11.1 : Suggestions Popup menu_
 
 As shown above, Bevy can suggests words based on the current text input on the command box.
 The suggestions are preloaded using keywords from the current features.
@@ -699,15 +699,15 @@ The suggestions are preloaded using keywords from the current features.
 === Export Address Book Data
 
 image::ExportData.png[width="800"]
-_Figure 4.12.1: Exporting your data out of Bevy_
+_Figure 4.12.1 : Exporting your data out of Bevy_
 
 Bevy can export AddressBook data onto Bevy.csv file which is located in the same directory as addressbook.jar. Seen in the figure above is the actual file Bevy exports the data to.
 
 image::ExportCommandSequenceDiagram.png[width="800"]
-_Figure 4.12.2: Export Command Sequence Diagram_
+_Figure 4.12.2 : Export Command Sequence Diagram_
 
 image::SaveToCsvFileSequenceDiagram.png[width="800"]
-_Figure 4.12.3: Save to CSV File Sequence Diagram_
+_Figure 4.12.3 : Save to CSV File Sequence Diagram_
 
 . Following the flow of the diagrams, the `LogicManager` will execute  the `export` command.
 . `ExportCommand` will request for an event change, as seen in figure 4.12.2 by posting to the events center the event `ExportToFileRequestEvent()`.
@@ -725,7 +725,7 @@ The theme of the application can be changed via a request event. The `changethem
 The sequence diagram below shows how the theme is changed.
 
 image::ThemeSequenceDiagram.png[width="800"]
-_Figure 4.13.1 ThemeCommand Sequence Diagram_
+_Figure 4.13.1 : ThemeCommand Sequence Diagram_
 
 From the sequence diagram, this operation extends into the Model and UI components.
 
@@ -776,7 +776,7 @@ Here are the steps to convert the project documentation files to PDF format.
 .  Set the destination to `Save as PDF`, then click `Save` to save a copy of the file in PDF format. For best results, use the settings indicated in the screenshot below.
 
 image::chrome_save_as_pdf.png[width="300"]
-_Figure 5.6.1 : Saving documentation as PDF files in Chrome_
+_Figure 5.3.1 : Saving documentation as PDF files in Chrome_
 
 == Testing
 
@@ -853,251 +853,6 @@ Here are the steps to create a new release.
 A project often depends on third-party libraries. For example, Address Book depends on the http://wiki.fasterxml.com/JacksonHome[Jackson library] for XML parsing. Managing these _dependencies_ can be automated using Gradle. For example, Gradle can download the dependencies automatically, which is better than these alternatives. +
 a. Include those libraries in the repo (this bloats the repo size) +
 b. Require developers to download those libraries manually (this creates extra work for developers)
-
-[appendix]
-== Suggested Programming Tasks to Get Started
-
-Suggested path for new programmers:
-
-1. First, add small local-impact (i.e. the impact of the change does not go beyond the component) enhancements to one component at a time. Some suggestions are given in this section link:#improving-each-component[Improving a Component].
-
-2. Next, add a feature that touches multiple components to learn how to implement an end-to-end feature across all components. The section link:#creating-a-new-command-code-remark-code[Creating a new command: `remark`] explains how to go about adding such a feature.
-
-=== Improving each component
-
-Each individual exercise in this section is component-based (i.e. you would not need to modify the other components to get it to work).
-
-[discrete]
-==== `Logic` component
-
-[TIP]
-Do take a look at the link:#logic-component[Design: Logic Component] section before attempting to modify the `Logic` component.
-
-. Add a shorthand equivalent alias for each of the individual commands. For example, besides typing `clear`, the user can also type `c` to remove all persons in the list.
-+
-****
-* Hints
-** Just like we store each individual command word constant `COMMAND_WORD` inside `*Command.java` (e.g.  link:{repoURL}/src/main/java/seedu/address/logic/commands/FindCommand.java[`FindCommand#COMMAND_WORD`], link:{repoURL}/src/main/java/seedu/address/logic/commands/DeleteCommand.java[`DeleteCommand#COMMAND_WORD`]), you need a new constant for aliases as well (e.g. `FindCommand#COMMAND_ALIAS`).
-** link:{repoURL}/src/main/java/seedu/address/logic/parser/AddressBookParser.java[`AddressBookParser`] is responsible for analyzing command words.
-* Solution
-** Modify the switch statement in link:{repoURL}/src/main/java/seedu/address/logic/parser/AddressBookParser.java[`AddressBookParser#parseCommand(String)`] such that both the proper command word and alias can be used to execute the same intended command.
-** See this https://github.com/se-edu/addressbook-level4/pull/590/files[PR] for the full solution.
-****
-
-[discrete]
-==== `Model` component
-
-[TIP]
-Do take a look at the link:#model-component[Design: Model Component] section before attempting to modify the `Model` component.
-
-. Add a `removeTag(Tag)` method. The specified tag will be removed from everyone in the address book.
-+
-****
-* Hints
-** The link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model`] API needs to be updated.
-**  Find out which of the existing API methods in  link:{repoURL}/src/main/java/seedu/address/model/AddressBook.java[`AddressBook`] and link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`] classes can be used to implement the tag removal logic. link:{repoURL}/src/main/java/seedu/address/model/AddressBook.java[`AddressBook`] allows you to update a person, and link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`] allows you to update the tags.
-* Solution
-** Add the implementation of `deleteTag(Tag)` method in link:{repoURL}/src/main/java/seedu/address/model/ModelManager.java[`ModelManager`]. Loop through each person, and remove the `tag` from each person.
-** See this https://github.com/se-edu/addressbook-level4/pull/591/files[PR] for the full solution.
-****
-
-[discrete]
-==== `Ui` component
-
-[TIP]
-Do take a look at the link:#ui-component[Design: UI Component] section before attempting to modify the `UI` component.
-
-. Use different colors for different tags inside person cards. For example, `friends` tags can be all in grey, and `colleagues` tags can be all in red.
-+
-**Before**
-+
-image::getting-started-ui-tag-before.png[width="300"]
-+
-**After**
-+
-image::getting-started-ui-tag-after.png[width="300"]
-+
-****
-* Hints
-** The tag labels are created inside link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard#initTags(ReadOnlyPerson)`] (`new Label(tag.tagName)`). https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/Label.html[JavaFX's `Label` class] allows you to modify the style of each Label, such as changing its color.
-** Use the .css attribute `-fx-background-color` to add a color.
-* Solution
-** See this https://github.com/se-edu/addressbook-level4/pull/592/files[PR] for the full solution.
-****
-
-. Modify link:{repoURL}/src/main/java/seedu/address/commons/events/ui/NewResultAvailableEvent.java[`NewResultAvailableEvent`] such that link:{repoURL}/src/main/java/seedu/address/ui/ResultDisplay.java[`ResultDisplay`] can show a different style on error (currently it shows the same regardless of errors).
-+
-**Before**
-+
-image::getting-started-ui-result-before.png[width="200"]
-+
-**After**
-+
-image::getting-started-ui-result-after.png[width="200"]
-+
-****
-* Hints
-** link:{repoURL}/src/main/java/seedu/address/commons/events/ui/NewResultAvailableEvent.java[`NewResultAvailableEvent`] is raised by link:{repoURL}/src/main/java/seedu/address/ui/CommandBox.java[`CommandBox`] which also knows whether the result is a success or failure, and is caught by link:{repoURL}/src/main/java/seedu/address/ui/ResultDisplay.java[`ResultDisplay`] which is where we want to change the style to.
-** Refer to link:{repoURL}/src/main/java/seedu/address/ui/CommandBox.java[`CommandBox`] for an example on how to display an error.
-* Solution
-** Modify link:{repoURL}/src/main/java/seedu/address/commons/events/ui/NewResultAvailableEvent.java[`NewResultAvailableEvent`] 's constructor so that users of the event can indicate whether an error has occurred.
-** Modify link:{repoURL}/src/main/java/seedu/address/ui/ResultDisplay.java[`ResultDisplay#handleNewResultAvailableEvent(event)`] to react to this event appropriately.
-** See this https://github.com/se-edu/addressbook-level4/pull/593/files[PR] for the full solution.
-****
-
-. Modify the link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] to show the total number of people in the address book.
-+
-**Before**
-+
-image::getting-started-ui-status-before.png[width="500"]
-+
-**After**
-+
-image::getting-started-ui-status-after.png[width="500"]
-+
-****
-* Hints
-** link:{repoURL}/src/main/resources/view/StatusBarFooter.fxml[`StatusBarFooter.fxml`] will need a new `StatusBar`. Be sure to set the `GridPane.columnIndex` properly for each `StatusBar` to avoid misalignment!
-** link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] needs to initialize the status bar on application start, and to update it accordingly whenever the address book is updated.
-* Solution
-** Modify the constructor of link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] to take in the number of persons when the application just started.
-** Use link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter#handleAddressBookChangedEvent(AddressBookChangedEvent)`] to update the number of persons whenever there are new changes to the addressbook.
-** See this https://github.com/se-edu/addressbook-level4/pull/596/files[PR] for the full solution.
-****
-
-[discrete]
-==== `Storage` component
-
-[TIP]
-Do take a look at the link:#storage-component[Design: Storage Component] section before attempting to modify the `Storage` component.
-
-. Add a new method `backupAddressBook(ReadOnlyAddressBook)`, so that the address book can be saved in a fixed temporary location.
-+
-****
-* Hint
-** Add the API method in link:{repoURL}/src/main/java/seedu/address/storage/AddressBookStorage.java[`AddressBookStorage`] interface.
-** Implement the logic in link:{repoURL}/src/main/java/seedu/address/storage/StorageManager.java[`StorageManager`] class.
-* Solution
-** See this https://github.com/se-edu/addressbook-level4/pull/594/files[PR] for the full solution.
-****
-
-=== Creating a new command: `remark`
-
-By creating this command, you will get a chance to learn how to implement a feature end-to-end, touching all major components of the app.
-
-==== Description
-Edits the remark for a person specified in the `INDEX`. +
-Format: `remark INDEX r/[REMARK]`
-
-Examples:
-
-* `remark 1 r/Likes to drink coffee.` +
-Edits the remark for the first person to `Likes to drink coffee.`
-* `remark 1 r/` +
-Removes the remark for the first person.
-
-==== Step-by-step Instructions
-
-===== [Step 1] Logic: Teach the app to accept 'remark' which does nothing
-Let's start by teaching the application how to parse a `remark` command. We will add the logic of `remark` later.
-
-**Main:**
-
-. Add a `RemarkCommand` that extends link:{repoURL}/src/main/java/seedu/address/logic/commands/UndoableCommand.java[`UndoableCommand`]. Upon execution, it should just throw an `Exception`.
-. Modify link:{repoURL}/src/main/java/seedu/address/logic/parser/AddressBookParser.java[`AddressBookParser`] to accept a `RemarkCommand`.
-
-**Tests:**
-
-. Add `RemarkCommandTest` that tests that `executeUndoableCommand()` throws an Exception.
-. Add new test method to link:{repoURL}/src/test/java/seedu/address/logic/parser/AddressBookParserTest.java[`AddressBookParserTest`], which tests that typing "remark" returns an instance of `RemarkCommand`.
-
-===== [Step 2] Logic: Teach the app to accept 'remark' arguments
-Let's teach the application to parse arguments that our `remark` command will accept. E.g. `1 r/Likes to drink coffee.`
-
-**Main:**
-
-. Modify `RemarkCommand` to take in an `Index` and `String` and print those two parameters as the error message.
-. Add `RemarkCommandParser` that knows how to parse two arguments, one index and one with prefix 'r/'.
-. Modify link:{repoURL}/src/main/java/seedu/address/logic/parser/AddressBookParser.java[`AddressBookParser`] to use the newly implemented `RemarkCommandParser`.
-
-**Tests:**
-
-. Modify `RemarkCommandTest` to test the `RemarkCommand#equals()` method.
-. Add `RemarkCommandParserTest` that tests different boundary values
-for `RemarkCommandParser`.
-. Modify link:{repoURL}/src/test/java/seedu/address/logic/parser/AddressBookParserTest.java[`AddressBookParserTest`] to test that the correct command is generated according to the user input.
-
-===== [Step 3] Ui: Add a placeholder for remark in `PersonCard`
-Let's add a placeholder on all our link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`] s to display a remark for each person later.
-
-**Main:**
-
-. Add a `Label` with any random text inside link:{repoURL}/src/main/resources/view/PersonListCard.fxml[`PersonListCard.fxml`].
-. Add FXML annotation in link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`] to tie the variable to the actual label.
-
-**Tests:**
-
-. Modify link:{repoURL}/src/test/java/guitests/guihandles/PersonCardHandle.java[`PersonCardHandle`] so that future tests can read the contents of the remark label.
-
-===== [Step 4] Model: Add `Remark` class
-We have to properly encapsulate the remark in our link:{repoURL}/src/main/java/seedu/address/model/person/ReadOnlyPerson.java[`ReadOnlyPerson`] class. Instead of just using a `String`, let's follow the conventional class structure that the codebase already uses by adding a `Remark` class.
-
-**Main:**
-
-. Add `Remark` to model component (you can copy from link:{repoURL}/src/main/java/seedu/address/model/person/Address.java[`Address`], remove the regex and change the names accordingly).
-. Modify `RemarkCommand` to now take in a `Remark` instead of a `String`.
-
-**Tests:**
-
-. Add test for `Remark`, to test the `Remark#equals()` method.
-
-===== [Step 5] Model: Modify `ReadOnlyPerson` to support a `Remark` field
-Now we have the `Remark` class, we need to actually use it inside link:{repoURL}/src/main/java/seedu/address/model/person/ReadOnlyPerson.java[`ReadOnlyPerson`].
-
-**Main:**
-
-. Add three methods `setRemark(Remark)`, `getRemark()` and `remarkProperty()`. Be sure to implement these newly created methods in link:{repoURL}/src/main/java/seedu/address/model/person/ReadOnlyPerson.java[`Person`], which implements the link:{repoURL}/src/main/java/seedu/address/model/person/ReadOnlyPerson.java[`ReadOnlyPerson`] interface.
-. You may assume that the user will not be able to use the `add` and `edit` commands to modify the remarks field (i.e. the person will be created without a remark).
-. Modify link:{repoURL}/src/main/java/seedu/address/model/util/SampleDataUtil.java/[`SampleDataUtil`] to add remarks for the sample data (delete your `addressBook.xml` so that the application will load the sample data when you launch it.)
-
-===== [Step 6] Storage: Add `Remark` field to `XmlAdaptedPerson` class
-We now have `Remark` s for `Person` s, but they will be gone when we exit the application. Let's modify link:{repoURL}/src/main/java/seedu/address/storage/XmlAdaptedPerson.java[`XmlAdaptedPerson`] to include a `Remark` field so that it will be saved.
-
-**Main:**
-
-. Add a new Xml field for `Remark`.
-. Be sure to modify the logic of the constructor and `toModelType()`, which handles the conversion to/from  link:{repoURL}/src/main/java/seedu/address/model/person/ReadOnlyPerson.java[`ReadOnlyPerson`].
-
-**Tests:**
-
-. Fix `validAddressBook.xml` such that the XML tests will not fail due to a missing `<remark>` element.
-
-===== [Step 7] Ui: Connect `Remark` field to `PersonCard`
-Our remark label in link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`] is still a placeholder. Let's bring it to life by binding it with the actual `remark` field.
-
-**Main:**
-
-. Modify link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard#bindListeners()`] to add the binding for `remark`.
-
-**Tests:**
-
-. Modify link:{repoURL}/src/test/java/seedu/address/ui/testutil/GuiTestAssert.java[`GuiTestAssert#assertCardDisplaysPerson(...)`] so that it will compare the remark label.
-. In link:{repoURL}/src/test/java/seedu/address/ui/PersonCardTest.java[`PersonCardTest`], call `personWithTags.setRemark(ALICE.getRemark())` to test that changes in the link:{repoURL}/src/main/java/seedu/address/model/person/ReadOnlyPerson.java[`Person`] 's remark correctly updates the corresponding link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`].
-
-===== [Step 8] Logic: Implement `RemarkCommand#execute()` logic
-We now have everything set up... but we still can't modify the remarks. Let's finish it up by adding in actual logic for our `remark` command.
-
-**Main:**
-
-. Replace the logic in `RemarkCommand#execute()` (that currently just throws an `Exception`), with the actual logic to modify the remarks of a person.
-
-**Tests:**
-
-. Update `RemarkCommandTest` to test that the `execute()` logic works.
-
-==== Full Solution
-
-See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-by-step solution.
 
 [appendix]
 == User Stories
@@ -1451,8 +1206,6 @@ Use case ends.
 .  It is open source.
 .  It is completely free for use.
 .  Should be able to function properly with and without an Internet connection.
-
-{More to be added}
 
 [appendix]
 == Glossary
