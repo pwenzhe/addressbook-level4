@@ -33,7 +33,7 @@ public class CommandBox extends UiPart<Region> {
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
     private static final int maxSuggestionsSize = 5;
-    private static final String[] suggestions = {"add", "a n/ p/ b/ e/ a/ pc/", "clear", "changetheme",
+    private static final String[] suggestions = {"add", "a n/ p/ b/ e/ a/", "clear", "changetheme",
         "ct", "delete", "edit", "exit", "export", "find", "help",
         "sos", "history", "home", "ho", "list", "birthdaystatistics", "bstats", "tagstatistics", "tstats",
         "select", "undo", "redo"};
