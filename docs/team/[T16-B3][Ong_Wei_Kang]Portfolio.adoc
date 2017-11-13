@@ -4,7 +4,7 @@ ifdef::env-github,env-browser[:outfilesuffix: .adoc]
 :stylesDir: ../stylesheets
 
 == Project: Bevy
-Bevy is a powerful app that helps you to remember your friends again. It simplifies your friends' information in a
+Bevy is a powerful application that helps you to remember your friends again. It simplifies your friends' information in a
 single place and provide more. Bevy is smart to know what your friends are up to in their social media, gives
 you a sneak peek into their location and even provides statistics analysis for you.
 
@@ -14,7 +14,8 @@ you a sneak peek into their location and even provides statistics analysis for y
 
 ==== Justification
 
-Instagram and Google Map provides more information about a person to users. This lets the users about what is happening in their lives.
+Instagram and Google Maps provides more information about a person to users. This lets the users know more
+about what is happening in their lives, such as what they are up to recently.
 
 ==== Implementation
 
@@ -42,8 +43,8 @@ End of Extract
 
 ==== Justification
 
-Deleting multiple persons helps to reduce the hassle of typing many lines of command just to delete a few persons.
-This greatly improves user experience.
+Deleting multiple persons remove the hassle of typing many lines of command to delete a few persons.
+Users only need to enter a sngle line of command to achieve that. This greatly improves user experience.
 
 ==== Implementation
 
@@ -72,9 +73,9 @@ End of Extract
 ---
 
 ==== Justification
-The home command displays the home panel which gives users an overview of the app, providing important
-information such as the total number of people and tags. It also provides randomised tips and advices to empower
-users with the features of the app.
+The home command displays the home panel which gives users an overview of the application, providing important
+information such as the total number of persons and tags. It also provides randomised tips and advices to empower
+users with the features of the application.
 
 The help command displays the help panel which gives users a concise, summarised table of commands for quick reference.
 This is useful for users to do a quick lookup when they need help.
@@ -97,9 +98,7 @@ End of Extract
 ---
 Start of Extract [from: User Guide] written by Ong Wei Kang
 
-include::../UserGuide.adoc[tag=home]
-
-include::../UserGuide.adoc[tag=help]
+include::../UserGuide.adoc[tag=dynamicInformationPanel]
 
 End of Extract
 
@@ -107,8 +106,8 @@ End of Extract
 
 ==== Justification
 
-UI is cleaner and dynamic. There is no need to put all UI elements onto a static information panel, instead the information panel
-can be changed according to user's command.
+This provides a cleaner and clutter-free UI. There is no need to put all the UI elements onto a static information panel, instead the information panel
+can be changed according to user's command. This provides a better user experience.
 
 ==== Implementation
 
@@ -165,8 +164,8 @@ End of Extract
 
 ==== Justification
 
-Users can quickly export the address book data into a .csv file which is used by thousands of applications
-out there. Users can easily integrate into other applications which support importing of .csv files. Users will also
+Users can quickly export the address book data into Bevy.csv file which is used by thousands of applications
+out there. Users can easily integrate into other applications which support importing of .csv files and
 save many hours of manually typing into an excel sheet.
 
 ==== Implementation
