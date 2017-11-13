@@ -45,10 +45,10 @@ public class ExportCommand extends Command {
     public static final String COMMAND_WORD = "export";
     public static final String COMMAND_ALIAS = "ex";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exports your friends into a CSV file.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exports your contacts into a CSV file.\n"
             + "Example: " + COMMAND_WORD;
 
-    public static final String MESSAGE_SUCCESS = "Successfully exported your friends to Bevy.csv file.";
+    public static final String MESSAGE_SUCCESS = "Successfully exported your contacts to Bevy.csv file.";
 
     @Override
     public CommandResult execute() {
@@ -484,11 +484,12 @@ public class HomePanel extends UiPart<Region> {
     private static String[] tips = {
         "Not sure what to do? Type sos to find out more!",
         "Want to add a contact? Type a and let Bevy complete the rest!",
-        "Wondering whose birthday is coming? Type stats to find out!",
+        "Wondering whose birthday is coming? Type bstats to find out!",
+        "Want to know how many people has the same tag? Type tstats to find out!",
         "Did you know? Bevy can help you complete your commands!",
         "Type s to select a contact and see more of the person!",
         "Not sure how to edit? Type e and let Bevy do the rest!",
-        "Did you know? Bevy can help you find your contacts." };
+        "Did you know? Bevy can help you find your contacts."};
     private static Random random = new Random();
 
     @FXML
@@ -822,13 +823,6 @@ public class PersonInformationPanel extends UiPart<Region> {
     -fx-fill: black;
 }
 
-.chart-title {
-    -fx-text-fill: black;
-}
-
-.axis-label {
-    -fx-text-fill: black;
-}
 ```
 ###### \resources\view\DarkTheme.css
 ``` css
@@ -871,13 +865,7 @@ public class PersonInformationPanel extends UiPart<Region> {
 #bevyAssistant {
     -fx-fill: white;
 }
-.chart-title {
-    -fx-text-fill: white;
-}
 
-.axis-label {
-    -fx-text-fill: white;
-}
 ```
 ###### \resources\view\GoogleMapBrowserPanel.fxml
 ``` fxml
@@ -960,8 +948,8 @@ public class PersonInformationPanel extends UiPart<Region> {
     </Menu>
       <Menu mnemonicParsing="false" text="Statistics">
          <items>
-            <MenuItem mnemonicParsing="false" text="Birthday" />
-            <MenuItem mnemonicParsing="false" text="Tags" />
+            <MenuItem fx:id="birthdayStatisticsMenuItem" mnemonicParsing="false" onAction="#handleBirthdayStatistics" text="Birthday" />
+            <MenuItem fx:id="tagStatisticsMenuItem" mnemonicParsing="false" onAction="#handleTagStatistics" text="Tag" />
          </items>
       </Menu>
     <Menu mnemonicParsing="false" text="Help">
